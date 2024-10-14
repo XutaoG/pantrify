@@ -2,7 +2,7 @@ import { MdOutlineSettings, MdLogout } from "react-icons/md";
 
 const UserProfileFooter = () => {
 	return (
-		<section className="flex px-8 py-2 justify-between">
+		<section className="flex px-6 2xl:px-8 py-2 justify-between">
 			{/* Name + email */}
 			<div className="hidden 2xl:flex flex-col gap-1">
 				<p className="font-semibold">Xutao Gao</p>
