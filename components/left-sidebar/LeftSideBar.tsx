@@ -21,6 +21,7 @@ const LeftSideBar = () => {
 						alt="logo"
 						width={48}
 						height={48}
+						priority
 					/>
 					<h1
 						className={`hidden 2xl:block font-medium ${edu_vic.className}`}

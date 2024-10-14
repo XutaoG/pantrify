@@ -10,7 +10,7 @@ const RootLayout = ({
 	return (
 		<main className="min-h-screen flex">
 			<LeftSideBar />
-			<div className="px-7 pt-12 grow">{children}</div>
+			<div className="px-7 pt-12 grow min-w-0">{children}</div>
 			<RightSideBar />
 		</main>
 	);

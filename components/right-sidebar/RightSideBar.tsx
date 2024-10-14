@@ -2,7 +2,7 @@ import React from "react";
 
 const RightSideBar = () => {
 	return (
-		<section className="w-[450px] border-l border-l-neutral-300"></section>
+		<section className="w-[450px] min-w-[450px] border-l border-l-neutral-300"></section>
 	);
 };
 

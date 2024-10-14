@@ -12,4 +12,8 @@
 	h3 {
 		@apply text-xl;
 	}
+	.scroll-bar {
+		scrollbar-color: theme("colors.neutral.400") theme("colors.neutral.200");
+		scrollbar-width: thin;
+	}
 }
