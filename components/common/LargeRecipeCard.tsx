@@ -1,6 +1,7 @@
 import { LargeRecipeCardProps } from "@/types";
 import Image from "next/image";
 import { MdAccessTime, MdOutlineSpeed, MdOutlineKitchen } from "react-icons/md";
+import InfoWidget from "./InfoWidget";
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
@@ -18,30 +19,27 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			</div>
 
 			{/* Info */}
-			<div className="flex flex-col gap-4 p-3 bg-neutral-100 border border-neutral-200">
+			<div className="flex flex-col gap-2 p-3 bg-neutral-100 border border-neutral-200">
 				<p className="font-bold">{recipe.name}</p>
 				<div className="flex justify-between">
 					{/* Time */}
-					<div className="flex flex-col gap-1 items-center">
-						<MdAccessTime className="text-xl text-emerald-500" />
-						<p className="text-sm text-neutral-600 font-semibold">
-							{recipe.time}
-						</p>
-					</div>
+					<InfoWidget
+						icon={<MdAccessTime />}
+						iconColor="text-emerald-500"
+						text={recipe.time}
+					/>
 					{/* Difficulty */}
-					<div className="flex flex-col gap-1 items-center">
-						<MdOutlineSpeed className="text-xl text-orange-500" />
-						<p className="text-sm text-neutral-600 font-semibold">
-							{recipe.difficulty}
-						</p>
-					</div>
+					<InfoWidget
+						icon={<MdOutlineSpeed />}
+						iconColor="text-orange-500"
+						text={recipe.difficulty}
+					/>
 					{/* Ingredients */}
-					<div className="flex flex-col gap-1 items-center">
-						<MdOutlineKitchen className="text-xl text-sky-500" />
-						<p className="text-sm text-neutral-600 font-semibold">
-							{recipe.numIngredients} Ing.
-						</p>
-					</div>
+					<InfoWidget
+						icon={<MdOutlineKitchen />}
+						iconColor="text-sky-500"
+						text={`${recipe.numIngredients} Ing.`}
+					/>
 				</div>
 			</div>
 		</div>

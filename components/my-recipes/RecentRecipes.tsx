@@ -6,33 +6,9 @@ import {
 	MdOutlineArrowRight,
 } from "react-icons/md";
 import LargeRecipeCard from "../common/LargeRecipeCard";
-import { UIEvent, useEffect, useRef, useState } from "react";
-import { Recipe } from "@/types";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-
-const mockRecipes: Recipe[] = [
-	{
-		imageUrl: "/temp-recipe-images/fried-rice.webp",
-		name: "Fried Rice",
-		time: "30m",
-		difficulty: "Medium",
-		numIngredients: 7,
-	},
-	{
-		imageUrl: "/temp-recipe-images/egg-drop-soup.jpg",
-		name: "Egg Drop Soup",
-		time: "15m",
-		difficulty: "Easy",
-		numIngredients: 4,
-	},
-	{
-		imageUrl: "/temp-recipe-images/spaghetti.jpg",
-		name: "Ground Beef Spaghetti",
-		time: "30m",
-		difficulty: "Medium",
-		numIngredients: 5,
-	},
-];
+import { mockRecipes1 } from "@/constants";
 
 const RecentRecipes = () => {
 	// Scroll recipes
@@ -80,7 +56,7 @@ const RecentRecipes = () => {
 	}, []);
 
 	// Render all recent recipe cards
-	const recipeCards = mockRecipes.map((recipe, index) => {
+	const recipeCards = mockRecipes1.map((recipe, index) => {
 		return (
 			<div
 				className=""

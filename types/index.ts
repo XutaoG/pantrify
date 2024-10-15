@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Recipe {
 	imageUrl: string;
 	name: string;
@@ -12,4 +14,12 @@ export interface LargeRecipeCardProps {
 
 export interface SmallRecipeCardProps {
 	recipe: Recipe;
+}
+
+export interface InfoWidgetProps {
+	icon: ReactNode;
+	iconColor: string;
+	text: string;
+	onClick?: () => void;
+	onHover?: () => void;
 }

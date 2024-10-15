@@ -1,6 +1,7 @@
 import { SmallRecipeCardProps } from "@/types";
 import Image from "next/image";
 import { MdAccessTime } from "react-icons/md";
+import InfoWidget from "./InfoWidget";
 
 const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 	return (
@@ -21,12 +22,12 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 			<div className="flex justify-between items-center gap-4 p-3 bg-neutral-100 border border-neutral-200">
 				<p className="font-bold truncate text-nowrap">{recipe.name}</p>
 				{/* Time */}
-				<div className="flex flex-col gap-1 items-center">
-					<MdAccessTime className="text-xl text-emerald-500" />
-					<p className="text-sm text-neutral-600 font-semibold">
-						{recipe.time}
-					</p>
-				</div>
+				{/* Time */}
+				<InfoWidget
+					icon={<MdAccessTime />}
+					iconColor="text-emerald-500"
+					text={recipe.time}
+				/>
 			</div>
 		</div>
 	);
