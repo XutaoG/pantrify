@@ -3,6 +3,7 @@ import RecipeInfo from "./RecipeInfo";
 import PrimaryIngredients from "./PrimaryIngredients";
 import SecondaryIngredients from "./SecondaryIngredients";
 import OptionalIngredients from "./OptionalIngredients";
+import RecipeInstructions from "./RecipeInstructions";
 
 const RecipeView = () => {
 	return (
@@ -31,6 +32,8 @@ const RecipeView = () => {
 				<SecondaryIngredients />
 				{/* Optional ingredients */}
 				<OptionalIngredients />
+				{/* Instructions */}
+				<RecipeInstructions />
 			</div>
 		</section>
 	);

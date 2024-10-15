@@ -3,9 +3,9 @@ import RecipeView from "./RecipeView";
 
 const RightSideBar = () => {
 	return (
-		<section className="w-[450px] min-w-[450px] border-l border-l-neutral-300 flex flex-col">
+		<section className="pr-2 border-l border-l-neutral-300 flex flex-col">
 			{/* pattern */}
-			<div className="h-24 bg-sky-600" />
+			<div className="min-h-24 h-24 bg-sky-600" />
 			<RecipeView />
 		</section>
 	);

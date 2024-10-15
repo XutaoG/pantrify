@@ -139,3 +139,11 @@ export const mockOptionalIngredients: Ingredient[] = [
 		isAvailable: false,
 	},
 ];
+
+export const mockInstructions: string[] = [
+	"Boil water and add salt and pasta. Strain after.",
+	"On medium heat, fry ground beef until brown. Then remove.",
+	"On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
+	"Once simmering, add pasta and ground beef back in, and mix. ",
+	"(Optional) Add shredded cheese on top.",
+];

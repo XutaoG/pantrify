@@ -16,7 +16,9 @@ const AllRecipes = () => {
 					<SearchBar />
 				</div>
 				{/* All recipes */}
-				<div className="grid grid-cols-3 gap-6">{recipeCards}</div>
+				<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
+					{recipeCards}
+				</div>
 			</div>
 		</section>
 	);
