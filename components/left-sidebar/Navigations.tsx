@@ -23,8 +23,8 @@ const Navigations = () => {
 				<Image
 					src={route.icon}
 					alt={route.label}
-					width={28}
-					height={28}
+					width={24}
+					height={24}
 					className={`${
 						isActive ? "brightness-200 invert-0" : "brightness-50"
 					}`}

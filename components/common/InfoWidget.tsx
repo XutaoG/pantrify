@@ -11,7 +11,7 @@ const InfoWidget = ({
 }: InfoWidgetProps) => {
 	return (
 		<div
-			className={`flex flex-col gap-1 justify-center items-center h-12 w-14 
+			className={`flex flex-col gap-1 justify-center items-center w-14 
 			rounded-sm ${(onClick || onHover) && "hover:bg-neutral-200 cursor-pointer"}`}
 			onClick={onClick}
 			onMouseOver={onHover}

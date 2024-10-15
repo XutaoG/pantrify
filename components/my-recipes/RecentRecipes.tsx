@@ -24,6 +24,9 @@ const RecentRecipes = () => {
 	const isEndOfScrollRef = useRef(false);
 	const [isEndOfScroll, setIsEndOfScroll] = useState(false);
 
+	// Expansion
+	const [isExpanded, setIsExpanded] = useState(true);
+
 	useEffect(() => {
 		const checkOverflow = () => {
 			if (!recipeCardsContainerRef.current) {
@@ -124,59 +127,66 @@ const RecentRecipes = () => {
 			<div className="flex items-center gap-4">
 				<p className="font-semibold">Recently Added</p>
 				<div className="bg-neutral-200 h-0.5 grow" />
-				<MdOutlineExpandCircleDown className="text-neutral-200 text-xl" />
+				<MdOutlineExpandCircleDown
+					className="text-neutral-200 text-xl hover:text-neutral-400 cursor-pointer"
+					onClick={() => {
+						setIsExpanded((val) => !val);
+					}}
+				/>
 			</div>
 
 			{/* Recipe cards */}
-			<div className="relative">
-				<div
-					ref={recipeCardsContainerRef}
-					className="flex gap-9 overflow-x-hidden pb-4"
-					onScroll={handleScroll}
-				>
-					{recipeCards}
+			{isExpanded && (
+				<div className="relative">
+					<div
+						ref={recipeCardsContainerRef}
+						className="flex gap-9 overflow-x-hidden pb-4"
+						onScroll={handleScroll}
+					>
+						{recipeCards}
 
-					<div className="min-w-[350px] flex justify-center items-center grow">
-						<div className="flex flex-col gap-2 items-center">
-							<Image
-								src="/logo/pantrify_logo.webp"
-								alt="logo"
-								width={48}
-								height={48}
-								priority
-							/>
-							<p className="text-neutral-600 font-semibold italic">
-								View all recipes below!
-							</p>
+						<div className="min-w-[350px] flex justify-center items-center grow">
+							<div className="flex flex-col gap-2 items-center">
+								<Image
+									src="/logo/pantrify_logo.webp"
+									alt="logo"
+									width={48}
+									height={48}
+									priority
+								/>
+								<p className="text-neutral-600 font-semibold italic">
+									View all recipes below!
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				{/* Previous recipe button */}
-				<div className="absolute left-2 inset-y-0 flex items-center">
-					<MdOutlineArrowLeft
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
-							(scrollIndex === 0 || !showNavigationArrows) &&
-							"hidden"
-						}`}
-						onClick={() => handleChangeRecipeClick(-1)}
-					/>
-				</div>
+					{/* Previous recipe button */}
+					<div className="absolute left-2 inset-y-0 flex items-center">
+						<MdOutlineArrowLeft
+							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
+								(scrollIndex === 0 || !showNavigationArrows) &&
+								"hidden"
+							}`}
+							onClick={() => handleChangeRecipeClick(-1)}
+						/>
+					</div>
 
-				{/* Next recipe button */}
-				<div className="absolute right-2 inset-y-0 flex items-center">
-					<MdOutlineArrowRight
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
-							(scrollIndex ===
-								recipeCardsRef.current.length - 1 ||
-								!showNavigationArrows ||
-								isEndOfScroll) &&
-							"hidden"
-						}`}
-						onClick={() => handleChangeRecipeClick(1)}
-					/>
+					{/* Next recipe button */}
+					<div className="absolute right-2 inset-y-0 flex items-center">
+						<MdOutlineArrowRight
+							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
+								(scrollIndex ===
+									recipeCardsRef.current.length - 1 ||
+									!showNavigationArrows ||
+									isEndOfScroll) &&
+								"hidden"
+							}`}
+							onClick={() => handleChangeRecipeClick(1)}
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 		</section>
 	);
 };

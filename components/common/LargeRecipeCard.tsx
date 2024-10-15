@@ -19,7 +19,7 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			</div>
 
 			{/* Info */}
-			<div className="flex flex-col gap-2 p-3 bg-neutral-100 border border-neutral-200">
+			<div className="flex flex-col gap-3 p-3 bg-neutral-100 border border-neutral-200">
 				<p className="font-bold">{recipe.name}</p>
 				<div className="flex justify-between">
 					{/* Time */}
