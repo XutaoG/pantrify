@@ -10,7 +10,7 @@ export interface Recipe {
 
 export interface Ingredient {
 	name: string;
-	amount: string;
+	amount?: string;
 	isAvailable: boolean;
 }
 
@@ -31,9 +31,7 @@ export interface InfoWidgetProps {
 }
 
 export interface IngredientProps {
-	name: string;
-	amount: string;
-	isAvailable: boolean;
+	ingredient: Ingredient;
 }
 
 export interface CollapsiblePanelProps {

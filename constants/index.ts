@@ -114,3 +114,28 @@ export const mockPrimaryIngredients: Ingredient[] = [
 		isAvailable: true,
 	},
 ];
+
+export const mockSecondaryIngredients: Ingredient[] = [
+	{
+		name: "Salt",
+		amount: "1 tsp",
+		isAvailable: true,
+	},
+	{
+		name: "Black pepper",
+		amount: "1/2 tsp",
+		isAvailable: true,
+	},
+	{
+		name: "Garlic powder",
+		amount: "1 tsp",
+		isAvailable: true,
+	},
+];
+
+export const mockOptionalIngredients: Ingredient[] = [
+	{
+		name: "Parmesan cheese",
+		isAvailable: false,
+	},
+];

@@ -12,7 +12,7 @@ const InfoWidget = ({
 	return (
 		<div
 			className={`flex flex-col gap-1 justify-center items-center w-14 
-			rounded-sm ${(onClick || onHover) && "hover:bg-neutral-200 cursor-pointer"}`}
+			rounded-sm ${(onClick || onHover) && "cursor-pointer"}`}
 			onClick={onClick}
 			onMouseOver={onHover}
 		>

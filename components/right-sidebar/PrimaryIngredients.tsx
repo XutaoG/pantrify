@@ -4,14 +4,7 @@ import CollapsiblePanel from "../common/CollapsiblePanel";
 
 const PrimaryIngredients = () => {
 	const primaryIngredients = mockPrimaryIngredients.map((ingredient) => {
-		return (
-			<Ingredient
-				key={ingredient.name}
-				name={ingredient.name}
-				amount={ingredient.amount}
-				isAvailable={ingredient.isAvailable}
-			/>
-		);
+		return <Ingredient key={ingredient.name} ingredient={ingredient} />;
 	});
 
 	return (
