@@ -8,6 +8,12 @@ export interface Recipe {
 	numIngredients: number;
 }
 
+export interface Ingredient {
+	name: string;
+	amount: string;
+	isAvailable: boolean;
+}
+
 export interface LargeRecipeCardProps {
 	recipe: Recipe;
 }
@@ -22,4 +28,15 @@ export interface InfoWidgetProps {
 	text: string;
 	onClick?: () => void;
 	onHover?: () => void;
+}
+
+export interface IngredientProps {
+	name: string;
+	amount: string;
+	isAvailable: boolean;
+}
+
+export interface CollapsiblePanelProps {
+	title: string;
+	children: ReactNode;
 }

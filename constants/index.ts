@@ -1,4 +1,4 @@
-import { Recipe } from "@/types";
+import { Ingredient, Recipe } from "@/types";
 
 export const navRoutes = [
 	{
@@ -89,5 +89,28 @@ export const mockRecipes2: Recipe[] = [
 		time: "15m",
 		difficulty: "Easy",
 		numIngredients: 5,
+	},
+];
+
+export const mockPrimaryIngredients: Ingredient[] = [
+	{
+		name: "Spaghetti",
+		amount: "2 servings",
+		isAvailable: true,
+	},
+	{
+		name: "Ground beef",
+		amount: "1/2 lbs",
+		isAvailable: false,
+	},
+	{
+		name: "Tomato paste",
+		amount: "2 tbsp",
+		isAvailable: true,
+	},
+	{
+		name: "Heavy whipping cream",
+		amount: "1 cups",
+		isAvailable: true,
 	},
 ];

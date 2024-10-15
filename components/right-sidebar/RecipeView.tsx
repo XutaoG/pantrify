@@ -1,5 +1,6 @@
 import Image from "next/image";
 import RecipeInfo from "./RecipeInfo";
+import PrimaryIngredients from "./PrimaryIngredients";
 
 const RecipeView = () => {
 	return (
@@ -22,6 +23,8 @@ const RecipeView = () => {
 				<h3 className="font-bold ">Ground Beef Spaghetti</h3>
 				{/* Basic infos */}
 				<RecipeInfo />
+				{/* Primary ingredients */}
+				<PrimaryIngredients />
 			</div>
 		</section>
 	);
