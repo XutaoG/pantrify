@@ -1,3 +1,5 @@
+import SearchBar from "@/components/common/SearchBar";
+import AllRecipes from "@/components/my-recipes/AllRecipes";
 import Overview from "@/components/my-recipes/Overview";
 import RecentRecipes from "@/components/my-recipes/RecentRecipes";
 
@@ -27,6 +29,16 @@ const Home = () => {
 
 			{/* Recent Recipes */}
 			<RecentRecipes />
+
+			{/* Search bar + filter + sort */}
+			<div className="flex gap-3">
+				<SearchBar />
+			</div>
+
+			{/* All recipe */}
+			<div className="">
+				<AllRecipes />
+			</div>
 		</main>
 	);
 };

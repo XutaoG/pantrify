@@ -9,3 +9,7 @@ export interface Recipe {
 export interface LargeRecipeCardProps {
 	recipe: Recipe;
 }
+
+export interface SmallRecipeCardProps {
+	recipe: Recipe;
+}

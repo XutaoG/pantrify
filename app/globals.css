@@ -6,14 +6,32 @@
 	h1 {
 		@apply text-3xl;
 	}
+
 	h2 {
 		@apply text-2xl;
 	}
+
 	h3 {
 		@apply text-xl;
 	}
-	.scroll-bar {
-		scrollbar-color: theme("colors.neutral.400") theme("colors.neutral.200");
-		scrollbar-width: thin;
+
+	/* width */
+	::-webkit-scrollbar {
+		@apply w-2;
 	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		@apply bg-neutral-100 rounded-lg;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		@apply bg-neutral-400 rounded-lg hover:bg-neutral-500;
+	}
+
+	/* Handle on hover
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-neutral-500;
+	} */
 }

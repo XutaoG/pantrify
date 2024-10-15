@@ -34,13 +34,13 @@ const Overview = () => {
 			<div className="flex flex-col gap-4 px-6 py-7">
 				<Link
 					href="/available-recipes"
-					className="p-4 text-nowrap bg-sky-600 rounded text-white font-semibold text-center"
+					className="p-4 text-nowrap bg-sky-600 rounded text-white font-semibold text-center hover:bg-sky-700"
 				>
 					See What You Can Make?
 				</Link>
 				<Link
 					href="/my-ingredients"
-					className="p-4 text-nowrap rounded font-semibold text-center"
+					className="p-4 text-nowrap rounded font-semibold text-center hover:underline decoration-2 underline-offset-4"
 				>
 					View All Ingredients
 				</Link>

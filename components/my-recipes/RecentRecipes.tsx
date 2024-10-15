@@ -135,6 +135,7 @@ const RecentRecipes = () => {
 		recipeCardsRef.current[scrollIndex + direction].scrollIntoView({
 			behavior: "smooth",
 			inline: "start",
+			block: "nearest",
 		});
 
 		// setIsEndOfScroll(isEnd);
