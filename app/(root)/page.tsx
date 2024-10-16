@@ -1,3 +1,4 @@
+import Pagination from "@/components/common/Pagination";
 import AllRecipes from "@/components/my-recipes/AllRecipes";
 import Overview from "@/components/my-recipes/Overview";
 import RecentRecipes from "@/components/my-recipes/RecentRecipes";
@@ -31,6 +32,11 @@ const Home = () => {
 
 			{/* All recipe */}
 			<AllRecipes />
+
+			{/* Pagination */}
+			<div className="flex justify-center py-8">
+				<Pagination />
+			</div>
 		</main>
 	);
 };
