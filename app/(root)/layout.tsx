@@ -11,7 +11,7 @@ const RootLayout = ({
 		<main className="min-h-screen max-h-screen flex">
 			<LeftSideBar />
 			<div className="grow my-1 mr-1 overflow-y-scroll">{children}</div>
-			<div className="my-1 mr-1 overflow-y-scroll w-[450px] min-w-[450px]">
+			<div className="min-h-full my-1 mr-1 overflow-y-scroll w-[450px] min-w-[450px]">
 				<RightSideBar />
 			</div>
 		</main>
