@@ -1,9 +1,10 @@
 "use client";
 
+import { SearchBarProps } from "@/types";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 
-const SearchBar = () => {
+const SearchBar = ({ placeholderText }: SearchBarProps) => {
 	const [searchKeyword, setSearchKeyword] = useState("");
 
 	return (
@@ -17,7 +18,7 @@ const SearchBar = () => {
 					setSearchKeyword(e.target.value);
 				}}
 				className="bg-transparent grow outline-none"
-				placeholder="Search for a recipe"
+				placeholder={placeholderText}
 			/>
 			<MdSearch className="text-2xl" />
 		</div>

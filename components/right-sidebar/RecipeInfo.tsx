@@ -6,7 +6,7 @@ import {
 	MdOutlineKitchen,
 	MdOutlineSpeed,
 	MdRestaurant,
-	MdCreate,
+	MdOutlineEdit,
 	MdOutlineDeleteForever,
 } from "react-icons/md";
 import InfoWidget from "../common/InfoWidget";
@@ -46,7 +46,7 @@ const RecipeInfo = () => {
 				/>
 				{/* Edit */}
 				<InfoWidget
-					icon={<MdCreate />}
+					icon={<MdOutlineEdit />}
 					iconColor="text-yellow-500"
 					text="Edit"
 					onClick={() => {}}

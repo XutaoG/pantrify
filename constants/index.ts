@@ -92,7 +92,7 @@ export const mockRecipes2: Recipe[] = [
 	},
 ];
 
-export const mockPrimaryIngredients: Ingredient[] = [
+export const mockRecipePrimaryIngredients: Ingredient[] = [
 	{
 		name: "Spaghetti",
 		amount: "2 servings",
@@ -115,7 +115,7 @@ export const mockPrimaryIngredients: Ingredient[] = [
 	},
 ];
 
-export const mockSecondaryIngredients: Ingredient[] = [
+export const mockRecipeSecondaryIngredients: Ingredient[] = [
 	{
 		name: "Salt",
 		amount: "1 tsp",
@@ -133,7 +133,7 @@ export const mockSecondaryIngredients: Ingredient[] = [
 	},
 ];
 
-export const mockOptionalIngredients: Ingredient[] = [
+export const mockRecipeOptionalIngredients: Ingredient[] = [
 	{
 		name: "Parmesan cheese",
 		isAvailable: false,
@@ -146,4 +146,106 @@ export const mockInstructions: string[] = [
 	"On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
 	"Once simmering, add pasta and ground beef back in, and mix. ",
 	"(Optional) Add shredded cheese on top.",
+];
+
+export const mockAllPrimaryIngredients: Ingredient[] = [
+	{
+		name: "Ribeye Steak",
+		isAvailable: true,
+	},
+	{
+		name: "Eggs",
+		isAvailable: true,
+	},
+	{
+		name: "Napa Cabbage",
+		isAvailable: true,
+	},
+	{
+		name: "Romaine Lettuce",
+		isAvailable: true,
+	},
+	{
+		name: "Shrimps",
+		isAvailable: true,
+	},
+	{
+		name: "Ground Beef",
+		isAvailable: true,
+	},
+	{
+		name: "Onions",
+		isAvailable: true,
+	},
+	{
+		name: "Heavy Cream",
+		isAvailable: true,
+	},
+	{
+		name: "Pasta",
+		isAvailable: true,
+	},
+	{
+		name: "Toasts",
+		isAvailable: true,
+	},
+	{
+		name: "Chicken Breasts",
+		isAvailable: true,
+	},
+	{
+		name: "Sour Cream",
+		isAvailable: true,
+	},
+	{
+		name: "Milk",
+		isAvailable: true,
+	},
+];
+
+export const mockAllSecondaryIngredients: Ingredient[] = [
+	{
+		name: "Salt",
+		isAvailable: true,
+	},
+	{
+		name: "Black Pepper",
+		isAvailable: true,
+	},
+	{
+		name: "Garlic Powder",
+		isAvailable: true,
+	},
+	{
+		name: "Onion Powder",
+		isAvailable: true,
+	},
+	{
+		name: "Mirin",
+		isAvailable: true,
+	},
+	{
+		name: "Sesame Oil",
+		isAvailable: true,
+	},
+	{
+		name: "Flour",
+		isAvailable: true,
+	},
+	{
+		name: "Cornstarch",
+		isAvailable: true,
+	},
+	{
+		name: "Butter",
+		isAvailable: true,
+	},
+	{
+		name: "Shaoxing Wine",
+		isAvailable: true,
+	},
+	{
+		name: "Soy Sauce",
+		isAvailable: true,
+	},
 ];

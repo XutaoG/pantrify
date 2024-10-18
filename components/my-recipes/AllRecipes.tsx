@@ -14,7 +14,7 @@ const AllRecipes = () => {
 			{/* Search bar + filter + sort */}
 			<div className="flex flex-col gap-4">
 				<div className="flex gap-6">
-					<SearchBar />
+					<SearchBar placeholderText="Search for a recipe" />
 					<Dropdown />
 				</div>
 				{/* All recipes */}

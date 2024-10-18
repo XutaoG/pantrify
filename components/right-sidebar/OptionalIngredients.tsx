@@ -1,11 +1,13 @@
-import { mockOptionalIngredients } from "@/constants";
+import { mockRecipeOptionalIngredients } from "@/constants";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import Ingredient from "./Ingredient";
 
 const OptionalIngredients = () => {
-	const SecondaryIngredients = mockOptionalIngredients.map((ingredient) => {
-		return <Ingredient key={ingredient.name} ingredient={ingredient} />;
-	});
+	const SecondaryIngredients = mockRecipeOptionalIngredients.map(
+		(ingredient) => {
+			return <Ingredient key={ingredient.name} ingredient={ingredient} />;
+		}
+	);
 
 	return (
 		<CollapsiblePanel title="Secondary Ingredients">

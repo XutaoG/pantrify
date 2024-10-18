@@ -10,7 +10,9 @@ const RootLayout = ({
 	return (
 		<main className="min-h-screen max-h-screen flex">
 			<LeftSideBar />
-			<div className="grow my-1 mr-1 overflow-y-scroll">{children}</div>
+			<div className="grow my-1 mr-1 overflow-y-scroll min-w-0">
+				{children}
+			</div>
 			<div className="min-h-full my-1 mr-1 overflow-y-scroll w-[450px] min-w-[450px]">
 				<RightSideBar />
 			</div>

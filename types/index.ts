@@ -12,6 +12,8 @@ export interface Ingredient {
 	name: string;
 	amount?: string;
 	isAvailable: boolean;
+	dateAdded?: Date;
+	dateExpired?: Date;
 }
 
 export interface LargeRecipeCardProps {
@@ -37,4 +39,12 @@ export interface IngredientProps {
 export interface CollapsiblePanelProps {
 	title: string;
 	children: ReactNode;
+}
+
+export interface SearchBarProps {
+	placeholderText: string;
+}
+
+export interface IngredientCardProps {
+	ingredient: Ingredient;
 }

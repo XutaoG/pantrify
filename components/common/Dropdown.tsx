@@ -28,7 +28,7 @@ const Dropdown = () => {
 	);
 
 	// Dropdown expansion
-	const [isExpanded, setIsExpanded] = useState(true);
+	const [isExpanded, setIsExpanded] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
