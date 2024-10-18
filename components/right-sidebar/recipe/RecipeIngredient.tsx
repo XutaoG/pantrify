@@ -1,7 +1,7 @@
 import { IngredientProps } from "@/types";
 import { MdOutlineCheck, MdOutlineClose } from "react-icons/md";
 
-const Ingredient = ({ ingredient }: IngredientProps) => {
+const RecipeIngredient = ({ ingredient }: IngredientProps) => {
 	return (
 		<div className="flex justify-between items-center">
 			<div className="flex gap-2 items-center">
@@ -23,4 +23,4 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
 	);
 };
 
-export default Ingredient;
+export default RecipeIngredient;

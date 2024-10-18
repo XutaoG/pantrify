@@ -249,3 +249,20 @@ export const mockAllSecondaryIngredients: Ingredient[] = [
 		isAvailable: true,
 	},
 ];
+
+export const mockEggRecipes: Recipe[] = [
+	{
+		imageUrl: "/temp-recipe-images/fried-rice.webp",
+		name: "Fried Rice",
+		time: "30m",
+		difficulty: "Medium",
+		numIngredients: 7,
+	},
+	{
+		imageUrl: "/temp-recipe-images/egg-drop-soup.jpg",
+		name: "Egg Drop Soup",
+		time: "15m",
+		difficulty: "Easy",
+		numIngredients: 4,
+	},
+];

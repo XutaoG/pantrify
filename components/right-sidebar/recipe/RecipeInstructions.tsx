@@ -1,5 +1,5 @@
+import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import { mockInstructions } from "@/constants";
-import CollapsiblePanel from "../common/CollapsiblePanel";
 
 const RecipeInstructions = () => {
 	const instructions = mockInstructions.map((step, index) => {

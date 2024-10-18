@@ -47,4 +47,9 @@ export interface SearchBarProps {
 
 export interface IngredientCardProps {
 	ingredient: Ingredient;
+	icon: ReactNode;
+}
+
+export interface RightSideBarProps {
+	children: ReactNode;
 }

@@ -1,11 +1,7 @@
 import { IngredientCardProps } from "@/types";
-import {
-	MdOutlineEgg,
-	MdOutlineEdit,
-	MdOutlineDeleteForever,
-} from "react-icons/md";
+import { MdOutlineEdit, MdOutlineDeleteForever } from "react-icons/md";
 
-const IngredientCard = ({ ingredient }: IngredientCardProps) => {
+const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 	return (
 		<div
 			className="flex justify-between items-center gap-3 rounded shadow-md 
@@ -13,7 +9,7 @@ const IngredientCard = ({ ingredient }: IngredientCardProps) => {
 		>
 			{/* Info */}
 			<div className="flex gap-3 items-center min-w-0">
-				<MdOutlineEgg className="text-xl" />
+				<div className="text-xl">{icon}</div>
 				<p className="text-nowrap truncate font-semibold">
 					{ingredient.name}
 				</p>

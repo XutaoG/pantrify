@@ -5,7 +5,7 @@ import InfoWidget from "./InfoWidget";
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
-		<div className="w-[350px] flex flex-col rounded shadow-md scroll-pl-6 ">
+		<div className="min-w-[350px] flex flex-col rounded shadow-md scroll-pl-6 ">
 			{/* Recipe image */}
 			<div className="w-full h-48 relative">
 				<Image

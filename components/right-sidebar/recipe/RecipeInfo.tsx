@@ -1,5 +1,6 @@
 "use client";
 
+import InfoWidget from "@/components/common/InfoWidget";
 import React from "react";
 import {
 	MdAccessTime,
@@ -9,7 +10,6 @@ import {
 	MdOutlineEdit,
 	MdOutlineDeleteForever,
 } from "react-icons/md";
-import InfoWidget from "../common/InfoWidget";
 
 const RecipeInfo = () => {
 	return (

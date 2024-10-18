@@ -1,5 +1,4 @@
 import LeftSideBar from "@/components/left-sidebar/LeftSideBar";
-import RightSideBar from "@/components/right-sidebar/RightSideBar";
 import { ReactNode } from "react";
 
 const RootLayout = ({
@@ -10,12 +9,7 @@ const RootLayout = ({
 	return (
 		<main className="min-h-screen max-h-screen flex">
 			<LeftSideBar />
-			<div className="grow my-1 mr-1 overflow-y-scroll min-w-0">
-				{children}
-			</div>
-			<div className="min-h-full my-1 mr-1 overflow-y-scroll w-[450px] min-w-[450px]">
-				<RightSideBar />
-			</div>
+			{children}
 		</main>
 	);
 };

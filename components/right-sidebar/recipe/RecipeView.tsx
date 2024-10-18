@@ -1,9 +1,9 @@
 import Image from "next/image";
 import RecipeInfo from "./RecipeInfo";
-import PrimaryIngredients from "./PrimaryIngredients";
-import SecondaryIngredients from "./SecondaryIngredients";
-import OptionalIngredients from "./OptionalIngredients";
 import RecipeInstructions from "./RecipeInstructions";
+import RecipePrimaryIngredients from "./RecipePrimaryIngredients";
+import RecipeSecondaryIngredients from "./RecipeSecondaryIngredients";
+import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
 
 const RecipeView = () => {
 	return (
@@ -27,11 +27,11 @@ const RecipeView = () => {
 				{/* Basic infos */}
 				<RecipeInfo />
 				{/* Primary ingredients */}
-				<PrimaryIngredients />
+				<RecipePrimaryIngredients />
 				{/* Secondary ingredient */}
-				<SecondaryIngredients />
+				<RecipeSecondaryIngredients />
 				{/* Optional ingredients */}
-				<OptionalIngredients />
+				<RecipeOptionalIngredients />
 				{/* Instructions */}
 				<RecipeInstructions />
 			</div>
