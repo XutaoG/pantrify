@@ -39,6 +39,7 @@ export interface IngredientProps {
 export interface CollapsiblePanelProps {
 	title: string;
 	children: ReactNode;
+	titleStyle?: string;
 }
 
 export interface SearchBarProps {
