@@ -97,21 +97,25 @@ export const mockRecipePrimaryIngredients: Ingredient[] = [
 		name: "Spaghetti",
 		amount: "2 servings",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Ground beef",
 		amount: "1/2 lbs",
 		isAvailable: false,
+		isInCart: false,
 	},
 	{
 		name: "Tomato paste",
 		amount: "2 tbsp",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Heavy whipping cream",
 		amount: "1 cups",
 		isAvailable: true,
+		isInCart: false,
 	},
 ];
 
@@ -120,16 +124,19 @@ export const mockRecipeSecondaryIngredients: Ingredient[] = [
 		name: "Salt",
 		amount: "1 tsp",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Black pepper",
 		amount: "1/2 tsp",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Garlic powder",
 		amount: "1 tsp",
 		isAvailable: true,
+		isInCart: false,
 	},
 ];
 
@@ -137,6 +144,7 @@ export const mockRecipeOptionalIngredients: Ingredient[] = [
 	{
 		name: "Parmesan cheese",
 		isAvailable: false,
+		isInCart: false,
 	},
 ];
 
@@ -152,54 +160,67 @@ export const mockAllPrimaryIngredients: Ingredient[] = [
 	{
 		name: "Ribeye Steak",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Eggs",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Napa Cabbage",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Romaine Lettuce",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Shrimps",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Ground Beef",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Onions",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Heavy Cream",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Pasta",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Toasts",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Chicken Breasts",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Sour Cream",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Milk",
 		isAvailable: true,
+		isInCart: false,
 	},
 ];
 
@@ -207,46 +228,57 @@ export const mockAllSecondaryIngredients: Ingredient[] = [
 	{
 		name: "Salt",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Black Pepper",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Garlic Powder",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Onion Powder",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Mirin",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Sesame Oil",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Flour",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Cornstarch",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Butter",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Shaoxing Wine",
 		isAvailable: true,
+		isInCart: false,
 	},
 	{
 		name: "Soy Sauce",
 		isAvailable: true,
+		isInCart: false,
 	},
 ];
 

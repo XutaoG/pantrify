@@ -1,5 +1,9 @@
 import { IngredientCardProps } from "@/types";
-import { MdOutlineEdit, MdOutlineDeleteForever } from "react-icons/md";
+import {
+	MdOutlineEdit,
+	MdOutlineDeleteForever,
+	MdAddShoppingCart,
+} from "react-icons/md";
 
 const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 	return (
@@ -16,7 +20,8 @@ const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 			</div>
 
 			{/* Actions */}
-			<div className="flex gap-4 items-center">
+			<div className="flex gap-3 items-center">
+				<MdAddShoppingCart className="text-xl cursor-pointer" />
 				<MdOutlineEdit className="text-xl cursor-pointer" />
 				<MdOutlineDeleteForever className="text-xl cursor-pointer" />
 			</div>

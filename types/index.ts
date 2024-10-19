@@ -12,6 +12,7 @@ export interface Ingredient {
 	name: string;
 	amount?: string;
 	isAvailable: boolean;
+	isInCart: boolean;
 	dateAdded?: Date;
 	dateExpired?: Date;
 }
