@@ -1,10 +1,10 @@
-import { mockAllSecondaryIngredients } from "@/constants";
+import { mockAllPrimaryIngredients } from "@/constants";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import IngredientCard from "../common/IngredientCard";
 import { MdOutlineEgg } from "react-icons/md";
 
-const AllSecondaryIngredients = () => {
-	const ingredientCards = mockAllSecondaryIngredients.map((ingredient) => {
+const AllPrimaryShoppingIngredients = () => {
+	const ingredientCards = mockAllPrimaryIngredients.map((ingredient) => {
 		return (
 			<IngredientCard
 				key={ingredient.name}
@@ -15,7 +15,7 @@ const AllSecondaryIngredients = () => {
 	});
 
 	return (
-		<CollapsiblePanel title="Secondary Ingredients">
+		<CollapsiblePanel title="Primary Ingredients">
 			<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
 				{ingredientCards}
 			</div>
@@ -23,4 +23,4 @@ const AllSecondaryIngredients = () => {
 	);
 };
 
-export default AllSecondaryIngredients;
+export default AllPrimaryShoppingIngredients;

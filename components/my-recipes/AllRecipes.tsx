@@ -9,7 +9,7 @@ const AllRecipes = () => {
 	});
 
 	return (
-		<section className="flex flex-col gap-3">
+		<section className="flex flex-col gap-2">
 			<p className="font-semibold">All Recipes</p>
 			{/* Search bar + filter + sort */}
 			<div className="flex flex-col gap-4">
