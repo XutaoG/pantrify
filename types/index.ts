@@ -1,9 +1,4 @@
-import {
-	ComponentPropsWithoutRef,
-	ComponentPropsWithRef,
-	ReactNode,
-} from "react";
-import { FieldError } from "react-hook-form";
+import { ComponentPropsWithRef, ReactNode } from "react";
 import { z } from "zod";
 
 // ! RESPONSES
@@ -125,13 +120,13 @@ export const signUpSchema = z
 	.object({
 		email: z
 			.string()
-			.min(1, "Email is required")
+			.min(1, "Email cannot be empty")
 			.email({ message: "Invalid email address" }),
-		firstName: z.string().min(1, "First name is required"),
-		lastName: z.string().min(1, "Last name is required"),
+		firstName: z.string().min(1, "First name cannot be empty"),
+		lastName: z.string().min(1, "Last name cannot be empty"),
 		password: z.string().min(8, "Password must be at least 8 characters"),
 		confirmPassword: z.string({
-			message: "Password confirmation is required",
+			message: "Password confirmation cannot be empty",
 		}),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
@@ -140,3 +135,10 @@ export const signUpSchema = z
 	});
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
+
+export const loginSchema = z.object({
+	email: z.string().min(1, "Email cannot be empty").email(),
+	password: z.string().min(1, "Password cannot be empty"),
+});
+
+export type TLoginSchema = z.infer<typeof loginSchema>;
