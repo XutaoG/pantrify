@@ -1,4 +1,10 @@
-import { ReactNode } from "react";
+import {
+	ComponentPropsWithoutRef,
+	ComponentPropsWithRef,
+	ReactNode,
+} from "react";
+import { FieldError } from "react-hook-form";
+import { z } from "zod";
 
 // ! RESPONSES
 
@@ -102,12 +108,35 @@ export interface ToolTipProps {
 	toolTipContent: string;
 }
 
-export interface FormInputProps {
+export interface FormInputProps extends ComponentPropsWithRef<"input"> {
 	title: string;
-	placeholder: string;
 	password?: boolean;
+	errorMessage?: string;
+	isSubmitting: boolean;
 }
 
-export interface FormButtonProps {
+export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
+	isSubmitting: boolean;
 }
+
+// ! Form schemas
+export const signUpSchema = z
+	.object({
+		email: z
+			.string()
+			.min(1, "Email is required")
+			.email({ message: "Invalid email address" }),
+		firstName: z.string().min(1, "First name is required"),
+		lastName: z.string().min(1, "Last name is required"),
+		password: z.string().min(8, "Password must be at least 8 characters"),
+		confirmPassword: z.string({
+			message: "Password confirmation is required",
+		}),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "Passwords must match",
+		path: ["confirmPassword"],
+	});
+
+export type TSignUpSchema = z.infer<typeof signUpSchema>;
