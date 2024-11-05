@@ -15,7 +15,7 @@ const RootLayout = ({
 			<LeftSideBar />
 
 			{/* Main content */}
-			<div className="grow flex min-w-0 relative p-2 pr-0">
+			<div className="grow flex flex-col min-w-0 relative p-2 pr-0">
 				{children}
 
 				{/* Quick actions */}

@@ -5,7 +5,7 @@ import RecentRecipes from "@/components/my-recipes/RecentRecipes";
 
 const Home = () => {
 	return (
-		<div className="flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-scroll">
+		<div className="flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="flex flex-col gap-2">
 				<h1 className="font-semibold">

@@ -24,7 +24,7 @@ const LeftSideBar = () => {
 						priority
 					/>
 					<h1
-						className={`hidden 2xl:block font-medium ${edu_vic.className}`}
+						className={`hidden 2xl:block font-medium select-none ${edu_vic.className}`}
 					>
 						Pantrify
 					</h1>
