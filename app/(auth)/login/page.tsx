@@ -26,24 +26,13 @@ const Login = () => {
 	const router = useRouter();
 
 	const onSubmit = async () => {
-		try {
-			await login(getValues());
-			router.push("/");
-		} catch (e) {
-			const error = e as AxiosError;
+		const loginResponse = await login(getValues());
 
-			// Response out of range of 2xx
-			if (error.response) {
-				if (error.response.status == 401) {
-					setLoginError("Incorrect email or password");
-				} else if (error.status == 400) {
-					setLoginError("An expected error occurred");
-				}
-			}
-			// No response
-			else {
-				setLoginError("An expected error occurred");
-			}
+		// Check if error message exists
+		if (loginResponse.errorMessage == null) {
+			router.push("/");
+		} else {
+			setLoginError(loginResponse.errorMessage);
 		}
 	};
 

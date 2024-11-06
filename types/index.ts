@@ -62,12 +62,8 @@ export interface User {
 	lastName: string;
 }
 
-export interface JwtResponse {
-	token: string;
-	refreshToken: string;
-	tokenType: string;
-	tokenExpiryTime: Date;
-	refreshTokenExpiryTime: Date;
+export interface LoginResponse {
+	errorMessage: string | null;
 }
 
 // ! PROPS

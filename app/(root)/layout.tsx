@@ -13,19 +13,9 @@ const RootLayout = async ({
 }: Readonly<{
 	children: ReactNode;
 }>) => {
-	try {
-		const response = await getUser();
-
-		// Check if user exists
-		if (!response?.data) {
-			redirect("/login");
-		}
-	} catch (e) {
-		const error = e as AxiosError;
-
-		if (error.response) {
-			redirect("/login");
-		}
+	// Redirect user to "/login" if not currently logged in
+	if ((await getUser()) == null) {
+		redirect("/login");
 	}
 
 	return (
