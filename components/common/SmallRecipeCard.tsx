@@ -9,7 +9,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 			{/* Recipe image */}
 			<div className="w-full grow relative">
 				<Image
-					src={recipe.imageUrl}
+					src={recipe.images[0].path}
 					alt="food"
 					className="object-cover"
 					fill
@@ -26,7 +26,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 				<InfoWidget
 					icon={<MdAccessTime />}
 					iconColor="text-emerald-500"
-					text={recipe.time}
+					text={recipe.duration.toString()}
 				/>
 			</div>
 		</div>

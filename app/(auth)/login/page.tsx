@@ -1,27 +1,54 @@
 "use client";
 
+import { login } from "@/services/api";
 import FormButton from "@/components/common/FormButton";
 import FormInput from "@/components/common/FormInput";
 import { loginSchema, TLoginSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
-		reset,
+		getValues,
 	} = useForm<TLoginSchema>({
 		resolver: zodResolver(loginSchema),
 	});
 
-	const onSubmit = async () => {
-		await new Promise((resolve) => setTimeout(resolve, 10000));
+	const [loginError, setLoginError] = useState<string | null>(null);
 
-		reset();
+	const router = useRouter();
+
+	const onSubmit = async () => {
+		try {
+			await login(getValues());
+			router.push("/");
+		} catch (e) {
+			const error = e as AxiosError;
+
+			// Response out of range of 2xx
+			if (error.response) {
+				if (error.response.status == 401) {
+					setLoginError("Incorrect email or password");
+				} else if (error.status == 400) {
+					setLoginError("An expected error occurred");
+				}
+			}
+			// No response
+			else {
+				setLoginError("An expected error occurred");
+			}
+		}
+	};
+
+	const removeLoginError = () => {
+		setLoginError(null);
 	};
 
 	return (
@@ -53,6 +80,7 @@ const Login = () => {
 						placeholder="Enter your email"
 						errorMessage={errors.email?.message}
 						isSubmitting={isSubmitting}
+						onFocus={removeLoginError}
 					/>
 
 					{/* Password field */}
@@ -64,12 +92,14 @@ const Login = () => {
 							password
 							errorMessage={errors.password?.message}
 							isSubmitting={isSubmitting}
+							onFocus={removeLoginError}
 						/>
 
 						<div className="flex justify-between items-center">
 							{/* Remember me */}
 							<div className="flex items-center gap-1">
 								<input
+									{...register("rememberMe")}
 									type="checkbox"
 									disabled={isSubmitting}
 								/>
@@ -88,6 +118,13 @@ const Login = () => {
 						</div>
 					</div>
 				</div>
+
+				{/* Login error */}
+				{loginError && (
+					<p className="self-center font-medium px-1 text-red-600">
+						{loginError}
+					</p>
+				)}
 
 				{/* Login button */}
 				<FormButton title="Login" isSubmitting={isSubmitting} />

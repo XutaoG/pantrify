@@ -1,5 +1,5 @@
 import ToolTipContainer from "@/components/common/ToolTipContainer";
-import { IngredientProps } from "@/types";
+import { RecipeIngredientProps } from "@/types";
 import { Fragment } from "react";
 import {
 	MdOutlineCheck,
@@ -8,7 +8,7 @@ import {
 	MdOutlineInventory2,
 } from "react-icons/md";
 
-const RecipeIngredient = ({ ingredient }: IngredientProps) => {
+const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	const addToInventoryAction = (
 		<ToolTipContainer toolTipContent="Have it? Add to inventory">
 			<div className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
@@ -36,22 +36,22 @@ const RecipeIngredient = ({ ingredient }: IngredientProps) => {
 	return (
 		<div className="flex justify-between items-center">
 			<div className="flex gap-2 items-center">
-				{ingredient.isAvailable ? (
+				{recipeIngredient.isAvailable ? (
 					<MdOutlineCheck className="text-lg text-emerald-500" />
 				) : (
 					<MdOutlineClose className="text-lg text-red-500" />
 				)}
 				<p className="font-medium">
-					{ingredient.name}
-					{ingredient.amount && (
+					{recipeIngredient.name}
+					{recipeIngredient.quantity && (
 						<span>
-							{":"} {ingredient.amount}
+							{":"} {recipeIngredient.quantityUnit}
 						</span>
 					)}
 				</p>
 			</div>
 			<div className="flex gap-2 items-center">
-				{ingredient.isAvailable ? (
+				{recipeIngredient.isAvailable ? (
 					<Fragment>
 						{removeFromInventoryAction}
 						{addToCartAction}

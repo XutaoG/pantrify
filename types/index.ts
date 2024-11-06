@@ -15,9 +15,6 @@ export interface Recipe {
 	ingredients: RecipeIngredient[];
 	instructions: RecipeInstruction[];
 	images: RecipeImage[];
-
-	time: string;
-	numIngredients: number;
 }
 
 export interface RecipeList {
@@ -36,12 +33,14 @@ interface IngredientBase {
 export interface RecipeIngredient extends IngredientBase {
 	quantity?: number;
 	quantityUnit?: string;
+
+	isAvailable: boolean; // To be removed
 }
 
 export interface RecipeInstruction {
 	id: number;
 	step: number;
-	instruction: number;
+	instruction: string;
 }
 
 export interface RecipeImage {
@@ -55,6 +54,20 @@ export interface Ingredient extends IngredientBase {
 	isInCart: boolean;
 	dateAdded?: Date;
 	dateExpired?: Date;
+}
+
+export interface User {
+	email: string;
+	firstName: string;
+	lastName: string;
+}
+
+export interface JwtResponse {
+	token: string;
+	refreshToken: string;
+	tokenType: string;
+	tokenExpiryTime: Date;
+	refreshTokenExpiryTime: Date;
 }
 
 // ! PROPS
@@ -75,8 +88,8 @@ export interface InfoWidgetProps {
 	onHover?: () => void;
 }
 
-export interface IngredientProps {
-	ingredient: Ingredient;
+export interface RecipeIngredientProps {
+	recipeIngredient: RecipeIngredient;
 }
 
 export interface CollapsiblePanelProps {
@@ -139,6 +152,7 @@ export type TSignUpSchema = z.infer<typeof signUpSchema>;
 export const loginSchema = z.object({
 	email: z.string().min(1, "Email cannot be empty").email(),
 	password: z.string().min(1, "Password cannot be empty"),
+	rememberMe: z.boolean(),
 });
 
 export type TLoginSchema = z.infer<typeof loginSchema>;

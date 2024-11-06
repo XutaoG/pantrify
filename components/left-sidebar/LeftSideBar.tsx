@@ -1,9 +1,9 @@
-import React from "react";
 import Navigations from "./Navigations";
 import { Edu_VIC_WA_NT_Beginner } from "next/font/google";
-// import { MdOutlineDoorSliding } from "react-icons/md";
 import UserProfileFooter from "./UserProfileFooter";
 import Image from "next/image";
+// import { getUser } from "@/services/api";
+// import { redirect } from "next/navigation";
 
 const edu_vic = Edu_VIC_WA_NT_Beginner({
 	subsets: ["latin"],

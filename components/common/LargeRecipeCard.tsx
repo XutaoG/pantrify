@@ -9,7 +9,7 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			{/* Recipe image */}
 			<div className="w-full h-48 relative">
 				<Image
-					src={recipe.imageUrl}
+					src={recipe.images[0].path}
 					alt="food"
 					className="object-cover"
 					fill
@@ -26,19 +26,19 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 					<InfoWidget
 						icon={<MdAccessTime />}
 						iconColor="text-emerald-500"
-						text={recipe.time}
+						text={recipe.duration.toString()}
 					/>
 					{/* Difficulty */}
 					<InfoWidget
 						icon={<MdOutlineSpeed />}
 						iconColor="text-orange-500"
-						text={recipe.difficulty}
+						text={recipe.difficulty.toString()}
 					/>
 					{/* Ingredients */}
 					<InfoWidget
 						icon={<MdOutlineKitchen />}
 						iconColor="text-sky-500"
-						text={`${recipe.numIngredients} Ing.`}
+						text={`${recipe.ingredients.length} Ing.`}
 					/>
 				</div>
 			</div>

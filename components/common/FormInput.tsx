@@ -33,7 +33,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="grow py-2 bg-transparent outline-none"
+							className="grow py-2 bg-transparent outline-none focus:bg-transparent"
 							placeholder={placeholder}
 							type={
 								password && !passwordVisibility

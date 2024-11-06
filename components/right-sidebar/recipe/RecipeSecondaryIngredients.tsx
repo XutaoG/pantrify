@@ -8,7 +8,7 @@ const RecipeSecondaryIngredients = () => {
 			return (
 				<RecipeIngredient
 					key={ingredient.name}
-					ingredient={ingredient}
+					recipeIngredient={ingredient}
 				/>
 			);
 		}

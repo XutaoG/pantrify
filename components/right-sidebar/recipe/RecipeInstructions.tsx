@@ -2,10 +2,10 @@ import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import { mockInstructions } from "@/constants";
 
 const RecipeInstructions = () => {
-	const instructions = mockInstructions.map((step, index) => {
+	const instructions = mockInstructions.map((instruction) => {
 		return (
-			<li key={index} className="font-medium">
-				{step}
+			<li key={instruction.step} className="font-medium">
+				{instruction.instruction}
 			</li>
 		);
 	});
