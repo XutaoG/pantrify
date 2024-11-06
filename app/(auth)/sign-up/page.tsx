@@ -2,9 +2,12 @@
 
 import FormButton from "@/components/common/FormButton";
 import FormInput from "@/components/common/FormInput";
+import { signUp } from "@/api";
 import { signUpSchema, TSignUpSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -12,15 +15,28 @@ const SignUp = () => {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
-		reset,
+		getValues,
 	} = useForm<TSignUpSchema>({
 		resolver: zodResolver(signUpSchema),
 	});
 
-	const onSubmit = async () => {
-		await new Promise((resolve) => setTimeout(resolve, 10000));
+	const [signUpError, setSignUpError] = useState<string | null>(null);
 
-		reset();
+	const router = useRouter();
+
+	const onSubmit = async () => {
+		const signUpResponse = await signUp(getValues());
+
+		// Check if error message exists
+		if (signUpResponse.errorMessage == null) {
+			router.push("/login");
+		} else {
+			setSignUpError(signUpResponse.errorMessage);
+		}
+	};
+
+	const removeSignUpError = () => {
+		setSignUpError(null);
 	};
 
 	return (
@@ -52,6 +68,7 @@ const SignUp = () => {
 						placeholder="Enter your email"
 						errorMessage={errors.email?.message}
 						isSubmitting={isSubmitting}
+						onFocus={removeSignUpError}
 					/>
 
 					<div className="flex gap-6">
@@ -62,6 +79,7 @@ const SignUp = () => {
 							placeholder="Enter your first name"
 							errorMessage={errors.firstName?.message}
 							isSubmitting={isSubmitting}
+							onFocus={removeSignUpError}
 						/>
 
 						{/* Last name field */}
@@ -71,6 +89,7 @@ const SignUp = () => {
 							placeholder="Enter your last name"
 							errorMessage={errors.lastName?.message}
 							isSubmitting={isSubmitting}
+							onFocus={removeSignUpError}
 						/>
 					</div>
 
@@ -83,6 +102,7 @@ const SignUp = () => {
 							password
 							errorMessage={errors.password?.message}
 							isSubmitting={isSubmitting}
+							onFocus={removeSignUpError}
 						/>
 					</div>
 
@@ -96,9 +116,17 @@ const SignUp = () => {
 							disabled={isSubmitting}
 							errorMessage={errors.confirmPassword?.message}
 							isSubmitting={isSubmitting}
+							onFocus={removeSignUpError}
 						/>
 					</div>
 				</div>
+
+				{/* Login error */}
+				{signUpError && (
+					<p className="self-center font-medium px-1 text-red-600">
+						{signUpError}
+					</p>
+				)}
 
 				{/* Login button */}
 				<FormButton title="Sign Up" isSubmitting={isSubmitting} />

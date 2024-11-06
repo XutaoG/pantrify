@@ -6,7 +6,11 @@ import {
 } from "@/types";
 
 export const baseApiPath = "http://localhost:5188/api";
+
+// ! Auth
 export const loginApiPath = "/auth/login";
+export const signUpApiPath = "/auth/sign-up";
+export const logoutPath = "/auth/logout";
 export const getUserApiPath = "/auth/user";
 
 export const navRoutes = [

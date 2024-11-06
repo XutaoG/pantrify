@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import { Edu_VIC_WA_NT_Beginner } from "next/font/google";
-import { getUser } from "@/services/api";
+import { getUser } from "@/api";
 import { redirect } from "next/navigation";
 
 const edu_vic = Edu_VIC_WA_NT_Beginner({

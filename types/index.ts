@@ -66,6 +66,10 @@ export interface LoginResponse {
 	errorMessage: string | null;
 }
 
+export interface SignUpResponse {
+	errorMessage: string | null;
+}
+
 // ! PROPS
 
 export interface LargeRecipeCardProps {
