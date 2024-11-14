@@ -1,15 +1,21 @@
+import { getUser } from "@/api";
 import Pagination from "@/components/common/Pagination";
 import AllRecipes from "@/components/my-recipes/AllRecipes";
 import Overview from "@/components/my-recipes/Overview";
 import RecentRecipes from "@/components/my-recipes/RecentRecipes";
 
-const Home = () => {
+const Home = async () => {
+	const user = await getUser();
+
 	return (
 		<div className="flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="flex flex-col gap-2">
 				<h1 className="font-semibold">
-					Welcome, <span className="text-sky-600">Xutao Gao</span>
+					Welcome,{" "}
+					<span className="text-sky-600">
+						{user?.firstName} {user?.lastName}
+					</span>
 				</h1>
 				<p className="font-semibold text-neutral-600">
 					Your Recipe Memories, Perfectly Kept.

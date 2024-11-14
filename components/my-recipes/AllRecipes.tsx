@@ -1,7 +1,7 @@
 import { mockRecipes2 } from "@/constants";
 import SmallRecipeCard from "../common/SmallRecipeCard";
 import SearchBar from "../common/SearchBar";
-import Dropdown from "../common/Dropdown";
+import RecipeFilterDropdown from "./RecipeFilterDropdown";
 
 const AllRecipes = () => {
 	const recipeCards = mockRecipes2.map((recipe) => {
@@ -15,7 +15,7 @@ const AllRecipes = () => {
 			<div className="flex flex-col gap-4">
 				<div className="flex gap-6">
 					<SearchBar placeholderText="Search for a recipe" />
-					<Dropdown />
+					<RecipeFilterDropdown />
 				</div>
 				{/* All recipes */}
 				<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">

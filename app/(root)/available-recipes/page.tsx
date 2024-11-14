@@ -1,8 +1,8 @@
 import AllIngredientsRecipes from "@/components/available-recipes/AllIngredientsRecipes";
 import MissingIngredientsRecipe from "@/components/available-recipes/MissingIngredientsRecipe";
 import SomeIngredientsRecipes from "@/components/available-recipes/SomeIngredientsRecipes";
-import Dropdown from "@/components/common/Dropdown";
 import SearchBar from "@/components/common/SearchBar";
+import RecipeFilterDropdown from "@/components/my-recipes/RecipeFilterDropdown";
 
 const AvailableRecipes = () => {
 	return (
@@ -21,7 +21,7 @@ const AvailableRecipes = () => {
 			<div className="flex flex-col gap-4">
 				<div className="flex gap-6">
 					<SearchBar placeholderText="Search for a recipe" />
-					<Dropdown />
+					<RecipeFilterDropdown />
 				</div>
 			</div>
 

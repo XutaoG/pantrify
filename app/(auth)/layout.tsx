@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import { Edu_VIC_WA_NT_Beginner } from "next/font/google";
-import { getUser } from "@/api";
-import { redirect } from "next/navigation";
 
 const edu_vic = Edu_VIC_WA_NT_Beginner({
 	subsets: ["latin"],
@@ -13,11 +11,6 @@ const AuthLayout = async ({
 }: Readonly<{
 	children: ReactNode;
 }>) => {
-	// Redirect to "/" if user is already logged in
-	if ((await getUser()) != null) {
-		redirect("/");
-	}
-
 	return (
 		<main className="min-h-screen max-h-screen flex">
 			{/* Form */}

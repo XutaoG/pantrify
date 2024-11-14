@@ -10,8 +10,9 @@ export const baseApiPath = "http://localhost:5188/api";
 // ! Auth
 export const loginApiPath = "/auth/login";
 export const signUpApiPath = "/auth/sign-up";
-export const logoutPath = "/auth/logout";
+export const logoutApiPath = "/auth/logout";
 export const getUserApiPath = "/auth/user";
+export const refreshApiPath = "/auth/refresh";
 
 export const navRoutes = [
 	{
@@ -35,6 +36,24 @@ export const navRoutes = [
 		label: "Shopping List",
 	},
 ];
+
+export const addNavRoutes = [
+	{
+		route: "/add-recipe",
+		label: "Add Recipe",
+	},
+	{
+		route: "/add-ingredient",
+		label: "Add Ingredient",
+	},
+	{
+		route: "/add-shopping",
+		label: "Add Shopping Item",
+	},
+];
+
+export const loginRoute = "/login";
+export const signUpRoute = "/sign-up";
 
 export const mockRecipes1: Recipe[] = [
 	{

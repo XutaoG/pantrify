@@ -4,11 +4,13 @@ import {
 	baseApiPath,
 	getUserApiPath,
 	loginApiPath,
-	logoutPath,
+	logoutApiPath,
+	refreshApiPath,
 	signUpApiPath,
 } from "@/constants";
 import {
 	LoginResponse,
+	RefreshResponse,
 	SignUpResponse,
 	TLoginSchema,
 	TSignUpSchema,
@@ -30,7 +32,7 @@ export const login = async (formData: TLoginSchema) => {
 	try {
 		const response = await axios.post(loginApiPath, formData);
 
-		setCookies(response);
+		await setCookies(response);
 	} catch (e) {
 		const error = e as AxiosError;
 
@@ -83,10 +85,12 @@ export const signUp = async (formData: TSignUpSchema) => {
 
 export const getUser = async () => {
 	try {
+		const cookieStore = await cookies();
+
 		const response = await axios.get<User>(getUserApiPath, {
 			headers: {
 				// Attach client cookies
-				Cookie: cookies().toString(),
+				Cookie: cookieStore.toString(),
 			},
 		});
 
@@ -98,38 +102,89 @@ export const getUser = async () => {
 
 export const logout = async () => {
 	try {
-		const response = await axios.post(logoutPath, {
+		const cookieStore = await cookies();
+
+		const response = await axios.post(logoutApiPath, null, {
 			headers: {
 				// Attach client cookies
-				cookie: cookies().toString(),
+				cookie: cookieStore.toString(),
 			},
 		});
 
-		setCookies(response);
+		await setCookies(response);
 	} catch {}
 
 	revalidatePath("/");
 };
 
-const setCookies = (response: AxiosResponse) => {
-	const cookieStore = cookies();
+export const refresh = async () => {
+	const refreshResponse: RefreshResponse = {
+		errorMessage: null,
+	};
 
-	const setCookies = setCookieParser(response.headers["set-cookie"] ?? []);
+	try {
+		const cookieStore = await cookies();
 
-	setCookies.forEach((cookie) => {
-		cookieStore.set(cookie.name, cookie.value, {
-			path: cookie.path,
-			domain: cookie.domain,
-			maxAge: cookie.maxAge,
-			sameSite: cookie.sameSite as
+		const response = await axios.post(
+			refreshApiPath,
+			{},
+			{
+				headers: {
+					// Attach client cookies
+					cookie: cookieStore.toString(),
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		await setCookies(response);
+	} catch (e) {
+		const error = e as AxiosError;
+
+		console.log(error.message);
+
+		if (error.response) {
+			// Response received, but error status code
+			if (error.response.status == 400) {
+				refreshResponse.errorMessage = "Unauthorized";
+			} else if (error.response.status == 401) {
+				refreshResponse.errorMessage = "Unauthorized";
+			}
+		} else {
+			// No response received
+			refreshResponse.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return refreshResponse;
+};
+
+const setCookies = async (response: AxiosResponse) => {
+	const cookieStore = await cookies();
+
+	// console.log(response.headers);
+
+	const cookieResponse = response.headers["set-cookie"]
+		?.toString()
+		.split(",")
+		.map((s) => s.trim());
+
+	cookieResponse?.forEach((cookie) => {
+		const cookieToSet = setCookieParser.parseString(cookie);
+
+		cookieStore.set(cookieToSet.name, cookieToSet.value, {
+			path: cookieToSet.path,
+			domain: cookieToSet.domain,
+			maxAge: cookieToSet.maxAge,
+			sameSite: cookieToSet.sameSite as
 				| "lax"
 				| "strict"
 				| "none"
 				| boolean
 				| undefined,
-			expires: cookie.expires,
-			secure: cookie.secure,
-			httpOnly: cookie.httpOnly,
+			expires: cookieToSet.expires,
+			secure: cookieToSet.secure,
+			httpOnly: cookieToSet.httpOnly,
 		});
 	});
 };

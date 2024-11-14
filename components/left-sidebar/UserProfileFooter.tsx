@@ -9,9 +9,9 @@ const UserProfileFooter = async () => {
 			{/* Name + email */}
 			<div className="hidden 2xl:flex flex-col gap-1 grow min-w-0">
 				<p className="font-semibold truncate">
-					{user!.firstName} {user!.lastName}
+					{user?.firstName} {user?.lastName}
 				</p>
-				<p className="truncate">{user!.email}</p>
+				<p className="truncate">{user?.email}</p>
 			</div>
 
 			{/* Actions */}

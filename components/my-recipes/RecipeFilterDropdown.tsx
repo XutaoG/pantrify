@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import CollapsiblePanel from "../common/CollapsiblePanel";
 import { MdToc } from "react-icons/md";
-import CollapsiblePanel from "./CollapsiblePanel";
+import { useDropdown } from "@/hooks";
 
-const Dropdown = () => {
+const RecipeFilterDropdown = () => {
+	const [containerRef, isExpanded, onToggle] = useDropdown();
+
 	const mockDifficultySelections = [
 		"All Difficulty",
 		"Easy",
@@ -26,28 +29,6 @@ const Dropdown = () => {
 	const [currentTimeSelection, setCurrentTimeSelection] = useState(
 		mockTimeSelections[0]
 	);
-
-	// Dropdown expansion
-	const [isExpanded, setIsExpanded] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (!containerRef.current) {
-				return;
-			}
-
-			if (!containerRef.current.contains(event.target as Node)) {
-				setIsExpanded(false);
-			}
-		};
-
-		document.addEventListener("click", handleClickOutside);
-
-		return () => {
-			document.removeEventListener("click", handleClickOutside);
-		};
-	}, []);
 
 	const handleDifficultySelectionClick = (selection: string) => {
 		if (selection !== currentDifficultySelection) {
@@ -100,21 +81,17 @@ const Dropdown = () => {
 	});
 
 	return (
-		// <div className="relative">
-		// {/* Selection box */}
 		<div
 			className="h-12 flex justify-center items-center relative select-none"
 			ref={containerRef}
 		>
 			<MdToc
 				className="text-3xl text-neutral-600 cursor-pointer"
-				onClick={() => setIsExpanded((val) => !val)}
+				onClick={onToggle}
 			/>
-
-			{/* Drop down box */}
 			{isExpanded && (
 				<div
-					className="w-48 absolute right-0  top-14 z-10 bg-neutral-100 border border-neutral-200 
+					className="absolute z-10 top-14 right-0 w-48 bg-neutral-100 border border-neutral-200 
 					p-3 py-5 rounded shadow-md flex flex-col gap-5"
 				>
 					{/* Difficulty selections */}
@@ -136,4 +113,4 @@ const Dropdown = () => {
 	);
 };
 
-export default Dropdown;
+export default RecipeFilterDropdown;

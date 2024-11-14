@@ -4,6 +4,7 @@ import { navRoutes } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AddNavigationButton from "./AddNavigationButton";
 
 const Navigations = () => {
 	const pathname = usePathname();
@@ -37,6 +38,7 @@ const Navigations = () => {
 	return (
 		<nav className="flex flex-col gap-4 items-center 2xl:items-stretch">
 			{renderedNavigationButtons}
+			<AddNavigationButton />
 		</nav>
 	);
 };

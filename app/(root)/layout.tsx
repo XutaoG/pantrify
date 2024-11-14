@@ -2,8 +2,6 @@ import QuickActions from "@/components/common/QuickActions";
 import LeftSideBar from "@/components/left-sidebar/LeftSideBar";
 import RecipeView from "@/components/right-sidebar/recipe/RecipeView";
 import RightSideBar from "@/components/right-sidebar/RightSideBar";
-import { getUser } from "@/api";
-import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 const RootLayout = async ({
@@ -11,11 +9,6 @@ const RootLayout = async ({
 }: Readonly<{
 	children: ReactNode;
 }>) => {
-	// Redirect user to "/login" if not currently logged in
-	if ((await getUser()) == null) {
-		redirect("/login");
-	}
-
 	return (
 		<main className="min-h-screen max-h-screen flex">
 			{/* Left sidebar */}

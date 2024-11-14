@@ -33,7 +33,6 @@ interface IngredientBase {
 export interface RecipeIngredient extends IngredientBase {
 	quantity?: number;
 	quantityUnit?: string;
-
 	isAvailable: boolean; // To be removed
 }
 
@@ -62,11 +61,21 @@ export interface User {
 	lastName: string;
 }
 
+export interface JwtInfo {
+	tokenType: string;
+	tokenExpiryTime: Date;
+	refreshTokenExpiryTime: Date;
+}
+
 export interface LoginResponse {
 	errorMessage: string | null;
 }
 
 export interface SignUpResponse {
+	errorMessage: string | null;
+}
+
+export interface RefreshResponse {
 	errorMessage: string | null;
 }
 
@@ -128,6 +137,17 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	isSubmitting: boolean;
 }
 
+export interface ModalProps {
+	show: boolean;
+	onClose: () => void;
+	children: ReactNode;
+}
+
+export interface DropdownProps {
+	children: ReactNode;
+	position?: "top" | "down" | "left" | "right";
+}
+
 // ! Form schemas
 export const signUpSchema = z
 	.object({
@@ -156,3 +176,5 @@ export const loginSchema = z.object({
 });
 
 export type TLoginSchema = z.infer<typeof loginSchema>;
+
+export const addIngredientSchema = z.object({});
