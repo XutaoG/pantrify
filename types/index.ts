@@ -149,6 +149,7 @@ export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
 	errorMessage?: string;
 	isSubmitting: boolean;
 	onValueIncrement: (val: number) => void;
+	incrementAmount: number;
 }
 
 export interface FormSelectionInputProps
@@ -164,17 +165,6 @@ export interface FormSelectionInputProps
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
 	isSubmitting: boolean;
-}
-
-export interface ModalProps {
-	show: boolean;
-	onClose: () => void;
-	children: ReactNode;
-}
-
-export interface DropdownProps {
-	children: ReactNode;
-	position?: "top" | "down" | "left" | "right";
 }
 
 // ! Form schemas
@@ -216,8 +206,7 @@ export const addRecipeSchema = z.object({
 		.string()
 		.max(500, "Description cannot be longer than 500 characters"),
 	difficulty: z.string().min(1, "Difficulty cannot be empty"),
-	durationMinutes: z.number(),
-	durationHours: z.number(),
+	duration: z.string(),
 	numServings: z.number().int("Invalid serving number"),
 });
 

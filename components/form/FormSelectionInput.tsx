@@ -17,6 +17,7 @@ const FormSelectionInput = forwardRef<
 			selections,
 			isSubmitting,
 			onSelectionChange,
+			className,
 			...rest
 		},
 		ref
@@ -43,7 +44,7 @@ const FormSelectionInput = forwardRef<
 
 		return (
 			<div
-				className="flex flex-col gap-1 min-w-12 relative"
+				className={`flex flex-col gap-1 min-w-0 relative ${className}`}
 				ref={containerRef}
 			>
 				{/* Input */}
@@ -56,14 +57,15 @@ const FormSelectionInput = forwardRef<
 						{title}
 					</p>
 
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center">
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="w-28 grow py-2 bg-transparent outline-none focus:bg-transparent"
+							className="grow py-2 bg-transparent outline-none focus:bg-transparent min-w-0 cursor-pointer"
 							readOnly
+							onClick={onToggle}
 						/>
 						<MdArrowLeft
 							className="text-lg cursor-pointer"

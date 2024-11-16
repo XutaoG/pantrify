@@ -5,6 +5,8 @@ import FormInput from "@/components/form/FormInput";
 import FormNumberInput from "@/components/form/FormNumberInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
 import FormTextArea from "@/components/form/FormTextArea";
+import FormTimeInput from "@/components/form/FormTimeInput";
+// import FormTimeInput from "@/components/form/FormTimeInput";
 import { addRecipeSchema, TAddRecipeSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -21,6 +23,7 @@ const AddRecipePage = () => {
 		defaultValues: {
 			numServings: 1,
 			difficulty: "Easy",
+			duration: "00:00",
 		},
 	});
 
@@ -38,13 +41,36 @@ const AddRecipePage = () => {
 		if (getValues("numServings"))
 			setValue("numServings", numServings + val, {
 				shouldValidate: true,
-				shouldDirty: true,
-				shouldTouch: true,
 			});
 	};
 
 	const onDifficultyChange = (val: string) => {
 		setValue("difficulty", val, { shouldValidate: true });
+	};
+
+	const onDurationChange = (val: number) => {
+		const displayDuration = getValues("duration").split(":");
+		const duration =
+			Number(displayDuration[0]) * 60 + Number(displayDuration[1]);
+
+		if (duration + val < 0) {
+			return;
+		}
+
+		const newNumHours = Math.floor((duration + val) / 60);
+		const newNumMinutes = (duration + val) % 60;
+
+		setValue(
+			"duration",
+			`${newNumHours.toLocaleString(undefined, {
+				minimumIntegerDigits: 2,
+			})}:${newNumMinutes.toLocaleString(undefined, {
+				minimumIntegerDigits: 2,
+			})}`,
+			{
+				shouldValidate: true,
+			}
+		);
 	};
 
 	return (
@@ -72,6 +98,7 @@ const AddRecipePage = () => {
 							placeholder="Enter the name of the recipe"
 							errorMessage={errors.name?.message}
 							isSubmitting={isSubmitting}
+							className="grow"
 						/>
 						<FormNumberInput
 							{...register("numServings")}
@@ -80,6 +107,19 @@ const AddRecipePage = () => {
 							errorMessage={errors.numServings?.message}
 							isSubmitting={isSubmitting}
 							onValueIncrement={onServingChange}
+							incrementAmount={1}
+						/>
+					</div>
+
+					<div className="flex gap-4">
+						<FormNumberInput
+							{...register("duration")}
+							title="Duration (Hour:Min)"
+							errorMessage={errors.duration?.message}
+							isSubmitting={isSubmitting}
+							onValueIncrement={onDurationChange}
+							incrementAmount={10}
+							className="grow"
 						/>
 						<FormSelectionInput
 							{...register("difficulty")}
@@ -89,6 +129,7 @@ const AddRecipePage = () => {
 							selections={["Easy", "Medium", "Hard"]}
 							currentSelection={getValues("difficulty")}
 							onSelectionChange={onDifficultyChange}
+							className="grow"
 						/>
 					</div>
 

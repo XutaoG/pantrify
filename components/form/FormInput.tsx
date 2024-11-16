@@ -6,7 +6,15 @@ import { forwardRef, useState } from "react";
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 	(
-		{ title, password, errorMessage, placeholder, isSubmitting, ...rest },
+		{
+			title,
+			password,
+			errorMessage,
+			placeholder,
+			isSubmitting,
+			className,
+			...rest
+		},
 		ref
 	) => {
 		const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -16,7 +24,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 		};
 
 		return (
-			<div className="flex flex-col gap-1 min-w-12">
+			<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
 				{/* Input */}
 				<div
 					className="flex flex-col gap-0 bg-neutral-100 border border-neutral-200 

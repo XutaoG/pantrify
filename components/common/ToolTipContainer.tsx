@@ -17,7 +17,7 @@ const ToolTipContainer = ({ children, toolTipContent }: ToolTipProps) => {
 			{showToolTip && (
 				<div
 					className="absolute top-full right-0 bg-black/90 text-white text-nowrap 
-					py-0.5 px-2 rounded select-none"
+					py-0.5 px-2 rounded select-none z-10"
 				>
 					{toolTipContent}
 				</div>
