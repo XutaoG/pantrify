@@ -1,7 +1,7 @@
 "use client";
 
-import FormButton from "@/components/common/FormButton";
-import FormInput from "@/components/common/FormInput";
+import FormButton from "@/components/form/FormButton";
+import FormInput from "@/components/form/FormInput";
 import { signUp } from "@/api";
 import { signUpSchema, TSignUpSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";

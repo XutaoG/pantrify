@@ -132,6 +132,35 @@ export interface FormInputProps extends ComponentPropsWithRef<"input"> {
 	isSubmitting: boolean;
 }
 
+export interface FormTextAreaProps extends ComponentPropsWithRef<"textarea"> {
+	title: string;
+	errorMessage?: string;
+	isSubmitting: boolean;
+}
+
+export interface FormTimeInputProps extends ComponentPropsWithRef<"input"> {
+	title: string;
+	errorMessage?: string;
+	isSubmitting: boolean;
+}
+
+export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
+	title: string;
+	errorMessage?: string;
+	isSubmitting: boolean;
+	onValueIncrement: (val: number) => void;
+}
+
+export interface FormSelectionInputProps
+	extends ComponentPropsWithRef<"input"> {
+	title: string;
+	errorMessage?: string;
+	currentSelection: string;
+	selections: string[];
+	isSubmitting: boolean;
+	onSelectionChange: (val: string) => void;
+}
+
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
 	isSubmitting: boolean;
@@ -149,6 +178,8 @@ export interface DropdownProps {
 }
 
 // ! Form schemas
+
+// Sign up
 export const signUpSchema = z
 	.object({
 		email: z
@@ -169,6 +200,7 @@ export const signUpSchema = z
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
 
+// Login
 export const loginSchema = z.object({
 	email: z.string().min(1, "Email cannot be empty").email(),
 	password: z.string().min(1, "Password cannot be empty"),
@@ -177,4 +209,16 @@ export const loginSchema = z.object({
 
 export type TLoginSchema = z.infer<typeof loginSchema>;
 
-export const addIngredientSchema = z.object({});
+// Add recipe
+export const addRecipeSchema = z.object({
+	name: z.string().min(1, "Recipe name cannot be empty"),
+	description: z
+		.string()
+		.max(500, "Description cannot be longer than 500 characters"),
+	difficulty: z.string().min(1, "Difficulty cannot be empty"),
+	durationMinutes: z.number(),
+	durationHours: z.number(),
+	numServings: z.number().int("Invalid serving number"),
+});
+
+export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;

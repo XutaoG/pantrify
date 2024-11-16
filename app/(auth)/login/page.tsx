@@ -1,8 +1,8 @@
 "use client";
 
 import { login } from "@/api";
-import FormButton from "@/components/common/FormButton";
-import FormInput from "@/components/common/FormInput";
+import FormButton from "@/components/form/FormButton";
+import FormInput from "@/components/form/FormInput";
 import { loginSchema, TLoginSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
