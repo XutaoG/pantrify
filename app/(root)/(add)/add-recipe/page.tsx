@@ -1,13 +1,19 @@
 "use client";
 
-import AddRecipeIngredient from "@/components/add/add-recipe/AddRecipeIngredient";
+import AddRecipeIngredientForm from "@/components/add/add-recipe/AddRecipeIngredientForm";
+import RecipeIngredientCard from "@/components/add/add-recipe/RecipeIngredientCard";
 import FormButton from "@/components/form/FormButton";
 import FormInput from "@/components/form/FormInput";
 import FormNumberInput from "@/components/form/FormNumberInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
 import FormTextArea from "@/components/form/FormTextArea";
-import { addRecipeSchema, TAddRecipeSchema } from "@/types";
+import {
+	addRecipeSchema,
+	TAddRecipeIngredientSchema,
+	TAddRecipeSchema,
+} from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const AddRecipePage = () => {
@@ -72,6 +78,43 @@ const AddRecipePage = () => {
 		);
 	};
 
+	//! Manage ingredients
+	const [ingredients, setIngredients] = useState<
+		TAddRecipeIngredientSchema[]
+	>([]);
+
+	const addIngredient = (newIngredient: TAddRecipeIngredientSchema) => {
+		for (const ingredient of ingredients) {
+			if (ingredient.name == newIngredient.name) {
+				// Ingredient duplicated
+				return;
+			}
+		}
+
+		setIngredients([...ingredients, newIngredient]);
+	};
+
+	const primaryIngredients: JSX.Element[] = [];
+	const secondaryIngredients: JSX.Element[] = [];
+	const optionalIngredients: JSX.Element[] = [];
+
+	ingredients.forEach((ingredient) => {
+		const recipeIngredientCard = (
+			<RecipeIngredientCard
+				key={ingredient.name}
+				ingredient={ingredient}
+			/>
+		);
+
+		if (ingredient.ingredientType == "Primary") {
+			primaryIngredients.push(recipeIngredientCard);
+		} else if (ingredient.ingredientType == "Secondary") {
+			secondaryIngredients.push(recipeIngredientCard);
+		} else {
+			optionalIngredients.push(recipeIngredientCard);
+		}
+	});
+
 	return (
 		<div className="flex flex-col items-center gap-6 px-5 pt-10 pb-5">
 			<div className="container mx-auto flex flex-col gap-6">
@@ -87,7 +130,7 @@ const AddRecipePage = () => {
 
 				<form
 					onSubmit={handleSubmit(() => {})}
-					className="flex flex-col gap-4"
+					className="flex flex-col gap-5"
 				>
 					<div className="flex gap-4">
 						{/* Name field */}
@@ -142,7 +185,35 @@ const AddRecipePage = () => {
 						isSubmitting={isSubmitting}
 					/>
 
-					<AddRecipeIngredient />
+					<AddRecipeIngredientForm onIngredientAdd={addIngredient} />
+
+					{/* Primary ingredients */}
+					{primaryIngredients.length != 0 && (
+						<section className="flex flex-col gap-2">
+							<p className="font-semibold">Primary Ingredients</p>
+							<div className="grid grid-cols-4 gap-4">
+								{primaryIngredients}
+							</div>
+						</section>
+					)}
+					{/* Secondary ingredients */}
+					{secondaryIngredients.length != 0 && (
+						<section className="flex flex-col gap-2">
+							<p className="font-semibold">Primary Ingredients</p>
+							<div className="grid grid-cols-4 gap-4">
+								{secondaryIngredients}
+							</div>
+						</section>
+					)}
+					{/* Optional ingredients */}
+					{optionalIngredients.length != 0 && (
+						<section className="flex flex-col gap-2">
+							<p className="font-semibold">Primary Ingredients</p>
+							<div className="grid grid-cols-4 gap-4">
+								{optionalIngredients}
+							</div>
+						</section>
+					)}
 
 					<FormButton title="Add" isSubmitting={isSubmitting} />
 				</form>

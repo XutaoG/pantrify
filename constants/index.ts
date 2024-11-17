@@ -76,6 +76,7 @@ export const ingredientQuantityFractions = ["1/4", "1/3", "1/2", "2/3", "3/4"];
 // 	"smidgen",
 // ];
 export const ingredientQuantityUnits = [
+	"none",
 	"tsp",
 	"tbsp",
 	"cup",
@@ -92,6 +93,7 @@ export const ingredientQuantityUnits = [
 	"pinch",
 	"dash",
 	"smidgen",
+	"serving",
 ];
 
 export const mockRecipes1: Recipe[] = [

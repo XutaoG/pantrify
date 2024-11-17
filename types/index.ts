@@ -163,6 +163,10 @@ export interface FormSelectionInputProps
 	onSelectionChange: (val: string) => void;
 }
 
+export interface AddRecipeIngredientFormProps {
+	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => void;
+}
+
 export interface FormQuantityInputProps {
 	className?: string;
 	isSubmitting: boolean;
@@ -173,6 +177,10 @@ export interface FormQuantityInputProps {
 	onQuantityFractionSelectionChange: (val: string) => void;
 	currentQuantityUnitSelection: string;
 	onQuantityUnitSelectionChange: (val: string) => void;
+}
+
+export interface RecipeIngredientCardProps {
+	ingredient: TAddRecipeIngredientSchema;
 }
 
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
@@ -227,7 +235,7 @@ export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;
 
 // Add recipe ingredient
 export const addRecipeIngredientSchema = z.object({
-	name: z.string().min(1, "Ingredient name cannot be empty"),
+	name: z.string().min(1, "Name cannot be empty"),
 	ingredientType: z.string(),
 	quantityWhole: z.string(),
 	quantityFraction: z.string(),
