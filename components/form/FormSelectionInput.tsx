@@ -22,7 +22,8 @@ const FormSelectionInput = forwardRef<
 		},
 		ref
 	) => {
-		const [containerRef, isExpanded, onToggle] = useDropdown();
+		const [containerRef, isExpanded, onToggle] =
+			useDropdown<HTMLDivElement>();
 
 		const options = selections.map((selection) => {
 			return (
@@ -77,8 +78,8 @@ const FormSelectionInput = forwardRef<
 				{/* Options */}
 				{isExpanded && (
 					<div
-						className="bg-neutral-100 border border-neutral-200 
-					rounded shadow-md absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
+						className="max-h-60 bg-neutral-100 border border-neutral-200 
+						rounded shadow-md absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
 					>
 						{options}
 					</div>

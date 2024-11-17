@@ -1,12 +1,11 @@
 "use client";
 
+import AddRecipeIngredient from "@/components/add/add-recipe/AddRecipeIngredient";
 import FormButton from "@/components/form/FormButton";
 import FormInput from "@/components/form/FormInput";
 import FormNumberInput from "@/components/form/FormNumberInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
 import FormTextArea from "@/components/form/FormTextArea";
-import FormTimeInput from "@/components/form/FormTimeInput";
-// import FormTimeInput from "@/components/form/FormTimeInput";
 import { addRecipeSchema, TAddRecipeSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -108,6 +107,7 @@ const AddRecipePage = () => {
 							isSubmitting={isSubmitting}
 							onValueIncrement={onServingChange}
 							incrementAmount={1}
+							className="w-40"
 						/>
 					</div>
 
@@ -141,6 +141,8 @@ const AddRecipePage = () => {
 						errorMessage={errors.description?.message}
 						isSubmitting={isSubmitting}
 					/>
+
+					<AddRecipeIngredient />
 
 					<FormButton title="Add" isSubmitting={isSubmitting} />
 				</form>

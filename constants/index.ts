@@ -55,6 +55,45 @@ export const addNavRoutes = [
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 
+export const ingredientTypes = ["Primary", "Secondary", "Optional"];
+export const ingredientQuantityFractions = ["1/4", "1/3", "1/2", "2/3", "3/4"];
+// export const ingredientQuantityUnits = [
+// 	"tsp (teaspoon)",
+// 	"tbsp (tablespoon)",
+// 	"cup",
+// 	"fl oz (fluid ounce)",
+// 	"pt (pint)",
+// 	"qt (quart)",
+// 	"gal (gallon)",
+// 	"ml (mililiter)",
+// 	"l (liter)",
+// 	"oz (ounce)",
+// 	"lb (pound)",
+// 	"g (gram)",
+// 	"kg (kilogram)",
+// 	"pinch",
+// 	"dash",
+// 	"smidgen",
+// ];
+export const ingredientQuantityUnits = [
+	"tsp",
+	"tbsp",
+	"cup",
+	"fl oz",
+	"pt",
+	"qt",
+	"gal",
+	"ml",
+	"l",
+	"oz",
+	"lb",
+	"g",
+	"kg",
+	"pinch",
+	"dash",
+	"smidgen",
+];
+
 export const mockRecipes1: Recipe[] = [
 	{
 		id: 1,

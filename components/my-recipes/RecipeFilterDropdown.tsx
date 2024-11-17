@@ -6,7 +6,7 @@ import { MdToc } from "react-icons/md";
 import { useDropdown } from "@/hooks";
 
 const RecipeFilterDropdown = () => {
-	const [containerRef, isExpanded, onToggle] = useDropdown();
+	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 	const mockDifficultySelections = [
 		"All Difficulty",

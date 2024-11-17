@@ -1,4 +1,5 @@
 import { ComponentPropsWithRef, ReactNode } from "react";
+import { UseFormRegister } from "react-hook-form";
 import { z } from "zod";
 
 // ! RESPONSES
@@ -162,6 +163,18 @@ export interface FormSelectionInputProps
 	onSelectionChange: (val: string) => void;
 }
 
+export interface FormQuantityInputProps {
+	className?: string;
+	isSubmitting: boolean;
+	// quantityWholeRegister: UseFormRegisterReturn;
+	// quantityFractionRegister: UseFormRegisterReturn;
+	register: UseFormRegister<TAddRecipeIngredientSchema>;
+	currentQuantityFractionSelection: string;
+	onQuantityFractionSelectionChange: (val: string) => void;
+	currentQuantityUnitSelection: string;
+	onQuantityUnitSelectionChange: (val: string) => void;
+}
+
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
 	isSubmitting: boolean;
@@ -211,3 +224,16 @@ export const addRecipeSchema = z.object({
 });
 
 export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;
+
+// Add recipe ingredient
+export const addRecipeIngredientSchema = z.object({
+	name: z.string().min(1, "Ingredient name cannot be empty"),
+	ingredientType: z.string(),
+	quantityWhole: z.string(),
+	quantityFraction: z.string(),
+	quantityUnit: z.string(),
+});
+
+export type TAddRecipeIngredientSchema = z.infer<
+	typeof addRecipeIngredientSchema
+>;

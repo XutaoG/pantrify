@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useDropdown = () => {
+export const useDropdown = <T extends HTMLElement>() => {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<T>(null);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
