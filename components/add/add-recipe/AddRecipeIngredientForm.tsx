@@ -1,7 +1,7 @@
 import FormInput from "@/components/form/FormInput";
 import FormQuantityInput from "@/components/form/FormQuantityInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
-import { ingredientQuantityUnits, ingredientTypes } from "@/constants";
+import { ingredientTypes } from "@/constants";
 import {
 	AddRecipeIngredientFormProps,
 	addRecipeIngredientSchema,
@@ -41,7 +41,7 @@ const AddRecipeIngredientForm = ({
 	};
 
 	return (
-		<div className="flex flex-col gap-6">
+		<section className="flex flex-col gap-6">
 			<div className="flex flex-col gap-2">
 				<p className="font-semibold">Add Ingredients</p>
 
@@ -88,7 +88,7 @@ const AddRecipeIngredientForm = ({
 				<MdAdd className="text-white text-3xl" />
 				<p className="text-white font-medium">Add Ingredient</p>
 			</div>
-		</div>
+		</section>
 	);
 };
 

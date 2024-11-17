@@ -1,6 +1,7 @@
 "use client";
 
 import AddRecipeIngredientForm from "@/components/add/add-recipe/AddRecipeIngredientForm";
+import AddRecipeInstructionForm from "@/components/add/add-recipe/AddRecipeInstructionForm";
 import RecipeIngredientCard from "@/components/add/add-recipe/RecipeIngredientCard";
 import FormButton from "@/components/form/FormButton";
 import FormInput from "@/components/form/FormInput";
@@ -32,6 +33,8 @@ const AddRecipePage = () => {
 		},
 	});
 
+	//! Serving
+
 	const onServingChange = (val: number) => {
 		const numServings = Number(getValues("numServings"));
 
@@ -49,9 +52,13 @@ const AddRecipePage = () => {
 			});
 	};
 
+	//! Difficulty
+
 	const onDifficultyChange = (val: string) => {
 		setValue("difficulty", val, { shouldValidate: true });
 	};
+
+	//! Duration
 
 	const onDurationChange = (val: number) => {
 		const displayDuration = getValues("duration").split(":");
@@ -78,7 +85,7 @@ const AddRecipePage = () => {
 		);
 	};
 
-	//! Manage ingredients
+	//! Ingredients
 	const [ingredients, setIngredients] = useState<
 		TAddRecipeIngredientSchema[]
 	>([]);
@@ -114,6 +121,13 @@ const AddRecipePage = () => {
 			optionalIngredients.push(recipeIngredientCard);
 		}
 	});
+
+	//! Instructions
+	const [instructions, setInstructions] = useState<string[]>([]);
+
+	const addInstruction = (newInstruction: string) => {
+		setInstructions([...instructions, newInstruction]);
+	};
 
 	return (
 		<div className="flex flex-col items-center gap-6 px-5 pt-10 pb-5">
@@ -185,6 +199,7 @@ const AddRecipePage = () => {
 						isSubmitting={isSubmitting}
 					/>
 
+					{/* Add ingredient form */}
 					<AddRecipeIngredientForm onIngredientAdd={addIngredient} />
 
 					{/* Primary ingredients */}
@@ -214,6 +229,8 @@ const AddRecipePage = () => {
 							</div>
 						</section>
 					)}
+
+					<AddRecipeInstructionForm />
 
 					<FormButton title="Add" isSubmitting={isSubmitting} />
 				</form>
