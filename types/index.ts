@@ -179,6 +179,14 @@ export interface FormQuantityInputProps {
 	onQuantityUnitSelectionChange: (val: string) => void;
 }
 
+export interface FormInstructionInputProps {
+	index: number;
+	value: string;
+	onInstructionEdit: (index: number, newInstruction: string) => void;
+	onInstructionRemove: (index: number) => void;
+	onInstructionMove: (index: number, direction: number) => void;
+}
+
 export interface RecipeIngredientCardProps {
 	ingredient: TAddRecipeIngredientSchema;
 }
@@ -244,4 +252,13 @@ export const addRecipeIngredientSchema = z.object({
 
 export type TAddRecipeIngredientSchema = z.infer<
 	typeof addRecipeIngredientSchema
+>;
+
+// Add recipe instruction
+export const addRecipeInstructionSchema = z.object({
+	instruction: z.string().min(1, "Instruction cannot be empty"),
+});
+
+export type TAddRecipeInstructionSchema = z.infer<
+	typeof addRecipeInstructionSchema
 >;

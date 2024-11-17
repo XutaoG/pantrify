@@ -1,38 +1,68 @@
+import { FormInstructionInputProps } from "@/types";
 import {
 	MdKeyboardDoubleArrowUp,
 	MdKeyboardDoubleArrowDown,
-	MdAdd,
+	MdOutlineDeleteForever,
 } from "react-icons/md";
 
-const FormInstructionInput = () => {
+const FormInstructionInput = ({
+	index,
+	value,
+	onInstructionEdit,
+	onInstructionRemove,
+	onInstructionMove,
+}: FormInstructionInputProps) => {
 	return (
-		<div className="flex shadow-md">
+		<div className="flex shadow-md rounded">
 			{/* Move */}
 			<div className="bg-neutral-200 flex flex-col justify-between rounded-l overflow-hidden">
-				<div className="grow p-1 flex justify-center items-center hover:bg-neutral-300 cursor-pointer">
+				<button
+					className="grow p-1 flex justify-center items-center hover:bg-neutral-300"
+					onClick={() => {
+						onInstructionMove(index, -1);
+					}}
+				>
 					<MdKeyboardDoubleArrowUp className="text-whit text-xl" />
-				</div>
-				<div className="grow p-1 flex justify-center items-center hover:bg-neutral-300 cursor-pointer">
+				</button>
+				<button
+					className="grow p-1 flex justify-center items-center hover:bg-neutral-300"
+					onClick={() => {
+						onInstructionMove(index, 1);
+					}}
+				>
 					<MdKeyboardDoubleArrowDown className="text-whit text-xl" />
-				</div>
+				</button>
 			</div>
 
-			<div className="grow flex gap-4 bg-neutral-100 border border-l-0 border-neutral-200 p-2 rounded-r">
+			<div className="grow flex gap-3 bg-neutral-100 border border-l-0 border-neutral-200 p-2 px-3 rounded-r">
+				{/* Step */}
+				<div className="flex justify-center items-center px-2 border bg-neutral-200  rounded">
+					<p className="font-medium">{index + 1}</p>
+				</div>
+
 				{/* Text area */}
 				<div className="bg-white border border-neutral-200 rounded grow p-2 flex flex-col">
 					<textarea
+						// {...register("instruction")}
 						className="bg-transparent outline-none focus:bg-transparent 
-					min-h-20 max-h-20 resize-none"
+						min-h-12 max-h-12 resize-none"
 						placeholder="Enter your recipe instruction"
+						value={value}
+						onChange={(event) => {
+							onInstructionEdit(index, event.target.value);
+						}}
 					/>
 				</div>
 
-				{/* Add */}
+				{/* Delete */}
 				<div
-					className="bg-emerald-500 rounded-md w-10 hover:bg-emerald-600 cursor-pointer
-				flex justify-center items-center border"
+					className="self-center bg-red-400 rounded-full size-10 hover:bg-red-500 cursor-pointer
+					flex justify-center items-center border"
+					onClick={() => {
+						onInstructionRemove(index);
+					}}
 				>
-					<MdAdd className="text-white text-3xl" />
+					<MdOutlineDeleteForever className="text-white text-2xl" />
 				</div>
 			</div>
 		</div>

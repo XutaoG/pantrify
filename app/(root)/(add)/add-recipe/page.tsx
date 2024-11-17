@@ -1,7 +1,6 @@
 "use client";
 
 import AddRecipeIngredientForm from "@/components/add/add-recipe/AddRecipeIngredientForm";
-import AddRecipeInstructionForm from "@/components/add/add-recipe/AddRecipeInstructionForm";
 import RecipeIngredientCard from "@/components/add/add-recipe/RecipeIngredientCard";
 import FormButton from "@/components/form/FormButton";
 import FormInput from "@/components/form/FormInput";
@@ -16,6 +15,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { MdAdd } from "react-icons/md";
+import FormInstructionInput from "@/components/form/FormInstructionInput";
 
 const AddRecipePage = () => {
 	const {
@@ -123,14 +124,64 @@ const AddRecipePage = () => {
 	});
 
 	//! Instructions
-	const [instructions, setInstructions] = useState<string[]>([]);
+	const [instructions, setInstructions] = useState<string[]>(["1", "2", "3"]);
 
-	const addInstruction = (newInstruction: string) => {
-		setInstructions([...instructions, newInstruction]);
+	const addInstruction = () => {
+		setInstructions([...instructions, ""]);
 	};
 
+	const onInstructionUpdate = (index: number, newInstruction: string) => {
+		const updatedInstructions = instructions.map((instruction, i) => {
+			if (index === i) {
+				return newInstruction;
+			}
+			return instruction;
+		});
+
+		setInstructions(updatedInstructions);
+	};
+
+	const removeInstruction = (index: number) => {
+		const updatedInstructions = instructions.filter((_, i) => {
+			return index !== i;
+		});
+
+		setInstructions(updatedInstructions);
+	};
+
+	const moveInstruction = (index: number, direction: number) => {
+		if (
+			(index === 0 && direction === -1) ||
+			(index === instructions.length - 1 && direction === 1)
+		) {
+			return;
+		}
+
+		const originalInstruction = instructions[index];
+		const newInstruction = instructions[index + direction];
+
+		const updatedInstructions = [...instructions];
+		updatedInstructions[index] = newInstruction;
+		updatedInstructions[index + direction] = originalInstruction;
+
+		setInstructions(updatedInstructions);
+	};
+
+	const instructionCards = instructions.map((instruction, index) => {
+		return (
+			<FormInstructionInput
+				key={index}
+				index={index}
+				value={instruction}
+				onInstructionRemove={removeInstruction}
+				onInstructionEdit={onInstructionUpdate}
+				onInstructionMove={moveInstruction}
+			/>
+		);
+	});
+
 	return (
-		<div className="flex flex-col items-center gap-6 px-5 pt-10 pb-5">
+		<div className="flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-scroll">
 			<div className="container mx-auto flex flex-col gap-6">
 				{/* Page title */}
 				<div className="flex flex-col gap-2">
@@ -142,10 +193,7 @@ const AddRecipePage = () => {
 					</p>
 				</div>
 
-				<form
-					onSubmit={handleSubmit(() => {})}
-					className="flex flex-col gap-5"
-				>
+				<section className="flex flex-col gap-5">
 					<div className="flex gap-4">
 						{/* Name field */}
 						<FormInput
@@ -230,10 +278,31 @@ const AddRecipePage = () => {
 						</section>
 					)}
 
-					<AddRecipeInstructionForm />
+					<section className="flex flex-col gap-6">
+						<div className="flex flex-col gap-2">
+							<p className="font-semibold">Instructions</p>
 
-					<FormButton title="Add" isSubmitting={isSubmitting} />
-				</form>
+							{instructionCards}
+						</div>
+
+						{/* Add instruction button */}
+						<div
+							className="self-center flex items-center gap-1 bg-emerald-500 p-1 pr-2 rounded hover:bg-emerald-600 cursor-pointer"
+							onClick={addInstruction}
+						>
+							<MdAdd className="text-white text-3xl" />
+							<p className="text-white font-medium">
+								Add Instruction
+							</p>
+						</div>
+					</section>
+
+					<FormButton
+						title="Add"
+						isSubmitting={isSubmitting}
+						onClick={handleSubmit(() => {})}
+					/>
+				</section>
 			</div>
 		</div>
 	);
