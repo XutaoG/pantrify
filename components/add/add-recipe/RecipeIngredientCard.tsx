@@ -1,5 +1,5 @@
 import { RecipeIngredientCardProps } from "@/types";
-import { MdOutlineDeleteForever, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIngredientCardProps) => {
 	const hideQuantity =
@@ -15,9 +15,11 @@ const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIng
 				{hideQuantity ? (
 					<p className="text-sm text-neutral-600 font-medium">Quantity unspecified</p>
 				) : (
-					<p className="text-sm font-medium">{`${ingredient.quantityWhole} ${
-						ingredient.quantityFraction !== "None" ? ingredient.quantityFraction : ""
-					} ${ingredient.quantityUnit}`}</p>
+					<p className="text-sm font-medium">
+						{ingredient.quantityWhole}{" "}
+						{ingredient.quantityFraction !== "None" ? ingredient.quantityFraction : ""}{" "}
+						{ingredient.quantityUnit !== "None" ? ingredient.quantityUnit : ""}
+					</p>
 				)}
 			</div>
 
@@ -40,7 +42,7 @@ const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIng
 						onDelete(index);
 					}}
 				>
-					<MdOutlineDeleteForever className="text-white text-2xl" />
+					<MdDelete className="text-white text-2xl" />
 				</button>
 			</div>
 		</div>

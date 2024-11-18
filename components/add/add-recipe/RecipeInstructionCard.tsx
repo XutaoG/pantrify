@@ -1,5 +1,5 @@
 import { FormInstructionInputProps } from "@/types";
-import { MdOutlineDeleteForever, MdArrowUpward, MdArrowDownward } from "react-icons/md";
+import { MdDelete, MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
 const RecipeInstructionCard = ({
 	index,
@@ -18,7 +18,7 @@ const RecipeInstructionCard = ({
 						onInstructionMove(index, -1);
 					}}
 				>
-					<MdArrowUpward className="text-whit text-lg" />
+					<MdKeyboardArrowUp className="text-whit text-xl" />
 				</button>
 				<button
 					className="grow p-2 flex justify-center items-center hover:bg-neutral-300"
@@ -26,7 +26,7 @@ const RecipeInstructionCard = ({
 						onInstructionMove(index, 1);
 					}}
 				>
-					<MdArrowDownward className="text-whit text-lg" />
+					<MdKeyboardArrowDown className="text-whit text-xl" />
 				</button>
 			</div>
 
@@ -57,7 +57,7 @@ const RecipeInstructionCard = ({
 						onInstructionRemove(index);
 					}}
 				>
-					<MdOutlineDeleteForever className="text-white text-2xl" />
+					<MdDelete className="text-white text-2xl" />
 				</button>
 			</div>
 		</div>

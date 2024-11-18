@@ -158,11 +158,11 @@ export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> 
 }
 
 export interface AddRecipeIngredientFormProps {
-	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => void;
+	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;
 	onModalClose: () => void;
 	index: number | null;
 	ingredient: TAddRecipeIngredientSchema | null;
-	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => void;
+	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
 	onIngredientDelete: (index: number) => void;
 }
 
@@ -224,10 +224,9 @@ export const addRecipeSchema = z.object({
 	name: z.string().min(1, "Recipe name cannot be empty"),
 	description: z.string().max(500, "Description cannot be longer than 500 characters"),
 	difficulty: z.string().min(1, "Difficulty cannot be empty"),
-	duration: z.string(),
 	durationHour: z.string(),
 	durationMinute: z.string(),
-	numServings: z.number().int("Invalid serving number"),
+	numServings: z.string(),
 });
 
 export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;

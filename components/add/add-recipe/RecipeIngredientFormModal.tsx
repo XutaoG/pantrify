@@ -4,9 +4,9 @@ import FormSelectionInput from "@/components/form/FormSelectionInput";
 import { ingredientQuantityFractions, ingredientTypes } from "@/constants";
 import { AddRecipeIngredientFormProps, addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { MdAdd, MdCancel, MdDelete, MdEdit } from "react-icons/md";
+import { MdOutlineAddCircle, MdCancel, MdDelete, MdEdit, MdRemoveCircle } from "react-icons/md";
 
 const RecipeIngredientFormModal = ({
 	onIngredientAdd,
@@ -38,10 +38,10 @@ const RecipeIngredientFormModal = ({
 		//* Initialize form if ingredient is valid
 		if (index != null && ingredient != null) {
 			setValue("name", ingredient.name, { shouldValidate: true });
-			setValue("ingredientType", ingredient.ingredientType, { shouldValidate: true });
+			setValue("ingredientType", ingredient.ingredientType);
 			setValue("quantityWhole", ingredient.quantityWhole, { shouldValidate: true });
-			setValue("quantityFraction", ingredient.quantityFraction, { shouldValidate: true });
-			setValue("quantityUnit", ingredient.quantityUnit, { shouldValidate: true });
+			setValue("quantityFraction", ingredient.quantityFraction);
+			setValue("quantityUnit", ingredient.quantityUnit);
 		}
 	}, [index, ingredient, setValue]);
 
@@ -50,16 +50,27 @@ const RecipeIngredientFormModal = ({
 		setValue("ingredientType", val);
 	};
 
+	const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
+
 	//* Form submission
 	const submitForm = () => {
 		if (index == null || ingredient == null) {
 			// Add ingredient
 
-			onIngredientAdd(getValues());
-			reset();
+			const response = onIngredientAdd(getValues());
+
+			if (response == null) {
+				reset();
+			} else {
+				setFormErrorMessage(response);
+			}
 		} else {
 			// Edit ingredient
-			onIngredientEdit(index, getValues());
+			const response = onIngredientEdit(index, getValues());
+
+			if (response != null) {
+				setFormErrorMessage(response);
+			}
 		}
 	};
 
@@ -76,13 +87,18 @@ const RecipeIngredientFormModal = ({
 		}
 	};
 
+	//* Discard changes
+	const discardChanges = () => {
+		onModalClose();
+	};
+
 	return (
 		<section className="absolute inset-0 flex justify-center items-center">
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(submitForm)}
 					className="flex flex-col gap-4 bg-white p-4 
-				border border-neutral-200 rounded-md shadow-md"
+					border border-neutral-200 rounded-md shadow-md"
 				>
 					{/* Title */}
 					<p className="font-semibold">
@@ -97,6 +113,7 @@ const RecipeIngredientFormModal = ({
 						errorMessage={errors.name?.message}
 						isSubmitting={isSubmitting}
 						className="grow"
+						onFocus={() => setFormErrorMessage(null)}
 					/>
 					{/* Ingredient type field */}
 					<FormSelectionInput
@@ -110,17 +127,21 @@ const RecipeIngredientFormModal = ({
 					{/* Ingredient quantity field */}
 					<RecipeIngredientQuantityInput />
 
+					{formErrorMessage && (
+						<p className="self-center px-1 text-red-600 font-medium">{formErrorMessage}</p>
+					)}
+
 					<div className="flex flex-col gap-2">
 						{/* Add ingredient */}
 						<button
 							type="submit"
-							className="flex justify-center items-center gap-2
-						bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
+							className="flex justify-center items-center gap-2 
+							bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
 						>
 							{index == null || ingredient == null ? (
 								<Fragment>
 									{/* Add icon and text */}
-									<MdAdd className="text-white text-xl" />
+									<MdOutlineAddCircle className="text-white text-xl" />
 									<p className="text-white font-medium">Add Ingredient</p>
 								</Fragment>
 							) : (
@@ -131,6 +152,19 @@ const RecipeIngredientFormModal = ({
 								</Fragment>
 							)}
 						</button>
+
+						{/* Discard change button */}
+						{index != null && ingredient != null && (
+							<button
+								type="button"
+								className="flex justify-center items-center gap-2 bg-yellow-500 
+								p-1.5 rounded hover:bg-yellow-600"
+								onClick={discardChanges}
+							>
+								<MdRemoveCircle className="text-white text-xl" />
+								<p className="text-white font-medium">Discard Changes</p>
+							</button>
+						)}
 
 						{/* Cancel */}
 						<button

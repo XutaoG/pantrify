@@ -19,9 +19,8 @@ const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
 		resolver: zodResolver(addRecipeSchema),
 		defaultValues: {
-			numServings: 1,
+			numServings: "1",
 			difficulty: "Easy",
-			duration: "00:00",
 			durationHour: "00",
 			durationMinute: "00",
 		},
@@ -40,14 +39,11 @@ const AddRecipePage = () => {
 	const onServingChange = (val: number) => {
 		const numServings = Number(getValues("numServings"));
 
-		if (isNaN(numServings) || numServings + val < 1 || numServings + val > 10) {
+		if (numServings + val < 1 || numServings + val > 10) {
 			return;
 		}
 
-		if (getValues("numServings"))
-			setValue("numServings", numServings + val, {
-				shouldValidate: true,
-			});
+		if (getValues("numServings")) setValue("numServings", (numServings + val).toLocaleString());
 	};
 
 	//! Difficulty
@@ -85,19 +81,33 @@ const AddRecipePage = () => {
 	const [ingredients, setIngredients] = useState<TAddRecipeIngredientSchema[]>([]);
 
 	//* Add ingredient
+	// Success: returns null
+	// Fail: error message
 	const addIngredient = (newIngredient: TAddRecipeIngredientSchema) => {
 		for (const ingredient of ingredients) {
 			if (ingredient.name == newIngredient.name) {
 				// Ingredient duplicated
-				return;
+
+				return "Ingredient already added";
 			}
 		}
 
 		setIngredients([...ingredients, newIngredient]);
+		return null;
 	};
 
 	//* Edit ingredient
+	// Success: returns null
+	// Fail: error message
 	const editIngredient = (index: number, newIngredient: TAddRecipeIngredientSchema) => {
+		for (const ingredient of ingredients) {
+			if (ingredient.name == newIngredient.name) {
+				// Ingredient duplicated
+
+				return "Ingredient already added";
+			}
+		}
+
 		const updatedIngredients = ingredients.map((ingredient, i) => {
 			if (index == i) {
 				return newIngredient;
@@ -108,6 +118,7 @@ const AddRecipePage = () => {
 
 		setIngredients(updatedIngredients);
 		resetModal();
+		return null;
 	};
 
 	//* Delete ingredient

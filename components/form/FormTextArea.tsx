@@ -21,7 +21,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="grow py-1 bg-transparent outline-none min-h-32 max-h-32 resize-none"
+							className="grow py-1 bg-transparent outline-none min-h-36 max-h-36 resize-none"
 							placeholder={placeholder}
 						/>
 					</div>
