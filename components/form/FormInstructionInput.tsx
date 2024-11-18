@@ -33,7 +33,7 @@ const FormInstructionInput = ({
 			<div className="grow flex gap-3 bg-neutral-100 border border-l-0 border-neutral-200 p-2 px-3 rounded-r">
 				{/* Step */}
 				<div className="flex justify-center items-center px-3 border bg-neutral-200  rounded">
-					<p className="font-medium">{index + 1}</p>
+					<p className="font-medium select-none">{index + 1}</p>
 				</div>
 
 				{/* Text area */}

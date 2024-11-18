@@ -13,9 +13,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 					rounded shadow-md px-4 py-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600">
-						{title}
-					</p>
+					<p className="text-sm font-semibold text-neutral-600 select-none">{title}</p>
 
 					<div className="flex gap-2 items-center">
 						{/* Input */}
@@ -31,9 +29,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 				</div>
 
 				{/* Error */}
-				{errorMessage && (
-					<p className="px-1 text-red-600">{errorMessage}</p>
-				)}
+				{errorMessage && <p className="px-1 text-red-600">{errorMessage}</p>}
 			</div>
 		);
 	}

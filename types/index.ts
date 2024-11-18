@@ -155,7 +155,6 @@ export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
 
 export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> {
 	title: string;
-	errorMessage?: string;
 	currentSelection: string;
 	selections: string[];
 	isSubmitting: boolean;

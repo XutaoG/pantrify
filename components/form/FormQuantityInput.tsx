@@ -35,7 +35,7 @@ const FormQuantityInput = ({
 		return (
 			<div
 				key={selection}
-				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
+				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer select-none ${
 					selection === currentQuantityFractionSelection
 						? "text-black font-bold"
 						: "text-neutral-600 font-medium"
@@ -53,7 +53,7 @@ const FormQuantityInput = ({
 		return (
 			<div
 				key={selection}
-				className={`p-1 hover:bg-neutral-300 rounded cursor-pointer ${
+				className={`p-1 hover:bg-neutral-300 rounded cursor-pointer select-none ${
 					selection === currentQuantityUnitSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
@@ -73,7 +73,7 @@ const FormQuantityInput = ({
 					rounded shadow-md px-4 pt-2 pb-4"
 			>
 				{/* Title */}
-				<p className="text-sm font-semibold text-neutral-600">Quantity</p>
+				<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
 
 				<div className="flex gap-2 items-center">
 					{/* Whole field */}

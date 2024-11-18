@@ -225,7 +225,7 @@ const AddRecipePage = () => {
 	});
 
 	return (
-		<div className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-scroll relative">
+		<div className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto relative">
 			<div className="container mx-auto flex flex-col gap-6">
 				{/* Page title */}
 				<div className="flex flex-col gap-2">
@@ -274,7 +274,6 @@ const AddRecipePage = () => {
 						<FormSelectionInput
 							{...register("difficulty")}
 							title="Difficulty"
-							errorMessage={errors.difficulty?.message}
 							isSubmitting={isSubmitting}
 							selections={["Easy", "Medium", "Hard"]}
 							currentSelection={getValues("difficulty")}
@@ -339,7 +338,7 @@ const AddRecipePage = () => {
 					<section className="flex flex-col gap-6">
 						<div className="flex flex-col gap-2">
 							{/* Title */}
-							<p className="font-semibold">Instructions</p>
+							<p className="font-semibold select-none">Instructions</p>
 
 							{/* Cards */}
 							{instructionCards}

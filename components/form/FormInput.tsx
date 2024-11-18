@@ -5,18 +5,7 @@ import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { forwardRef, useState } from "react";
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
-	(
-		{
-			title,
-			password,
-			errorMessage,
-			placeholder,
-			isSubmitting,
-			className,
-			...rest
-		},
-		ref
-	) => {
+	({ title, password, errorMessage, placeholder, isSubmitting, className, ...rest }, ref) => {
 		const [passwordVisibility, setPasswordVisibility] = useState(false);
 
 		const togglePasswordVisibility = () => {
@@ -31,9 +20,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 					rounded shadow-md px-4 pt-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600">
-						{title}
-					</p>
+					<p className="text-sm font-semibold text-neutral-600 select-none">{title}</p>
 
 					<div className="flex gap-2 items-center">
 						{/* Input */}
@@ -43,19 +30,12 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 							disabled={isSubmitting}
 							className="grow py-2 bg-transparent outline-none focus:bg-transparent"
 							placeholder={placeholder}
-							type={
-								password && !passwordVisibility
-									? "password"
-									: ""
-							}
+							type={password && !passwordVisibility ? "password" : ""}
 						/>
 
 						{/* Eye toggle */}
 						{password && (
-							<div
-								className="cursor-pointer"
-								onClick={togglePasswordVisibility}
-							>
+							<div className="cursor-pointer" onClick={togglePasswordVisibility}>
 								{passwordVisibility ? (
 									<MdOutlineVisibility className="text-xl" />
 								) : (
@@ -67,9 +47,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 				</div>
 
 				{/* Error */}
-				{errorMessage && (
-					<p className="px-1 text-red-600">{errorMessage}</p>
-				)}
+				{errorMessage && <p className="px-1 text-red-600">{errorMessage}</p>}
 			</div>
 		);
 	}

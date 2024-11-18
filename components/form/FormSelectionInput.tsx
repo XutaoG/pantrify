@@ -3,36 +3,18 @@
 import { useDropdown } from "@/hooks";
 import { FormSelectionInputProps } from "@/types";
 import { forwardRef } from "react";
-import { MdArrowLeft } from "react-icons/md";
+import { MdArrowDropDown } from "react-icons/md";
 
-const FormSelectionInput = forwardRef<
-	HTMLInputElement,
-	FormSelectionInputProps
->(
-	(
-		{
-			title,
-			currentSelection,
-			errorMessage,
-			selections,
-			isSubmitting,
-			onSelectionChange,
-			className,
-			...rest
-		},
-		ref
-	) => {
-		const [containerRef, isExpanded, onToggle] =
-			useDropdown<HTMLDivElement>();
+const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>(
+	({ title, currentSelection, selections, isSubmitting, onSelectionChange, className, ...rest }, ref) => {
+		const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 		const options = selections.map((selection) => {
 			return (
 				<div
 					key={selection}
-					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
-						selection === currentSelection
-							? "text-black font-bold"
-							: "text-neutral-600 font-medium"
+					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer select-none ${
+						selection === currentSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
 					}`}
 					onClick={() => {
 						onSelectionChange(selection);
@@ -44,34 +26,25 @@ const FormSelectionInput = forwardRef<
 		});
 
 		return (
-			<div
-				className={`flex flex-col gap-1 min-w-0 relative ${className}`}
-				ref={containerRef}
-			>
+			<div className={`flex flex-col gap-1 min-w-0 relative ${className}`} ref={containerRef}>
 				{/* Input */}
 				<div
 					className="flex flex-col gap-0 bg-neutral-100 border border-neutral-200 
 					rounded shadow-md px-4 pt-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600">
-						{title}
-					</p>
+					<p className="text-sm font-semibold text-neutral-600 select-none cursor-pointer">{title}</p>
 
-					<div className="flex items-center">
+					<div className="flex items-center" onClick={onToggle}>
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="grow py-2 bg-transparent outline-none focus:bg-transparent min-w-0 cursor-pointer"
+							className="grow py-2 bg-transparent outline-none focus:bg-transparent min-w-0"
 							readOnly
-							onClick={onToggle}
 						/>
-						<MdArrowLeft
-							className="text-lg cursor-pointer"
-							onClick={onToggle}
-						/>
+						<MdArrowDropDown className={`text-lg cursor-pointer ${!isExpanded && "rotate-90"}`} />
 					</div>
 				</div>
 
@@ -83,11 +56,6 @@ const FormSelectionInput = forwardRef<
 					>
 						{options}
 					</div>
-				)}
-
-				{/* Error */}
-				{errorMessage && (
-					<p className="px-1 text-red-600">{errorMessage}</p>
 				)}
 			</div>
 		);

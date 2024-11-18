@@ -6,16 +6,7 @@ import { MdAdd, MdRemove } from "react-icons/md";
 
 const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 	(
-		{
-			title,
-			errorMessage,
-			placeholder,
-			isSubmitting,
-			onValueIncrement,
-			incrementAmount,
-			className,
-			...rest
-		},
+		{ title, errorMessage, placeholder, isSubmitting, onValueIncrement, incrementAmount, className, ...rest },
 		ref
 	) => {
 		// Store interval
@@ -53,9 +44,7 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 					rounded shadow-md px-4 pt-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600">
-						{title}
-					</p>
+					<p className="text-sm font-semibold text-neutral-600 select-none">{title}</p>
 
 					<div className="flex gap-2 items-center">
 						{/* Input */}
@@ -70,24 +59,16 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 						<div className="flex gap-4 items-center">
 							<MdRemove
 								className="text-lg cursor-pointer"
-								onClick={() =>
-									onValueIncrement(-incrementAmount)
-								}
-								onMouseDown={() =>
-									keepValueIncrement(-incrementAmount)
-								}
+								onClick={() => onValueIncrement(-incrementAmount)}
+								onMouseDown={() => keepValueIncrement(-incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
 							/>
 							<p className="text-neutral-600 select-none">|</p>
 							<MdAdd
 								className="text-lg cursor-pointer"
-								onClick={() =>
-									onValueIncrement(incrementAmount)
-								}
-								onMouseDown={() =>
-									keepValueIncrement(incrementAmount)
-								}
+								onClick={() => onValueIncrement(incrementAmount)}
+								onMouseDown={() => keepValueIncrement(incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
 							/>
@@ -96,9 +77,7 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 				</div>
 
 				{/* Error */}
-				{errorMessage && (
-					<p className="px-1 text-red-600">{errorMessage}</p>
-				)}
+				{errorMessage && <p className="px-1 text-red-600">{errorMessage}</p>}
 			</div>
 		);
 	}
