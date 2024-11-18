@@ -1,9 +1,6 @@
 "use client";
 
-import {
-	ingredientQuantityFractions,
-	ingredientQuantityUnits,
-} from "@/constants";
+import { ingredientQuantityFractions, ingredientQuantityUnits } from "@/constants";
 import { useDropdown } from "@/hooks";
 import { FormQuantityInputProps } from "@/types";
 import { MdArrowLeft } from "react-icons/md";
@@ -30,40 +27,34 @@ const FormQuantityInput = ({
 	currentQuantityUnitSelection,
 	onQuantityUnitSelectionChange,
 }: FormQuantityInputProps) => {
-	const [fractionContainerRef, isExpandedFraction, onToggleFraction] =
-		useDropdown<HTMLInputElement>();
+	const [fractionContainerRef, isExpandedFraction, onToggleFraction] = useDropdown<HTMLInputElement>();
 
-	const [unitContainerRef, isExpandedUnit, onToggleUnit] =
-		useDropdown<HTMLInputElement>();
+	const [unitContainerRef, isExpandedUnit, onToggleUnit] = useDropdown<HTMLInputElement>();
 
-	const fractionQuantityOptions = ingredientQuantityFractions.map(
-		(selection) => {
-			return (
-				<div
-					key={selection}
-					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
-						selection === currentQuantityFractionSelection
-							? "text-black font-bold"
-							: "text-neutral-600 font-medium"
-					}`}
-					onClick={() => {
-						onQuantityFractionSelectionChange(selection);
-					}}
-				>
-					{selection}
-				</div>
-			);
-		}
-	);
+	const fractionQuantityOptions = ingredientQuantityFractions.map((selection) => {
+		return (
+			<div
+				key={selection}
+				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
+					selection === currentQuantityFractionSelection
+						? "text-black font-bold"
+						: "text-neutral-600 font-medium"
+				}`}
+				onClick={() => {
+					onQuantityFractionSelectionChange(selection);
+				}}
+			>
+				{selection}
+			</div>
+		);
+	});
 
 	const quantityUnitOptions = ingredientQuantityUnits.map((selection) => {
 		return (
 			<div
 				key={selection}
 				className={`p-1 hover:bg-neutral-300 rounded cursor-pointer ${
-					selection === currentQuantityUnitSelection
-						? "text-black font-bold"
-						: "text-neutral-600 font-medium"
+					selection === currentQuantityUnitSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
 					onQuantityUnitSelectionChange(selection);
@@ -79,15 +70,13 @@ const FormQuantityInput = ({
 			{/* Input */}
 			<div
 				className="flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded shadow-md px-4 pt-2 pb-1"
+					rounded shadow-md px-4 pt-2 pb-4"
 			>
 				{/* Title */}
-				<p className="text-sm font-semibold text-neutral-600">
-					Quantity
-				</p>
+				<p className="text-sm font-semibold text-neutral-600">Quantity</p>
 
 				<div className="flex gap-2 items-center">
-					{/* Whole input */}
+					{/* Whole field */}
 					<div className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded">
 						<input
 							{...register("quantityWhole")}
@@ -96,7 +85,7 @@ const FormQuantityInput = ({
 							placeholder="1"
 						/>
 					</div>
-					{/* fraction input */}
+					{/* fraction field */}
 					<div
 						className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
 						ref={fractionContainerRef}
@@ -108,10 +97,7 @@ const FormQuantityInput = ({
 							readOnly
 							placeholder="1/2"
 						/>
-						<MdArrowLeft
-							className="text-lg cursor-pointer"
-							onClick={onToggleFraction}
-						/>
+						<MdArrowLeft className="text-lg cursor-pointer" onClick={onToggleFraction} />
 						{isExpandedFraction && (
 							<div
 								className="bg-neutral-100 border border-neutral-200 
@@ -121,7 +107,7 @@ const FormQuantityInput = ({
 							</div>
 						)}
 					</div>
-					{/* Unit input */}
+					{/* Unit field */}
 					<div
 						className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
 						ref={unitContainerRef}
@@ -133,10 +119,7 @@ const FormQuantityInput = ({
 							placeholder="Unit"
 							readOnly
 						/>
-						<MdArrowLeft
-							className="text-lg cursor-pointer"
-							onClick={onToggleUnit}
-						/>
+						<MdArrowLeft className="text-lg cursor-pointer" onClick={onToggleUnit} />
 						{isExpandedUnit && (
 							<div
 								className="h-64 bg-neutral-100 border border-neutral-200 

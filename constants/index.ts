@@ -56,7 +56,14 @@ export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 
 export const ingredientTypes = ["Primary", "Secondary", "Optional"];
-export const ingredientQuantityFractions = ["1/4", "1/3", "1/2", "2/3", "3/4"];
+export const ingredientQuantityFractions = [
+	"None",
+	"1/4",
+	"1/3",
+	"1/2",
+	"2/3",
+	"3/4",
+];
 // export const ingredientQuantityUnits = [
 // 	"tsp (teaspoon)",
 // 	"tbsp (tablespoon)",

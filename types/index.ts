@@ -153,8 +153,7 @@ export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
 	incrementAmount: number;
 }
 
-export interface FormSelectionInputProps
-	extends ComponentPropsWithRef<"input"> {
+export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> {
 	title: string;
 	errorMessage?: string;
 	currentSelection: string;
@@ -165,6 +164,11 @@ export interface FormSelectionInputProps
 
 export interface AddRecipeIngredientFormProps {
 	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => void;
+	onModalClose: () => void;
+	index: number | null;
+	ingredient: TAddRecipeIngredientSchema | null;
+	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => void;
+	onIngredientDelete: (index: number) => void;
 }
 
 export interface FormQuantityInputProps {
@@ -188,7 +192,10 @@ export interface FormInstructionInputProps {
 }
 
 export interface RecipeIngredientCardProps {
+	index: number;
 	ingredient: TAddRecipeIngredientSchema;
+	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
+	onDelete: (index: number) => void;
 }
 
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
@@ -201,10 +208,7 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 // Sign up
 export const signUpSchema = z
 	.object({
-		email: z
-			.string()
-			.min(1, "Email cannot be empty")
-			.email({ message: "Invalid email address" }),
+		email: z.string().min(1, "Email cannot be empty").email({ message: "Invalid email address" }),
 		firstName: z.string().min(1, "First name cannot be empty"),
 		lastName: z.string().min(1, "Last name cannot be empty"),
 		password: z.string().min(8, "Password must be at least 8 characters"),
@@ -231,9 +235,7 @@ export type TLoginSchema = z.infer<typeof loginSchema>;
 // Add recipe
 export const addRecipeSchema = z.object({
 	name: z.string().min(1, "Recipe name cannot be empty"),
-	description: z
-		.string()
-		.max(500, "Description cannot be longer than 500 characters"),
+	description: z.string().max(500, "Description cannot be longer than 500 characters"),
 	difficulty: z.string().min(1, "Difficulty cannot be empty"),
 	duration: z.string(),
 	numServings: z.number().int("Invalid serving number"),
@@ -250,15 +252,11 @@ export const addRecipeIngredientSchema = z.object({
 	quantityUnit: z.string(),
 });
 
-export type TAddRecipeIngredientSchema = z.infer<
-	typeof addRecipeIngredientSchema
->;
+export type TAddRecipeIngredientSchema = z.infer<typeof addRecipeIngredientSchema>;
 
 // Add recipe instruction
 export const addRecipeInstructionSchema = z.object({
 	instruction: z.string().min(1, "Instruction cannot be empty"),
 });
 
-export type TAddRecipeInstructionSchema = z.infer<
-	typeof addRecipeInstructionSchema
->;
+export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSchema>;
