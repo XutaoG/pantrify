@@ -9,7 +9,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 			<div className="flex flex-col gap-1 min-w-12">
 				{/* Input */}
 				<div
-					className="flex flex-col gap-0 bg-neutral-100 border border-neutral-200 
+					className="flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
 					rounded shadow-md px-4 py-2"
 				>
 					{/* Title */}
@@ -21,8 +21,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="grow py-2 bg-transparent outline-none focus:bg-transparent 
-							min-h-32 max-h-32 resize-none"
+							className="grow py-1 bg-transparent outline-none min-h-32 max-h-32 resize-none"
 							placeholder={placeholder}
 						/>
 					</div>

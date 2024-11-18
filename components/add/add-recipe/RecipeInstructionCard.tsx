@@ -1,7 +1,7 @@
 import { FormInstructionInputProps } from "@/types";
 import { MdOutlineDeleteForever, MdArrowUpward, MdArrowDownward } from "react-icons/md";
 
-const FormInstructionInput = ({
+const RecipeInstructionCard = ({
 	index,
 	value,
 	onInstructionEdit,
@@ -64,4 +64,4 @@ const FormInstructionInput = ({
 	);
 };
 
-export default FormInstructionInput;
+export default RecipeInstructionCard;

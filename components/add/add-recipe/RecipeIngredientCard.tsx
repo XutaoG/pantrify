@@ -15,7 +15,9 @@ const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIng
 				{hideQuantity ? (
 					<p className="text-sm text-neutral-600 font-medium">Quantity unspecified</p>
 				) : (
-					<p className="text-sm font-medium">{`${ingredient.quantityWhole} ${ingredient.quantityFraction} ${ingredient.quantityUnit}`}</p>
+					<p className="text-sm font-medium">{`${ingredient.quantityWhole} ${
+						ingredient.quantityFraction !== "None" ? ingredient.quantityFraction : ""
+					} ${ingredient.quantityUnit}`}</p>
 				)}
 			</div>
 

@@ -1,5 +1,4 @@
 import { ComponentPropsWithRef, ReactNode } from "react";
-import { UseFormRegister } from "react-hook-form";
 import { z } from "zod";
 
 // ! RESPONSES
@@ -139,15 +138,12 @@ export interface FormTextAreaProps extends ComponentPropsWithRef<"textarea"> {
 	isSubmitting: boolean;
 }
 
-export interface FormTimeInputProps extends ComponentPropsWithRef<"input"> {
-	title: string;
-	errorMessage?: string;
-	isSubmitting: boolean;
+export interface RecipeDurationInputProps {
+	className?: string;
 }
 
 export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
 	title: string;
-	errorMessage?: string;
 	isSubmitting: boolean;
 	onValueIncrement: (val: number) => void;
 	incrementAmount: number;
@@ -172,14 +168,6 @@ export interface AddRecipeIngredientFormProps {
 
 export interface FormQuantityInputProps {
 	className?: string;
-	isSubmitting: boolean;
-	// quantityWholeRegister: UseFormRegisterReturn;
-	// quantityFractionRegister: UseFormRegisterReturn;
-	register: UseFormRegister<TAddRecipeIngredientSchema>;
-	currentQuantityFractionSelection: string;
-	onQuantityFractionSelectionChange: (val: string) => void;
-	currentQuantityUnitSelection: string;
-	onQuantityUnitSelectionChange: (val: string) => void;
 }
 
 export interface FormInstructionInputProps {
@@ -237,6 +225,8 @@ export const addRecipeSchema = z.object({
 	description: z.string().max(500, "Description cannot be longer than 500 characters"),
 	difficulty: z.string().min(1, "Difficulty cannot be empty"),
 	duration: z.string(),
+	durationHour: z.string(),
+	durationMinute: z.string(),
 	numServings: z.number().int("Invalid serving number"),
 });
 

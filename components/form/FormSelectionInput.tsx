@@ -29,19 +29,19 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 			<div className={`flex flex-col gap-1 min-w-0 relative ${className}`} ref={containerRef}>
 				{/* Input */}
 				<div
-					className="flex flex-col gap-0 bg-neutral-100 border border-neutral-200 
-					rounded shadow-md px-4 pt-2"
+					className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
+					rounded shadow-md px-4 py-2"
 				>
 					{/* Title */}
 					<p className="text-sm font-semibold text-neutral-600 select-none cursor-pointer">{title}</p>
 
-					<div className="flex items-center" onClick={onToggle}>
+					<div className="grow flex items-center" onClick={onToggle}>
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
 							disabled={isSubmitting}
-							className="grow py-2 bg-transparent outline-none focus:bg-transparent min-w-0"
+							className="grow py-1 bg-transparent outline-none min-w-0"
 							readOnly
 						/>
 						<MdArrowDropDown className={`text-lg cursor-pointer ${!isExpanded && "rotate-90"}`} />

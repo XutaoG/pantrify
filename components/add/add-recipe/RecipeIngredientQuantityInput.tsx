@@ -2,46 +2,33 @@
 
 import { ingredientQuantityFractions, ingredientQuantityUnits } from "@/constants";
 import { useDropdown } from "@/hooks";
-import { FormQuantityInputProps } from "@/types";
+import { FormQuantityInputProps, TAddRecipeIngredientSchema } from "@/types";
+import { useFormContext } from "react-hook-form";
 import { MdArrowLeft } from "react-icons/md";
 
-// const FormQuantityInput = forwardRef<HTMLInputElement, FormQuantityInputProps>(
-// 	(
-// 		{
-// 			className,
-// 			isSubmitting,
-// 			quantityWholeRegister,
-// 			quantityFractionRegister,
-// 		},
-// 		ref
-// 	) => {
-
-const FormQuantityInput = ({
-	className,
-	isSubmitting,
-	// quantityWholeRegister,
-	// quantityFractionRegister,
-	register,
-	currentQuantityFractionSelection,
-	onQuantityFractionSelectionChange,
-	currentQuantityUnitSelection,
-	onQuantityUnitSelectionChange,
-}: FormQuantityInputProps) => {
+const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) => {
+	//! Dropdowns
 	const [fractionContainerRef, isExpandedFraction, onToggleFraction] = useDropdown<HTMLInputElement>();
-
 	const [unitContainerRef, isExpandedUnit, onToggleUnit] = useDropdown<HTMLInputElement>();
+
+	const {
+		register,
+		formState: { isSubmitting },
+		getValues,
+		setValue,
+	} = useFormContext<TAddRecipeIngredientSchema>();
 
 	const fractionQuantityOptions = ingredientQuantityFractions.map((selection) => {
 		return (
 			<div
 				key={selection}
 				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer select-none ${
-					selection === currentQuantityFractionSelection
+					selection === getValues("quantityFraction")
 						? "text-black font-bold"
 						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
-					onQuantityFractionSelectionChange(selection);
+					setValue("quantityFraction", selection);
 				}}
 			>
 				{selection}
@@ -54,10 +41,10 @@ const FormQuantityInput = ({
 			<div
 				key={selection}
 				className={`p-1 hover:bg-neutral-300 rounded cursor-pointer select-none ${
-					selection === currentQuantityUnitSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
+					selection === getValues("quantityUnit") ? "text-black font-bold" : "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
-					onQuantityUnitSelectionChange(selection);
+					setValue("quantityUnit", selection, { shouldValidate: true });
 				}}
 			>
 				{selection}
@@ -69,13 +56,13 @@ const FormQuantityInput = ({
 		<div className={`flex flex-col gap-1 min-w-0 relative ${className}`}>
 			{/* Input */}
 			<div
-				className="flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded shadow-md px-4 pt-2 pb-4"
+				className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
+					rounded shadow-md px-4 pt-2 pb-2"
 			>
 				{/* Title */}
 				<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
 
-				<div className="flex gap-2 items-center">
+				<div className="grow flex gap-2 items-center">
 					{/* Whole field */}
 					<div className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded">
 						<input
@@ -135,6 +122,4 @@ const FormQuantityInput = ({
 	);
 };
 
-FormQuantityInput.displayName = "FormQuantityInput";
-
-export default FormQuantityInput;
+export default RecipeIngredientQuantityInput;

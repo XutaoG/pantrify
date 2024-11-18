@@ -4,9 +4,10 @@ import { FormButtonProps } from "@/types";
 import React from "react";
 import { MdOutlineRefresh } from "react-icons/md";
 
-const FormButton = ({ title, isSubmitting }: FormButtonProps) => {
+const FormButton = ({ title, isSubmitting, ...rest }: FormButtonProps) => {
 	return (
 		<button
+			{...rest}
 			type="submit"
 			className="bg-sky-600 py-2 rounded shadow-md flex justify-center items-center"
 			disabled={isSubmitting}
