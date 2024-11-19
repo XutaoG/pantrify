@@ -1,29 +1,26 @@
 import { IngredientCardProps } from "@/types";
-import {
-	MdOutlineEdit,
-	MdOutlineDeleteForever,
-	MdAddShoppingCart,
-} from "react-icons/md";
+import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
 
 const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 	return (
 		<div
-			className="flex justify-between items-center gap-3 rounded shadow-md 
+			className="h-16 flex justify-between items-center gap-3 rounded 
 			bg-neutral-100 px-3 py-4"
 		>
 			{/* Info */}
-			<div className="flex gap-3 items-center min-w-0">
+			<div className="flex gap-1 items-center min-w-0">
 				<div className="text-xl">{icon}</div>
-				<p className="text-nowrap truncate font-semibold">
-					{ingredient.name}
-				</p>
+				<p className="text-nowrap truncate font-semibold">{ingredient.name}</p>
 			</div>
 
 			{/* Actions */}
-			<div className="flex gap-3 items-center">
-				<MdAddShoppingCart className="text-xl cursor-pointer" />
-				<MdOutlineEdit className="text-xl cursor-pointer" />
-				<MdOutlineDeleteForever className="text-xl cursor-pointer" />
+			<div className="flex gap-1.5 items-center">
+				<button type="button" className="rounded-full bg-yellow-400 p-1.5">
+					<MdOutlineEdit className="text-lg text-white" />
+				</button>
+				<button type="button" className="rounded-full bg-red-400 p-1.5">
+					<MdOutlineDelete className="text-lg text-white" />
+				</button>
 			</div>
 		</div>
 	);
