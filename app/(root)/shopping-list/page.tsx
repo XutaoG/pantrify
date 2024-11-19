@@ -7,7 +7,7 @@ import React from "react";
 
 const ShoppingList = () => {
 	return (
-		<div className="flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
+		<div className="grow flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			{/* Page title */}
 			<div className="flex flex-col gap-2">
 				<h2 className="font-semibold text-sky-600">Shopping List</h2>

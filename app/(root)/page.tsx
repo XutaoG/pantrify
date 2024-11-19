@@ -8,7 +8,7 @@ const Home = async () => {
 	const user = await getUser();
 
 	return (
-		<div className="flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
+		<div className="grow flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="flex flex-col gap-2">
 				<h1 className="font-semibold">
@@ -17,9 +17,7 @@ const Home = async () => {
 						{user?.firstName} {user?.lastName}
 					</span>
 				</h1>
-				<p className="font-semibold text-neutral-600">
-					Your Recipe Memories, Perfectly Kept.
-				</p>
+				<p className="font-semibold text-neutral-600">Your Recipe Memories, Perfectly Kept.</p>
 			</div>
 
 			{/* Overview */}
@@ -28,9 +26,7 @@ const Home = async () => {
 			{/* Page title */}
 			<div className="flex flex-col gap-2">
 				<h2 className="font-semibold text-sky-600">My Recipes</h2>
-				<p className="text-neutral-600 font-medium">
-					Explore and Relive Your Favorite Culinary Moments.
-				</p>
+				<p className="text-neutral-600 font-medium">Explore and Relive Your Favorite Culinary Moments.</p>
 			</div>
 
 			{/* Recent Recipes */}
