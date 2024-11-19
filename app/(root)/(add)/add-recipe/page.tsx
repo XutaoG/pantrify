@@ -253,7 +253,7 @@ const AddRecipePage = () => {
 	};
 
 	return (
-		<div className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto relative">
+		<div id="add-recipe-page" className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			<div className="container mx-auto flex flex-col gap-6">
 				{/* Page title */}
 				<div className="flex flex-col gap-2">

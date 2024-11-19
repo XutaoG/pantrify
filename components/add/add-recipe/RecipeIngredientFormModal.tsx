@@ -94,7 +94,7 @@ const RecipeIngredientFormModal = ({
 	};
 
 	return (
-		<section className="absolute inset-0 flex justify-center items-center">
+		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(submitForm)}
