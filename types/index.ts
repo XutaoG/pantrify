@@ -79,6 +79,24 @@ export interface RefreshResponse {
 	errorMessage: string | null;
 }
 
+export interface RecipeDto {
+	name: string;
+	description?: string;
+	duration: number;
+	difficulty: number;
+	numServings: number;
+	ingredients: RecipeIngredientDto[];
+	instructions: string[];
+}
+
+export interface RecipeIngredientDto {
+	name: string;
+	ingredientType: string;
+	quantityWhole?: number;
+	quantityFraction?: string;
+	quantityUnit?: string;
+}
+
 // ! PROPS
 
 export interface LargeRecipeCardProps {
@@ -164,6 +182,7 @@ export interface AddRecipeIngredientFormProps {
 	ingredient: TAddRecipeIngredientSchema | null;
 	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
 	onIngredientDelete: (index: number) => void;
+	onIngredientEditDiscard: () => void;
 }
 
 export interface FormQuantityInputProps {
@@ -176,6 +195,7 @@ export interface FormInstructionInputProps {
 	onInstructionEdit: (index: number, newInstruction: string) => void;
 	onInstructionRemove: (index: number) => void;
 	onInstructionMove: (index: number, direction: number) => void;
+	isSubmitting: boolean;
 }
 
 export interface RecipeIngredientCardProps {
@@ -183,6 +203,7 @@ export interface RecipeIngredientCardProps {
 	ingredient: TAddRecipeIngredientSchema;
 	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
 	onDelete: (index: number) => void;
+	isSubmitting: boolean;
 }
 
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
@@ -222,7 +243,7 @@ export type TLoginSchema = z.infer<typeof loginSchema>;
 // Add recipe
 export const addRecipeSchema = z.object({
 	name: z.string().min(1, "Recipe name cannot be empty"),
-	description: z.string().max(500, "Description cannot be longer than 500 characters"),
+	description: z.string().max(1000, "Description cannot be longer than 500 characters"),
 	difficulty: z.string().min(1, "Difficulty cannot be empty"),
 	durationHour: z.string(),
 	durationMinute: z.string(),

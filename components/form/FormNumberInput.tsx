@@ -54,21 +54,27 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 							readOnly
 						/>
 						<div className="flex gap-2 items-center">
-							<MdRemove
-								className="text-lg cursor-pointer"
+							<button
+								type="button"
 								onClick={() => onValueIncrement(-incrementAmount)}
 								onMouseDown={() => keepValueIncrement(-incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
-							/>
+								disabled={isSubmitting}
+							>
+								<MdRemove className="text-lg" />
+							</button>
 							<p className="text-neutral-600 select-none">|</p>
-							<MdAdd
-								className="text-lg cursor-pointer"
+							<button
+								type="button"
 								onClick={() => onValueIncrement(incrementAmount)}
 								onMouseDown={() => keepValueIncrement(incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
-							/>
+								disabled={isSubmitting}
+							>
+								<MdAdd className="text-lg cursor-pointer" />
+							</button>
 						</div>
 					</div>
 				</div>

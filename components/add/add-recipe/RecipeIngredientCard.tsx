@@ -1,7 +1,7 @@
 import { RecipeIngredientCardProps } from "@/types";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIngredientCardProps) => {
+const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete, isSubmitting }: RecipeIngredientCardProps) => {
 	const hideQuantity =
 		ingredient.quantityWhole == "" && (ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
 
@@ -31,6 +31,7 @@ const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIng
 					onClick={() => {
 						onEdit(index, ingredient);
 					}}
+					disabled={isSubmitting}
 				>
 					<MdEdit className="text-white text-2xl" />
 				</button>
@@ -41,6 +42,7 @@ const RecipeIngredientCard = ({ index, ingredient, onEdit, onDelete }: RecipeIng
 					onClick={() => {
 						onDelete(index);
 					}}
+					disabled={isSubmitting}
 				>
 					<MdDelete className="text-white text-2xl" />
 				</button>

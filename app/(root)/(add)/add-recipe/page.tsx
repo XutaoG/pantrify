@@ -7,7 +7,7 @@ import FormInput from "@/components/form/FormInput";
 import FormNumberInput from "@/components/form/FormNumberInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
 import FormTextArea from "@/components/form/FormTextArea";
-import { addRecipeSchema, TAddRecipeIngredientSchema, TAddRecipeSchema } from "@/types";
+import { addRecipeSchema, RecipeDto, RecipeIngredientDto, TAddRecipeIngredientSchema, TAddRecipeSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -131,6 +131,10 @@ const AddRecipePage = () => {
 		resetModal();
 	};
 
+	const discardIngredientChange = () => {
+		resetModal();
+	};
+
 	//* Render ingredient cards
 	const primaryIngredients: JSX.Element[] = [];
 	const secondaryIngredients: JSX.Element[] = [];
@@ -144,6 +148,7 @@ const AddRecipePage = () => {
 				index={index}
 				onEdit={openModelForEdit}
 				onDelete={deleteIngredient}
+				isSubmitting={isSubmitting}
 			/>
 		);
 
@@ -210,12 +215,41 @@ const AddRecipePage = () => {
 				onInstructionRemove={removeInstruction}
 				onInstructionEdit={editInstruction}
 				onInstructionMove={moveInstruction}
+				isSubmitting={isSubmitting}
 			/>
 		);
 	});
 
 	const addRecipe = () => {
-		console.log(errors);
+		const name = getValues("name");
+		const description = getValues("description");
+		const duration = Number(getValues("durationHour")) * 60 + Number(getValues("durationMinute"));
+		const difficulty = getValues("difficulty") == "Easy" ? 1 : getValues("difficulty") == "Medium" ? 2 : 3;
+		const numServings = Number(getValues("numServings"));
+
+		const addRecipeIngredientDtos = ingredients.map((ingredient) => {
+			const ingredientDto: RecipeIngredientDto = {
+				name: ingredient.name,
+				ingredientType: ingredient.ingredientType,
+				quantityWhole: Number(ingredient.quantityWhole),
+				quantityFraction: ingredient.quantityFraction,
+				quantityUnit: ingredient.quantityUnit,
+			};
+
+			return ingredientDto;
+		});
+
+		const addRecipeDto: RecipeDto = {
+			name,
+			description,
+			duration,
+			difficulty,
+			numServings,
+			ingredients: addRecipeIngredientDtos,
+			instructions: instructions,
+		};
+
+		console.log(addRecipeDto);
 	};
 
 	return (
@@ -280,6 +314,7 @@ const AddRecipePage = () => {
 							type="button"
 							className="self-center flex items-center gap-1 bg-emerald-500 p-2 rounded hover:bg-emerald-600 cursor-pointer"
 							onClick={openModelForAdd}
+							disabled={isSubmitting}
 						>
 							<MdOutlineAddCircle className="text-white text-2xl" />
 							<p className="text-white font-medium">Add Ingredient</p>
@@ -294,6 +329,7 @@ const AddRecipePage = () => {
 								ingredient={ingredientEditObj}
 								onIngredientEdit={editIngredient}
 								onIngredientDelete={deleteIngredient}
+								onIngredientEditDiscard={discardIngredientChange}
 							/>
 						)}
 
@@ -326,7 +362,7 @@ const AddRecipePage = () => {
 								<p className="font-semibold select-none">Instructions</p>
 
 								{/* Cards */}
-								{instructionCards}
+								<div className="flex flex-col gap-4">{instructionCards}</div>
 							</div>
 
 							{/* Add instruction button */}
@@ -334,6 +370,7 @@ const AddRecipePage = () => {
 								type="button"
 								className="self-center flex items-center gap-1 bg-emerald-500 p-2 rounded hover:bg-emerald-600 cursor-pointer"
 								onClick={addInstruction}
+								disabled={isSubmitting}
 							>
 								<MdOutlineAddCircle className="text-white text-2xl" />
 								<p className="text-white font-medium">Add Instruction</p>

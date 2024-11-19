@@ -7,6 +7,7 @@ const RecipeInstructionCard = ({
 	onInstructionEdit,
 	onInstructionRemove,
 	onInstructionMove,
+	isSubmitting,
 }: FormInstructionInputProps) => {
 	return (
 		<div className="flex shadow-md rounded">
@@ -17,6 +18,7 @@ const RecipeInstructionCard = ({
 					onClick={() => {
 						onInstructionMove(index, -1);
 					}}
+					disabled={isSubmitting}
 				>
 					<MdKeyboardArrowUp className="text-whit text-xl" />
 				</button>
@@ -25,6 +27,7 @@ const RecipeInstructionCard = ({
 					onClick={() => {
 						onInstructionMove(index, 1);
 					}}
+					disabled={isSubmitting}
 				>
 					<MdKeyboardArrowDown className="text-whit text-xl" />
 				</button>
@@ -46,6 +49,7 @@ const RecipeInstructionCard = ({
 						onChange={(event) => {
 							onInstructionEdit(index, event.target.value);
 						}}
+						disabled={isSubmitting}
 					/>
 				</div>
 
@@ -56,6 +60,7 @@ const RecipeInstructionCard = ({
 					onClick={() => {
 						onInstructionRemove(index);
 					}}
+					disabled={isSubmitting}
 				>
 					<MdDelete className="text-white text-2xl" />
 				</button>

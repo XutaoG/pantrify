@@ -15,6 +15,7 @@ const RecipeIngredientFormModal = ({
 	ingredient,
 	onIngredientEdit,
 	onIngredientDelete,
+	onIngredientEditDiscard,
 }: AddRecipeIngredientFormProps) => {
 	//* Form
 	const methods = useForm<TAddRecipeIngredientSchema>({
@@ -89,7 +90,7 @@ const RecipeIngredientFormModal = ({
 
 	//* Discard changes
 	const discardChanges = () => {
-		onModalClose();
+		onIngredientEditDiscard();
 	};
 
 	return (
