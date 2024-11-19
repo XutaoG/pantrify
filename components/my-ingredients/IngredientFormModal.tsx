@@ -9,7 +9,7 @@ import FormSelectionInput from "../form/FormSelectionInput";
 import FormDateInput from "../form/FormDateInput";
 import { MdCancel, MdOutlineAddCircle } from "react-icons/md";
 
-const IngredientFormModal = ({ onIngredientAdd, onModalClose }: IngredientFormModalProps) => {
+const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: IngredientFormModalProps) => {
 	const methods = useForm<TAddIngredientSchema>({
 		resolver: zodResolver(addIngredientSchema),
 		defaultValues: {
@@ -53,7 +53,9 @@ const IngredientFormModal = ({ onIngredientAdd, onModalClose }: IngredientFormMo
 				noValidate
 			>
 				{/* Page title */}
-				<p className="font-semibold select-none">Add Ingredient</p>
+				<p className="font-semibold select-none">
+					{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
+				</p>
 
 				<div className="flex flex-col gap-5">
 					{/* Name field */}
@@ -92,7 +94,9 @@ const IngredientFormModal = ({ onIngredientAdd, onModalClose }: IngredientFormMo
 							bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
 						>
 							<MdOutlineAddCircle className="text-white text-xl" />
-							<p className="text-white font-medium">Add Ingredient</p>
+							<p className="text-white font-medium">
+								{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
+							</p>
 						</button>
 
 						{/* Cancel */}

@@ -1,11 +1,11 @@
 "use client";
 
 import { MdOutlineAddCircle } from "react-icons/md";
-import IngredientFormModal from "./IngredientFormModal";
 import { Fragment, useState } from "react";
 import { TAddIngredientSchema } from "@/types";
+import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 
-const AddIngredientController = () => {
+const AddShoppingListcontroller = () => {
 	// * Model control
 	const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 
@@ -31,14 +31,14 @@ const AddIngredientController = () => {
 			>
 				<div className="flex gap-2 items-center">
 					<MdOutlineAddCircle className="text-white text-2xl" />
-					<p className="text-white font-semibold">Add Ingredient</p>
+					<p className="text-white font-semibold">Add to Shopping List</p>
 				</div>
 			</button>
 			{isIngredientModalOpen && (
-				<IngredientFormModal mode="ingredient" onModalClose={closeModel} onIngredientAdd={addIngredient} />
+				<IngredientFormModal mode="shopping" onModalClose={closeModel} onIngredientAdd={addIngredient} />
 			)}
 		</Fragment>
 	);
 };
 
-export default AddIngredientController;
+export default AddShoppingListcontroller;

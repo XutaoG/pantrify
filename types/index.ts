@@ -220,6 +220,7 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 
 export interface IngredientFormModalProps {
 	onIngredientAdd: (ingredient: TAddIngredientSchema) => string | null;
+	mode: "ingredient" | "shopping";
 	onModalClose: () => void;
 }
 
