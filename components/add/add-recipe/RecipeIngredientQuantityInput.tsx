@@ -57,7 +57,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 			{/* Input */}
 			<div
 				className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded shadow-md px-4 pt-2 pb-2"
+					rounded px-4 pt-2 pb-2"
 			>
 				{/* Title */}
 				<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
@@ -88,7 +88,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 						{isExpandedFraction && (
 							<div
 								className="bg-neutral-100 border border-neutral-200 
-								rounded shadow-md absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
+								rounded absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
 							>
 								{fractionQuantityOptions}
 							</div>
@@ -110,7 +110,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 						{isExpandedUnit && (
 							<div
 								className="h-64 bg-neutral-100 border border-neutral-200 
-								rounded shadow-md absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1 overflow-scroll"
+								rounded absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1 overflow-scroll"
 							>
 								{quantityUnitOptions}
 							</div>

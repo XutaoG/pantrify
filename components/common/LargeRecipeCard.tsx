@@ -5,21 +5,17 @@ import InfoWidget from "./InfoWidget";
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
-		<div className="min-w-[350px] flex flex-col rounded shadow-md scroll-pl-6 ">
+		<div
+			className="min-w-[350px] flex flex-col rounded scroll-pl-6 
+			bg-neutral-100 border border-neutral-200"
+		>
 			{/* Recipe image */}
-			<div className="w-full h-48 relative">
-				<Image
-					src={recipe.images[0].path}
-					alt="food"
-					className="object-cover"
-					fill
-					sizes="33vw"
-					priority
-				/>
+			<div className="w-full h-48 relative overflow-hidden rounded-t">
+				<Image src={recipe.images[0].path} alt="food" className="object-cover" fill sizes="33vw" priority />
 			</div>
 
 			{/* Info */}
-			<div className="flex flex-col gap-3 p-3 bg-neutral-100 border border-neutral-200">
+			<div className="flex flex-col gap-3 p-3 ">
 				<p className="font-bold">{recipe.name}</p>
 				<div className="flex justify-between">
 					{/* Time */}

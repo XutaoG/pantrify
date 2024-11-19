@@ -5,7 +5,7 @@ const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 	return (
 		<div
 			className="h-16 flex justify-between items-center gap-3 rounded 
-			bg-neutral-100 px-3 py-4"
+			bg-neutral-100 px-3 py-4 border border-neutral-200"
 		>
 			{/* Info */}
 			<div className="flex gap-1 items-center min-w-0">

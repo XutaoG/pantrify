@@ -8,27 +8,13 @@ import { useDropdown } from "@/hooks";
 const RecipeFilterDropdown = () => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
-	const mockDifficultySelections = [
-		"All Difficulty",
-		"Easy",
-		"Medium",
-		"Difficult",
-	];
+	const mockDifficultySelections = ["All Difficulty", "Easy", "Medium", "Difficult"];
 
-	const mockTimeSelections = [
-		"0 to 15 mins",
-		"15 to 30 mins",
-		"30 to 60 mins",
-		"1 to 2 hrs",
-		"2 hrs+",
-	];
+	const mockTimeSelections = ["0 to 15 mins", "15 to 30 mins", "30 to 60 mins", "1 to 2 hrs", "2 hrs+"];
 
-	const [currentDifficultySelection, setCurrentDifficultySelection] =
-		useState(mockDifficultySelections[0]);
+	const [currentDifficultySelection, setCurrentDifficultySelection] = useState(mockDifficultySelections[0]);
 
-	const [currentTimeSelection, setCurrentTimeSelection] = useState(
-		mockTimeSelections[0]
-	);
+	const [currentTimeSelection, setCurrentTimeSelection] = useState(mockTimeSelections[0]);
 
 	const handleDifficultySelectionClick = (selection: string) => {
 		if (selection !== currentDifficultySelection) {
@@ -36,25 +22,21 @@ const RecipeFilterDropdown = () => {
 		}
 	};
 
-	const difficultyDropdownOptions = mockDifficultySelections.map(
-		(selection) => {
-			return (
-				<div
-					key={selection}
-					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
-						selection === currentDifficultySelection
-							? "text-black font-bold"
-							: "text-neutral-600 font-medium"
-					}`}
-					onClick={() => {
-						handleDifficultySelectionClick(selection);
-					}}
-				>
-					{selection}
-				</div>
-			);
-		}
-	);
+	const difficultyDropdownOptions = mockDifficultySelections.map((selection) => {
+		return (
+			<div
+				key={selection}
+				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
+					selection === currentDifficultySelection ? "text-black font-bold" : "text-neutral-600 font-medium"
+				}`}
+				onClick={() => {
+					handleDifficultySelectionClick(selection);
+				}}
+			>
+				{selection}
+			</div>
+		);
+	});
 
 	const handleTimeSelectionClick = (selection: string) => {
 		if (selection !== currentDifficultySelection) {
@@ -67,9 +49,7 @@ const RecipeFilterDropdown = () => {
 			<div
 				key={selection}
 				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
-					selection === currentTimeSelection
-						? "text-black font-bold"
-						: "text-neutral-600 font-medium"
+					selection === currentTimeSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
 					handleTimeSelectionClick(selection);
@@ -81,31 +61,21 @@ const RecipeFilterDropdown = () => {
 	});
 
 	return (
-		<div
-			className="h-12 flex justify-center items-center relative select-none"
-			ref={containerRef}
-		>
-			<MdToc
-				className="text-3xl text-neutral-600 cursor-pointer"
-				onClick={onToggle}
-			/>
+		<div className="h-12 flex justify-center items-center relative select-none" ref={containerRef}>
+			<MdToc className="text-3xl text-neutral-600 cursor-pointer" onClick={onToggle} />
 			{isExpanded && (
 				<div
 					className="absolute z-10 top-14 right-0 w-48 bg-neutral-100 border border-neutral-200 
-					p-3 py-5 rounded shadow-md flex flex-col gap-5"
+					p-3 py-5 rounded flex flex-col gap-5"
 				>
 					{/* Difficulty selections */}
 					<CollapsiblePanel title="Difficulty">
-						<div className="flex flex-col gap-1">
-							{difficultyDropdownOptions}
-						</div>
+						<div className="flex flex-col gap-1">{difficultyDropdownOptions}</div>
 					</CollapsiblePanel>
 
 					{/* Time selections */}
 					<CollapsiblePanel title="Time">
-						<div className="flex flex-col gap-1">
-							{timeDropdownOptions}
-						</div>
+						<div className="flex flex-col gap-1">{timeDropdownOptions}</div>
 					</CollapsiblePanel>
 				</div>
 			)}

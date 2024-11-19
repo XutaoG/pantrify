@@ -10,7 +10,7 @@ const RecipeInstructionCard = ({
 	isSubmitting,
 }: FormInstructionInputProps) => {
 	return (
-		<div className="flex shadow-md rounded">
+		<div className="flex rounded">
 			{/* Move */}
 			<div className="bg-neutral-200 flex flex-col justify-between rounded-l overflow-hidden">
 				<button

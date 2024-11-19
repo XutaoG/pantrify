@@ -2,31 +2,26 @@ import Link from "next/link";
 
 const Overview = () => {
 	return (
-		<section className="flex bg-neutral-100 rounded border border-neutral-200 shadow-md">
+		<section className="flex bg-neutral-100 rounded border border-neutral-200">
 			{/* Info */}
 			<div className="flex flex-col gap-7 px-6 py-8 grow">
 				{/* Recipe + Ingredient count */}
 				<div className="flex gap-16">
 					{/* Recipe count */}
 					<div className="flex gap-2">
-						<p className="font-semibold text-neutral-600">
-							Recipes:
-						</p>
+						<p className="font-semibold text-neutral-600">Recipes:</p>
 						<p className="text-5xl">17</p>
 					</div>
 					{/* Ingredient count */}
 					<div className="flex gap-2">
-						<p className="font-semibold text-neutral-600">
-							Ingredients:
-						</p>
+						<p className="font-semibold text-neutral-600">Ingredients:</p>
 						<p className="text-5xl">9</p>
 					</div>
 				</div>
 
 				{/* Encouragement */}
 				<p className="text-neutral-600 font-medium">
-					17 recipes, Impressive! Keep adding more to expand your
-					cooking archive!
+					17 recipes, Impressive! Keep adding more to expand your cooking archive!
 				</p>
 			</div>
 

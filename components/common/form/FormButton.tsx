@@ -9,10 +9,7 @@ const FormButton = ({ title, className, isSubmitting, ...rest }: FormButtonProps
 	return (
 		<button
 			type="submit"
-			className={twMerge(
-				"bg-sky-600 hover:bg-sky-500 py-2 rounded shadow-md flex justify-center items-center",
-				className
-			)}
+			className={twMerge("bg-sky-600 hover:bg-sky-500 py-2 rounded flex justify-center items-center", className)}
 			disabled={isSubmitting}
 			{...rest}
 		>

@@ -9,7 +9,7 @@ const SearchBar = ({ placeholderText }: SearchBarProps) => {
 
 	return (
 		<div
-			className="h-12 bg-neutral-100 border border-neutral-200 rounded shadow-md 
+			className="h-12 bg-neutral-100 border border-neutral-200 rounded 
 			flex items-center grow gap-4 px-4"
 		>
 			<input

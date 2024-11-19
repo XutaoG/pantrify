@@ -72,7 +72,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 	return (
 		<div
 			className={`h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-			rounded shadow-md px-4 py-2 ${className}`}
+			rounded px-4 py-2 ${className}`}
 		>
 			{/* Title */}
 			<p className="text-sm font-semibold text-neutral-600 select-none">Duration</p>

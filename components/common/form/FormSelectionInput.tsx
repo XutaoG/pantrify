@@ -30,7 +30,7 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 				{/* Input */}
 				<div
 					className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded shadow-md px-4 py-2"
+					rounded px-4 py-2"
 				>
 					{/* Title */}
 					<p className="text-sm font-semibold text-neutral-600 select-none cursor-pointer">{title}</p>
@@ -52,7 +52,7 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 				{isExpanded && (
 					<div
 						className="max-h-60 bg-neutral-100 border border-neutral-200 
-						rounded shadow-md absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
+						rounded absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
 					>
 						{options}
 					</div>
