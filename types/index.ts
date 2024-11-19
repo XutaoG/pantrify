@@ -206,6 +206,13 @@ export interface RecipeIngredientCardProps {
 	isSubmitting: boolean;
 }
 
+export interface FormDateInputProps extends ComponentPropsWithRef<"input"> {
+	title: string;
+	password?: boolean;
+	errorMessage?: string;
+	isSubmitting: boolean;
+}
+
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
 	isSubmitting: boolean;
@@ -269,3 +276,12 @@ export const addRecipeInstructionSchema = z.object({
 });
 
 export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSchema>;
+
+// Add ingredient
+export const addIngredientSchema = z.object({
+	name: z.string().min(1, "Name cannot be empty"),
+	ingredientType: z.string(),
+	dateExpired: z.date().optional(),
+});
+
+export type TAddIngredientSchema = z.infer<typeof addIngredientSchema>;

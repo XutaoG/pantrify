@@ -1,9 +1,4 @@
-import {
-	Ingredient,
-	Recipe,
-	RecipeIngredient,
-	RecipeInstruction,
-} from "@/types";
+import { Ingredient, Recipe, RecipeIngredient, RecipeInstruction } from "@/types";
 
 export const baseApiPath = "http://localhost:5188/api";
 
@@ -46,24 +41,13 @@ export const addNavRoutes = [
 		route: "/add-ingredient",
 		label: "Add Ingredient",
 	},
-	{
-		route: "/add-shopping",
-		label: "Add Shopping Item",
-	},
 ];
 
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 
 export const ingredientTypes = ["Primary", "Secondary", "Optional"];
-export const ingredientQuantityFractions = [
-	"None",
-	"1/4",
-	"1/3",
-	"1/2",
-	"2/3",
-	"3/4",
-];
+export const ingredientQuantityFractions = ["None", "1/4", "1/3", "1/2", "2/3", "3/4"];
 // export const ingredientQuantityUnits = [
 // 	"tsp (teaspoon)",
 // 	"tbsp (tablespoon)",
@@ -350,20 +334,17 @@ export const mockInstructions: RecipeInstruction[] = [
 	},
 	{
 		id: 2,
-		instruction:
-			"On medium heat, fry ground beef until brown. Then remove.",
+		instruction: "On medium heat, fry ground beef until brown. Then remove.",
 		step: 2,
 	},
 	{
 		id: 3,
-		instruction:
-			"On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
+		instruction: "On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
 		step: 3,
 	},
 	{
 		id: 4,
-		instruction:
-			"Once simmering, add pasta and ground beef back in, and mix. ",
+		instruction: "Once simmering, add pasta and ground beef back in, and mix. ",
 		step: 4,
 	},
 	{

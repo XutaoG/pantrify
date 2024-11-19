@@ -3,14 +3,18 @@
 import { FormButtonProps } from "@/types";
 import React from "react";
 import { MdOutlineRefresh } from "react-icons/md";
+import { twMerge } from "tailwind-merge";
 
-const FormButton = ({ title, isSubmitting, ...rest }: FormButtonProps) => {
+const FormButton = ({ title, className, isSubmitting, ...rest }: FormButtonProps) => {
 	return (
 		<button
-			{...rest}
 			type="submit"
-			className="bg-sky-600 py-2 rounded shadow-md flex justify-center items-center"
+			className={twMerge(
+				"bg-sky-600 hover:bg-sky-500 py-2 rounded shadow-md flex justify-center items-center",
+				className
+			)}
 			disabled={isSubmitting}
+			{...rest}
 		>
 			{isSubmitting ? (
 				<div className="flex gap-2 items-center">

@@ -273,7 +273,7 @@ const AddRecipePage = () => {
 							className="grow"
 						/>
 
-						<div className="flex gap-4">
+						<div className="flex gap-6">
 							{/* Serving field */}
 							<FormNumberInput
 								{...register("numServings")}

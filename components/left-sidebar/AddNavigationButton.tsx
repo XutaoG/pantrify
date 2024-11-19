@@ -3,14 +3,10 @@
 import { useDropdown } from "@/hooks";
 import Link from "next/link";
 import { MdAdd } from "react-icons/md";
-import {
-	MdOutlineRestaurantMenu,
-	MdOutlineEgg,
-	MdAddShoppingCart,
-} from "react-icons/md";
+import { MdOutlineRestaurantMenu, MdOutlineEgg } from "react-icons/md";
 
 const AddNavigationButton = () => {
-	const [containerRef, isExpanded, onToggle] = useDropdown();
+	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 	return (
 		<div className="mt-4 relative" ref={containerRef}>
@@ -39,13 +35,6 @@ const AddNavigationButton = () => {
 						className="flex justify-center items-center size-10 rounded-full cursor-pointer hover:bg-neutral-200"
 					>
 						<MdOutlineEgg className="text-sky-500 text-2xl" />
-					</Link>
-					{/* Add shopping item link */}
-					<Link
-						href="/add-shopping"
-						className="flex justify-center items-center size-10 rounded-full cursor-pointer hover:bg-neutral-200"
-					>
-						<MdAddShoppingCart className="text-violet-500 text-2xl" />
 					</Link>
 				</div>
 			)}
