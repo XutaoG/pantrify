@@ -1,18 +1,17 @@
 "use client";
 
-import { navRoutes } from "@/constants";
+import { addRecipeRoute, navRoutes } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import AddNavigationButton from "./AddNavigationButton";
+import { MdAdd } from "react-icons/md";
 
 const Navigations = () => {
 	const pathname = usePathname();
 
 	const renderedNavigationButtons = navRoutes.map((route) => {
 		// Check if route is active
-		const isActive =
-			route.route === pathname || pathname.startsWith(`${route.route}/`);
+		const isActive = route.route === pathname || pathname.startsWith(`${route.route}/`);
 
 		return (
 			<Link
@@ -26,9 +25,7 @@ const Navigations = () => {
 					alt={route.label}
 					width={24}
 					height={24}
-					className={`${
-						isActive ? "brightness-200 invert-0" : "brightness-50"
-					}`}
+					className={`${isActive ? "brightness-200 invert-0" : "brightness-50"}`}
 				/>
 				<p className="hidden 2xl:block">{route.label}</p>
 			</Link>
@@ -37,8 +34,19 @@ const Navigations = () => {
 
 	return (
 		<nav className="flex flex-col gap-4 items-center 2xl:items-stretch">
+			{/* Nav routes */}
 			{renderedNavigationButtons}
-			<AddNavigationButton />
+
+			{/* Add recipe route */}
+			<div className="mt-4 relative">
+				<Link
+					href={addRecipeRoute.route}
+					className="flex justify-center items-center gap-4 size-12 rounded-full font-semibold 
+					bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
+				>
+					<MdAdd className="text-white text-4xl" />
+				</Link>
+			</div>
 		</nav>
 	);
 };

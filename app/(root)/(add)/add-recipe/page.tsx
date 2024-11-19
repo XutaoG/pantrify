@@ -53,22 +53,22 @@ const AddRecipePage = () => {
 	};
 
 	//! Ingredients
-	// * Model control
+	// * Modal control
 	const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 	const [ingredientEditIndex, setIngredientEditIndex] = useState<number | null>(null);
 	const [ingredientEditObj, setIngredientEditObj] = useState<TAddRecipeIngredientSchema | null>(null);
 
-	const openModelForAdd = () => {
+	const openModalForAdd = () => {
 		setIsIngredientModalOpen(true);
 	};
 
-	const openModelForEdit = (index: number, ingredient: TAddRecipeIngredientSchema) => {
+	const openModalForEdit = (index: number, ingredient: TAddRecipeIngredientSchema) => {
 		setIngredientEditIndex(index);
 		setIngredientEditObj(ingredient);
 		setIsIngredientModalOpen(true);
 	};
 
-	const closeModel = () => {
+	const closeModal = () => {
 		setIsIngredientModalOpen(false);
 	};
 
@@ -146,7 +146,7 @@ const AddRecipePage = () => {
 				key={ingredient.name}
 				ingredient={ingredient}
 				index={index}
-				onEdit={openModelForEdit}
+				onEdit={openModalForEdit}
 				onDelete={deleteIngredient}
 				isSubmitting={isSubmitting}
 			/>
@@ -313,7 +313,7 @@ const AddRecipePage = () => {
 						<button
 							type="button"
 							className="self-center flex items-center gap-1 bg-emerald-500 p-2 rounded hover:bg-emerald-600 cursor-pointer"
-							onClick={openModelForAdd}
+							onClick={openModalForAdd}
 							disabled={isSubmitting}
 						>
 							<MdOutlineAddCircle className="text-white text-2xl" />
@@ -324,7 +324,7 @@ const AddRecipePage = () => {
 						{isIngredientModalOpen && (
 							<RecipeIngredientFormModal
 								onIngredientAdd={addIngredient}
-								onModalClose={closeModel}
+								onModalClose={closeModal}
 								index={ingredientEditIndex}
 								ingredient={ingredientEditObj}
 								onIngredientEdit={editIngredient}

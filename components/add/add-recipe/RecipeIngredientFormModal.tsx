@@ -2,7 +2,7 @@ import FormInput from "@/components/form/FormInput";
 import RecipeIngredientQuantityInput from "@/components/add/add-recipe/RecipeIngredientQuantityInput";
 import FormSelectionInput from "@/components/form/FormSelectionInput";
 import { ingredientQuantityFractions, ingredientTypes } from "@/constants";
-import { AddRecipeIngredientFormProps, addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
+import { RecipeIngredientFormModalProps, addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ const RecipeIngredientFormModal = ({
 	onIngredientEdit,
 	onIngredientDelete,
 	onIngredientEditDiscard,
-}: AddRecipeIngredientFormProps) => {
+}: RecipeIngredientFormModalProps) => {
 	//* Form
 	const methods = useForm<TAddRecipeIngredientSchema>({
 		resolver: zodResolver(addRecipeIngredientSchema),

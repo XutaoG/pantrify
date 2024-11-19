@@ -32,16 +32,10 @@ export const navRoutes = [
 	},
 ];
 
-export const addNavRoutes = [
-	{
-		route: "/add-recipe",
-		label: "Add Recipe",
-	},
-	{
-		route: "/add-ingredient",
-		label: "Add Ingredient",
-	},
-];
+export const addRecipeRoute = {
+	route: "/add-recipe",
+	label: "Add Recipe",
+};
 
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";

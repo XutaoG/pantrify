@@ -175,7 +175,7 @@ export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> 
 	onSelectionChange: (val: string) => void;
 }
 
-export interface AddRecipeIngredientFormProps {
+export interface RecipeIngredientFormModalProps {
 	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;
 	onModalClose: () => void;
 	index: number | null;
@@ -216,6 +216,11 @@ export interface FormDateInputProps extends ComponentPropsWithRef<"input"> {
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
 	isSubmitting: boolean;
+}
+
+export interface IngredientFormModalProps {
+	onIngredientAdd: (ingredient: TAddIngredientSchema) => string | null;
+	onModalClose: () => void;
 }
 
 // ! Form schemas
