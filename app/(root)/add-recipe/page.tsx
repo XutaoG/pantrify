@@ -2,11 +2,11 @@
 
 import RecipeIngredientFormModal from "@/components/add/add-recipe/RecipeIngredientFormModal";
 import RecipeIngredientCard from "@/components/add/add-recipe/RecipeIngredientCard";
-import FormButton from "@/components/form/FormButton";
-import FormInput from "@/components/form/FormInput";
-import FormNumberInput from "@/components/form/FormNumberInput";
-import FormSelectionInput from "@/components/form/FormSelectionInput";
-import FormTextArea from "@/components/form/FormTextArea";
+import FormButton from "@/components/common/form/FormButton";
+import FormInput from "@/components/common/form/FormInput";
+import FormNumberInput from "@/components/common/form/FormNumberInput";
+import FormSelectionInput from "@/components/common/form/FormSelectionInput";
+import FormTextArea from "@/components/common/form/FormTextArea";
 import { addRecipeSchema, RecipeDto, RecipeIngredientDto, TAddRecipeIngredientSchema, TAddRecipeSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";

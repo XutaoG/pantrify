@@ -1,6 +1,6 @@
-import FormInput from "@/components/form/FormInput";
+import FormInput from "@/components/common/form/FormInput";
 import RecipeIngredientQuantityInput from "@/components/add/add-recipe/RecipeIngredientQuantityInput";
-import FormSelectionInput from "@/components/form/FormSelectionInput";
+import FormSelectionInput from "@/components/common/form/FormSelectionInput";
 import { ingredientQuantityFractions, ingredientTypes } from "@/constants";
 import { RecipeIngredientFormModalProps, addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";

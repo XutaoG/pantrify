@@ -1,8 +1,8 @@
 "use client";
 
 import { login } from "@/api";
-import FormButton from "@/components/form/FormButton";
-import FormInput from "@/components/form/FormInput";
+import FormButton from "@/components/common/form/FormButton";
+import FormInput from "@/components/common/form/FormInput";
 import { loginSchema, TLoginSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -46,20 +46,14 @@ const Login = () => {
 				<h1 className="font-semibold text-neutral-600">Login</h1>
 				<p className="font-medium">
 					Don{"'"}t Have an Account?{" "}
-					<Link
-						href="/sign-up"
-						className="text-blue-600 underline underline-offset-2"
-					>
+					<Link href="/sign-up" className="text-blue-600 underline underline-offset-2">
 						Create One Now
 					</Link>
 				</p>
 			</div>
 
 			{/* Form */}
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="flex flex-col gap-10"
-			>
+			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
 				<div className="flex flex-col gap-6">
 					{/* Email field */}
 					<FormInput
@@ -86,14 +80,8 @@ const Login = () => {
 						<div className="flex justify-between items-center">
 							{/* Remember me */}
 							<div className="flex items-center gap-1">
-								<input
-									{...register("rememberMe")}
-									type="checkbox"
-									disabled={isSubmitting}
-								/>
-								<p className="text-sm font-medium">
-									Remember Me
-								</p>
+								<input {...register("rememberMe")} type="checkbox" disabled={isSubmitting} />
+								<p className="text-sm font-medium">Remember Me</p>
 							</div>
 
 							{/* Forgot password */}
@@ -108,11 +96,7 @@ const Login = () => {
 				</div>
 
 				{/* Login error */}
-				{loginError && (
-					<p className="self-center font-medium px-1 text-red-600">
-						{loginError}
-					</p>
-				)}
+				{loginError && <p className="self-center font-medium px-1 text-red-600">{loginError}</p>}
 
 				{/* Login button */}
 				<FormButton title="Login" isSubmitting={isSubmitting} />

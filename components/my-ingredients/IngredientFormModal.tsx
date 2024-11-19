@@ -4,9 +4,9 @@ import { ingredientTypes } from "@/constants";
 import { addIngredientSchema, IngredientFormModalProps, TAddIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormInput from "../form/FormInput";
-import FormSelectionInput from "../form/FormSelectionInput";
-import FormDateInput from "../form/FormDateInput";
+import FormInput from "../common/form/FormInput";
+import FormSelectionInput from "../common/form/FormSelectionInput";
+import FormDateInput from "../common/form/FormDateInput";
 import { MdCancel, MdOutlineAddCircle } from "react-icons/md";
 
 const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: IngredientFormModalProps) => {

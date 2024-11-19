@@ -1,7 +1,7 @@
 "use client";
 
-import FormButton from "@/components/form/FormButton";
-import FormInput from "@/components/form/FormInput";
+import FormButton from "@/components/common/form/FormButton";
+import FormInput from "@/components/common/form/FormInput";
 import { signUp } from "@/api";
 import { signUpSchema, TSignUpSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,20 +46,14 @@ const SignUp = () => {
 				<h1 className="font-semibold text-neutral-600">Sign Up</h1>
 				<p className="font-medium">
 					Already Have an Account?{" "}
-					<Link
-						href="/login"
-						className="text-blue-600 underline underline-offset-2"
-					>
+					<Link href="/login" className="text-blue-600 underline underline-offset-2">
 						Login Here
 					</Link>
 				</p>
 			</div>
 
 			{/* Form */}
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="flex flex-col gap-10"
-			>
+			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
 				<div className="flex flex-col gap-6">
 					{/* Email field */}
 					<FormInput
@@ -122,11 +116,7 @@ const SignUp = () => {
 				</div>
 
 				{/* Login error */}
-				{signUpError && (
-					<p className="self-center font-medium px-1 text-red-600">
-						{signUpError}
-					</p>
-				)}
+				{signUpError && <p className="self-center font-medium px-1 text-red-600">{signUpError}</p>}
 
 				{/* Login button */}
 				<FormButton title="Sign Up" isSubmitting={isSubmitting} />
