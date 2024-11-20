@@ -275,10 +275,6 @@ export const getIngredient = async (id: number) => {
 };
 
 export const deleteIngredient = async (id: number) => {
-	const response: DeleteIngredientResponse = {
-		errorMessage: null,
-	};
-
 	try {
 		const cookieStore = await cookies();
 
@@ -290,21 +286,7 @@ export const deleteIngredient = async (id: number) => {
 		});
 
 		revalidatePath("/my-ingredients");
-	} catch (e) {
-		const error = e as AxiosError;
-
-		if (error.response) {
-			// Response received, but error status code
-
-			if (error.response.status == 404) {
-				response.errorMessage = "Ingredient does not exist";
-			}
-		} else {
-			// No response received
-
-			response.errorMessage = "An unexpected error occurred";
-		}
+	} catch {
+		return;
 	}
-
-	return response;
 };

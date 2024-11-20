@@ -96,16 +96,8 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 	//! Delete ingredient
 	const submitDeleteIngredient = async () => {
 		if (ingredient != null) {
-			const response = await deleteIngredient(ingredient.id);
-
-			if (response.errorMessage == null) {
-				// No error
-
-				onModalClose();
-			} else {
-				setFormSuccessMessage(null);
-				setFormErrorMessage(response.errorMessage);
-			}
+			await deleteIngredient(ingredient.id);
+			onModalClose();
 		}
 	};
 
