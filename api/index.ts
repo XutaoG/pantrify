@@ -12,7 +12,9 @@ import {
 import {
 	AddIngredientDto,
 	AddIngredientResponse,
+	DeleteIngredientResponse,
 	GetAllIngredientsRequestConfig,
+	Ingredient,
 	IngredientList,
 	LoginResponse,
 	RefreshResponse,
@@ -253,4 +255,56 @@ export const addIngredient = async (newIngredient: AddIngredientDto) => {
 	}
 
 	return addIngredientResponse;
+};
+
+export const getIngredient = async (id: number) => {
+	try {
+		const cookieStore = await cookies();
+
+		const response = await axios.get<Ingredient>(`${ingredientsPath}/${id}`, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
+			},
+		});
+
+		return response.data;
+	} catch {
+		return null;
+	}
+};
+
+export const deleteIngredient = async (id: number) => {
+	const response: DeleteIngredientResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.delete(`${ingredientsPath}/${id}`, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
+			},
+		});
+
+		revalidatePath("/my-ingredients");
+	} catch (e) {
+		const error = e as AxiosError;
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 404) {
+				response.errorMessage = "Ingredient does not exist";
+			}
+		} else {
+			// No response received
+
+			response.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return response;
 };

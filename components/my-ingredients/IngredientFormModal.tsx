@@ -8,8 +8,8 @@ import FormInput from "../common/form/FormInput";
 import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
 import { MdCancel, MdDelete, MdEdit, MdOutlineAddCircle, MdRemoveCircle } from "react-icons/md";
-import { Fragment, useState } from "react";
-import { addIngredient } from "@/api";
+import { Fragment, useEffect, useState } from "react";
+import { addIngredient, deleteIngredient } from "@/api";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Form
@@ -29,15 +29,17 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 		reset,
 	} = methods;
 
-	const convertDate = (date: string) => {
-		const parsedDate = Date.parse(date);
-
-		if (isNaN(parsedDate)) {
-			return undefined;
-		} else {
-			return new Date(parsedDate);
+	useEffect(() => {
+		//* Initialize form if ingredient is valid
+		if (ingredient != null) {
+			setValue("name", ingredient.name, { shouldValidate: true });
+			setValue("ingredientType", ingredient.ingredientType);
+			setValue(
+				"dateExpired",
+				ingredient.dateExpired ? new Date(ingredient?.dateExpired ?? "").toISOString().substring(0, 10) : ""
+			);
 		}
-	};
+	}, [ingredient, setValue]);
 
 	//! Message management
 	const [formSuccessMessage, setFormSuccessMessage] = useState<string | null>(null);
@@ -60,7 +62,9 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 		const ingredientType = getValues("ingredientType");
 		const isAvailable = mode == "ingredient";
 		const isInCart = mode == "shopping";
-		const dateExpired = getValues("dateExpired");
+
+		const parsedDate = Date.parse(getValues("dateExpired") ?? "");
+		const dateExpired = isNaN(parsedDate) ? undefined : new Date(parsedDate);
 
 		const newIngredient: AddIngredientDto = {
 			name,
@@ -90,6 +94,20 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 	};
 
 	//! Delete ingredient
+	const submitDeleteIngredient = async () => {
+		if (ingredient != null) {
+			const response = await deleteIngredient(ingredient.id);
+
+			if (response.errorMessage == null) {
+				// No error
+
+				onModalClose();
+			} else {
+				setFormSuccessMessage(null);
+				setFormErrorMessage(response.errorMessage);
+			}
+		}
+	};
 
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
@@ -128,7 +146,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 
 					{/* Expiration date field */}
 					<FormDateInput
-						{...register("dateExpired", { setValueAs: convertDate })}
+						{...register("dateExpired")}
 						className="grow"
 						title="Expiration Date (Optional)"
 						isSubmitting={isSubmitting}
@@ -197,7 +215,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 								type="button"
 								className="flex justify-center items-center gap-2 bg-red-400 
 								p-1.5 rounded hover:bg-red-500"
-								onClick={onModalClose}
+								onClick={submitDeleteIngredient}
 							>
 								{/* Delete icon and text */}
 								<MdDelete className="text-white text-xl" />

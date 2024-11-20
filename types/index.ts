@@ -116,6 +116,10 @@ export interface AddIngredientResponse {
 	errorMessage: string | null;
 }
 
+export interface DeleteIngredientResponse {
+	errorMessage: string | null;
+}
+
 // ! Request config
 export interface GetAllIngredientsRequestConfig {
 	name?: string;
@@ -161,6 +165,7 @@ export interface SearchBarProps {
 }
 
 export interface IngredientCardProps {
+	mode: "ingredient" | "shopping";
 	ingredient: Ingredient;
 	icon: ReactNode;
 }
@@ -317,7 +322,7 @@ export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSch
 export const addIngredientSchema = z.object({
 	name: z.string().min(1, "Name cannot be empty"),
 	ingredientType: z.string(),
-	dateExpired: z.date().optional(),
+	dateExpired: z.string().optional(),
 });
 
 export type TAddIngredientSchema = z.infer<typeof addIngredientSchema>;

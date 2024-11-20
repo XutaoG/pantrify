@@ -1,7 +1,13 @@
-import { IngredientCardProps } from "@/types";
-import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
+"use client";
 
-const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
+import { IngredientCardProps } from "@/types";
+import { useState } from "react";
+import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
+import IngredientFormModal from "../my-ingredients/IngredientFormModal";
+
+const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
+	const [showModalForEdit, setShowModalForEdit] = useState(false);
+
 	return (
 		<div
 			className="h-16 flex justify-between items-center gap-3 rounded 
@@ -15,13 +21,26 @@ const IngredientCard = ({ icon, ingredient }: IngredientCardProps) => {
 
 			{/* Actions */}
 			<div className="flex gap-1.5 items-center">
-				<button type="button" className="rounded-full bg-yellow-400 p-1.5">
+				<button
+					type="button"
+					className="rounded-full bg-yellow-400 p-1.5"
+					onClick={() => setShowModalForEdit(true)}
+				>
 					<MdOutlineEdit className="text-lg text-white" />
 				</button>
 				<button type="button" className="rounded-full bg-red-400 p-1.5">
 					<MdOutlineDelete className="text-lg text-white" />
 				</button>
 			</div>
+
+			{/* Modal */}
+			{showModalForEdit && (
+				<IngredientFormModal
+					mode={mode}
+					ingredient={ingredient}
+					onModalClose={() => setShowModalForEdit(false)}
+				/>
+			)}
 		</div>
 	);
 };

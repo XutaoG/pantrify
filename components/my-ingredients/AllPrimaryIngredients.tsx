@@ -4,10 +4,10 @@ import IngredientCard from "../common/IngredientCard";
 import { MdOutlineEgg } from "react-icons/md";
 
 const AllPrimaryIngredients = async () => {
-	const primaryIngredients = await getAllIngredients({ ingredientType: "Primary" });
+	const primaryIngredients = await getAllIngredients({ ingredientType: "Primary", isAvailable: true });
 
 	const primaryIngredientCards = primaryIngredients?.ingredients.map((ingredient) => {
-		return <IngredientCard key={ingredient.id} ingredient={ingredient} icon={<MdOutlineEgg />} />;
+		return <IngredientCard key={ingredient.id} ingredient={ingredient} icon={<MdOutlineEgg />} mode="ingredient" />;
 	});
 
 	return (
