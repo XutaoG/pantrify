@@ -7,7 +7,13 @@ import FormInput from "@/components/common/form/FormInput";
 import FormNumberInput from "@/components/common/form/FormNumberInput";
 import FormSelectionInput from "@/components/common/form/FormSelectionInput";
 import FormTextArea from "@/components/common/form/FormTextArea";
-import { addRecipeSchema, RecipeDto, RecipeIngredientDto, TAddRecipeIngredientSchema, TAddRecipeSchema } from "@/types";
+import {
+	addRecipeSchema,
+	AddRecipeDto,
+	AddRecipeIngredientDto,
+	TAddRecipeIngredientSchema,
+	TAddRecipeSchema,
+} from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -228,7 +234,7 @@ const AddRecipePage = () => {
 		const numServings = Number(getValues("numServings"));
 
 		const addRecipeIngredientDtos = ingredients.map((ingredient) => {
-			const ingredientDto: RecipeIngredientDto = {
+			const ingredientDto: AddRecipeIngredientDto = {
 				name: ingredient.name,
 				ingredientType: ingredient.ingredientType,
 				quantityWhole: Number(ingredient.quantityWhole),
@@ -239,7 +245,7 @@ const AddRecipePage = () => {
 			return ingredientDto;
 		});
 
-		const addRecipeDto: RecipeDto = {
+		const addRecipeDto: AddRecipeDto = {
 			name,
 			description,
 			duration,

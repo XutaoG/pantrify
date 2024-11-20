@@ -3,12 +3,17 @@
 import {
 	baseApiPath,
 	getUserApiPath,
+	ingredientsPath,
 	loginApiPath,
 	logoutApiPath,
 	refreshApiPath,
 	signUpApiPath,
 } from "@/constants";
 import {
+	AddIngredientDto,
+	AddIngredientResponse,
+	GetAllIngredientsRequestConfig,
+	IngredientList,
 	LoginResponse,
 	RefreshResponse,
 	SignUpResponse,
@@ -23,6 +28,8 @@ import setCookieParser from "set-cookie-parser";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = baseApiPath;
+
+//! Authentication
 
 export const login = async (formData: TLoginSchema) => {
 	const loginResponse: LoginResponse = {
@@ -70,8 +77,7 @@ export const signUp = async (formData: TSignUpSchema) => {
 			if (error.response.status == 400) {
 				signUpResponse.errorMessage = "An unexpected error occurred";
 			} else if (error.response.status == 409) {
-				signUpResponse.errorMessage =
-					"An account with this email address already exists";
+				signUpResponse.errorMessage = "An account with this email address already exists";
 			}
 		} else {
 			// No response received
@@ -176,15 +182,75 @@ const setCookies = async (response: AxiosResponse) => {
 			path: cookieToSet.path,
 			domain: cookieToSet.domain,
 			maxAge: cookieToSet.maxAge,
-			sameSite: cookieToSet.sameSite as
-				| "lax"
-				| "strict"
-				| "none"
-				| boolean
-				| undefined,
+			sameSite: cookieToSet.sameSite as "lax" | "strict" | "none" | boolean | undefined,
 			expires: cookieToSet.expires,
 			secure: cookieToSet.secure,
 			httpOnly: cookieToSet.httpOnly,
 		});
 	});
+};
+
+//! Ingredients
+export const getAllIngredients = async (config?: GetAllIngredientsRequestConfig) => {
+	try {
+		const cookieStore = await cookies();
+
+		const response = await axios.get<IngredientList>(ingredientsPath, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
+			},
+			params: config && {
+				// Attach parameters
+				name: config.name,
+				ingredientType: config.ingredientType,
+				isAvailable: config.isAvailable,
+				isInCart: config.isInCart,
+				sortBy: config.sortBy,
+				isAscending: config.isAscending,
+				pageNumber: config.pageNumber,
+				pageSize: config.pageSize,
+			},
+		});
+
+		return response.data;
+	} catch {
+		return null;
+	}
+};
+
+export const addIngredient = async (newIngredient: AddIngredientDto) => {
+	const addIngredientResponse: AddIngredientResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.post(ingredientsPath, newIngredient, {
+			headers: {
+				Cookie: cookieStore.toString(),
+			},
+		});
+
+		revalidatePath("/my-ingredients");
+	} catch (e) {
+		const error = e as AxiosError;
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 400) {
+				addIngredientResponse.errorMessage = "Invalid ingredient";
+			} else if (error.response.status == 409) {
+				addIngredientResponse.errorMessage = "Ingredient already exists";
+			}
+		} else {
+			// No response received
+
+			addIngredientResponse.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return addIngredientResponse;
 };

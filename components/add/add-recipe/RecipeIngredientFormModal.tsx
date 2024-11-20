@@ -1,7 +1,7 @@
 import FormInput from "@/components/common/form/FormInput";
 import RecipeIngredientQuantityInput from "@/components/add/add-recipe/RecipeIngredientQuantityInput";
 import FormSelectionInput from "@/components/common/form/FormSelectionInput";
-import { ingredientQuantityFractions, ingredientTypes } from "@/constants";
+import { ingredientQuantityFractions, recipeIngredientTypes } from "@/constants";
 import { RecipeIngredientFormModalProps, addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment, useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const RecipeIngredientFormModal = ({
 	const methods = useForm<TAddRecipeIngredientSchema>({
 		resolver: zodResolver(addRecipeIngredientSchema),
 		defaultValues: {
-			ingredientType: ingredientTypes[0],
+			ingredientType: recipeIngredientTypes[0],
 			quantityFraction: ingredientQuantityFractions[0],
 		},
 	});
@@ -122,7 +122,7 @@ const RecipeIngredientFormModal = ({
 						title="Ingredient Type"
 						isSubmitting={isSubmitting}
 						currentSelection={getValues("ingredientType")}
-						selections={ingredientTypes}
+						selections={recipeIngredientTypes}
 						onSelectionChange={onIngredientTypeChange}
 					/>
 					{/* Ingredient quantity field */}

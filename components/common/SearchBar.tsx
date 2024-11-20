@@ -8,7 +8,7 @@ const SearchBar = ({ placeholderText }: SearchBarProps) => {
 	const [searchKeyword, setSearchKeyword] = useState("");
 
 	return (
-		<div
+		<form
 			className="h-12 bg-neutral-100 border border-neutral-200 rounded 
 			flex items-center grow gap-4 px-4"
 		>
@@ -20,8 +20,10 @@ const SearchBar = ({ placeholderText }: SearchBarProps) => {
 				className="bg-transparent grow outline-none"
 				placeholder={placeholderText}
 			/>
-			<MdSearch className="text-2xl" />
-		</div>
+			<button type="submit">
+				<MdSearch className="text-2xl" />
+			</button>
+		</form>
 	);
 };
 

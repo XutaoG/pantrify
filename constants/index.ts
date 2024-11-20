@@ -1,13 +1,16 @@
-import { Ingredient, Recipe, RecipeIngredient, RecipeInstruction } from "@/types";
+import { Recipe, RecipeIngredient, RecipeInstruction } from "@/types";
 
 export const baseApiPath = "http://localhost:5188/api";
 
-// ! Auth
+//! Auth
 export const loginApiPath = "/auth/login";
 export const signUpApiPath = "/auth/sign-up";
 export const logoutApiPath = "/auth/logout";
 export const getUserApiPath = "/auth/user";
 export const refreshApiPath = "/auth/refresh";
+
+//! Ingredient
+export const ingredientsPath = "/ingredient";
 
 export const navRoutes = [
 	{
@@ -40,26 +43,10 @@ export const addRecipeRoute = {
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 
-export const ingredientTypes = ["Primary", "Secondary", "Optional"];
+export const recipeIngredientTypes = ["Primary", "Secondary", "Optional"];
+export const ingredientTypes = ["Primary", "Secondary"];
 export const ingredientQuantityFractions = ["None", "1/4", "1/3", "1/2", "2/3", "3/4"];
-// export const ingredientQuantityUnits = [
-// 	"tsp (teaspoon)",
-// 	"tbsp (tablespoon)",
-// 	"cup",
-// 	"fl oz (fluid ounce)",
-// 	"pt (pint)",
-// 	"qt (quart)",
-// 	"gal (gallon)",
-// 	"ml (mililiter)",
-// 	"l (liter)",
-// 	"oz (ounce)",
-// 	"lb (pound)",
-// 	"g (gram)",
-// 	"kg (kilogram)",
-// 	"pinch",
-// 	"dash",
-// 	"smidgen",
-// ];
+
 export const ingredientQuantityUnits = [
 	"none",
 	"tsp",
@@ -345,102 +332,6 @@ export const mockInstructions: RecipeInstruction[] = [
 		id: 5,
 		instruction: "(Optional) Add shredded cheese on top.",
 		step: 5,
-	},
-];
-
-export const mockAllPrimaryIngredients: Ingredient[] = [
-	{
-		id: 1,
-		name: "Ribeye Steak",
-		ingredientType: "Primary",
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 2,
-		name: "Eggs",
-		ingredientType: "Primary",
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 3,
-		name: "Napa Cabbage",
-		ingredientType: "Primary",
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 1,
-		name: "Romaine Lettuce",
-		ingredientType: "Primary",
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 4,
-		name: "Shrimps",
-		ingredientType: "Primary",
-		isAvailable: true,
-		isInCart: false,
-	},
-];
-
-export const mockAllSecondaryIngredients: Ingredient[] = [
-	{
-		id: 1,
-		name: "Salt",
-		ingredientType: "Secondary",
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 2,
-		name: "Black Pepper",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 3,
-		name: "Garlic Powder",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 4,
-		name: "Onion Powder",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 5,
-		name: "Mirin",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 6,
-		name: "Sesame Oil",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
-	},
-	{
-		id: 7,
-		name: "Flour",
-		ingredientType: "Secondary",
-
-		isAvailable: true,
-		isInCart: false,
 	},
 ];
 

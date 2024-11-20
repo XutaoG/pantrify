@@ -67,6 +67,13 @@ export interface JwtInfo {
 	refreshTokenExpiryTime: Date;
 }
 
+export interface IngredientList {
+	ingredients: Ingredient[];
+	totalCount: number;
+	pageNumber: number;
+	pageSize: number;
+}
+
 export interface LoginResponse {
 	errorMessage: string | null;
 }
@@ -79,22 +86,46 @@ export interface RefreshResponse {
 	errorMessage: string | null;
 }
 
-export interface RecipeDto {
+export interface AddRecipeDto {
 	name: string;
 	description?: string;
 	duration: number;
 	difficulty: number;
 	numServings: number;
-	ingredients: RecipeIngredientDto[];
+	ingredients: AddRecipeIngredientDto[];
 	instructions: string[];
 }
 
-export interface RecipeIngredientDto {
+export interface AddRecipeIngredientDto {
 	name: string;
 	ingredientType: string;
 	quantityWhole?: number;
 	quantityFraction?: string;
 	quantityUnit?: string;
+}
+
+export interface AddIngredientDto {
+	name: string;
+	ingredientType: string;
+	isAvailable: boolean;
+	isInCart: boolean;
+	dateExpired?: Date;
+}
+
+export interface AddIngredientResponse {
+	errorMessage: string | null;
+}
+
+// ! Request config
+export interface GetAllIngredientsRequestConfig {
+	name?: string;
+	ingredientType?: string;
+	isAvailable?: boolean;
+	isInCart?: boolean;
+	sortBy?: string;
+	isAscending?: boolean;
+	pageNumber?: number;
+	pageSize?: number;
 }
 
 // ! PROPS
@@ -219,7 +250,6 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 }
 
 export interface IngredientFormModalProps {
-	onIngredientAdd: (ingredient: TAddIngredientSchema) => string | null;
 	mode: "ingredient" | "shopping";
 	onModalClose: () => void;
 }

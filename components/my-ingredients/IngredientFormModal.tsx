@@ -1,15 +1,18 @@
 "use client";
 
 import { ingredientTypes } from "@/constants";
-import { addIngredientSchema, IngredientFormModalProps, TAddIngredientSchema } from "@/types";
+import { AddIngredientDto, addIngredientSchema, IngredientFormModalProps, TAddIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
 import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
 import { MdCancel, MdOutlineAddCircle } from "react-icons/md";
+import { useState } from "react";
+import { addIngredient } from "@/api";
 
-const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: IngredientFormModalProps) => {
+const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) => {
+	//! Form
 	const methods = useForm<TAddIngredientSchema>({
 		resolver: zodResolver(addIngredientSchema),
 		defaultValues: {
@@ -23,16 +26,8 @@ const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: Ingredient
 		getValues,
 		setValue,
 		handleSubmit,
+		reset,
 	} = methods;
-
-	//* Selection management
-	const onIngredientTypeChange = (val: string) => {
-		setValue("ingredientType", val);
-	};
-
-	const addIngredient = () => {
-		onIngredientAdd(getValues());
-	};
 
 	const convertDate = (date: string) => {
 		const parsedDate = Date.parse(date);
@@ -44,10 +39,55 @@ const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: Ingredient
 		}
 	};
 
+	//! Error management
+	const [formSuccessMessage, setFormSuccessMessage] = useState<string | null>(null);
+	const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
+
+	const removeErrors = () => {
+		setFormSuccessMessage(null);
+		setFormErrorMessage(null);
+	};
+
+	//! Selection management
+	const onIngredientTypeChange = (val: string) => {
+		setValue("ingredientType", val);
+	};
+
+	//! Add ingredient
+
+	const submitAddIngredient = async () => {
+		const name = getValues("name").trim();
+		const ingredientType = getValues("ingredientType");
+		const isAvailable = mode == "ingredient";
+		const isInCart = mode == "shopping";
+		const dateExpired = getValues("dateExpired");
+
+		const newIngredient: AddIngredientDto = {
+			name,
+			ingredientType,
+			isAvailable,
+			isInCart,
+			dateExpired,
+		};
+
+		const response = await addIngredient(newIngredient);
+
+		if (response.errorMessage == null) {
+			// No error
+
+			setFormErrorMessage(null);
+			setFormSuccessMessage("Ingredient added");
+			reset();
+		} else {
+			setFormSuccessMessage(null);
+			setFormErrorMessage(response.errorMessage);
+		}
+	};
+
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<form
-				onSubmit={handleSubmit(addIngredient)}
+				onSubmit={handleSubmit(submitAddIngredient)}
 				className="w-96 flex flex-col gap-4 bg-white p-4 
 				border border-neutral-200 rounded-md shadow-md"
 				noValidate
@@ -66,6 +106,7 @@ const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: Ingredient
 						errorMessage={errors.name?.message}
 						isSubmitting={isSubmitting}
 						className="grow"
+						onFocus={removeErrors}
 					/>
 
 					{/* Ingredient type field */}
@@ -78,6 +119,7 @@ const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: Ingredient
 						onSelectionChange={onIngredientTypeChange}
 					/>
 
+					{/* Expiration date field */}
 					<FormDateInput
 						{...register("dateExpired", { setValueAs: convertDate })}
 						className="grow"
@@ -85,6 +127,16 @@ const IngredientFormModal = ({ mode, onIngredientAdd, onModalClose }: Ingredient
 						isSubmitting={isSubmitting}
 						errorMessage={errors.dateExpired?.message}
 					/>
+
+					{/* Success message */}
+					{formSuccessMessage && (
+						<p className="self-center px-1 text-emerald-500 font-medium">{formSuccessMessage}</p>
+					)}
+
+					{/* Error message */}
+					{formErrorMessage && (
+						<p className="self-center px-1 text-red-600 font-medium">{formErrorMessage}</p>
+					)}
 
 					<div className="flex flex-col gap-2">
 						{/* Add ingredient */}

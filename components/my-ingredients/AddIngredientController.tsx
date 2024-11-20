@@ -3,7 +3,6 @@
 import { MdOutlineAddCircle } from "react-icons/md";
 import IngredientFormModal from "./IngredientFormModal";
 import { Fragment, useState } from "react";
-import { TAddIngredientSchema } from "@/types";
 
 const AddIngredientController = () => {
 	// * Model control
@@ -15,11 +14,6 @@ const AddIngredientController = () => {
 
 	const closeModel = () => {
 		setIsIngredientModalOpen(false);
-	};
-
-	const addIngredient = (ingredient: TAddIngredientSchema) => {
-		console.log(ingredient);
-		return null;
 	};
 
 	return (
@@ -34,9 +28,7 @@ const AddIngredientController = () => {
 					<p className="text-white font-semibold">Add Ingredient</p>
 				</div>
 			</button>
-			{isIngredientModalOpen && (
-				<IngredientFormModal mode="ingredient" onModalClose={closeModel} onIngredientAdd={addIngredient} />
-			)}
+			{isIngredientModalOpen && <IngredientFormModal mode="ingredient" onModalClose={closeModel} />}
 		</Fragment>
 	);
 };
