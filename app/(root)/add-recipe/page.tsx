@@ -223,7 +223,7 @@ const AddRecipePage = () => {
 		);
 	});
 
-	const addRecipe = () => {
+	const parseRecipe = () => {
 		// * Sanitize data
 		const name = getValues("name").trim();
 		const description = getValues("description").trim();
@@ -259,7 +259,15 @@ const AddRecipePage = () => {
 			instructions: instructions,
 		};
 
-		console.log(addRecipeDto);
+		return addRecipeDto;
+	};
+
+	const addRecipe = async () => {
+		const recipe = parseRecipe();
+
+		await new Promise((resolve) => setTimeout(resolve, 5000));
+
+		console.log(recipe);
 	};
 
 	return (
@@ -330,7 +338,9 @@ const AddRecipePage = () => {
 						{/* Open ingredient form */}
 						<button
 							type="button"
-							className="self-center flex items-center gap-2 bg-emerald-400 p-2 rounded hover:bg-emerald-500 cursor-pointer"
+							className={`self-center flex items-center gap-2 bg-emerald-400 p-2 rounded ${
+								isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+							}`}
 							onClick={openModalForAdd}
 							disabled={isSubmitting}
 						>
@@ -384,7 +394,9 @@ const AddRecipePage = () => {
 							{/* Add instruction button */}
 							<button
 								type="button"
-								className="self-center flex items-center gap-2 bg-emerald-400 p-2 rounded hover:bg-emerald-500 cursor-pointer"
+								className={`self-center flex items-center gap-2 bg-emerald-400 p-2 rounded ${
+									isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+								}`}
 								onClick={addInstruction}
 								disabled={isSubmitting}
 							>

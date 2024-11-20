@@ -39,11 +39,11 @@ const Pagination = () => {
 	return (
 		<div className="flex gap-6 items-center">
 			{/* Left arrow */}
-			<button onClick={() => setCurrentPageNumberIndex(0)}>
+			<button type="button" onClick={() => setCurrentPageNumberIndex(0)}>
 				<ChevronsLeft size={18} />
 			</button>
 
-			<button onClick={moveToPrevPage}>
+			<button type="button" onClick={moveToPrevPage}>
 				<ChevronLeft size={18} />
 			</button>
 
@@ -51,11 +51,14 @@ const Pagination = () => {
 			{pageNumbers}
 
 			{/* Right arrow */}
-			<button onClick={moveToNextPage}>
+			<button type="button" onClick={moveToNextPage}>
 				<ChevronsRight size={18} />
 			</button>
 
-			<button onClick={() => setCurrentPageNumberIndex(mockPageNumbers.length - 1)}>
+			<button
+				type="button"
+				onClick={() => setCurrentPageNumberIndex(mockPageNumbers.length - 1)}
+			>
 				<ChevronRight size={18} />
 			</button>
 		</div>

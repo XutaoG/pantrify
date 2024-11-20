@@ -10,9 +10,12 @@ const FormButton = ({ title, icon, className, disabled, ...rest }: FormButtonPro
 		<button
 			type="submit"
 			className={twMerge(
-				"bg-sky-600 hover:bg-sky-500 py-2 rounded flex justify-center items-center",
+				`bg-sky-600 py-2 rounded flex justify-center items-center ${
+					disabled ? "cursor-not-allowed" : "hover:bg-sky-500"
+				}`,
 				className
 			)}
+			disabled={disabled}
 			{...rest}
 		>
 			{disabled ? (

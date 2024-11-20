@@ -121,6 +121,7 @@ const RecipeIngredientFormModal = ({
 						onSelectionChange={onIngredientTypeChange}
 						disabled={isSubmitting}
 					/>
+
 					{/* Ingredient quantity field */}
 					<RecipeIngredientQuantityInput />
 
@@ -142,8 +143,9 @@ const RecipeIngredientFormModal = ({
 						{/* Add or edit ingredient */}
 						<button
 							type="submit"
-							className="flex justify-center items-center gap-2 
-							bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
+							className={`flex justify-center items-center gap-2 
+							bg-emerald-500 p-1.5 rounded ${isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-600"}`}
+							disabled={isSubmitting}
 						>
 							{index == null || ingredient == null ? (
 								<Fragment>
@@ -163,9 +165,10 @@ const RecipeIngredientFormModal = ({
 						{/* Cancel */}
 						<button
 							type="button"
-							className="flex justify-center items-center gap-2 bg-yellow-500 
-							p-1.5 rounded hover:bg-yellow-600"
+							className={`flex justify-center items-center gap-2 bg-yellow-500 
+							p-1.5 rounded ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-600"}`}
 							onClick={onModalClose}
+							disabled={isSubmitting}
 						>
 							<CircleX size={20} color="white" />
 							<p className="text-white font-medium">Cancel</p>

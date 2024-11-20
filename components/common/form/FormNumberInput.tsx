@@ -56,12 +56,14 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 						<input
 							{...rest}
 							ref={ref}
-							className="grow py-1 bg-transparent outline-none min-w-0"
+							className="grow py-1 bg-transparent outline-none min-w-0 cursor-default"
 							readOnly
+							disabled={disabled}
 						/>
 						<div className="flex gap-2 items-center">
 							<button
 								type="button"
+								className={`${disabled && "cursor-not-allowed"}`}
 								onClick={() => onValueIncrement(-incrementAmount)}
 								onMouseDown={() => keepValueIncrement(-incrementAmount)}
 								onMouseUp={stopValueIncrement}
@@ -73,6 +75,7 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 							<p className="text-neutral-600 select-none">|</p>
 							<button
 								type="button"
+								className={`${disabled && "cursor-not-allowed"}`}
 								onClick={() => onValueIncrement(incrementAmount)}
 								onMouseDown={() => keepValueIncrement(incrementAmount)}
 								onMouseUp={stopValueIncrement}

@@ -9,8 +9,8 @@ import { useFormContext } from "react-hook-form";
 const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) => {
 	//! Dropdowns
 	const [fractionContainerRef, isExpandedFraction, onToggleFraction] =
-		useDropdown<HTMLInputElement>();
-	const [unitContainerRef, isExpandedUnit, onToggleUnit] = useDropdown<HTMLInputElement>();
+		useDropdown<HTMLButtonElement>();
+	const [unitContainerRef, isExpandedUnit, onToggleUnit] = useDropdown<HTMLButtonElement>();
 
 	const {
 		register,
@@ -65,7 +65,9 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 				{/* Title */}
 				<div className="flex items-center gap-1.5">
 					<CookingPot size={16} />
-					<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
+					<p className="text-sm font-semibold text-neutral-600 select-none">
+						Quantity (Optional)
+					</p>
 				</div>
 
 				<div className="grow flex gap-2 items-center">
@@ -74,25 +76,32 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 						<input
 							{...register("quantityWhole")}
 							disabled={isSubmitting}
-							className="w-16 py-1.5 bg-transparent outline-none min-w-0"
+							className={`w-16 py-1.5 bg-transparent outline-none min-w-0 ${
+								isSubmitting && "cursor-not-allowed"
+							}`}
 							placeholder="1"
 						/>
 					</div>
+
 					{/* fraction field */}
-					<div
-						className="grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
+					<button
+						type="button"
+						className={`grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative ${
+							isSubmitting && "cursor-not-allowed"
+						}`}
 						ref={fractionContainerRef}
+						onClick={onToggleUnit}
+						disabled={isSubmitting}
 					>
 						<input
 							{...register("quantityFraction")}
-							className="w-12 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer"
-							onClick={onToggleFraction}
+							className={`w-12 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer ${
+								isSubmitting && "cursor-not-allowed"
+							}`}
 							readOnly
 							placeholder="1/2"
 						/>
-						<button type="button" onClick={onToggleFraction}>
-							<ChevronLeft size={16} />
-						</button>
+						<ChevronLeft size={16} />
 						{isExpandedFraction && (
 							<div
 								className="bg-neutral-100 border border-neutral-200 
@@ -101,23 +110,28 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 								{fractionQuantityOptions}
 							</div>
 						)}
-					</div>
+					</button>
+
 					{/* Unit field */}
-					<div
-						className="grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
+					<button
+						type="button"
+						className={`grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative ${
+							isSubmitting && "cursor-not-allowed"
+						}`}
 						ref={unitContainerRef}
+						onClick={onToggleUnit}
+						disabled={isSubmitting}
 					>
 						<input
 							{...register("quantityUnit")}
-							className="w-20 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer"
-							onClick={onToggleUnit}
+							className={`w-20 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer ${
+								isSubmitting && "cursor-not-allowed"
+							}`}
 							placeholder="Unit"
 							readOnly
 						/>
 
-						<button type="button" onClick={onToggleUnit}>
-							<ChevronLeft size={16} />
-						</button>
+						<ChevronLeft size={16} />
 						{isExpandedUnit && (
 							<div
 								className="h-64 bg-neutral-100 border border-neutral-200 
@@ -126,7 +140,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 								{quantityUnitOptions}
 							</div>
 						)}
-					</div>
+					</button>
 				</div>
 			</div>
 		</div>

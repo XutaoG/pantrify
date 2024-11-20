@@ -4,7 +4,7 @@ import { FormInputProps } from "@/types";
 import { forwardRef } from "react";
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
-	({ header, headerIcon, errorMessage, placeholder, className, ...rest }, ref) => {
+	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {
 		return (
 			<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
 				{/* Input */}
@@ -25,7 +25,10 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 						<input
 							{...rest}
 							ref={ref}
-							className="grow py-1 bg-transparent outline-none min-w-0"
+							className={`grow py-1 bg-transparent outline-none min-w-0 ${
+								disabled && "cursor-not-allowed"
+							}`}
+							disabled={disabled}
 							placeholder={placeholder}
 						/>
 					</div>

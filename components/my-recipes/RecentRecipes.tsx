@@ -154,6 +154,7 @@ const RecentRecipes = () => {
 				{/* Next recipe button */}
 				<div className="absolute right-2 inset-y-0 flex items-center">
 					<button
+						type="button"
 						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
 							(scrollIndex === recipeCardsRef.current.length - 1 ||
 								!showNavigationArrows ||

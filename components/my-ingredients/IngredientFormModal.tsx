@@ -14,7 +14,7 @@ import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
 import { Fragment, useEffect, useState } from "react";
 import { addIngredient, updateIngredient } from "@/api";
-import { CalendarX2, CirclePlus, CircleX, Egg, Ham, Pencil } from "lucide-react";
+import { CalendarX2, CirclePlus, CircleX, Egg, Ham, LoaderCircle, Pencil } from "lucide-react";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Form
@@ -206,7 +206,15 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 							{ingredient == null ? (
 								<Fragment>
 									{/* Add icon and text */}
-									<CirclePlus size={20} color="white" />
+									{isSubmitting ? (
+										<LoaderCircle
+											className="animate-spin"
+											size={20}
+											color="white"
+										/>
+									) : (
+										<CirclePlus size={20} color="white" />
+									)}
 									<p className="text-white font-medium">Add</p>
 								</Fragment>
 							) : (

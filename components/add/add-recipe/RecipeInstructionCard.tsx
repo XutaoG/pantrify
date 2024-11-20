@@ -15,10 +15,11 @@ const RecipeInstructionCard = ({
 			<div className="bg-neutral-200 flex flex-col justify-between rounded-l overflow-hidden">
 				{/* Move up */}
 				<button
-					className="grow p-2 flex justify-center items-center hover:bg-neutral-300"
-					onClick={() => {
-						onInstructionMove(index, -1);
-					}}
+					type="button"
+					className={`grow p-2 flex justify-center items-center hover:bg-neutral-300 ${
+						isSubmitting && "cursor-not-allowed"
+					}`}
+					onClick={() => onInstructionMove(index, -1)}
 					disabled={isSubmitting}
 				>
 					<ChevronUp size={16} />
@@ -30,10 +31,11 @@ const RecipeInstructionCard = ({
 
 				{/* Move down */}
 				<button
-					className="grow p-2 flex justify-center items-center hover:bg-neutral-300"
-					onClick={() => {
-						onInstructionMove(index, 1);
-					}}
+					type="button"
+					className={`grow p-2 flex justify-center items-center hover:bg-neutral-300 ${
+						isSubmitting && "cursor-not-allowed"
+					}`}
+					onClick={() => onInstructionMove(index, 1)}
 					disabled={isSubmitting}
 				>
 					<ChevronDown size={16} />
@@ -44,8 +46,8 @@ const RecipeInstructionCard = ({
 				{/* Text area */}
 				<div className="bg-white border border-neutral-200 rounded grow p-2 flex flex-col">
 					<textarea
-						className="bg-transparent outline-none focus:bg-transparent 
-						min-h-12 max-h-12 resize-none"
+						className={`bg-transparent outline-none focus:bg-transparent 
+						min-h-12 max-h-12 resize-none ${isSubmitting && "cursor-not-allowed"}`}
 						placeholder="Enter your recipe instruction"
 						value={value}
 						onChange={(event) => {
@@ -57,11 +59,12 @@ const RecipeInstructionCard = ({
 
 				{/* Delete */}
 				<button
-					className="self-center bg-red-400 rounded-full size-10 hover:bg-red-500
-					flex justify-center items-center"
-					onClick={() => {
-						onInstructionRemove(index);
-					}}
+					type="button"
+					className={`self-center bg-red-400 rounded-full size-10 ${
+						isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"
+					}
+					flex justify-center items-center`}
+					onClick={() => onInstructionRemove(index)}
 					disabled={isSubmitting}
 				>
 					<Trash2 color="white" size={20} />

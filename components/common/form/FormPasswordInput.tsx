@@ -5,7 +5,7 @@ import { forwardRef, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
 const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
-	({ header, headerIcon, errorMessage, placeholder, className, ...rest }, ref) => {
+	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {
 		const [passwordVisibility, setPasswordVisibility] = useState(false);
 
 		const togglePasswordVisibility = () => {
@@ -35,12 +35,17 @@ const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 							className="grow py-1 bg-transparent outline-none min-w-0"
 							placeholder={placeholder}
 							type={!passwordVisibility ? "password" : ""}
+							disabled={disabled}
 						/>
 
 						{/* Eye toggle */}
-						<div className="cursor-pointer" onClick={togglePasswordVisibility}>
+						<button
+							type="button"
+							className={`${disabled && "cursor-not-allowed"}`}
+							onClick={togglePasswordVisibility}
+						>
 							{passwordVisibility ? <Eye size={20} /> : <EyeOff size={20} />}
-						</div>
+						</button>
 					</div>
 				</div>
 

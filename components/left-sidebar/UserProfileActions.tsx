@@ -15,7 +15,11 @@ const UserProfileActions = () => {
 			<div className="hover:bg-neutral-200 p-2 rounded cursor-pointer">
 				<Settings />
 			</div>
-			<button className="hover:bg-neutral-200 p-2 rounded" onClick={onLogoutClick}>
+			<button
+				type="button"
+				className="hover:bg-neutral-200 p-2 rounded"
+				onClick={onLogoutClick}
+			>
 				<LogOut />
 			</button>
 		</div>

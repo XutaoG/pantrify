@@ -4,7 +4,7 @@ import { FormTextAreaProps } from "@/types";
 import { forwardRef } from "react";
 
 const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
-	({ header, headerIcon, errorMessage, placeholder, ...rest }, ref) => {
+	({ header, headerIcon, errorMessage, placeholder, disabled, ...rest }, ref) => {
 		return (
 			<div className="flex flex-col gap-1 min-w-12">
 				{/* Input */}
@@ -25,8 +25,11 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 						<textarea
 							{...rest}
 							ref={ref}
-							className="grow py-1 bg-transparent outline-none min-h-36 max-h-36 resize-none"
+							className={`grow py-1 bg-transparent outline-none min-h-36 max-h-36 resize-none ${
+								disabled && "cursor-not-allowed"
+							}`}
 							placeholder={placeholder}
+							disabled={disabled}
 						/>
 					</div>
 				</div>

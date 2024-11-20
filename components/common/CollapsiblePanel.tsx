@@ -14,6 +14,7 @@ const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps
 				<p className={`font-semibold ${titleStyle}`}>{title}</p>
 				<div className="bg-neutral-200 h-0.5 grow" />
 				<button
+					type="button"
 					className={`cursor-pointer ${isExpanded && "rotate-180"} text-neutral-600`}
 					onClick={() => setIsExpanded((val) => !val)}
 				>

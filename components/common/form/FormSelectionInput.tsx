@@ -7,7 +7,16 @@ import { forwardRef } from "react";
 
 const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>(
 	(
-		{ header, headerIcon, currentSelection, selections, onSelectionChange, className, ...rest },
+		{
+			header,
+			headerIcon,
+			currentSelection,
+			selections,
+			onSelectionChange,
+			className,
+			disabled,
+			...rest
+		},
 		ref
 	) => {
 		const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
@@ -45,19 +54,26 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 						</p>
 					</div>
 
-					<div className="grow flex items-center" onClick={onToggle}>
+					<button
+						type="button"
+						className={`grow flex items-center ${disabled && "cursor-not-allowed"}`}
+						onClick={onToggle}
+						disabled={disabled}
+					>
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
-							className="grow py-1 bg-transparent outline-none min-w-0"
+							className={`grow py-1 bg-transparent outline-none min-w-0 cursor-pointer ${
+								disabled && "cursor-not-allowed"
+							}`}
 							readOnly
 						/>
 
-						<button className={`cursor-pointer ${isExpanded && "rotate-180"}`}>
+						<div className={`${isExpanded && "rotate-180"}`}>
 							<ChevronUp size={20} />
-						</button>
-					</div>
+						</div>
+					</button>
 				</div>
 
 				{/* Options */}

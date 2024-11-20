@@ -95,15 +95,15 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						<input
 							{...register("durationHour")}
 							disabled={isSubmitting}
-							className="w-8 bg-white rounded-l border border-neutral-200 p-1 bg-transparent outline-none"
+							className="w-8 bg-white rounded-l border border-neutral-200 p-1 bg-transparent outline-none cursor-default"
 							readOnly
 						/>
 
 						{/* Control */}
 						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className="grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300 
-								flex justify-center items-center"
+								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300 
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementHour(1)}
 								onMouseDown={() => keepValueIncrement("hour", 1)}
@@ -114,8 +114,8 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className="grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
-								flex justify-center items-center"
+								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementHour(-1)}
 								onMouseDown={() => keepValueIncrement("hour", -1)}
@@ -144,8 +144,8 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						{/* Control */}
 						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className="grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300
-								flex justify-center items-center"
+								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementMinute(5)}
 								onMouseDown={() => keepValueIncrement("minute", 5)}
@@ -156,8 +156,8 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className="grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
-								flex justify-center items-center"
+								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementMinute(-5)}
 								onMouseDown={() => keepValueIncrement("minute", -5)}
