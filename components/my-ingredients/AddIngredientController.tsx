@@ -28,7 +28,9 @@ const AddIngredientController = () => {
 					<p className="text-white font-semibold">Add Ingredient</p>
 				</div>
 			</button>
-			{isIngredientModalOpen && <IngredientFormModal mode="ingredient" onModalClose={closeModel} />}
+			{isIngredientModalOpen && (
+				<IngredientFormModal mode="ingredient" onModalClose={closeModel} />
+			)}
 		</Fragment>
 	);
 };

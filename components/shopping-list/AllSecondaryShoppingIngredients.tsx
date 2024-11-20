@@ -1,25 +1,33 @@
-import { mockAllSecondaryIngredients } from "@/constants";
 import IngredientCard from "../common/IngredientCard";
 import { MdOutlineEgg } from "react-icons/md";
 import CollapsiblePanel from "../common/CollapsiblePanel";
+import { getAllIngredients } from "@/api";
 
-const AllSecondaryShoppingIngredients = () => {
-	const ingredientCards = mockAllSecondaryIngredients.map((ingredient) => {
+const AllSecondaryShoppingIngredients = async () => {
+	const secondaryIngredients = await getAllIngredients({
+		ingredientType: "Secondary",
+		isInCart: true,
+	});
+
+	const secondaryIngredientCards = secondaryIngredients?.ingredients.map((ingredient) => {
 		return (
 			<IngredientCard
-				key={ingredient.name}
+				key={ingredient.id}
 				ingredient={ingredient}
 				icon={<MdOutlineEgg />}
+				mode="shopping"
 			/>
 		);
 	});
 
 	return (
-		<CollapsiblePanel title="Secondary Ingredients">
-			<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
-				{ingredientCards}
-			</div>
-		</CollapsiblePanel>
+		secondaryIngredientCards?.length != 0 && (
+			<CollapsiblePanel title="Secondary Ingredients List">
+				<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
+					{secondaryIngredientCards}
+				</div>
+			</CollapsiblePanel>
+		)
 	);
 };
 

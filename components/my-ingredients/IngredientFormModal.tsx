@@ -1,7 +1,12 @@
 "use client";
 
 import { ingredientTypes } from "@/constants";
-import { AddIngredientDto, addIngredientSchema, IngredientFormModalProps, TAddIngredientSchema } from "@/types";
+import {
+	AddIngredientDto,
+	addIngredientSchema,
+	IngredientFormModalProps,
+	TAddIngredientSchema,
+} from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
@@ -36,7 +41,9 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 			setValue("ingredientType", ingredient.ingredientType);
 			setValue(
 				"dateExpired",
-				ingredient.dateExpired ? new Date(ingredient?.dateExpired ?? "").toISOString().substring(0, 10) : ""
+				ingredient.dateExpired
+					? new Date(ingredient?.dateExpired ?? "").toISOString().substring(0, 10)
+					: ""
 			);
 		}
 	}, [ingredient, setValue]);
@@ -170,22 +177,28 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 					/>
 
 					{/* Expiration date field */}
-					<FormDateInput
-						{...register("dateExpired")}
-						className="grow"
-						title="Expiration Date (Optional)"
-						isSubmitting={isSubmitting}
-						errorMessage={errors.dateExpired?.message}
-					/>
+					{mode == "ingredient" && (
+						<FormDateInput
+							{...register("dateExpired")}
+							className="grow"
+							title="Expiration Date (Optional)"
+							isSubmitting={isSubmitting}
+							errorMessage={errors.dateExpired?.message}
+						/>
+					)}
 
 					{/* Success message */}
 					{formSuccessMessage && (
-						<p className="self-center px-1 text-emerald-500 font-medium">{formSuccessMessage}</p>
+						<p className="self-center px-1 text-emerald-500 font-medium">
+							{formSuccessMessage}
+						</p>
 					)}
 
 					{/* Error message */}
 					{formErrorMessage && (
-						<p className="self-center px-1 text-red-600 font-medium">{formErrorMessage}</p>
+						<p className="self-center px-1 text-red-600 font-medium">
+							{formErrorMessage}
+						</p>
 					)}
 
 					<div className="flex flex-col gap-2">
@@ -200,7 +213,9 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 									{/* Add icon and text */}
 									<MdOutlineAddCircle className="text-white text-xl" />
 									<p className="text-white font-medium">
-										{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
+										{mode === "ingredient"
+											? "Add New Ingredient"
+											: "Add to Shopping List"}
 									</p>
 								</Fragment>
 							) : (
