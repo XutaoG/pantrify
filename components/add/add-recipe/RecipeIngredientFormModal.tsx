@@ -15,7 +15,6 @@ const RecipeIngredientFormModal = ({
 	ingredient,
 	onIngredientEdit,
 	onIngredientDelete,
-	onIngredientEditDiscard,
 }: RecipeIngredientFormModalProps) => {
 	//* Form
 	const methods = useForm<TAddRecipeIngredientSchema>({
@@ -51,7 +50,14 @@ const RecipeIngredientFormModal = ({
 		setValue("ingredientType", val);
 	};
 
+	// * Message management
+	const [formSuccessMessage, setFormSuccessMessage] = useState<string | null>(null);
 	const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
+
+	const removeMessages = () => {
+		setFormSuccessMessage(null);
+		setFormErrorMessage(null);
+	};
 
 	//* Form submission
 	const submitForm = () => {
@@ -61,6 +67,7 @@ const RecipeIngredientFormModal = ({
 			const response = onIngredientAdd(getValues());
 
 			if (response == null) {
+				setFormSuccessMessage("Ingredient added");
 				reset();
 			} else {
 				setFormErrorMessage(response);
@@ -88,11 +95,6 @@ const RecipeIngredientFormModal = ({
 		}
 	};
 
-	//* Discard changes
-	const discardChanges = () => {
-		onIngredientEditDiscard();
-	};
-
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<FormProvider {...methods}>
@@ -114,7 +116,7 @@ const RecipeIngredientFormModal = ({
 						errorMessage={errors.name?.message}
 						isSubmitting={isSubmitting}
 						className="grow"
-						onFocus={() => setFormErrorMessage(null)}
+						onFocus={removeMessages}
 					/>
 					{/* Ingredient type field */}
 					<FormSelectionInput
@@ -128,12 +130,18 @@ const RecipeIngredientFormModal = ({
 					{/* Ingredient quantity field */}
 					<RecipeIngredientQuantityInput />
 
+					{/* Success message */}
+					{formSuccessMessage && (
+						<p className="self-center px-1 text-emerald-500 font-medium">{formSuccessMessage}</p>
+					)}
+
+					{/* Error message */}
 					{formErrorMessage && (
 						<p className="self-center px-1 text-red-600 font-medium">{formErrorMessage}</p>
 					)}
 
 					<div className="flex flex-col gap-2">
-						{/* Add ingredient */}
+						{/* Add or edit ingredient */}
 						<button
 							type="submit"
 							className="flex justify-center items-center gap-2 
@@ -155,24 +163,11 @@ const RecipeIngredientFormModal = ({
 						</button>
 
 						{/* Discard change button */}
-						{index != null && ingredient != null && (
-							<button
-								type="button"
-								className="flex justify-center items-center gap-2 bg-yellow-500 
-								p-1.5 rounded hover:bg-yellow-600"
-								onClick={discardChanges}
-							>
-								<MdRemoveCircle className="text-white text-xl" />
-								<p className="text-white font-medium">Discard Changes</p>
-							</button>
-						)}
-
-						{/* Cancel */}
 						<button
 							type="button"
-							className="flex justify-center items-center gap-2 bg-red-400 
-							p-1.5 rounded hover:bg-red-500"
-							onClick={cancelOrDelete}
+							className="flex justify-center items-center gap-2 bg-yellow-500 
+							p-1.5 rounded hover:bg-yellow-600"
+							onClick={onModalClose}
 						>
 							{index == null || ingredient == null ? (
 								<Fragment>
@@ -182,12 +177,26 @@ const RecipeIngredientFormModal = ({
 								</Fragment>
 							) : (
 								<Fragment>
-									{/* Delete icon and text */}
-									<MdDelete className="text-white text-xl" />
-									<p className="text-white font-medium">Delete</p>
+									{/* Discard change icon and text */}
+									<MdRemoveCircle className="text-white text-xl" />
+									<p className="text-white font-medium">Discard Changes</p>
 								</Fragment>
 							)}
 						</button>
+
+						{/* Delete */}
+						{index != null && ingredient != null && (
+							<button
+								type="button"
+								className="flex justify-center items-center gap-2 bg-red-400 
+								p-1.5 rounded hover:bg-red-500"
+								onClick={cancelOrDelete}
+							>
+								{/* Delete icon and text */}
+								<MdDelete className="text-white text-xl" />
+								<p className="text-white font-medium">Delete</p>
+							</button>
+						)}
 					</div>
 				</form>
 			</FormProvider>

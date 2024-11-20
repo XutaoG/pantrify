@@ -7,11 +7,11 @@ import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
 import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
-import { MdCancel, MdOutlineAddCircle } from "react-icons/md";
-import { useState } from "react";
+import { MdCancel, MdDelete, MdEdit, MdOutlineAddCircle, MdRemoveCircle } from "react-icons/md";
+import { Fragment, useState } from "react";
 import { addIngredient } from "@/api";
 
-const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) => {
+const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Form
 	const methods = useForm<TAddIngredientSchema>({
 		resolver: zodResolver(addIngredientSchema),
@@ -39,11 +39,11 @@ const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) =
 		}
 	};
 
-	//! Error management
+	//! Message management
 	const [formSuccessMessage, setFormSuccessMessage] = useState<string | null>(null);
 	const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
 
-	const removeErrors = () => {
+	const removeMessages = () => {
 		setFormSuccessMessage(null);
 		setFormErrorMessage(null);
 	};
@@ -84,6 +84,13 @@ const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) =
 		}
 	};
 
+	//! Cancel
+	const cancel = () => {
+		onModalClose();
+	};
+
+	//! Delete ingredient
+
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<form
@@ -106,7 +113,7 @@ const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) =
 						errorMessage={errors.name?.message}
 						isSubmitting={isSubmitting}
 						className="grow"
-						onFocus={removeErrors}
+						onFocus={removeMessages}
 					/>
 
 					{/* Ingredient type field */}
@@ -139,28 +146,64 @@ const IngredientFormModal = ({ mode, onModalClose }: IngredientFormModalProps) =
 					)}
 
 					<div className="flex flex-col gap-2">
-						{/* Add ingredient */}
+						{/* Add or editingredient */}
 						<button
 							type="submit"
 							className="flex justify-center items-center gap-2 
 							bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
 						>
-							<MdOutlineAddCircle className="text-white text-xl" />
-							<p className="text-white font-medium">
-								{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
-							</p>
+							{ingredient == null ? (
+								<Fragment>
+									{/* Add icon and text */}
+									<MdOutlineAddCircle className="text-white text-xl" />
+									<p className="text-white font-medium">
+										{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
+									</p>
+								</Fragment>
+							) : (
+								<Fragment>
+									{/* Edit icon and text */}
+									<MdEdit className="text-white text-xl" />
+									<p className="text-white font-medium">Save Changes</p>
+								</Fragment>
+							)}
 						</button>
 
-						{/* Cancel */}
+						{/* Discard change or cancel */}
 						<button
 							type="button"
-							className="flex justify-center items-center gap-2 bg-red-400 
-							p-1.5 rounded hover:bg-red-500"
-							onClick={onModalClose}
+							className="flex justify-center items-center gap-2 bg-yellow-500 
+							p-1.5 rounded hover:bg-yellow-600"
+							onClick={cancel}
 						>
-							<MdCancel className="text-white text-xl" />
-							<p className="text-white font-medium">Cancel</p>
+							{ingredient == null ? (
+								<Fragment>
+									{/* Cancel icon and text */}
+									<MdCancel className="text-white text-xl" />
+									<p className="text-white font-medium">Cancel</p>
+								</Fragment>
+							) : (
+								<Fragment>
+									{/* Discard change icon and text */}
+									<MdRemoveCircle className="text-white text-xl" />
+									<p className="text-white font-medium">Discard Changes</p>
+								</Fragment>
+							)}
 						</button>
+
+						{/* Delete */}
+						{ingredient != null && (
+							<button
+								type="button"
+								className="flex justify-center items-center gap-2 bg-red-400 
+								p-1.5 rounded hover:bg-red-500"
+								onClick={onModalClose}
+							>
+								{/* Delete icon and text */}
+								<MdDelete className="text-white text-xl" />
+								<p className="text-white font-medium">Delete</p>
+							</button>
+						)}
 					</div>
 				</div>
 			</form>

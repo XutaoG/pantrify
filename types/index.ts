@@ -213,7 +213,6 @@ export interface RecipeIngredientFormModalProps {
 	ingredient: TAddRecipeIngredientSchema | null;
 	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
 	onIngredientDelete: (index: number) => void;
-	onIngredientEditDiscard: () => void;
 }
 
 export interface FormQuantityInputProps {
@@ -252,6 +251,7 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 export interface IngredientFormModalProps {
 	mode: "ingredient" | "shopping";
 	onModalClose: () => void;
+	ingredient?: Ingredient;
 }
 
 // ! Form schemas

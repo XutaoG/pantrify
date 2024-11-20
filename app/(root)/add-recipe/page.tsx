@@ -75,10 +75,6 @@ const AddRecipePage = () => {
 	};
 
 	const closeModal = () => {
-		setIsIngredientModalOpen(false);
-	};
-
-	const resetModal = () => {
 		setIngredientEditIndex(null);
 		setIngredientEditIndex(null);
 		setIsIngredientModalOpen(false);
@@ -123,7 +119,7 @@ const AddRecipePage = () => {
 		});
 
 		setIngredients(updatedIngredients);
-		resetModal();
+		closeModal();
 		return null;
 	};
 
@@ -134,11 +130,7 @@ const AddRecipePage = () => {
 		});
 
 		setIngredients(updatedIngredients);
-		resetModal();
-	};
-
-	const discardIngredientChange = () => {
-		resetModal();
+		closeModal();
 	};
 
 	//* Render ingredient cards
@@ -227,11 +219,16 @@ const AddRecipePage = () => {
 	});
 
 	const addRecipe = () => {
-		const name = getValues("name");
-		const description = getValues("description");
+		// * Sanitize data
+		const name = getValues("name").trim();
+		const description = getValues("description").trim();
 		const duration = Number(getValues("durationHour")) * 60 + Number(getValues("durationMinute"));
 		const difficulty = getValues("difficulty") == "Easy" ? 1 : getValues("difficulty") == "Medium" ? 2 : 3;
 		const numServings = Number(getValues("numServings"));
+
+		for (let i = 0; i < instructions.length; i++) {
+			instructions[i] = instructions[i].trim();
+		}
 
 		const addRecipeIngredientDtos = ingredients.map((ingredient) => {
 			const ingredientDto: AddRecipeIngredientDto = {
@@ -335,7 +332,6 @@ const AddRecipePage = () => {
 								ingredient={ingredientEditObj}
 								onIngredientEdit={editIngredient}
 								onIngredientDelete={deleteIngredient}
-								onIngredientEditDiscard={discardIngredientChange}
 							/>
 						)}
 
