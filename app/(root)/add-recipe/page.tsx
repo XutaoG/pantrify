@@ -104,8 +104,8 @@ const AddRecipePage = () => {
 	// Success: returns null
 	// Fail: error message
 	const editIngredient = (index: number, newIngredient: TAddRecipeIngredientSchema) => {
-		for (const ingredient of ingredients) {
-			if (ingredient.name == newIngredient.name) {
+		for (let i = 0; i < ingredients.length; i++) {
+			if (i != index && ingredients[i].name == newIngredient.name) {
 				// Ingredient duplicated
 
 				return "Ingredient already added";
