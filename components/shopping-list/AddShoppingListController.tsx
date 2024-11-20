@@ -24,7 +24,7 @@ const AddShoppingListcontroller = () => {
 				onClick={openModal}
 			>
 				<div className="flex gap-2 items-center">
-					<CirclePlus size={20} />
+					<CirclePlus size={20} color="white" />
 					<p className="text-white font-semibold">Add to Shopping List</p>
 				</div>
 			</button>

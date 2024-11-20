@@ -90,7 +90,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 							isSubmitting && "cursor-not-allowed"
 						}`}
 						ref={fractionContainerRef}
-						onClick={onToggleUnit}
+						onClick={onToggleFraction}
 						disabled={isSubmitting}
 					>
 						<input

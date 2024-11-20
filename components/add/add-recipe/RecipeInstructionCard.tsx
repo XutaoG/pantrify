@@ -16,8 +16,8 @@ const RecipeInstructionCard = ({
 				{/* Move up */}
 				<button
 					type="button"
-					className={`grow p-2 flex justify-center items-center hover:bg-neutral-300 ${
-						isSubmitting && "cursor-not-allowed"
+					className={`grow p-2 flex justify-center items-center  ${
+						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-300"
 					}`}
 					onClick={() => onInstructionMove(index, -1)}
 					disabled={isSubmitting}
@@ -32,8 +32,8 @@ const RecipeInstructionCard = ({
 				{/* Move down */}
 				<button
 					type="button"
-					className={`grow p-2 flex justify-center items-center hover:bg-neutral-300 ${
-						isSubmitting && "cursor-not-allowed"
+					className={`grow p-2 flex justify-center items-center  ${
+						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-300"
 					}`}
 					onClick={() => onInstructionMove(index, 1)}
 					disabled={isSubmitting}

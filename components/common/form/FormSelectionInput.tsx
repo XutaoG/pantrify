@@ -32,6 +32,7 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 					}`}
 					onClick={() => {
 						onSelectionChange(selection);
+						onToggle();
 					}}
 				>
 					{selection}
