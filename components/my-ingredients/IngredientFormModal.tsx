@@ -9,7 +9,7 @@ import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
 import { MdCancel, MdDelete, MdEdit, MdOutlineAddCircle, MdRemoveCircle } from "react-icons/md";
 import { Fragment, useEffect, useState } from "react";
-import { addIngredient, deleteIngredient } from "@/api";
+import { addIngredient, deleteIngredient, updateIngredient } from "@/api";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Form
@@ -57,7 +57,52 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 
 	//! Add ingredient
 
+	const submit = async () => {
+		if (ingredient == null) {
+			//* Add ingredient
+			await submitAddIngredient();
+		} else {
+			//* Update ingredient
+			await submitEditIngredient();
+		}
+	};
+
 	const submitAddIngredient = async () => {
+		const response = await addIngredient(parseIngredient());
+
+		if (response.errorMessage == null) {
+			// No error
+
+			setFormErrorMessage(null);
+			setFormSuccessMessage("Ingredient added");
+			reset();
+		} else {
+			setFormSuccessMessage(null);
+			setFormErrorMessage(response.errorMessage);
+		}
+	};
+
+	const submitEditIngredient = async () => {
+		if (ingredient == null) {
+			onModalClose();
+			return;
+		}
+
+		const response = await updateIngredient(ingredient.id, parseIngredient());
+
+		if (response.errorMessage == null) {
+			// No error
+
+			onModalClose();
+		} else {
+			setFormSuccessMessage(null);
+			setFormErrorMessage(response.errorMessage);
+		}
+	};
+
+	const parseIngredient = () => {
+		// Sanitize inputs
+
 		const name = getValues("name").trim();
 		const ingredientType = getValues("ingredientType");
 		const isAvailable = mode == "ingredient";
@@ -73,19 +118,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 			isInCart,
 			dateExpired,
 		};
-
-		const response = await addIngredient(newIngredient);
-
-		if (response.errorMessage == null) {
-			// No error
-
-			setFormErrorMessage(null);
-			setFormSuccessMessage("Ingredient added");
-			reset();
-		} else {
-			setFormSuccessMessage(null);
-			setFormErrorMessage(response.errorMessage);
-		}
+		return newIngredient;
 	};
 
 	//! Cancel
@@ -104,7 +137,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<form
-				onSubmit={handleSubmit(submitAddIngredient)}
+				onSubmit={handleSubmit(submit)}
 				className="w-96 flex flex-col gap-4 bg-white p-4 
 				border border-neutral-200 rounded-md shadow-md"
 				noValidate
@@ -156,7 +189,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 					)}
 
 					<div className="flex flex-col gap-2">
-						{/* Add or editingredient */}
+						{/* Add or edit ingredient */}
 						<button
 							type="submit"
 							className="flex justify-center items-center gap-2 

@@ -12,7 +12,6 @@ import {
 import {
 	AddIngredientDto,
 	AddIngredientResponse,
-	DeleteIngredientResponse,
 	GetAllIngredientsRequestConfig,
 	Ingredient,
 	IngredientList,
@@ -21,6 +20,8 @@ import {
 	SignUpResponse,
 	TLoginSchema,
 	TSignUpSchema,
+	UpdateIngredientDto,
+	UpdateIngredientResponse,
 	User,
 } from "@/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -222,7 +223,7 @@ export const getAllIngredients = async (config?: GetAllIngredientsRequestConfig)
 };
 
 export const addIngredient = async (newIngredient: AddIngredientDto) => {
-	const addIngredientResponse: AddIngredientResponse = {
+	const response: AddIngredientResponse = {
 		errorMessage: null,
 	};
 
@@ -243,18 +244,18 @@ export const addIngredient = async (newIngredient: AddIngredientDto) => {
 			// Response received, but error status code
 
 			if (error.response.status == 400) {
-				addIngredientResponse.errorMessage = "Invalid ingredient";
+				response.errorMessage = "Invalid ingredient";
 			} else if (error.response.status == 409) {
-				addIngredientResponse.errorMessage = "Ingredient already exists";
+				response.errorMessage = "Ingredient already exists";
 			}
 		} else {
 			// No response received
 
-			addIngredientResponse.errorMessage = "An unexpected error occurred";
+			response.errorMessage = "An unexpected error occurred";
 		}
 	}
 
-	return addIngredientResponse;
+	return response;
 };
 
 export const getIngredient = async (id: number) => {
@@ -289,4 +290,40 @@ export const deleteIngredient = async (id: number) => {
 	} catch {
 		return;
 	}
+};
+
+export const updateIngredient = async (id: number, updatedIngredient: UpdateIngredientDto) => {
+	const response: UpdateIngredientResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.put(`${ingredientsPath}/${id}`, updatedIngredient, {
+			headers: {
+				Cookie: cookieStore.toString(),
+			},
+		});
+
+		revalidatePath("/my-ingredients");
+	} catch (e) {
+		const error = e as AxiosError;
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 400) {
+				response.errorMessage = "Invalid ingredient";
+			} else if (error.response.status == 409) {
+				response.errorMessage = "Ingredient already exists";
+			}
+		} else {
+			// No response received
+
+			response.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return response;
 };

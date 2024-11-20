@@ -112,11 +112,19 @@ export interface AddIngredientDto {
 	dateExpired?: Date;
 }
 
+export interface UpdateIngredientDto {
+	name: string;
+	ingredientType: string;
+	isAvailable: boolean;
+	isInCart: boolean;
+	dateExpired?: Date;
+}
+
 export interface AddIngredientResponse {
 	errorMessage: string | null;
 }
 
-export interface DeleteIngredientResponse {
+export interface UpdateIngredientResponse {
 	errorMessage: string | null;
 }
 
