@@ -9,6 +9,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { KeyRound, Mail } from "lucide-react";
+import FormPasswordInput from "@/components/common/form/FormPasswordInput";
 
 const Login = () => {
 	const {
@@ -58,29 +60,32 @@ const Login = () => {
 					{/* Email field */}
 					<FormInput
 						{...register("email")}
-						title="Email"
+						header="Email"
+						headerIcon={<Mail size={16} />}
 						placeholder="Enter your email"
 						errorMessage={errors.email?.message}
-						isSubmitting={isSubmitting}
 						onFocus={removeLoginError}
 					/>
 
 					{/* Password field */}
 					<div className="flex flex-col gap-2">
-						<FormInput
+						<FormPasswordInput
 							{...register("password")}
-							title="Password"
+							header="Password"
+							headerIcon={<KeyRound size={16} />}
 							placeholder="Enter your password"
-							password
 							errorMessage={errors.password?.message}
-							isSubmitting={isSubmitting}
 							onFocus={removeLoginError}
 						/>
 
 						<div className="flex justify-between items-center">
 							{/* Remember me */}
 							<div className="flex items-center gap-1">
-								<input {...register("rememberMe")} type="checkbox" disabled={isSubmitting} />
+								<input
+									{...register("rememberMe")}
+									type="checkbox"
+									disabled={isSubmitting}
+								/>
 								<p className="text-sm font-medium">Remember Me</p>
 							</div>
 
@@ -96,7 +101,9 @@ const Login = () => {
 				</div>
 
 				{/* Login error */}
-				{loginError && <p className="self-center font-medium px-1 text-red-600">{loginError}</p>}
+				{loginError && (
+					<p className="self-center font-medium px-1 text-red-600">{loginError}</p>
+				)}
 
 				{/* Login button */}
 				<FormButton title="Login" isSubmitting={isSubmitting} />

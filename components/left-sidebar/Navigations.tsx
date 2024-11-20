@@ -1,10 +1,8 @@
 "use client";
 
-import { addRecipeRoute, navRoutes } from "@/constants";
-import Image from "next/image";
+import { addRecipeRoute, navRoutes } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MdAdd } from "react-icons/md";
 
 const Navigations = () => {
 	const pathname = usePathname();
@@ -20,13 +18,7 @@ const Navigations = () => {
 				className={`flex justify-left gap-4 p-4 rounded font-semibold
 					${isActive ? "bg-sky-600 text-white" : "hover:bg-neutral-200"}`}
 			>
-				<Image
-					src={route.icon}
-					alt={route.label}
-					width={24}
-					height={24}
-					className={`${isActive ? "brightness-200 invert-0" : "brightness-50"}`}
-				/>
+				{route.icon}
 				<p className="hidden 2xl:block">{route.label}</p>
 			</Link>
 		);
@@ -44,7 +36,7 @@ const Navigations = () => {
 					className="flex justify-center items-center gap-4 size-12 rounded-full font-semibold 
 					bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
 				>
-					<MdAdd className="text-white text-4xl" />
+					{addRecipeRoute.icon}
 				</Link>
 			</div>
 		</nav>

@@ -1,8 +1,8 @@
 "use client";
 
 import { CollapsiblePanelProps } from "@/types";
+import { CircleChevronUp } from "lucide-react";
 import { useState } from "react";
-import { MdOutlineExpandCircleDown } from "react-icons/md";
 
 const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps) => {
 	const [isExpanded, setIsExpanded] = useState(true);
@@ -13,14 +13,12 @@ const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps
 			<div className="flex items-center gap-4">
 				<p className={`font-semibold ${titleStyle}`}>{title}</p>
 				<div className="bg-neutral-200 h-0.5 grow" />
-				<MdOutlineExpandCircleDown
-					className={`text-neutral-200 text-xl hover:text-neutral-400 cursor-pointer ${
-						!isExpanded && "rotate-90"
-					}`}
-					onClick={() => {
-						setIsExpanded((val) => !val);
-					}}
-				/>
+				<button
+					className={`cursor-pointer ${isExpanded && "rotate-180"} text-neutral-600`}
+					onClick={() => setIsExpanded((val) => !val)}
+				>
+					<CircleChevronUp size={18} />
+				</button>
 			</div>
 
 			{/* content */}

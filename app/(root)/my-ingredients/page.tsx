@@ -10,7 +10,9 @@ const MyIngredients = () => {
 			{/* Page title */}
 			<div className="flex flex-col gap-2">
 				<h2 className="font-semibold text-sky-600">My Ingredients</h2>
-				<p className="text-neutral-600 font-medium">Organize, Manage, and Create with What You Have.</p>
+				<p className="text-neutral-600 font-medium">
+					Organize, Manage, and Create with What You Have.
+				</p>
 			</div>
 
 			<AddIngredientController />

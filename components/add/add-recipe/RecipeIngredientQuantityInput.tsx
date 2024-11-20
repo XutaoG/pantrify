@@ -3,12 +3,13 @@
 import { ingredientQuantityFractions, ingredientQuantityUnits } from "@/constants";
 import { useDropdown } from "@/hooks";
 import { FormQuantityInputProps, TAddRecipeIngredientSchema } from "@/types";
+import { ChevronLeft, CookingPot } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import { MdArrowLeft } from "react-icons/md";
 
 const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) => {
 	//! Dropdowns
-	const [fractionContainerRef, isExpandedFraction, onToggleFraction] = useDropdown<HTMLInputElement>();
+	const [fractionContainerRef, isExpandedFraction, onToggleFraction] =
+		useDropdown<HTMLInputElement>();
 	const [unitContainerRef, isExpandedUnit, onToggleUnit] = useDropdown<HTMLInputElement>();
 
 	const {
@@ -41,7 +42,9 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 			<div
 				key={selection}
 				className={`p-1 hover:bg-neutral-300 rounded cursor-pointer select-none ${
-					selection === getValues("quantityUnit") ? "text-black font-bold" : "text-neutral-600 font-medium"
+					selection === getValues("quantityUnit")
+						? "text-black font-bold"
+						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
 					setValue("quantityUnit", selection, { shouldValidate: true });
@@ -56,11 +59,14 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 		<div className={`flex flex-col gap-1 min-w-0 relative ${className}`}>
 			{/* Input */}
 			<div
-				className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
+				className="h-24 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
 					rounded px-4 pt-2 pb-2"
 			>
 				{/* Title */}
-				<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
+				<div className="flex items-center gap-1.5">
+					<CookingPot size={16} />
+					<p className="text-sm font-semibold text-neutral-600 select-none">Quantity</p>
+				</div>
 
 				<div className="grow flex gap-2 items-center">
 					{/* Whole field */}
@@ -68,23 +74,25 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 						<input
 							{...register("quantityWhole")}
 							disabled={isSubmitting}
-							className="w-16 py-1 bg-transparent outline-none min-w-0"
+							className="w-16 py-1.5 bg-transparent outline-none min-w-0"
 							placeholder="1"
 						/>
 					</div>
 					{/* fraction field */}
 					<div
-						className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
+						className="grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
 						ref={fractionContainerRef}
 					>
 						<input
 							{...register("quantityFraction")}
-							className="w-12 py-1 bg-transparent outline-none min-w-0 cursor-pointer"
+							className="w-12 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer"
 							onClick={onToggleFraction}
 							readOnly
 							placeholder="1/2"
 						/>
-						<MdArrowLeft className="text-lg cursor-pointer" onClick={onToggleFraction} />
+						<button type="button" onClick={onToggleFraction}>
+							<ChevronLeft size={16} />
+						</button>
 						{isExpandedFraction && (
 							<div
 								className="bg-neutral-100 border border-neutral-200 
@@ -96,17 +104,20 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 					</div>
 					{/* Unit field */}
 					<div
-						className="flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
+						className="grow flex gap-2 px-1 items-center bg-white border border-neutral-200 rounded relative"
 						ref={unitContainerRef}
 					>
 						<input
 							{...register("quantityUnit")}
-							className="w-20 py-1 bg-transparent outline-none min-w-0 cursor-pointer"
+							className="w-20 py-1.5 bg-transparent outline-none min-w-0 cursor-pointer"
 							onClick={onToggleUnit}
 							placeholder="Unit"
 							readOnly
 						/>
-						<MdArrowLeft className="text-lg cursor-pointer" onClick={onToggleUnit} />
+
+						<button type="button" onClick={onToggleUnit}>
+							<ChevronLeft size={16} />
+						</button>
 						{isExpandedUnit && (
 							<div
 								className="h-64 bg-neutral-100 border border-neutral-200 

@@ -188,16 +188,21 @@ export interface ToolTipProps {
 }
 
 export interface FormInputProps extends ComponentPropsWithRef<"input"> {
-	title: string;
-	password?: boolean;
+	header: string;
+	headerIcon?: ReactNode;
 	errorMessage?: string;
-	isSubmitting: boolean;
+}
+
+export interface FormPasswordInputProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	errorMessage?: string;
 }
 
 export interface FormTextAreaProps extends ComponentPropsWithRef<"textarea"> {
-	title: string;
+	header: string;
+	headerIcon?: ReactNode;
 	errorMessage?: string;
-	isSubmitting: boolean;
 }
 
 export interface RecipeDurationInputProps {
@@ -205,17 +210,17 @@ export interface RecipeDurationInputProps {
 }
 
 export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
-	title: string;
-	isSubmitting: boolean;
+	header: string;
+	headerIcon?: ReactNode;
 	onValueIncrement: (val: number) => void;
 	incrementAmount: number;
 }
 
 export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> {
-	title: string;
+	header: string;
+	headerIcon?: ReactNode;
 	currentSelection: string;
 	selections: string[];
-	isSubmitting: boolean;
 	onSelectionChange: (val: string) => void;
 }
 
@@ -225,7 +230,6 @@ export interface RecipeIngredientFormModalProps {
 	index: number | null;
 	ingredient: TAddRecipeIngredientSchema | null;
 	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
-	onIngredientDelete: (index: number) => void;
 }
 
 export interface FormQuantityInputProps {
@@ -250,15 +254,15 @@ export interface RecipeIngredientCardProps {
 }
 
 export interface FormDateInputProps extends ComponentPropsWithRef<"input"> {
-	title: string;
+	header: string;
+	headerIcon?: ReactNode;
 	password?: boolean;
 	errorMessage?: string;
-	isSubmitting: boolean;
 }
 
 export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	title: string;
-	isSubmitting: boolean;
+	icon?: ReactNode;
 }
 
 export interface IngredientFormModalProps {
@@ -272,7 +276,10 @@ export interface IngredientFormModalProps {
 // Sign up
 export const signUpSchema = z
 	.object({
-		email: z.string().min(1, "Email cannot be empty").email({ message: "Invalid email address" }),
+		email: z
+			.string()
+			.min(1, "Email cannot be empty")
+			.email({ message: "Invalid email address" }),
 		firstName: z.string().min(1, "First name cannot be empty"),
 		lastName: z.string().min(1, "Last name cannot be empty"),
 		password: z.string().min(8, "Password must be at least 8 characters"),

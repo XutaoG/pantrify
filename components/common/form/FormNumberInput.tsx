@@ -1,11 +1,14 @@
 "use client";
 
 import { FormNumberProps } from "@/types";
+import { Minus, Plus } from "lucide-react";
 import { forwardRef, useEffect, useRef } from "react";
-import { MdAdd, MdRemove } from "react-icons/md";
 
 const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
-	({ title, placeholder, isSubmitting, onValueIncrement, incrementAmount, className, ...rest }, ref) => {
+	(
+		{ header, headerIcon, onValueIncrement, incrementAmount, className, disabled, ...rest },
+		ref
+	) => {
 		// Store interval
 		const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -41,16 +44,19 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 					rounded px-4 py-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600 select-none">{title}</p>
+					<div className="flex items-center gap-1.5">
+						{headerIcon}
+						<p className="text-sm font-semibold text-neutral-600 select-none">
+							{header}
+						</p>
+					</div>
 
 					<div className="grow flex gap-2 items-center">
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
-							disabled={isSubmitting}
 							className="grow py-1 bg-transparent outline-none min-w-0"
-							placeholder={placeholder}
 							readOnly
 						/>
 						<div className="flex gap-2 items-center">
@@ -60,9 +66,9 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 								onMouseDown={() => keepValueIncrement(-incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
-								disabled={isSubmitting}
+								disabled={disabled}
 							>
-								<MdRemove className="text-lg" />
+								<Minus size={16} />
 							</button>
 							<p className="text-neutral-600 select-none">|</p>
 							<button
@@ -71,9 +77,9 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 								onMouseDown={() => keepValueIncrement(incrementAmount)}
 								onMouseUp={stopValueIncrement}
 								onMouseLeave={stopValueIncrement}
-								disabled={isSubmitting}
+								disabled={disabled}
 							>
-								<MdAdd className="text-lg cursor-pointer" />
+								<Plus size={16} />
 							</button>
 						</div>
 					</div>

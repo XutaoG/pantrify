@@ -1,12 +1,7 @@
 "use client";
 
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useState } from "react";
-import {
-	MdChevronLeft,
-	MdChevronRight,
-	MdKeyboardDoubleArrowLeft,
-	MdKeyboardDoubleArrowRight,
-} from "react-icons/md";
 
 const Pagination = () => {
 	const mockPageNumbers = ["8", "9", "10"];
@@ -44,27 +39,25 @@ const Pagination = () => {
 	return (
 		<div className="flex gap-6 items-center">
 			{/* Left arrow */}
-			<MdKeyboardDoubleArrowLeft
-				className="text-xl text-neutral-600 cursor-pointer"
-				onClick={() => setCurrentPageNumberIndex(0)}
-			/>
-			<MdChevronLeft
-				className="text-xl text-neutral-600 cursor-pointer"
-				onClick={moveToPrevPage}
-			/>
+			<button onClick={() => setCurrentPageNumberIndex(0)}>
+				<ChevronsLeft size={18} />
+			</button>
+
+			<button onClick={moveToPrevPage}>
+				<ChevronLeft size={18} />
+			</button>
+
 			{/* Page numbers */}
 			{pageNumbers}
+
 			{/* Right arrow */}
-			<MdChevronRight
-				className="text-xl text-neutral-600 cursor-pointer"
-				onClick={moveToNextPage}
-			/>
-			<MdKeyboardDoubleArrowRight
-				className="text-xl text-neutral-600 cursor-pointer"
-				onClick={() =>
-					setCurrentPageNumberIndex(mockPageNumbers.length - 1)
-				}
-			/>
+			<button onClick={moveToNextPage}>
+				<ChevronsRight size={18} />
+			</button>
+
+			<button onClick={() => setCurrentPageNumberIndex(mockPageNumbers.length - 1)}>
+				<ChevronRight size={18} />
+			</button>
 		</div>
 	);
 };

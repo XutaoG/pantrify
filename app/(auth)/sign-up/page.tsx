@@ -9,6 +9,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import FormPasswordInput from "@/components/common/form/FormPasswordInput";
+import { CircleUserRound, KeyRound, Mail } from "lucide-react";
 
 const SignUp = () => {
 	const {
@@ -58,10 +60,10 @@ const SignUp = () => {
 					{/* Email field */}
 					<FormInput
 						{...register("email")}
-						title="Email"
+						header="Email"
+						headerIcon={<Mail size={16} />}
 						placeholder="Enter your email"
 						errorMessage={errors.email?.message}
-						isSubmitting={isSubmitting}
 						onFocus={removeSignUpError}
 					/>
 
@@ -69,54 +71,54 @@ const SignUp = () => {
 						{/* First name fields */}
 						<FormInput
 							{...register("firstName")}
-							title="First Name"
+							header="First Name"
+							headerIcon={<CircleUserRound size={16} />}
 							placeholder="Enter your first name"
 							errorMessage={errors.firstName?.message}
-							isSubmitting={isSubmitting}
 							onFocus={removeSignUpError}
 						/>
 
 						{/* Last name field */}
 						<FormInput
 							{...register("lastName")}
-							title="Last Name"
+							header="Last Name"
+							headerIcon={<CircleUserRound size={16} />}
 							placeholder="Enter your last name"
 							errorMessage={errors.lastName?.message}
-							isSubmitting={isSubmitting}
 							onFocus={removeSignUpError}
 						/>
 					</div>
 
 					{/* Password field */}
 					<div className="flex flex-col gap-2">
-						<FormInput
+						<FormPasswordInput
 							{...register("password")}
-							title="Password"
+							header="Password"
+							headerIcon={<KeyRound size={16} />}
 							placeholder="Enter your password"
-							password
 							errorMessage={errors.password?.message}
-							isSubmitting={isSubmitting}
 							onFocus={removeSignUpError}
 						/>
 					</div>
 
 					{/* Confirm password field */}
 					<div className="flex flex-col gap-2">
-						<FormInput
+						<FormPasswordInput
 							{...register("confirmPassword")}
-							title="Confirm Password"
+							header="Confirm Password"
+							headerIcon={<KeyRound size={16} />}
 							placeholder="Confirm your password"
-							password
 							disabled={isSubmitting}
 							errorMessage={errors.confirmPassword?.message}
-							isSubmitting={isSubmitting}
 							onFocus={removeSignUpError}
 						/>
 					</div>
 				</div>
 
 				{/* Login error */}
-				{signUpError && <p className="self-center font-medium px-1 text-red-600">{signUpError}</p>}
+				{signUpError && (
+					<p className="self-center font-medium px-1 text-red-600">{signUpError}</p>
+				)}
 
 				{/* Login button */}
 				<FormButton title="Sign Up" isSubmitting={isSubmitting} />

@@ -1,9 +1,9 @@
 "use client";
 
 import { RecipeDurationInputProps, TAddRecipeSchema } from "@/types";
+import { ChevronDown, ChevronUp, Clock } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
-import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 	const {
@@ -54,7 +54,10 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 			return;
 		}
 
-		setValue("durationHour", (hour + val).toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+		setValue(
+			"durationHour",
+			(hour + val).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+		);
 	};
 
 	//* Change minutes
@@ -66,7 +69,10 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 			return;
 		}
 
-		setValue("durationMinute", (minute + val).toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+		setValue(
+			"durationMinute",
+			(minute + val).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+		);
 	};
 
 	return (
@@ -75,7 +81,10 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 			rounded px-4 py-2 ${className}`}
 		>
 			{/* Title */}
-			<p className="text-sm font-semibold text-neutral-600 select-none">Duration</p>
+			<div className="flex items-center gap-1.5">
+				<Clock size={14} />
+				<p className="text-sm font-semibold text-neutral-600 select-none">Duration</p>
+			</div>
 
 			<div className="grow flex items-center gap-4">
 				<div className="flex gap-2 items-center">
@@ -91,9 +100,10 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						/>
 
 						{/* Control */}
-						<div className="flex flex-col justify-evenly">
+						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className="border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300"
+								className="grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300 
+								flex justify-center items-center"
 								type="button"
 								onClick={() => incrementHour(1)}
 								onMouseDown={() => keepValueIncrement("hour", 1)}
@@ -101,10 +111,11 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								onMouseLeave={stopValueIncrement}
 								disabled={isSubmitting}
 							>
-								<MdArrowDropUp className="" />
+								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className="border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300"
+								className="grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								flex justify-center items-center"
 								type="button"
 								onClick={() => incrementHour(-1)}
 								onMouseDown={() => keepValueIncrement("hour", -1)}
@@ -112,7 +123,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								onMouseLeave={stopValueIncrement}
 								disabled={isSubmitting}
 							>
-								<MdArrowDropDown />
+								<ChevronDown size={16} strokeWidth={1} />
 							</button>
 						</div>
 					</div>
@@ -131,9 +142,10 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						/>
 
 						{/* Control */}
-						<div className="flex flex-col justify-evenly">
+						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className="border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300"
+								className="grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300
+								flex justify-center items-center"
 								type="button"
 								onClick={() => incrementMinute(5)}
 								onMouseDown={() => keepValueIncrement("minute", 5)}
@@ -141,10 +153,11 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								onMouseLeave={stopValueIncrement}
 								disabled={isSubmitting}
 							>
-								<MdArrowDropUp />
+								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className="border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300"
+								className="grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								flex justify-center items-center"
 								type="button"
 								onClick={() => incrementMinute(-5)}
 								onMouseDown={() => keepValueIncrement("minute", -5)}
@@ -152,7 +165,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								onMouseLeave={stopValueIncrement}
 								disabled={isSubmitting}
 							>
-								<MdArrowDropDown />
+								<ChevronDown size={16} strokeWidth={1} />
 							</button>
 						</div>
 					</div>

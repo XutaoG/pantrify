@@ -2,7 +2,7 @@
 
 import { SearchBarProps } from "@/types";
 import { useState } from "react";
-import { MdSearch } from "react-icons/md";
+import { Search } from "lucide-react";
 
 const SearchBar = ({ placeholderText }: SearchBarProps) => {
 	const [searchKeyword, setSearchKeyword] = useState("");
@@ -21,7 +21,7 @@ const SearchBar = ({ placeholderText }: SearchBarProps) => {
 				placeholder={placeholderText}
 			/>
 			<button type="submit">
-				<MdSearch className="text-2xl" />
+				<Search size={20} />
 			</button>
 		</form>
 	);

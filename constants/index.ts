@@ -12,34 +12,6 @@ export const refreshApiPath = "/auth/refresh";
 //! Ingredient
 export const ingredientsPath = "/ingredient";
 
-export const navRoutes = [
-	{
-		icon: "/icons/dining.svg",
-		route: "/",
-		label: "My Recipes",
-	},
-	{
-		icon: "/icons/grocery.svg",
-		route: "/my-ingredients",
-		label: "My Ingredients",
-	},
-	{
-		icon: "/icons/skillet.svg",
-		route: "/available-recipes",
-		label: "Available Recipes",
-	},
-	{
-		icon: "/icons/store.svg",
-		route: "/shopping-list",
-		label: "Shopping List",
-	},
-];
-
-export const addRecipeRoute = {
-	route: "/add-recipe",
-	label: "Add Recipe",
-};
-
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 
@@ -320,7 +292,8 @@ export const mockInstructions: RecipeInstruction[] = [
 	},
 	{
 		id: 3,
-		instruction: "On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
+		instruction:
+			"On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
 		step: 3,
 	},
 	{

@@ -1,6 +1,6 @@
 "use client";
 
-import { MdOutlineAddCircle } from "react-icons/md";
+import { CirclePlus } from "lucide-react";
 import IngredientFormModal from "./IngredientFormModal";
 import { Fragment, useState } from "react";
 
@@ -24,7 +24,7 @@ const AddIngredientController = () => {
 				onClick={openModal}
 			>
 				<div className="flex gap-2 items-center">
-					<MdOutlineAddCircle className="text-white text-2xl" />
+					<CirclePlus size={20} color="white" />
 					<p className="text-white font-semibold">Add Ingredient</p>
 				</div>
 			</button>

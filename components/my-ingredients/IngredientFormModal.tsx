@@ -12,9 +12,9 @@ import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
 import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
-import { MdCancel, MdDelete, MdEdit, MdOutlineAddCircle, MdRemoveCircle } from "react-icons/md";
 import { Fragment, useEffect, useState } from "react";
-import { addIngredient, deleteIngredient, updateIngredient } from "@/api";
+import { addIngredient, updateIngredient } from "@/api";
+import { CalendarX2, CirclePlus, CircleX, Egg, Ham, Pencil } from "lucide-react";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Form
@@ -133,14 +133,6 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 		onModalClose();
 	};
 
-	//! Delete ingredient
-	const submitDeleteIngredient = async () => {
-		if (ingredient != null) {
-			await deleteIngredient(ingredient.id);
-			onModalClose();
-		}
-	};
-
 	return (
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<form
@@ -158,32 +150,35 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 					{/* Name field */}
 					<FormInput
 						{...register("name")}
-						title="Ingredient Name"
+						header="Ingredient Name"
+						headerIcon={<Ham size={16} />}
 						placeholder="Enter the name of the ingredient"
 						errorMessage={errors.name?.message}
-						isSubmitting={isSubmitting}
 						className="grow"
 						onFocus={removeMessages}
+						disabled={isSubmitting}
 					/>
 
 					{/* Ingredient type field */}
 					<FormSelectionInput
 						{...register("ingredientType")}
-						title="Ingredient Type"
-						isSubmitting={isSubmitting}
+						header="Ingredient Type"
+						headerIcon={<Egg size={16} />}
 						currentSelection={getValues("ingredientType")}
 						selections={ingredientTypes}
 						onSelectionChange={onIngredientTypeChange}
+						disabled={isSubmitting}
 					/>
 
 					{/* Expiration date field */}
 					{mode == "ingredient" && (
 						<FormDateInput
 							{...register("dateExpired")}
+							header="Expiration Date (Optional)"
+							headerIcon={<CalendarX2 size={16} />}
 							className="grow"
-							title="Expiration Date (Optional)"
-							isSubmitting={isSubmitting}
 							errorMessage={errors.dateExpired?.message}
+							disabled={isSubmitting}
 						/>
 					)}
 
@@ -201,7 +196,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 						</p>
 					)}
 
-					<div className="flex flex-col gap-2">
+					<div className="grid grid-cols-2 gap-3">
 						{/* Add or edit ingredient */}
 						<button
 							type="submit"
@@ -211,57 +206,28 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 							{ingredient == null ? (
 								<Fragment>
 									{/* Add icon and text */}
-									<MdOutlineAddCircle className="text-white text-xl" />
-									<p className="text-white font-medium">
-										{mode === "ingredient"
-											? "Add New Ingredient"
-											: "Add to Shopping List"}
-									</p>
+									<CirclePlus size={20} color="white" />
+									<p className="text-white font-medium">Add</p>
 								</Fragment>
 							) : (
 								<Fragment>
 									{/* Edit icon and text */}
-									<MdEdit className="text-white text-xl" />
-									<p className="text-white font-medium">Save Changes</p>
+									<Pencil size={18} color="white" />
+									<p className="text-white font-medium">Save</p>
 								</Fragment>
 							)}
 						</button>
 
-						{/* Discard change or cancel */}
+						{/* Cancel */}
 						<button
 							type="button"
 							className="flex justify-center items-center gap-2 bg-yellow-500 
 							p-1.5 rounded hover:bg-yellow-600"
 							onClick={cancel}
 						>
-							{ingredient == null ? (
-								<Fragment>
-									{/* Cancel icon and text */}
-									<MdCancel className="text-white text-xl" />
-									<p className="text-white font-medium">Cancel</p>
-								</Fragment>
-							) : (
-								<Fragment>
-									{/* Discard change icon and text */}
-									<MdRemoveCircle className="text-white text-xl" />
-									<p className="text-white font-medium">Discard Changes</p>
-								</Fragment>
-							)}
+							<CircleX size={20} color="white" />
+							<p className="text-white font-medium">Cancel</p>
 						</button>
-
-						{/* Delete */}
-						{ingredient != null && (
-							<button
-								type="button"
-								className="flex justify-center items-center gap-2 bg-red-400 
-								p-1.5 rounded hover:bg-red-500"
-								onClick={submitDeleteIngredient}
-							>
-								{/* Delete icon and text */}
-								<MdDelete className="text-white text-xl" />
-								<p className="text-white font-medium">Delete</p>
-							</button>
-						)}
 					</div>
 				</div>
 			</form>

@@ -2,7 +2,7 @@ import { FormDateInputProps } from "@/types";
 import { forwardRef } from "react";
 
 const FormDateInput = forwardRef<HTMLInputElement, FormDateInputProps>(
-	({ title, errorMessage, isSubmitting, className, ...rest }, ref) => {
+	({ header, headerIcon, errorMessage, className, ...rest }, ref) => {
 		return (
 			<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
 				{/* Input */}
@@ -11,7 +11,12 @@ const FormDateInput = forwardRef<HTMLInputElement, FormDateInputProps>(
 					rounded px-4 py-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600 select-none">{title}</p>
+					<div className="flex items-center gap-1.5">
+						{headerIcon}
+						<p className="text-sm font-semibold text-neutral-600 select-none">
+							{header}
+						</p>
+					</div>
 
 					<div className="grow flex gap-2 items-center">
 						{/* Input */}
@@ -19,7 +24,6 @@ const FormDateInput = forwardRef<HTMLInputElement, FormDateInputProps>(
 							{...rest}
 							ref={ref}
 							type="date"
-							disabled={isSubmitting}
 							className="grow py-1 bg-transparent outline-none"
 						/>
 					</div>

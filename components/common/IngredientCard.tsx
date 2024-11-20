@@ -2,9 +2,9 @@
 
 import { IngredientCardProps } from "@/types";
 import { useState } from "react";
-import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
 import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
+import { Pencil, Trash2 } from "lucide-react";
 
 const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 	const [showModalForEdit, setShowModalForEdit] = useState(false);
@@ -27,23 +27,39 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 			bg-neutral-100 px-3 py-4 border border-neutral-200"
 		>
 			{/* Info */}
-			<div className="flex gap-1 items-center min-w-0">
+			<div className="flex gap-1.5 items-center min-w-0">
 				<div className="text-xl">{icon}</div>
 				<p className="text-nowrap truncate font-semibold">{ingredient.name}</p>
 			</div>
 
 			{/* Actions */}
-			<div className="flex gap-1.5 items-center">
-				<button type="button" className="rounded-full bg-yellow-400 p-1.5" onClick={openModal}>
-					<MdOutlineEdit className="text-lg text-white" />
+			<div className="flex gap-2 items-center">
+				<button
+					type="button"
+					className="bg-yellow-400 rounded-full size-8 hover:bg-yellow-500
+					flex justify-center items-center"
+					onClick={openModal}
+				>
+					<Pencil size={18} color="white" />
 				</button>
-				<button type="button" className="rounded-full bg-red-400 p-1.5" onClick={submitDeleteIngredient}>
-					<MdOutlineDelete className="text-lg text-white" />
+				<button
+					type="button"
+					className="bg-red-400 rounded-full size-8 hover:bg-red-500 
+					flex justify-center items-center"
+					onClick={submitDeleteIngredient}
+				>
+					<Trash2 size={18} color="white" />
 				</button>
 			</div>
 
 			{/* Modal */}
-			{showModalForEdit && <IngredientFormModal mode={mode} ingredient={ingredient} onModalClose={closeModal} />}
+			{showModalForEdit && (
+				<IngredientFormModal
+					mode={mode}
+					ingredient={ingredient}
+					onModalClose={closeModal}
+				/>
+			)}
 		</div>
 	);
 };

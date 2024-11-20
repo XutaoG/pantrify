@@ -1,5 +1,5 @@
 import { FormInstructionInputProps } from "@/types";
-import { MdDelete, MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 
 const RecipeInstructionCard = ({
 	index,
@@ -13,6 +13,7 @@ const RecipeInstructionCard = ({
 		<div className="flex rounded">
 			{/* Move */}
 			<div className="bg-neutral-200 flex flex-col justify-between rounded-l overflow-hidden">
+				{/* Move up */}
 				<button
 					className="grow p-2 flex justify-center items-center hover:bg-neutral-300"
 					onClick={() => {
@@ -20,8 +21,14 @@ const RecipeInstructionCard = ({
 					}}
 					disabled={isSubmitting}
 				>
-					<MdKeyboardArrowUp className="text-whit text-xl" />
+					<ChevronUp size={16} />
 				</button>
+				{/* Step */}
+				<div className="grow py-0.5 flex justify-center items-center">
+					<p className="font-medium text-sm select-none">{index + 1}</p>
+				</div>
+
+				{/* Move down */}
 				<button
 					className="grow p-2 flex justify-center items-center hover:bg-neutral-300"
 					onClick={() => {
@@ -29,16 +36,11 @@ const RecipeInstructionCard = ({
 					}}
 					disabled={isSubmitting}
 				>
-					<MdKeyboardArrowDown className="text-whit text-xl" />
+					<ChevronDown size={16} />
 				</button>
 			</div>
 
 			<div className="grow flex gap-3 bg-neutral-100 border border-l-0 border-neutral-200 p-2 px-3 rounded-r">
-				{/* Step */}
-				<div className="flex justify-center items-center px-3 border bg-neutral-200  rounded">
-					<p className="font-medium select-none">{index + 1}</p>
-				</div>
-
 				{/* Text area */}
 				<div className="bg-white border border-neutral-200 rounded grow p-2 flex flex-col">
 					<textarea
@@ -56,13 +58,13 @@ const RecipeInstructionCard = ({
 				{/* Delete */}
 				<button
 					className="self-center bg-red-400 rounded-full size-10 hover:bg-red-500
-					flex justify-center items-center border"
+					flex justify-center items-center"
 					onClick={() => {
 						onInstructionRemove(index);
 					}}
 					disabled={isSubmitting}
 				>
-					<MdDelete className="text-white text-2xl" />
+					<Trash2 color="white" size={20} />
 				</button>
 			</div>
 		</div>

@@ -1,10 +1,17 @@
 "use client";
 
-import { FormInputProps } from "@/types";
-import { forwardRef } from "react";
+import { FormPasswordInputProps } from "@/types";
+import { forwardRef, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
-const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 	({ header, headerIcon, errorMessage, placeholder, className, ...rest }, ref) => {
+		const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+		const togglePasswordVisibility = () => {
+			setPasswordVisibility((val) => !val);
+		};
+
 		return (
 			<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
 				{/* Input */}
@@ -27,7 +34,13 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 							ref={ref}
 							className="grow py-1 bg-transparent outline-none min-w-0"
 							placeholder={placeholder}
+							type={!passwordVisibility ? "password" : ""}
 						/>
+
+						{/* Eye toggle */}
+						<div className="cursor-pointer" onClick={togglePasswordVisibility}>
+							{passwordVisibility ? <Eye size={20} /> : <EyeOff size={20} />}
+						</div>
 					</div>
 				</div>
 
@@ -38,6 +51,6 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 	}
 );
 
-FormInput.displayName = "FormInput";
+FormPasswordInput.displayName = "FormPasswordInput";
 
-export default FormInput;
+export default FormPasswordInput;

@@ -1,7 +1,7 @@
 import { getAllIngredients } from "@/api";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import IngredientCard from "../common/IngredientCard";
-import { MdOutlineEgg } from "react-icons/md";
+import { Milk } from "lucide-react";
 
 const AllSecondaryIngredients = async () => {
 	const secondaryIngredients = await getAllIngredients({ ingredientType: "Secondary" });
@@ -11,7 +11,7 @@ const AllSecondaryIngredients = async () => {
 			<IngredientCard
 				key={ingredient.name}
 				ingredient={ingredient}
-				icon={<MdOutlineEgg />}
+				icon={<Milk size={20} />}
 				mode="ingredient"
 			/>
 		);

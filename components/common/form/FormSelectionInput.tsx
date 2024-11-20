@@ -2,11 +2,14 @@
 
 import { useDropdown } from "@/hooks";
 import { FormSelectionInputProps } from "@/types";
+import { ChevronUp } from "lucide-react";
 import { forwardRef } from "react";
-import { MdArrowDropDown } from "react-icons/md";
 
 const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>(
-	({ title, currentSelection, selections, isSubmitting, onSelectionChange, className, ...rest }, ref) => {
+	(
+		{ header, headerIcon, currentSelection, selections, onSelectionChange, className, ...rest },
+		ref
+	) => {
 		const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 		const options = selections.map((selection) => {
@@ -14,7 +17,9 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 				<div
 					key={selection}
 					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer select-none ${
-						selection === currentSelection ? "text-black font-bold" : "text-neutral-600 font-medium"
+						selection === currentSelection
+							? "text-black font-bold"
+							: "text-neutral-600 font-medium"
 					}`}
 					onClick={() => {
 						onSelectionChange(selection);
@@ -33,18 +38,25 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 					rounded px-4 py-2"
 				>
 					{/* Title */}
-					<p className="text-sm font-semibold text-neutral-600 select-none cursor-pointer">{title}</p>
+					<div className="flex items-center gap-1.5">
+						{headerIcon}
+						<p className="text-sm font-semibold text-neutral-600 select-none">
+							{header}
+						</p>
+					</div>
 
 					<div className="grow flex items-center" onClick={onToggle}>
 						{/* Input */}
 						<input
 							{...rest}
 							ref={ref}
-							disabled={isSubmitting}
 							className="grow py-1 bg-transparent outline-none min-w-0"
 							readOnly
 						/>
-						<MdArrowDropDown className={`text-lg cursor-pointer ${!isExpanded && "rotate-90"}`} />
+
+						<button className={`cursor-pointer ${isExpanded && "rotate-180"}`}>
+							<ChevronUp size={20} />
+						</button>
 					</div>
 				</div>
 

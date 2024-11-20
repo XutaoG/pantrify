@@ -1,11 +1,11 @@
 "use client";
 
-import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
 import LargeRecipeCard from "../common/LargeRecipeCard";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { mockRecipes1 } from "@/constants";
 import CollapsiblePanel from "../common/CollapsiblePanel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const RecentRecipes = () => {
 	// Scroll recipes
@@ -97,10 +97,7 @@ const RecentRecipes = () => {
 		}
 
 		// If current index is at the last recipe or end of scroll has being reached
-		if (
-			direction > 0 &&
-			(scrollIndex + 1 >= recipeCardsRef.current.length || isEndOfScroll)
-		) {
+		if (direction > 0 && (scrollIndex + 1 >= recipeCardsRef.current.length || isEndOfScroll)) {
 			return;
 		}
 
@@ -143,27 +140,30 @@ const RecentRecipes = () => {
 
 				{/* Previous recipe button */}
 				<div className="absolute left-2 inset-y-0 flex items-center">
-					<MdOutlineArrowLeft
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
-							(scrollIndex === 0 || !showNavigationArrows) &&
-							"hidden"
+					<button
+						type="button"
+						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
+							(scrollIndex === 0 || !showNavigationArrows) && "hidden"
 						}`}
 						onClick={() => handleChangeRecipeClick(-1)}
-					/>
+					>
+						<ChevronLeft color="white" />
+					</button>
 				</div>
 
 				{/* Next recipe button */}
 				<div className="absolute right-2 inset-y-0 flex items-center">
-					<MdOutlineArrowRight
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full text-4xl text-white cursor-pointer ${
-							(scrollIndex ===
-								recipeCardsRef.current.length - 1 ||
+					<button
+						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
+							(scrollIndex === recipeCardsRef.current.length - 1 ||
 								!showNavigationArrows ||
 								isEndOfScroll) &&
 							"hidden"
 						}`}
 						onClick={() => handleChangeRecipeClick(1)}
-					/>
+					>
+						<ChevronRight color="white" />
+					</button>
 				</div>
 			</div>
 		</CollapsiblePanel>

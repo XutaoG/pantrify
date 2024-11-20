@@ -17,9 +17,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { MdOutlineAddCircle } from "react-icons/md";
 import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstructionCard";
 import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
+import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
 
 const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
@@ -62,7 +62,9 @@ const AddRecipePage = () => {
 	// * Modal control
 	const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 	const [ingredientEditIndex, setIngredientEditIndex] = useState<number | null>(null);
-	const [ingredientEditObj, setIngredientEditObj] = useState<TAddRecipeIngredientSchema | null>(null);
+	const [ingredientEditObj, setIngredientEditObj] = useState<TAddRecipeIngredientSchema | null>(
+		null
+	);
 
 	const openModalForAdd = () => {
 		setIsIngredientModalOpen(true);
@@ -189,7 +191,10 @@ const AddRecipePage = () => {
 
 	//* Move instruction
 	const moveInstruction = (index: number, direction: number) => {
-		if ((index === 0 && direction === -1) || (index === instructions.length - 1 && direction === 1)) {
+		if (
+			(index === 0 && direction === -1) ||
+			(index === instructions.length - 1 && direction === 1)
+		) {
 			return;
 		}
 
@@ -222,8 +227,10 @@ const AddRecipePage = () => {
 		// * Sanitize data
 		const name = getValues("name").trim();
 		const description = getValues("description").trim();
-		const duration = Number(getValues("durationHour")) * 60 + Number(getValues("durationMinute"));
-		const difficulty = getValues("difficulty") == "Easy" ? 1 : getValues("difficulty") == "Medium" ? 2 : 3;
+		const duration =
+			Number(getValues("durationHour")) * 60 + Number(getValues("durationMinute"));
+		const difficulty =
+			getValues("difficulty") == "Easy" ? 1 : getValues("difficulty") == "Medium" ? 2 : 3;
 		const numServings = Number(getValues("numServings"));
 
 		for (let i = 0; i < instructions.length; i++) {
@@ -256,12 +263,17 @@ const AddRecipePage = () => {
 	};
 
 	return (
-		<div id="add-recipe-page" className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto">
+		<div
+			id="add-recipe-page"
+			className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto"
+		>
 			<div className="container mx-auto flex flex-col gap-6">
 				{/* Page title */}
 				<div className="flex flex-col gap-2">
 					<h2 className="font-semibold text-sky-600">Add a New Recipe</h2>
-					<p className="text-neutral-600 font-medium">Enrich Your Own Personal Cookbook.</p>
+					<p className="text-neutral-600 font-medium">
+						Enrich Your Own Personal Cookbook.
+					</p>
 				</div>
 
 				<FormProvider {...methods}>
@@ -269,23 +281,24 @@ const AddRecipePage = () => {
 						{/* Name field */}
 						<FormInput
 							{...register("name")}
-							title="Recipe Name"
+							header="Recipe Name"
+							headerIcon={<ChefHat size={16} />}
 							placeholder="Enter the name of the recipe"
 							errorMessage={errors.name?.message}
-							isSubmitting={isSubmitting}
 							className="grow"
+							disabled={isSubmitting}
 						/>
 
 						<div className="flex gap-6">
 							{/* Serving field */}
 							<FormNumberInput
 								{...register("numServings")}
-								title="Servings"
-								placeholder="1"
-								isSubmitting={isSubmitting}
+								header="Servings"
+								headerIcon={<Users size={16} />}
 								onValueIncrement={onServingChange}
 								incrementAmount={1}
 								className="w-40"
+								disabled={isSubmitting}
 							/>
 
 							{/* Duration field */}
@@ -294,32 +307,34 @@ const AddRecipePage = () => {
 							{/* Difficulty field */}
 							<FormSelectionInput
 								{...register("difficulty")}
-								title="Difficulty"
-								isSubmitting={isSubmitting}
+								header="Difficulty"
+								headerIcon={<Gauge size={16} />}
 								selections={["Easy", "Medium", "Hard"]}
 								currentSelection={getValues("difficulty")}
 								onSelectionChange={onDifficultyChange}
 								className="grow"
+								disabled={isSubmitting}
 							/>
 						</div>
 
 						{/* Description field */}
 						<FormTextArea
 							{...register("description")}
-							title="Description (optional)"
+							header="Description (optional)"
+							headerIcon={<Text size={16} />}
 							placeholder="Enter the description of the recipe"
 							errorMessage={errors.description?.message}
-							isSubmitting={isSubmitting}
+							disabled={isSubmitting}
 						/>
 
 						{/* Open ingredient form */}
 						<button
 							type="button"
-							className="self-center flex items-center gap-1 bg-emerald-500 p-2 rounded hover:bg-emerald-600 cursor-pointer"
+							className="self-center flex items-center gap-2 bg-emerald-400 p-2 rounded hover:bg-emerald-500 cursor-pointer"
 							onClick={openModalForAdd}
 							disabled={isSubmitting}
 						>
-							<MdOutlineAddCircle className="text-white text-2xl" />
+							<CirclePlus size={20} color="white" />
 							<p className="text-white font-medium">Add Ingredient</p>
 						</button>
 
@@ -331,7 +346,6 @@ const AddRecipePage = () => {
 								index={ingredientEditIndex}
 								ingredient={ingredientEditObj}
 								onIngredientEdit={editIngredient}
-								onIngredientDelete={deleteIngredient}
 							/>
 						)}
 
@@ -370,17 +384,22 @@ const AddRecipePage = () => {
 							{/* Add instruction button */}
 							<button
 								type="button"
-								className="self-center flex items-center gap-1 bg-emerald-500 p-2 rounded hover:bg-emerald-600 cursor-pointer"
+								className="self-center flex items-center gap-2 bg-emerald-400 p-2 rounded hover:bg-emerald-500 cursor-pointer"
 								onClick={addInstruction}
 								disabled={isSubmitting}
 							>
-								<MdOutlineAddCircle className="text-white text-2xl" />
+								<CirclePlus size={20} color="white" />
 								<p className="text-white font-medium">Add Instruction</p>
 							</button>
 						</section>
 
 						{/* Add */}
-						<FormButton title="Add Recipe" isSubmitting={isSubmitting} onClick={handleSubmit(addRecipe)} />
+						<FormButton
+							title="Add Recipe"
+							icon={<ChefHat color="white" />}
+							onClick={handleSubmit(addRecipe)}
+							disabled={isSubmitting}
+						/>
 					</section>
 				</FormProvider>
 			</div>

@@ -1,35 +1,30 @@
 import ToolTipContainer from "@/components/common/ToolTipContainer";
 import { RecipeIngredientProps } from "@/types";
+import { Archive, Check, CircleMinusIcon, ShoppingCart, X } from "lucide-react";
 import { Fragment } from "react";
-import {
-	MdOutlineCheck,
-	MdOutlineClose,
-	MdAddShoppingCart,
-	MdOutlineInventory2,
-} from "react-icons/md";
 
 const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	const addToInventoryAction = (
 		<ToolTipContainer toolTipContent="Have it? Add to inventory">
-			<div className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
-				<MdOutlineInventory2 className="text-lg" />
-			</div>
+			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+				<Archive size={16} />
+			</button>
 		</ToolTipContainer>
 	);
 
 	const addToCartAction = (
 		<ToolTipContainer toolTipContent="Add to shopping list">
-			<div className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
-				<MdAddShoppingCart className="text-lg" />
-			</div>
+			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+				<ShoppingCart size={16} />
+			</button>
 		</ToolTipContainer>
 	);
 
 	const removeFromInventoryAction = (
 		<ToolTipContainer toolTipContent={`Ran out? Remove from inventory`}>
-			<div className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
-				<MdOutlineClose className="text-lg" />
-			</div>
+			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+				<CircleMinusIcon size={16} />
+			</button>
 		</ToolTipContainer>
 	);
 
@@ -37,9 +32,13 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 		<div className="flex justify-between items-center">
 			<div className="flex gap-2 items-center">
 				{recipeIngredient.isAvailable ? (
-					<MdOutlineCheck className="text-lg text-emerald-500" />
+					<div className="text-emerald-500">
+						<Check size={18} />
+					</div>
 				) : (
-					<MdOutlineClose className="text-lg text-red-500" />
+					<div className="text-red-400">
+						<X size={18} />
+					</div>
 				)}
 				<p className="font-medium">
 					{recipeIngredient.name}

@@ -1,7 +1,7 @@
 import { LargeRecipeCardProps } from "@/types";
 import Image from "next/image";
-import { MdAccessTime, MdOutlineSpeed, MdOutlineKitchen } from "react-icons/md";
 import InfoWidget from "./InfoWidget";
+import { Clock, Gauge, Refrigerator } from "lucide-react";
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
@@ -11,7 +11,14 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 		>
 			{/* Recipe image */}
 			<div className="w-full h-48 relative overflow-hidden rounded-t">
-				<Image src={recipe.images[0].path} alt="food" className="object-cover" fill sizes="33vw" priority />
+				<Image
+					src={recipe.images[0].path}
+					alt="food"
+					className="object-cover"
+					fill
+					sizes="33vw"
+					priority
+				/>
 			</div>
 
 			{/* Info */}
@@ -20,19 +27,19 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 				<div className="flex justify-between">
 					{/* Time */}
 					<InfoWidget
-						icon={<MdAccessTime />}
+						icon={<Clock size={16} />}
 						iconColor="text-emerald-500"
 						text={recipe.duration.toString()}
 					/>
 					{/* Difficulty */}
 					<InfoWidget
-						icon={<MdOutlineSpeed />}
+						icon={<Gauge size={16} />}
 						iconColor="text-orange-500"
 						text={recipe.difficulty.toString()}
 					/>
 					{/* Ingredients */}
 					<InfoWidget
-						icon={<MdOutlineKitchen />}
+						icon={<Refrigerator size={16} />}
 						iconColor="text-sky-500"
 						text={`${recipe.ingredients.length} Ing.`}
 					/>

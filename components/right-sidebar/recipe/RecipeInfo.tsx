@@ -1,15 +1,8 @@
 "use client";
 
 import InfoWidget from "@/components/common/InfoWidget";
+import { Clock, Gauge, Pencil, Refrigerator, Trash2, Users } from "lucide-react";
 import React from "react";
-import {
-	MdAccessTime,
-	MdOutlineKitchen,
-	MdOutlineSpeed,
-	MdRestaurant,
-	MdOutlineEdit,
-	MdOutlineDeleteForever,
-} from "react-icons/md";
 
 const RecipeInfo = () => {
 	return (
@@ -17,20 +10,12 @@ const RecipeInfo = () => {
 			{/* Row 1 */}
 			<div className="flex justify-between items-center">
 				{/* Time */}
-				<InfoWidget
-					icon={<MdAccessTime />}
-					iconColor="text-emerald-500"
-					text="30m"
-				/>
+				<InfoWidget icon={<Clock size={16} />} iconColor="text-emerald-500" text="30m" />
 				{/* Difficulty */}
-				<InfoWidget
-					icon={<MdOutlineSpeed />}
-					iconColor="text-orange-500"
-					text="Med"
-				/>
+				<InfoWidget icon={<Gauge size={16} />} iconColor="text-orange-500" text="Med" />
 				{/* Ingredients */}
 				<InfoWidget
-					icon={<MdOutlineKitchen />}
+					icon={<Refrigerator size={16} />}
 					iconColor="text-sky-500"
 					text="4 Ing."
 				/>
@@ -39,21 +24,17 @@ const RecipeInfo = () => {
 			{/* Row 2 */}
 			<div className="flex justify-between items-center">
 				{/* Portion */}
-				<InfoWidget
-					icon={<MdRestaurant />}
-					iconColor="text-violet-500"
-					text="2 P."
-				/>
+				<InfoWidget icon={<Users size={16} />} iconColor="text-violet-500" text="2 P." />
 				{/* Edit */}
 				<InfoWidget
-					icon={<MdOutlineEdit />}
+					icon={<Pencil size={16} />}
 					iconColor="text-yellow-500"
 					text="Edit"
 					onClick={() => {}}
 				/>
 				{/* Delete */}
 				<InfoWidget
-					icon={<MdOutlineDeleteForever />}
+					icon={<Trash2 size={16} />}
 					iconColor="text-red-500"
 					text="Delete"
 					onClick={() => {}}

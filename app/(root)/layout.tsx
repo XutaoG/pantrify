@@ -24,6 +24,7 @@ const RootLayout = async ({
 			{/* Right sidebar */}
 			<RightSideBar>
 				<RecipeView />
+				{/* <IngredientView /> */}
 			</RightSideBar>
 		</main>
 	);
