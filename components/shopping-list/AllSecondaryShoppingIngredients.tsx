@@ -1,21 +1,16 @@
 import IngredientCard from "../common/IngredientCard";
 import CollapsiblePanel from "../common/CollapsiblePanel";
-import { getAllIngredients } from "@/api";
 import { Milk } from "lucide-react";
+import { AllSecondaryIngredientsProps } from "@/types";
 
-const AllSecondaryShoppingIngredients = async () => {
-	const secondaryIngredients = await getAllIngredients({
-		ingredientType: "Secondary",
-		isInCart: true,
-	});
-
-	const secondaryIngredientCards = secondaryIngredients?.ingredients.map((ingredient) => {
+const AllSecondaryShoppingIngredients = ({ ingredients }: AllSecondaryIngredientsProps) => {
+	const secondaryIngredientCards = ingredients?.ingredients.map((ingredient) => {
 		return (
 			<IngredientCard
-				key={ingredient.id}
+				key={ingredient.name}
 				ingredient={ingredient}
 				icon={<Milk size={20} />}
-				mode="shopping"
+				mode="ingredient"
 			/>
 		);
 	});

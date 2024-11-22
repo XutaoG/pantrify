@@ -40,6 +40,43 @@ export const ingredientQuantityUnits = [
 	"serving",
 ];
 
+export interface IngredientSortSchema {
+	name: string;
+	routeParam: string;
+	isAscending: boolean;
+}
+
+export const ingredientSortSelections: IngredientSortSchema[] = [
+	{
+		name: "Creation Date",
+		routeParam: "dateAdded",
+		isAscending: true,
+	},
+	{
+		name: "Expiration Date",
+		routeParam: "dateExpired",
+		isAscending: false,
+	},
+	{
+		name: "Name",
+		routeParam: "name",
+		isAscending: true,
+	},
+];
+
+export const shoppingListSortSelections: IngredientSortSchema[] = [
+	{
+		name: "Creation Date",
+		routeParam: "dateAdded",
+		isAscending: true,
+	},
+	{
+		name: "Name",
+		routeParam: "name",
+		isAscending: true,
+	},
+];
+
 export const mockRecipes1: Recipe[] = [
 	{
 		id: 1,

@@ -18,7 +18,7 @@ const Home = async () => {
 						{user?.firstName} {user?.lastName}
 					</span>
 				</h1>
-				<p className="font-semibold text-neutral-600">
+				<p className="font-medium text-neutral-600">
 					Your Recipe Memories, Perfectly Kept.
 				</p>
 			</div>

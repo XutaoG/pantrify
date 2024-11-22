@@ -1,3 +1,4 @@
+import { IngredientSortSchema } from "@/constants";
 import { ComponentPropsWithRef, ReactNode } from "react";
 import { z } from "zod";
 
@@ -174,7 +175,21 @@ export interface CollapsiblePanelProps {
 }
 
 export interface SearchBarProps {
+	onSearch: (searchWord: string) => void;
 	placeholderText: string;
+}
+
+export interface IngredientSortByProps {
+	selections: IngredientSortSchema[];
+	onSort: (sortBy: IngredientSortSchema) => void;
+}
+
+export interface AllPrimaryIngredientsProps {
+	ingredients: IngredientList;
+}
+
+export interface AllSecondaryIngredientsProps {
+	ingredients: IngredientList;
 }
 
 export interface IngredientCardProps {

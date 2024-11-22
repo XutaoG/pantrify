@@ -1,15 +1,10 @@
-import { getAllIngredients } from "@/api";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import IngredientCard from "../common/IngredientCard";
 import { Egg } from "lucide-react";
+import { AllPrimaryIngredientsProps } from "@/types";
 
-const AllPrimaryIngredients = async () => {
-	const primaryIngredients = await getAllIngredients({
-		ingredientType: "Primary",
-		isAvailable: true,
-	});
-
-	const primaryIngredientCards = primaryIngredients?.ingredients.map((ingredient) => {
+const AllPrimaryIngredients = ({ ingredients }: AllPrimaryIngredientsProps) => {
+	const primaryIngredientCards = ingredients?.ingredients.map((ingredient) => {
 		return (
 			<IngredientCard
 				key={ingredient.id}

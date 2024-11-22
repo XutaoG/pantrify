@@ -4,6 +4,7 @@ import SomeIngredientsRecipes from "@/components/available-recipes/SomeIngredien
 import PageTitle from "@/components/common/PageTitle";
 import SearchBar from "@/components/common/SearchBar";
 import RecipeFilterDropdown from "@/components/my-recipes/RecipeFilterDropdown";
+import RecipeSortDropdown from "@/components/my-recipes/RecipeSortDropdown";
 
 const AvailableRecipes = () => {
 	return (
@@ -16,9 +17,10 @@ const AvailableRecipes = () => {
 
 			{/* Search bar + filter + sort */}
 			<div className="flex flex-col gap-4">
-				<div className="flex gap-6">
+				<div className="flex gap-4">
 					<SearchBar placeholderText="Search for a recipe" />
 					<RecipeFilterDropdown />
+					<RecipeSortDropdown />
 				</div>
 			</div>
 

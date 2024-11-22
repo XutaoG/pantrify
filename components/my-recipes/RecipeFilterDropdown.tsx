@@ -39,9 +39,7 @@ const RecipeFilterDropdown = () => {
 						? "text-black font-medium"
 						: "text-neutral-600 font-normal"
 				}`}
-				onClick={() => {
-					handleDifficultySelectionClick(selection);
-				}}
+				onClick={() => handleDifficultySelectionClick(selection)}
 			>
 				{selection}
 			</div>
@@ -63,9 +61,7 @@ const RecipeFilterDropdown = () => {
 						? "text-black font-medium"
 						: "text-neutral-600 font-normal"
 				}`}
-				onClick={() => {
-					handleTimeSelectionClick(selection);
-				}}
+				onClick={() => handleTimeSelectionClick(selection)}
 			>
 				{selection}
 			</div>
