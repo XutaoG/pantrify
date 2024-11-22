@@ -19,8 +19,8 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			</div>
 
 			{/* Info */}
-			<div className="flex flex-col gap-3 p-3 ">
-				<p className="font-bold">{recipe.name}</p>
+			<div className="flex flex-col gap-4 p-3">
+				<p className="font-medium tracking-wide truncate text-nowrap">{recipe.name}</p>
 				<div className="flex justify-between">
 					{/* Time */}
 					<InfoWidget

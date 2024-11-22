@@ -142,6 +142,11 @@ export interface GetAllIngredientsRequestConfig {
 
 // ! PROPS
 
+export interface PageTitleProps {
+	title: string;
+	subtitle: string;
+}
+
 export interface LargeRecipeCardProps {
 	recipe: Recipe;
 }

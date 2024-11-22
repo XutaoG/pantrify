@@ -20,6 +20,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstructionCard";
 import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
 import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
+import PageTitle from "@/components/common/PageTitle";
 
 const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
@@ -275,12 +276,7 @@ const AddRecipePage = () => {
 		>
 			<div className="container mx-auto flex flex-col gap-6">
 				{/* Page title */}
-				<div className="flex flex-col gap-2">
-					<h2 className="font-semibold text-sky-600">Add a New Recipe</h2>
-					<p className="text-neutral-600 font-medium">
-						Enrich Your Own Personal Cookbook.
-					</p>
-				</div>
+				<PageTitle title="Add a New Recipe" subtitle="Enrich Your Own Personal Cookbook." />
 
 				<FormProvider {...methods}>
 					<section className="flex flex-col gap-5">
@@ -381,9 +377,9 @@ const AddRecipePage = () => {
 
 						{/* Instructions */}
 						<section className="flex flex-col gap-6">
-							<div className="flex flex-col gap-2">
+							<div className="flex flex-col gap-4">
 								{/* Title */}
-								<p className="font-semibold select-none">Instructions</p>
+								<p className="font-medium select-none">Instructions</p>
 
 								{/* Cards */}
 								<div className="flex flex-col gap-4">{instructionCards}</div>

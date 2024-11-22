@@ -8,7 +8,7 @@ const RecipeInstructions = () => {
 
 	return (
 		<CollapsiblePanel title="Instructions">
-			<ol className="p-2 list-decimal list-inside flex flex-col gap-2">{instructions}</ol>
+			<ol className="px-2 list-decimal list-inside flex flex-col gap-2">{instructions}</ol>
 		</CollapsiblePanel>
 	);
 };

@@ -1,4 +1,5 @@
 import { getUser } from "@/api";
+import PageTitle from "@/components/common/PageTitle";
 import Pagination from "@/components/common/Pagination";
 import AllRecipes from "@/components/my-recipes/AllRecipes";
 import Overview from "@/components/my-recipes/Overview";
@@ -11,7 +12,7 @@ const Home = async () => {
 		<div className="flex flex-col gap-6 px-4 pt-8 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="flex flex-col gap-2">
-				<h1 className="font-semibold">
+				<h1 className="font-semibold tracking-wide">
 					Welcome,{" "}
 					<span className="text-sky-600">
 						{user?.firstName} {user?.lastName}
@@ -26,12 +27,10 @@ const Home = async () => {
 			<Overview />
 
 			{/* Page title */}
-			<div className="flex flex-col gap-2">
-				<h2 className="font-semibold text-sky-600">My Recipes</h2>
-				<p className="text-neutral-600 font-medium">
-					Explore and Relive Your Favorite Culinary Moments.
-				</p>
-			</div>
+			<PageTitle
+				title="My Recipes"
+				subtitle="Explore and Relive Your Favorite Culinary Moments."
+			/>
 
 			{/* Recent Recipes */}
 			<RecentRecipes />

@@ -9,8 +9,8 @@ const AllRecipes = () => {
 	});
 
 	return (
-		<section className="flex flex-col gap-2">
-			<p className="font-semibold">All Recipes</p>
+		<section className="flex flex-col gap-4">
+			<p className="font-medium">All Recipes</p>
 			{/* Search bar + filter + sort */}
 			<div className="flex flex-col gap-4">
 				<div className="flex gap-6">
@@ -18,9 +18,7 @@ const AllRecipes = () => {
 					<RecipeFilterDropdown />
 				</div>
 				{/* All recipes */}
-				<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
-					{recipeCards}
-				</div>
+				<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">{recipeCards}</div>
 			</div>
 		</section>
 	);

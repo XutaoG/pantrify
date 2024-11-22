@@ -34,10 +34,10 @@ const RecipeFilterDropdown = () => {
 		return (
 			<div
 				key={selection}
-				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
+				className={`p-1.5 hover:bg-neutral-200 rounded-lg cursor-pointer ${
 					selection === currentDifficultySelection
-						? "text-black font-bold"
-						: "text-neutral-600 font-medium"
+						? "text-black font-medium"
+						: "text-neutral-600 font-normal"
 				}`}
 				onClick={() => {
 					handleDifficultySelectionClick(selection);
@@ -58,10 +58,10 @@ const RecipeFilterDropdown = () => {
 		return (
 			<div
 				key={selection}
-				className={`p-2 hover:bg-neutral-300 rounded cursor-pointer ${
+				className={`p-2 hover:bg-neutral-200 rounded-lg cursor-pointer ${
 					selection === currentTimeSelection
-						? "text-black font-bold"
-						: "text-neutral-600 font-medium"
+						? "text-black font-medium"
+						: "text-neutral-600 font-normal"
 				}`}
 				onClick={() => {
 					handleTimeSelectionClick(selection);
@@ -87,17 +87,17 @@ const RecipeFilterDropdown = () => {
 			</button>
 			{isExpanded && (
 				<div
-					className="absolute z-10 top-14 right-0 w-48 card-container p-3 py-5 shadow-sm
-					rounded-xl flex flex-col gap-5"
+					className="absolute z-10 top-12 right-0 w-48 card-container p-3 
+					border border-neutral-200 rounded-xl flex flex-col gap-5"
 				>
 					{/* Difficulty selections */}
 					<CollapsiblePanel title="Difficulty">
-						<div className="flex flex-col gap-1">{difficultyDropdownOptions}</div>
+						<div className="flex flex-col gap-0">{difficultyDropdownOptions}</div>
 					</CollapsiblePanel>
 
 					{/* Time selections */}
 					<CollapsiblePanel title="Time">
-						<div className="flex flex-col gap-1">{timeDropdownOptions}</div>
+						<div className="flex flex-col gap-0">{timeDropdownOptions}</div>
 					</CollapsiblePanel>
 				</div>
 			)}

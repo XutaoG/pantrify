@@ -17,7 +17,7 @@ const RootLayout = async ({
 			</section>
 
 			{/* Main content */}
-			<section className="grow min-w-0 flex p-4">{children}</section>
+			<section className="grow min-w-0 flex p-4 my-4">{children}</section>
 
 			{/* Right sidebar */}
 			<section className="flex p-4 pl-0">

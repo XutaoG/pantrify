@@ -9,7 +9,7 @@ const RecipeSecondaryIngredients = () => {
 
 	return (
 		<CollapsiblePanel title="Secondary Ingredients">
-			<div className="flex flex-col py-2 gap-2">{SecondaryIngredients}</div>
+			<div className="flex flex-col gap-2">{SecondaryIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

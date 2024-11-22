@@ -1,3 +1,4 @@
+import PageTitle from "@/components/common/PageTitle";
 import SearchBar from "@/components/common/SearchBar";
 import RecipeFilterDropdown from "@/components/my-recipes/RecipeFilterDropdown";
 import AddShoppingListcontroller from "@/components/shopping-list/AddShoppingListController";
@@ -9,10 +10,7 @@ const ShoppingList = () => {
 	return (
 		<div className="grow flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
 			{/* Page title */}
-			<div className="flex flex-col gap-2">
-				<h2 className="font-semibold text-sky-600">Shopping List</h2>
-				<p className="text-neutral-600 font-medium">Everything You Need, All in One Page.</p>
-			</div>
+			<PageTitle title="Shopping List" subtitle="Everything You Need, All in One Page." />
 
 			<AddShoppingListcontroller />
 

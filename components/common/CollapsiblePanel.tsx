@@ -8,17 +8,17 @@ const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps
 	const [isExpanded, setIsExpanded] = useState(true);
 
 	return (
-		<section className="flex flex-col gap-2">
+		<section className="flex flex-col gap-4">
 			{/* Title */}
 			<div className="flex items-center gap-4">
-				<p className={`font-semibold ${titleStyle}`}>{title}</p>
-				<div className="bg-neutral-200 h-0.5 grow" />
+				<p className={`font-medium select-none ${titleStyle}`}>{title}</p>
+				<div className="bg-neutral-300 h-0.5 grow" />
 				<button
 					type="button"
-					className={`cursor-pointer ${isExpanded && "rotate-180"} text-neutral-600`}
+					className={`text-neutral-300 ${isExpanded && "rotate-180"}`}
 					onClick={() => setIsExpanded((val) => !val)}
 				>
-					<CircleChevronUp size={18} />
+					<CircleChevronUp size={20} />
 				</button>
 			</div>
 

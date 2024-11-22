@@ -29,7 +29,7 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 			{/* Info */}
 			<div className="flex gap-1.5 items-center min-w-0">
 				<div className="text-xl">{icon}</div>
-				<p className="text-nowrap truncate font-semibold">{ingredient.name}</p>
+				<p className="font-medium text-nowrap truncate ">{ingredient.name}</p>
 			</div>
 
 			{/* Actions */}

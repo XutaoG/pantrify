@@ -9,7 +9,10 @@ const RecipeView = () => {
 	return (
 		<section className="flex flex-col gap-6">
 			{/* Recipe name */}
-			<h3 className="font-bold">Ground Beef Spaghetti</h3>
+			<div className="flex flex-col">
+				<p className="text-sm font-semibold text-neutral-600">Recipe name</p>
+				<h3 className="font-medium tracking-wide">Ground Beef Spaghetti</h3>
+			</div>
 
 			{/* Image */}
 			<div className="h-60 w-full relative rounded-lg overflow-hidden">
