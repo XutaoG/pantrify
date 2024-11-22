@@ -8,6 +8,8 @@ const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {
 		const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+		const [isFocused, setIsFocused] = useState(false);
+
 		const togglePasswordVisibility = () => {
 			setPasswordVisibility((val) => !val);
 		};
@@ -16,8 +18,9 @@ const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 			<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
 				{/* Input */}
 				<div
-					className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded px-4 py-2"
+					className={`h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2 ${
+						isFocused && "border-neutral-200"
+					}`}
 				>
 					{/* Title */}
 					<div className="flex items-center gap-1.5">
@@ -36,6 +39,8 @@ const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 							placeholder={placeholder}
 							type={!passwordVisibility ? "password" : ""}
 							disabled={disabled}
+							onFocus={() => setIsFocused(true)}
+							onBlur={() => setIsFocused(false)}
 						/>
 
 						{/* Eye toggle */}

@@ -45,7 +45,7 @@ const Login = () => {
 		<section className="flex flex-col gap-16">
 			{/* Header */}
 			<div className="flex flex-col gap-4">
-				<h1 className="font-semibold text-neutral-600">Login</h1>
+				<h1 className="font-semibold tracking-wide text-neutral-600">Login</h1>
 				<p className="font-medium">
 					Don{"'"}t Have an Account?{" "}
 					<Link href="/sign-up" className="text-blue-600 underline underline-offset-2">
@@ -80,7 +80,7 @@ const Login = () => {
 
 						<div className="flex justify-between items-center">
 							{/* Remember me */}
-							<div className="flex items-center gap-1">
+							<div className="flex items-center gap-2">
 								<input
 									{...register("rememberMe")}
 									type="checkbox"

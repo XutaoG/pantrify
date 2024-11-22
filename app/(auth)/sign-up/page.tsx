@@ -45,7 +45,7 @@ const SignUp = () => {
 		<section className="flex flex-col gap-16">
 			{/* Header */}
 			<div className="flex flex-col gap-4">
-				<h1 className="font-semibold text-neutral-600">Sign Up</h1>
+				<h1 className="font-semibold tracking-wide text-neutral-600">Sign Up</h1>
 				<p className="font-medium">
 					Already Have an Account?{" "}
 					<Link href="/login" className="text-blue-600 underline underline-offset-2">

@@ -14,7 +14,7 @@ const AuthLayout = async ({
 	return (
 		<main className="min-h-screen max-h-screen flex">
 			{/* Form */}
-			<div className="w-[600px] min-w-[600px] flex flex-col gap-20 justify-center px-16">
+			<div className="w-[600px] min-w-[600px] bg-gray-100 flex flex-col gap-20 justify-center px-16">
 				{/* Logo + Text */}
 				<div className="flex items-center gap-2 text-sky-600 self-center">
 					<Image
@@ -24,18 +24,14 @@ const AuthLayout = async ({
 						height={48}
 						priority
 					/>
-					<h1
-						className={`font-medium select-none ${edu_vic.className}`}
-					>
-						Pantrify
-					</h1>
+					<h1 className={`font-medium select-none ${edu_vic.className}`}>Pantrify</h1>
 				</div>
 
 				{children}
 			</div>
 
 			{/* Images */}
-			<div className="grow bg-neutral-100"></div>
+			<div className="grow bg-white"></div>
 		</main>
 	);
 };
