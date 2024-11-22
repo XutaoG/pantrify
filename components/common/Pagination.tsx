@@ -10,17 +10,18 @@ const Pagination = () => {
 
 	const pageNumbers = mockPageNumbers.map((pageNumber, index) => {
 		return (
-			<div
+			<button
+				type="button"
 				key={pageNumber}
-				className={`size-7 flex justify-center items-center rounded cursor-pointer ${
+				className={`aspect-square flex justify-center items-center rounded-full  ${
 					pageNumber === mockPageNumbers[currentPageNumberIndex]
 						? "bg-sky-600 text-white"
-						: "text-neutral-600"
+						: "text-neutral-600 hover:bg-neutral-200"
 				}`}
 				onClick={() => setCurrentPageNumberIndex(index)}
 			>
 				{pageNumber}
-			</div>
+			</button>
 		);
 	});
 
@@ -37,13 +38,23 @@ const Pagination = () => {
 	};
 
 	return (
-		<div className="flex gap-6 items-center">
+		<div className="h-8 flex gap-6">
 			{/* Left arrow */}
-			<button type="button" onClick={() => setCurrentPageNumberIndex(0)}>
+			<button
+				type="button"
+				className="aspect-square hover:bg-neutral-200 rounded-full
+				flex justify-center items-center"
+				onClick={() => setCurrentPageNumberIndex(0)}
+			>
 				<ChevronsLeft size={18} />
 			</button>
 
-			<button type="button" onClick={moveToPrevPage}>
+			<button
+				type="button"
+				className="aspect-square hover:bg-neutral-200 rounded-full
+				flex justify-center items-center"
+				onClick={moveToPrevPage}
+			>
 				<ChevronLeft size={18} />
 			</button>
 
@@ -51,12 +62,19 @@ const Pagination = () => {
 			{pageNumbers}
 
 			{/* Right arrow */}
-			<button type="button" onClick={moveToNextPage}>
+			<button
+				type="button"
+				className="aspect-square hover:bg-neutral-200 rounded-full
+				flex justify-center items-center"
+				onClick={moveToNextPage}
+			>
 				<ChevronsRight size={18} />
 			</button>
 
 			<button
 				type="button"
+				className="aspect-square hover:bg-neutral-200 rounded-full
+				flex justify-center items-center"
 				onClick={() => setCurrentPageNumberIndex(mockPageNumbers.length - 1)}
 			>
 				<ChevronRight size={18} />

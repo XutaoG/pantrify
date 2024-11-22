@@ -1,5 +1,8 @@
+"use client";
+
 import { FormInstructionInputProps } from "@/types";
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 const RecipeInstructionCard = ({
 	index,
@@ -9,15 +12,17 @@ const RecipeInstructionCard = ({
 	onInstructionMove,
 	isSubmitting,
 }: FormInstructionInputProps) => {
+	const [isFocused, setIsFocused] = useState(false);
+
 	return (
-		<div className="flex rounded">
+		<div className="flex card-container rounded-xl">
 			{/* Move */}
-			<div className="bg-neutral-200 flex flex-col justify-between rounded-l overflow-hidden">
+			<div className="flex flex-col justify-between overflow-hidden">
 				{/* Move up */}
 				<button
 					type="button"
-					className={`grow p-2 flex justify-center items-center  ${
-						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-300"
+					className={`grow flex p-1 px-2 justify-center items-center rounded-tl-xl  ${
+						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-200"
 					}`}
 					onClick={() => onInstructionMove(index, -1)}
 					disabled={isSubmitting}
@@ -32,8 +37,8 @@ const RecipeInstructionCard = ({
 				{/* Move down */}
 				<button
 					type="button"
-					className={`grow p-2 flex justify-center items-center  ${
-						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-300"
+					className={`grow flex p-1 px-2 justify-center items-center rounded-bl-xl ${
+						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-200"
 					}`}
 					onClick={() => onInstructionMove(index, 1)}
 					disabled={isSubmitting}
@@ -42,18 +47,25 @@ const RecipeInstructionCard = ({
 				</button>
 			</div>
 
-			<div className="grow flex gap-3 bg-neutral-100 border border-l-0 border-neutral-200 p-2 px-3 rounded-r">
+			<div className="grow flex gap-3 p-2 px-3">
 				{/* Text area */}
-				<div className="bg-white border border-neutral-200 rounded grow p-2 flex flex-col">
+				<div
+					className={`grow border p-2 rounded-lg flex ${
+						isFocused ? "border-neutral-200" : "border-transparent"
+					}`}
+				>
 					<textarea
-						className={`bg-transparent outline-none focus:bg-transparent 
-						min-h-12 max-h-12 resize-none ${isSubmitting && "cursor-not-allowed"}`}
+						className={`grow outline-none min-h-16 max-h-16 resize-none ${
+							isSubmitting && "cursor-not-allowed"
+						}`}
 						placeholder="Enter your recipe instruction"
 						value={value}
 						onChange={(event) => {
 							onInstructionEdit(index, event.target.value);
 						}}
 						disabled={isSubmitting}
+						onFocus={() => setIsFocused(true)}
+						onBlur={() => setIsFocused(false)}
 					/>
 				</div>
 

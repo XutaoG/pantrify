@@ -20,7 +20,7 @@ const AddIngredientController = () => {
 		<Fragment>
 			<button
 				type="button"
-				className="bg-sky-600 hover:bg-sky-500 py-2 rounded flex justify-center items-center"
+				className="bg-sky-600 hover:bg-sky-500 py-2 rounded-xl flex justify-center items-center"
 				onClick={openModal}
 			>
 				<div className="flex gap-2 items-center">

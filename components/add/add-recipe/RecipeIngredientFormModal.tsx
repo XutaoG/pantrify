@@ -90,8 +90,7 @@ const RecipeIngredientFormModal = ({
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(submitForm)}
-					className="w-96 flex flex-col gap-4 bg-white p-6 
-					border border-neutral-200 rounded-md shadow-md"
+					className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"
 				>
 					{/* Title */}
 					<p className="font-semibold">
@@ -144,7 +143,7 @@ const RecipeIngredientFormModal = ({
 						<button
 							type="submit"
 							className={`flex justify-center items-center gap-2 
-							bg-emerald-500 p-1.5 rounded ${isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-600"}`}
+							bg-emerald-500 p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-600"}`}
 							disabled={isSubmitting}
 						>
 							{index == null || ingredient == null ? (
@@ -166,7 +165,7 @@ const RecipeIngredientFormModal = ({
 						<button
 							type="button"
 							className={`flex justify-center items-center gap-2 bg-yellow-500 
-							p-1.5 rounded ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-600"}`}
+							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-600"}`}
 							onClick={onModalClose}
 							disabled={isSubmitting}
 						>

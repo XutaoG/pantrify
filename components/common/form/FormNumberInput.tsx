@@ -39,10 +39,7 @@ const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 		return (
 			<div className={`flex flex-col gap-1 min-w-0 ${className}`}>
 				{/* Input */}
-				<div
-					className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded px-4 py-2"
-				>
+				<div className="h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2">
 					{/* Title */}
 					<div className="flex items-center gap-1.5">
 						{headerIcon}

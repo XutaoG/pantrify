@@ -137,8 +137,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
 			<form
 				onSubmit={handleSubmit(submit)}
-				className="w-96 flex flex-col gap-4 bg-white p-4 
-				border border-neutral-200 rounded-md shadow-md"
+				className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"
 				noValidate
 			>
 				{/* Page title */}
@@ -201,7 +200,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 						<button
 							type="submit"
 							className="flex justify-center items-center gap-2 
-							bg-emerald-500 p-1.5 rounded hover:bg-emerald-600"
+							bg-emerald-500 p-1.5 rounded-full hover:bg-emerald-600"
 						>
 							{ingredient == null ? (
 								<Fragment>
@@ -230,7 +229,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 						<button
 							type="button"
 							className="flex justify-center items-center gap-2 bg-yellow-500 
-							p-1.5 rounded hover:bg-yellow-600"
+							p-1.5 rounded-full hover:bg-yellow-600"
 							onClick={cancel}
 						>
 							<CircleX size={20} color="white" />

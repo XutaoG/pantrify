@@ -15,8 +15,8 @@ const Navigations = () => {
 			<Link
 				key={route.label}
 				href={route.route}
-				className={`flex justify-left gap-4 p-4 rounded font-semibold
-					${isActive ? "bg-sky-600 text-white" : "hover:bg-neutral-200"}`}
+				className={`flex justify-left gap-4 p-4 rounded-2xl
+					${isActive ? "bg-sky-600 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
 			>
 				{route.icon}
 				<p className="hidden 2xl:block">{route.label}</p>

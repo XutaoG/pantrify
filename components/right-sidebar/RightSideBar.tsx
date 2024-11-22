@@ -2,17 +2,11 @@ import { RightSideBarProps } from "@/types";
 
 const RightSideBar = ({ children }: RightSideBarProps) => {
 	return (
-		<section className="flex w-[450px] min-w-[450px] p-2">
-			<div
-				className="grow flex flex-col border border-neutral-200 shadow-md 
-				rounded-lg overflow-hidden"
-			>
-				{/* pattern */}
-				<div className="min-h-24 h-24 bg-sky-600" />
-
-				{/* Content */}
-				<div className="flex flex-col overflow-y-auto">{children}</div>
-			</div>
+		<section
+			className="flex flex-col w-[450px] min-w-[450px] p-4 card-container 
+			shadow-sm rounded-xl min-h-0"
+		>
+			<div className="flex flex-col pr-4 overflow-y-auto">{children}</div>
 		</section>
 	);
 };

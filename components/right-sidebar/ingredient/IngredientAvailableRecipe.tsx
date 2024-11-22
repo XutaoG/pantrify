@@ -9,7 +9,9 @@ const IngredientAvailableRecipe = () => {
 
 	return (
 		<CollapsiblePanel title={'What You Can Make with "Eggs" '}>
-			<div className="flex flex-col items-stretch gap-9">{recipes}</div>
+			<div className="bg-gray-100 p-4 rounded-2xl flex flex-col items-stretch gap-9">
+				{recipes}
+			</div>
 		</CollapsiblePanel>
 	);
 };

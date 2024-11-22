@@ -6,7 +6,10 @@ import { Fragment } from "react";
 const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	const addToInventoryAction = (
 		<ToolTipContainer toolTipContent="Have it? Add to inventory">
-			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+			<button
+				type="button"
+				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
+			>
 				<Archive size={16} />
 			</button>
 		</ToolTipContainer>
@@ -14,7 +17,10 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 
 	const addToCartAction = (
 		<ToolTipContainer toolTipContent="Add to shopping list">
-			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+			<button
+				type="button"
+				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
+			>
 				<ShoppingCart size={16} />
 			</button>
 		</ToolTipContainer>
@@ -22,7 +28,10 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 
 	const removeFromInventoryAction = (
 		<ToolTipContainer toolTipContent={`Ran out? Remove from inventory`}>
-			<button type="button" className="p-0.5 rounded-md cursor-pointer hover:bg-neutral-200">
+			<button
+				type="button"
+				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
+			>
 				<CircleMinusIcon size={16} />
 			</button>
 		</ToolTipContainer>
@@ -40,7 +49,7 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 						<X size={18} />
 					</div>
 				)}
-				<p className="font-medium">
+				<p>
 					{recipeIngredient.name}
 					{recipeIngredient.quantity && (
 						<span>
@@ -49,7 +58,7 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 					)}
 				</p>
 			</div>
-			<div className="flex gap-2 items-center">
+			<div className="flex gap-1 items-center">
 				{recipeIngredient.isAvailable ? (
 					<Fragment>
 						{removeFromInventoryAction}

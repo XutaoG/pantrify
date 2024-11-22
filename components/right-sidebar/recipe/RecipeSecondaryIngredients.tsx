@@ -3,20 +3,13 @@ import RecipeIngredient from "./RecipeIngredient";
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 
 const RecipeSecondaryIngredients = () => {
-	const SecondaryIngredients = mockRecipeSecondaryIngredients.map(
-		(ingredient) => {
-			return (
-				<RecipeIngredient
-					key={ingredient.name}
-					recipeIngredient={ingredient}
-				/>
-			);
-		}
-	);
+	const SecondaryIngredients = mockRecipeSecondaryIngredients.map((ingredient) => {
+		return <RecipeIngredient key={ingredient.name} recipeIngredient={ingredient} />;
+	});
 
 	return (
 		<CollapsiblePanel title="Secondary Ingredients">
-			{SecondaryIngredients}
+			<div className="flex flex-col py-2 gap-2">{SecondaryIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

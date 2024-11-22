@@ -121,7 +121,7 @@ const SignUp = () => {
 				)}
 
 				{/* Login button */}
-				<FormButton title="Sign Up" isSubmitting={isSubmitting} />
+				<FormButton title="Sign Up" disabled={isSubmitting} />
 			</form>
 		</section>
 	);

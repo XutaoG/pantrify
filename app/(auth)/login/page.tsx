@@ -106,7 +106,7 @@ const Login = () => {
 				)}
 
 				{/* Login button */}
-				<FormButton title="Login" isSubmitting={isSubmitting} />
+				<FormButton title="Login" disabled={isSubmitting} />
 			</form>
 		</section>
 	);

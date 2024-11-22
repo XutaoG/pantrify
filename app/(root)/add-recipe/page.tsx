@@ -265,8 +265,6 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		await new Promise((resolve) => setTimeout(resolve, 5000));
-
 		console.log(recipe);
 	};
 
@@ -338,7 +336,7 @@ const AddRecipePage = () => {
 						{/* Open ingredient form */}
 						<button
 							type="button"
-							className={`self-center flex items-center gap-2 bg-emerald-400 p-2 rounded ${
+							className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
 								isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
 							}`}
 							onClick={openModalForAdd}
@@ -394,7 +392,7 @@ const AddRecipePage = () => {
 							{/* Add instruction button */}
 							<button
 								type="button"
-								className={`self-center flex items-center gap-2 bg-emerald-400 p-2 rounded ${
+								className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
 									isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
 								}`}
 								onClick={addInstruction}

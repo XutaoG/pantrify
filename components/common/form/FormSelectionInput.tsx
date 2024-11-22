@@ -25,7 +25,7 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 			return (
 				<div
 					key={selection}
-					className={`p-2 hover:bg-neutral-300 rounded cursor-pointer select-none ${
+					className={`p-2 hover:bg-neutral-200 rounded-lg cursor-pointer ${
 						selection === currentSelection
 							? "text-black font-bold"
 							: "text-neutral-600 font-medium"
@@ -44,8 +44,9 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 			<div className={`flex flex-col gap-1 min-w-0 relative ${className}`} ref={containerRef}>
 				{/* Input */}
 				<div
-					className="h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-					rounded px-4 py-2"
+					className={`h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2 ${
+						isExpanded && "border-neutral-200"
+					}`}
 				>
 					{/* Title */}
 					<div className="flex items-center gap-1.5">
@@ -80,8 +81,8 @@ const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>
 				{/* Options */}
 				{isExpanded && (
 					<div
-						className="max-h-60 bg-neutral-100 border border-neutral-200 
-						rounded absolute inset-x-0 top-full z-10 flex flex-col p-2 gap-1"
+						className="absolute inset-x-0 top-full max-h-60 card-container border-neutral-200
+						rounded-xl z-10 flex flex-col p-2 gap-1"
 					>
 						{options}
 					</div>

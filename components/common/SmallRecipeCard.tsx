@@ -5,9 +5,9 @@ import { Clock } from "lucide-react";
 
 const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 	return (
-		<div className="flex flex-col rounded aspect-[5/4] bg-neutral-100 border border-neutral-200">
+		<div className="flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer">
 			{/* Recipe image */}
-			<div className="w-full grow relative overflow-hidden rounded-t">
+			<div className="w-full grow relative overflow-hidden rounded-t-xl">
 				<Image
 					src={recipe.images[0].path}
 					alt="food"

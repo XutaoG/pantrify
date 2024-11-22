@@ -3,7 +3,7 @@
 import { useState } from "react";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import { useDropdown } from "@/hooks";
-import { List } from "lucide-react";
+import { ListFilter } from "lucide-react";
 
 const RecipeFilterDropdown = () => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
@@ -76,16 +76,19 @@ const RecipeFilterDropdown = () => {
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
 			<button
 				type="button"
-				className="h-12 bg-neutral-100 border border-neutral-200 aspect-square 
-				flex justify-center items-center rounded"
+				className={`h-10 card-container aspect-square px-4
+				flex gap-2 justify-center items-center rounded-full  ${
+					isExpanded ? "text-neutral-800 border-neutral-200" : "text-neutral-400"
+				}`}
 				onClick={onToggle}
 			>
-				<List size={20} />
+				<p className="tracking-wide">Filter</p>
+				<ListFilter size={20} />
 			</button>
 			{isExpanded && (
 				<div
-					className="absolute z-10 top-14 right-0 w-48 bg-neutral-100 border border-neutral-200 
-					p-3 py-5 rounded flex flex-col gap-5"
+					className="absolute z-10 top-14 right-0 w-48 card-container p-3 py-5 shadow-sm
+					rounded-xl flex flex-col gap-5"
 				>
 					{/* Difficulty selections */}
 					<CollapsiblePanel title="Difficulty">

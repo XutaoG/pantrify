@@ -5,12 +5,9 @@ import { Clock, Gauge, Refrigerator } from "lucide-react";
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
-		<div
-			className="min-w-[350px] flex flex-col rounded scroll-pl-6 
-			bg-neutral-100 border border-neutral-200"
-		>
+		<div className="min-w-[350px] flex flex-col rounded-xl card-container cursor-pointer">
 			{/* Recipe image */}
-			<div className="w-full h-48 relative overflow-hidden rounded-t">
+			<div className="w-full h-48 relative overflow-hidden rounded-t-xl">
 				<Image
 					src={recipe.images[0].path}
 					alt="food"

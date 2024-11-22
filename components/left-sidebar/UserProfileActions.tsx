@@ -12,12 +12,12 @@ const UserProfileActions = () => {
 	return (
 		<div className="flex flex-col gap-4 2xl:flex-row 2xl:gap-2 items-center text-2xl text-neutral-600">
 			<span className="hidden 2xl:block w-[2px] bg-neutral-600 self-stretch" />
-			<div className="hover:bg-neutral-200 p-2 rounded cursor-pointer">
+			<button type="button" className="hover:bg-neutral-100 p-4 rounded-2xl">
 				<Settings />
-			</div>
+			</button>
 			<button
 				type="button"
-				className="hover:bg-neutral-200 p-2 rounded"
+				className="hover:bg-neutral-100 p-4 rounded-2xl"
 				onClick={onLogoutClick}
 			>
 				<LogOut />

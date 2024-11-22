@@ -77,8 +77,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 
 	return (
 		<div
-			className={`h-20 flex flex-col gap-1 bg-neutral-100 border border-neutral-200 
-			rounded px-4 py-2 ${className}`}
+			className={`h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2 ${className}`}
 		>
 			{/* Title */}
 			<div className="flex items-center gap-1.5">
@@ -95,14 +94,14 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						<input
 							{...register("durationHour")}
 							disabled={isSubmitting}
-							className="w-8 bg-white rounded-l border border-neutral-200 p-1 bg-transparent outline-none cursor-default"
+							className="w-8 rounded-l border border-neutral-200 p-1 outline-none cursor-default"
 							readOnly
 						/>
 
 						{/* Control */}
 						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300 
+								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200 
 								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementHour(1)}
@@ -114,7 +113,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
 								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementHour(-1)}
@@ -137,14 +136,14 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 						<input
 							{...register("durationMinute")}
 							disabled={isSubmitting}
-							className="w-8 bg-white rounded-l border border-neutral-200 p-1 bg-transparent outline-none"
+							className="w-8 rounded-l border border-neutral-200 p-1 outline-none"
 							readOnly
 						/>
 
 						{/* Control */}
 						<div className="w-4 flex flex-col justify-evenly">
 							<button
-								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-300
+								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200
 								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementMinute(5)}
@@ -156,7 +155,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 								<ChevronUp size={16} strokeWidth={1} />
 							</button>
 							<button
-								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-300
+								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
 								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
 								type="button"
 								onClick={() => incrementMinute(-5)}

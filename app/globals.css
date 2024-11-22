@@ -15,19 +15,23 @@
 		@apply text-lg;
 	}
 
+	.card-container {
+		@apply bg-white border border-neutral-50;
+	}
+
 	/* width */
 	::-webkit-scrollbar {
-		@apply w-2;
+		@apply w-1.5;
 	}
 
 	/* Track */
 	::-webkit-scrollbar-track {
-		@apply bg-neutral-100;
+		@apply bg-inherit rounded-full;
 	}
 
 	/* Handle */
 	::-webkit-scrollbar-thumb {
-		@apply bg-neutral-400 hover:bg-neutral-500;
+		@apply bg-neutral-300 rounded-full;
 	}
 
 	/* Handle on hover

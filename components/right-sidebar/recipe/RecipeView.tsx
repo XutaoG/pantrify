@@ -7,9 +7,12 @@ import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
 
 const RecipeView = () => {
 	return (
-		<section>
+		<section className="flex flex-col gap-6">
+			{/* Recipe name */}
+			<h3 className="font-bold">Ground Beef Spaghetti</h3>
+
 			{/* Image */}
-			<div className="h-60 w-full relative">
+			<div className="h-60 w-full relative rounded-lg overflow-hidden">
 				<Image
 					src="/temp-recipe-images/spaghetti.jpg"
 					alt="recipe image"
@@ -20,21 +23,16 @@ const RecipeView = () => {
 				/>
 			</div>
 
-			{/* Info */}
-			<div className="p-5 flex flex-col gap-6">
-				{/* Recipe name */}
-				<h3 className="font-bold ">Ground Beef Spaghetti</h3>
-				{/* Basic infos */}
-				<RecipeInfo />
-				{/* Primary ingredients */}
-				<RecipePrimaryIngredients />
-				{/* Secondary ingredient */}
-				<RecipeSecondaryIngredients />
-				{/* Optional ingredients */}
-				<RecipeOptionalIngredients />
-				{/* Instructions */}
-				<RecipeInstructions />
-			</div>
+			{/* Basic infos */}
+			<RecipeInfo />
+			{/* Primary ingredients */}
+			<RecipePrimaryIngredients />
+			{/* Secondary ingredient */}
+			<RecipeSecondaryIngredients />
+			{/* Optional ingredients */}
+			<RecipeOptionalIngredients />
+			{/* Instructions */}
+			<RecipeInstructions />
 		</section>
 	);
 };
