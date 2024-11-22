@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDropdown } from "@/hooks";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
+import { ArrowDown, ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
 import { IngredientSortSchema } from "@/constants";
 import { IngredientSortByProps } from "@/types";
 
@@ -67,12 +67,11 @@ const IngredientSortDropdown = ({ selections, onSort }: IngredientSortByProps) =
 				onClick={() => handleSortSelectionClick(selection)}
 			>
 				{selection.name}
-				{/* {selection.name === currentSortSelection.name &&
-					(selection.isAscending ? (
-						<ArrowUpNarrowWide className="text-neutral-600" size={20} />
-					) : (
-						<ArrowDownNarrowWide className="text-neutral-600" size={20} />
-					))} */}
+				{selection.name === currentSortSelection.name && (
+					<div className={`${selection.isAscending && "rotate-180"}`}>
+						<ArrowDown size={20} className="text-neutral-600" />
+					</div>
+				)}
 			</button>
 		);
 	});
