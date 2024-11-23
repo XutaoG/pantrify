@@ -1,85 +1,113 @@
 "use client";
 
+import { PaginationProps } from "@/types";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { useState } from "react";
 
-const Pagination = () => {
-	const mockPageNumbers = ["8", "9", "10"];
+const Pagination = ({
+	pageSize,
+	totalCount,
+	currentPageNumber,
+	setCurrentPageNumber,
+}: PaginationProps) => {
+	const totalPages = Math.ceil(totalCount / pageSize);
 
-	const [currentPageNumberIndex, setCurrentPageNumberIndex] = useState(0);
+	const pages: number[] = [];
 
-	const pageNumbers = mockPageNumbers.map((pageNumber, index) => {
+	// * Add to pages
+	for (let i = currentPageNumber - 2; i <= currentPageNumber + 2; i++) {
+		if (i > 0 && i <= totalPages) {
+			pages.push(i);
+		}
+	}
+
+	const moveToPage = (pageNumber: number) => {
+		if (pageNumber > 0 && pageNumber <= totalPages) {
+			setCurrentPageNumber(pageNumber);
+		}
+	};
+
+	const moveToPrevPage = () => {
+		if (currentPageNumber - 1 > 0) {
+			setCurrentPageNumber(currentPageNumber - 1);
+		}
+	};
+
+	const moveToNextPage = () => {
+		if (currentPageNumber + 1 <= totalPages) {
+			setCurrentPageNumber(currentPageNumber + 1);
+		}
+	};
+
+	const moveToFirstPage = () => {
+		setCurrentPageNumber(1);
+	};
+
+	const moveToLastPage = () => {
+		setCurrentPageNumber(totalPages);
+	};
+
+	const pageNumbers = pages.map((pageNumber) => {
 		return (
 			<button
 				type="button"
 				key={pageNumber}
-				className={`aspect-square flex justify-center items-center rounded-full  ${
-					pageNumber === mockPageNumbers[currentPageNumberIndex]
+				className={`aspect-square flex justify-center items-center rounded-full ${
+					pageNumber === currentPageNumber
 						? "bg-sky-600 text-white"
 						: "text-neutral-600 hover:bg-neutral-200"
 				}`}
-				onClick={() => setCurrentPageNumberIndex(index)}
+				onClick={() => moveToPage(pageNumber)}
 			>
 				{pageNumber}
 			</button>
 		);
 	});
 
-	const moveToPrevPage = () => {
-		if (currentPageNumberIndex !== 0) {
-			setCurrentPageNumberIndex(currentPageNumberIndex - 1);
-		}
-	};
-
-	const moveToNextPage = () => {
-		if (currentPageNumberIndex !== mockPageNumbers.length - 1) {
-			setCurrentPageNumberIndex(currentPageNumberIndex + 1);
-		}
-	};
-
 	return (
-		<div className="h-8 flex gap-6">
-			{/* Left arrow */}
-			<button
-				type="button"
-				className="aspect-square hover:bg-neutral-200 rounded-full
-				flex justify-center items-center"
-				onClick={() => setCurrentPageNumberIndex(0)}
-			>
-				<ChevronsLeft size={18} />
-			</button>
+		<section className="flex justify-center py-8">
+			<div className="h-8 flex gap-6">
+				{/* Left arrow */}
+				<button
+					type="button"
+					className="aspect-square hover:bg-neutral-200 rounded-full
+					flex justify-center items-center"
+					onClick={moveToFirstPage}
+				>
+					<ChevronsLeft size={18} />
+				</button>
 
-			<button
-				type="button"
-				className="aspect-square hover:bg-neutral-200 rounded-full
-				flex justify-center items-center"
-				onClick={moveToPrevPage}
-			>
-				<ChevronLeft size={18} />
-			</button>
+				<button
+					type="button"
+					className="aspect-square hover:bg-neutral-200 rounded-full
+					flex justify-center items-center"
+					onClick={moveToPrevPage}
+				>
+					<ChevronLeft size={18} />
+				</button>
 
-			{/* Page numbers */}
-			{pageNumbers}
+				{/* Page numbers */}
+				{pageNumbers}
 
-			{/* Right arrow */}
-			<button
-				type="button"
-				className="aspect-square hover:bg-neutral-200 rounded-full
-				flex justify-center items-center"
-				onClick={moveToNextPage}
-			>
-				<ChevronsRight size={18} />
-			</button>
+				{/* Right arrow */}
+				<button
+					type="button"
+					className="aspect-square hover:bg-neutral-200 rounded-full
+					flex justify-center items-center"
+					onClick={moveToNextPage}
+				>
+					<ChevronRight size={18} />
+				</button>
 
-			<button
-				type="button"
-				className="aspect-square hover:bg-neutral-200 rounded-full
-				flex justify-center items-center"
-				onClick={() => setCurrentPageNumberIndex(mockPageNumbers.length - 1)}
-			>
-				<ChevronRight size={18} />
-			</button>
-		</div>
+				<button
+					type="button"
+					className="aspect-square hover:bg-neutral-200 rounded-full
+					flex justify-center items-center"
+					onClick={moveToLastPage}
+				>
+					<ChevronsRight size={18} />
+				</button>
+			</div>
+		</section>
 	);
 };
 

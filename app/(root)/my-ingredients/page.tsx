@@ -23,6 +23,14 @@ const MyIngredients = () => {
 	const [secondaryIngredients, setSecondaryIngredients] = useState<IngredientList | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
+	const [currentPrimaryIngredientsPageNumber, setCurrentPrimaryIngredientsPageNumber] =
+		useState(1);
+
+	const [currentSecondaryIngredientsPageNumber, setCurrentSecondaryIngredientsPageNumber] =
+		useState(1);
+
+	const pageSize = 12;
+
 	//* Fetch data
 	const fetchIngredients = useCallback(async () => {
 		setIsLoading(true);
@@ -35,6 +43,8 @@ const MyIngredients = () => {
 				isAvailable: true,
 				sortBy: currentSortOption?.routeParam,
 				isAscending: currentSortOption?.isAscending,
+				pageNumber: currentPrimaryIngredientsPageNumber,
+				pageSize: pageSize,
 			})
 		);
 
@@ -46,11 +56,18 @@ const MyIngredients = () => {
 				isAvailable: true,
 				sortBy: currentSortOption?.routeParam,
 				isAscending: currentSortOption?.isAscending,
+				pageNumber: currentSecondaryIngredientsPageNumber,
+				pageSize: pageSize,
 			})
 		);
 
 		setIsLoading(false);
-	}, [currentSearchWord, currentSortOption?.isAscending, currentSortOption?.routeParam]);
+	}, [
+		currentSearchWord,
+		currentSortOption,
+		currentPrimaryIngredientsPageNumber,
+		currentSecondaryIngredientsPageNumber,
+	]);
 
 	useEffect(() => {
 		// Fetch data
@@ -103,8 +120,18 @@ const MyIngredients = () => {
 						</div>
 					) : (
 						<Fragment>
-							<AllPrimaryIngredients ingredients={primaryIngredients} />
-							<AllSecondaryIngredients ingredients={secondaryIngredients} />
+							<AllPrimaryIngredients
+								ingredients={primaryIngredients}
+								pageSize={pageSize}
+								currentPageNumber={currentPrimaryIngredientsPageNumber}
+								setCurrentPageNumber={setCurrentPrimaryIngredientsPageNumber}
+							/>
+							<AllSecondaryIngredients
+								ingredients={secondaryIngredients}
+								pageSize={pageSize}
+								currentPageNumber={currentSecondaryIngredientsPageNumber}
+								setCurrentPageNumber={setCurrentSecondaryIngredientsPageNumber}
+							/>
 						</Fragment>
 					)}
 				</section>

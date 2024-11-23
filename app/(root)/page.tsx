@@ -39,9 +39,7 @@ const Home = async () => {
 			<AllRecipes />
 
 			{/* Pagination */}
-			<div className="flex justify-center py-8">
-				<Pagination />
-			</div>
+			<Pagination />
 		</div>
 	);
 };

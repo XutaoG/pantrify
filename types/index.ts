@@ -148,6 +148,13 @@ export interface PageTitleProps {
 	subtitle: string;
 }
 
+export interface PaginationProps {
+	pageSize: number;
+	totalCount: number;
+	currentPageNumber: number;
+	setCurrentPageNumber: (pageNumber: number) => void;
+}
+
 export interface LargeRecipeCardProps {
 	recipe: Recipe;
 }
@@ -186,10 +193,16 @@ export interface IngredientSortByProps {
 
 export interface AllPrimaryIngredientsProps {
 	ingredients: IngredientList;
+	pageSize: number;
+	currentPageNumber: number;
+	setCurrentPageNumber: (pageNumber: number) => void;
 }
 
 export interface AllSecondaryIngredientsProps {
 	ingredients: IngredientList;
+	pageSize: number;
+	currentPageNumber: number;
+	setCurrentPageNumber: (pageNumber: number) => void;
 }
 
 export interface IngredientCardProps {
