@@ -33,15 +33,28 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 		}
 	};
 
+	//* Expiration date
+	const expirationDate = ingredient.dateExpired ? new Date(ingredient?.dateExpired ?? "") : null;
+	const expirationDateStr = expirationDate
+		? `Exp: ${
+				expirationDate.getMonth() + 1
+		  }/${expirationDate.getDay()}/${expirationDate.getFullYear()}`
+		: "Exp: None";
+
 	return (
 		<div
 			className="h-16 flex justify-between items-center gap-3 rounded-xl 
-			px-3 py-4 card-container"
+			px-3 py-4 card-container cursor-pointer"
 		>
 			{/* Info */}
-			<div className="flex gap-1.5 items-center min-w-0">
-				<div className="text-xl">{icon}</div>
-				<p className="font-medium text-nowrap truncate ">{ingredient.name}</p>
+			<div className="flex flex-col gap-1">
+				<div className="flex gap-1.5 items-center min-w-0">
+					<div className="text-neutral-600">{icon}</div>
+					<p className="font-medium text-nowrap truncate ">{ingredient.name}</p>
+				</div>
+				{mode === "ingredient" && (
+					<p className="text-sm text-neutral-600">{expirationDateStr}</p>
+				)}
 			</div>
 
 			{/* Actions */}

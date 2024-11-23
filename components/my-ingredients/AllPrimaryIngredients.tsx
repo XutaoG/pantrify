@@ -9,7 +9,7 @@ const AllPrimaryIngredients = ({ ingredients }: AllPrimaryIngredientsProps) => {
 			<IngredientCard
 				key={ingredient.id}
 				ingredient={ingredient}
-				icon={<Egg size={20} />}
+				icon={<Egg size={16} />}
 				mode="ingredient"
 			/>
 		);
