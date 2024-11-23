@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
 import { Pencil, Trash2 } from "lucide-react";
-import { FetchContext } from "@/app/(root)/my-ingredients/page";
+import { FetchContext } from "./FetchContext";
 
 const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 	//! Context

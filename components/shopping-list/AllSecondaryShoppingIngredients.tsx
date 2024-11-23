@@ -10,7 +10,7 @@ const AllSecondaryShoppingIngredients = ({ ingredients }: AllSecondaryIngredient
 				key={ingredient.name}
 				ingredient={ingredient}
 				icon={<Milk size={20} />}
-				mode="ingredient"
+				mode="shopping"
 			/>
 		);
 	});

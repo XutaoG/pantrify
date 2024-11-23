@@ -171,8 +171,6 @@ export const refresh = async () => {
 const setCookies = async (response: AxiosResponse) => {
 	const cookieStore = await cookies();
 
-	// console.log(response.headers);
-
 	const cookieResponse = response.headers["set-cookie"]
 		?.toString()
 		.split(",")
@@ -235,8 +233,6 @@ export const addIngredient = async (newIngredient: AddIngredientDto) => {
 				Cookie: cookieStore.toString(),
 			},
 		});
-
-		// revalidatePath("/my-ingredients");
 	} catch (e) {
 		const error = e as AxiosError;
 
@@ -285,8 +281,6 @@ export const deleteIngredient = async (id: number) => {
 				Cookie: cookieStore.toString(),
 			},
 		});
-
-		revalidatePath("/my-ingredients");
 	} catch {
 		return;
 	}
@@ -305,8 +299,6 @@ export const updateIngredient = async (id: number, updatedIngredient: UpdateIngr
 				Cookie: cookieStore.toString(),
 			},
 		});
-
-		revalidatePath("/my-ingredients");
 	} catch (e) {
 		const error = e as AxiosError;
 

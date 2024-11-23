@@ -15,7 +15,7 @@ import FormDateInput from "../common/form/FormDateInput";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { addIngredient, updateIngredient } from "@/api";
 import { CalendarX2, CirclePlus, CircleX, Egg, Ham, LoaderCircle, Pencil } from "lucide-react";
-import { FetchContext } from "@/app/(root)/my-ingredients/page";
+import { FetchContext } from "../common/FetchContext";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Context
@@ -152,7 +152,11 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 			>
 				{/* Page title */}
 				<p className="font-semibold select-none">
-					{mode === "ingredient" ? "Add New Ingredient" : "Add to Shopping List"}
+					{ingredient != null
+						? "Edit"
+						: mode === "ingredient"
+						? "Add New Ingredient"
+						: "Add to Shopping List"}
 				</p>
 
 				<div className="flex flex-col gap-5">

@@ -10,7 +10,7 @@ const AllPrimaryShoppingIngredients = ({ ingredients }: AllPrimaryIngredientsPro
 				key={ingredient.id}
 				ingredient={ingredient}
 				icon={<Egg size={20} />}
-				mode="ingredient"
+				mode="shopping"
 			/>
 		);
 	});

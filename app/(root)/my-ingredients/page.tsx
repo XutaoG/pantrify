@@ -1,6 +1,7 @@
 "use client";
 
 import { getAllIngredients } from "@/api";
+import { FetchContext } from "@/components/common/FetchContext";
 import PageTitle from "@/components/common/PageTitle";
 import SearchBar from "@/components/common/SearchBar";
 import AddIngredientController from "@/components/my-ingredients/AddIngredientController";
@@ -10,10 +11,7 @@ import IngredientSortDropdown from "@/components/my-ingredients/IngredientSortDr
 import { IngredientSortSchema, ingredientSortSelections } from "@/constants";
 import { IngredientList } from "@/types";
 import { LoaderCircle } from "lucide-react";
-import { createContext, Fragment, useCallback, useEffect, useState } from "react";
-
-//* Context
-export const FetchContext = createContext<(() => Promise<void>) | null>(null);
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 const MyIngredients = () => {
 	//* Search and sorting
