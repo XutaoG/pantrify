@@ -236,7 +236,7 @@ export const addIngredient = async (newIngredient: AddIngredientDto) => {
 			},
 		});
 
-		revalidatePath("/my-ingredients");
+		// revalidatePath("/my-ingredients");
 	} catch (e) {
 		const error = e as AxiosError;
 

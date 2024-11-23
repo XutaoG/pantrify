@@ -12,11 +12,15 @@ import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
 import FormSelectionInput from "../common/form/FormSelectionInput";
 import FormDateInput from "../common/form/FormDateInput";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { addIngredient, updateIngredient } from "@/api";
 import { CalendarX2, CirclePlus, CircleX, Egg, Ham, LoaderCircle, Pencil } from "lucide-react";
+import { FetchContext } from "@/app/(root)/my-ingredients/page";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
+	//! Context
+	const fetch = useContext(FetchContext);
+
 	//! Form
 	const methods = useForm<TAddIngredientSchema>({
 		resolver: zodResolver(addIngredientSchema),
@@ -71,6 +75,12 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 		} else {
 			//* Update ingredient
 			await submitEditIngredient();
+		}
+
+		if (fetch) {
+			await fetch();
+		} else {
+			console.error("Context not found");
 		}
 	};
 

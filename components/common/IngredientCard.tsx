@@ -1,12 +1,17 @@
 "use client";
 
 import { IngredientCardProps } from "@/types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
 import { Pencil, Trash2 } from "lucide-react";
+import { FetchContext } from "@/app/(root)/my-ingredients/page";
 
 const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
+	//! Context
+	const fetch = useContext(FetchContext);
+
+	//! Modal
 	const [showModalForEdit, setShowModalForEdit] = useState(false);
 
 	const openModal = () => {
@@ -17,8 +22,15 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 		setShowModalForEdit(false);
 	};
 
+	//* Delete ingredient
 	const submitDeleteIngredient = async () => {
 		await deleteIngredient(ingredient.id);
+
+		if (fetch) {
+			await fetch();
+		} else {
+			console.error("Context not found");
+		}
 	};
 
 	return (
