@@ -1,12 +1,7 @@
 "use client";
 
 import { ingredientTypes } from "@/constants";
-import {
-	AddIngredientDto,
-	addIngredientSchema,
-	IngredientFormModalProps,
-	TAddIngredientSchema,
-} from "@/types";
+import { AddIngredientDto, addIngredientSchema, Ingredient, TAddIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "../common/form/FormInput";
@@ -16,6 +11,12 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { addIngredient, updateIngredient } from "@/api";
 import { CalendarX2, CirclePlus, CircleX, Egg, Ham, LoaderCircle, Pencil } from "lucide-react";
 import { RefreshContext } from "../common/FetchContext";
+
+interface IngredientFormModalProps {
+	mode: "ingredient" | "shopping";
+	onModalClose: () => void;
+	ingredient?: Ingredient;
+}
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Context

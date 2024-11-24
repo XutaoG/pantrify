@@ -298,12 +298,6 @@ export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
 	icon?: ReactNode;
 }
 
-export interface IngredientFormModalProps {
-	mode: "ingredient" | "shopping";
-	onModalClose: () => void;
-	ingredient?: Ingredient;
-}
-
 // ! Form schemas
 
 // Sign up

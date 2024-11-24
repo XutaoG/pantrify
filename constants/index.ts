@@ -11,6 +11,8 @@ export const refreshApiPath = "/auth/refresh";
 
 //! Ingredient
 export const ingredientsPath = "/ingredient";
+export const moveIngredientToCartPath = "/ingredient/move-to-cart";
+export const moveIngredientToInventoryPath = "/ingredient/move-to-inventory";
 
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";

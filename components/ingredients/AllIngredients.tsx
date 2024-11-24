@@ -1,7 +1,7 @@
 "use client";
 
 import CollapsiblePanel from "../common/CollapsiblePanel";
-import IngredientCard from "../common/IngredientCard";
+import IngredientCard from "./IngredientCard";
 import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
 import {

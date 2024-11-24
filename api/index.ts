@@ -6,6 +6,8 @@ import {
 	ingredientsPath,
 	loginApiPath,
 	logoutApiPath,
+	moveIngredientToCartPath,
+	moveIngredientToInventoryPath,
 	refreshApiPath,
 	signUpApiPath,
 } from "@/constants";
@@ -31,6 +33,10 @@ import setCookieParser from "set-cookie-parser";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = baseApiPath;
+
+export interface ErrorResponse {
+	errorMessage: string | null;
+}
 
 //! Authentication
 
@@ -307,6 +313,74 @@ export const updateIngredient = async (id: number, updatedIngredient: UpdateIngr
 
 			if (error.response.status == 400) {
 				response.errorMessage = "Invalid ingredient";
+			} else if (error.response.status == 409) {
+				response.errorMessage = "Ingredient already exists";
+			}
+		} else {
+			// No response received
+
+			response.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return response;
+};
+
+export const moveToCart = async (id: number) => {
+	const response: ErrorResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.post(`${moveIngredientToCartPath}/${id}`, undefined, {
+			headers: {
+				Cookie: cookieStore.toString(),
+			},
+		});
+	} catch (e) {
+		const error = e as AxiosError;
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 404) {
+				response.errorMessage = "Ingredient not found";
+			} else if (error.response.status == 409) {
+				response.errorMessage = "Ingredient already exists";
+			}
+		} else {
+			// No response received
+
+			response.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return response;
+};
+
+export const moveToInventory = async (id: number) => {
+	const response: ErrorResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.post(`${moveIngredientToInventoryPath}/${id}`, undefined, {
+			headers: {
+				Cookie: cookieStore.toString(),
+			},
+		});
+	} catch (e) {
+		const error = e as AxiosError;
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 404) {
+				response.errorMessage = "Ingredient not found";
 			} else if (error.response.status == 409) {
 				response.errorMessage = "Ingredient already exists";
 			}

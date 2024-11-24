@@ -2,11 +2,11 @@
 
 import { useContext, useState } from "react";
 import IngredientFormModal from "../ingredients/IngredientFormModal";
-import { deleteIngredient } from "@/api";
-import { Egg, Milk, Pencil, Trash2 } from "lucide-react";
-import { ActiveViewContext } from "./ActiveViewContext";
+import { deleteIngredient, moveToCart, moveToInventory } from "@/api";
+import { Archive, Egg, Milk, Pencil, ShoppingCart, Trash2 } from "lucide-react";
+import { ActiveViewContext } from "../common/ActiveViewContext";
 import { Ingredient } from "@/types";
-import { RefreshContext } from "./FetchContext";
+import { RefreshContext } from "../common/FetchContext";
 
 interface IngredientCardProps {
 	mode: "ingredient" | "shopping";
@@ -33,6 +33,16 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 		setShowModalForEdit(false);
 	};
 
+	//* Move ingredient to cart or inventory
+	const submitMove = async () => {
+		if (mode == "ingredient") {
+			await moveToCart(ingredient.id);
+		} else {
+			await moveToInventory(ingredient.id);
+		}
+		refresh();
+	};
+
 	//* Delete ingredient
 	const submitDeleteIngredient = async () => {
 		await deleteIngredient(ingredient.id);
@@ -57,14 +67,14 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 			onMouseLeave={() => setIsHover(false)}
 		>
 			{/* Info */}
-			<div className="flex flex-col gap-1">
-				<div className="flex gap-1.5 items-center min-w-0">
+			<div className="flex flex-col gap-1 truncate">
+				<div className="flex gap-1.5 items-center">
 					{ingredient.ingredientType == "Primary" ? (
-						<Egg size={16} className="text-neutral-600" />
+						<Egg size={16} className="text-neutral-600 min-w-4" />
 					) : (
-						<Milk size={16} className="text-neutral-600" />
+						<Milk size={16} className="text-neutral-600 min-w-4" />
 					)}
-					<p className="font-medium text-nowrap truncate ">{ingredient.name}</p>
+					<p className="font-medium text-nowrap truncate">{ingredient.name}</p>
 				</div>
 				{mode === "ingredient" && (
 					<p className="text-sm text-neutral-600">{expirationDateStr}</p>
@@ -73,6 +83,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 
 			{/* Actions */}
 			<div className={`flex gap-2 items-center ${!isHover && "hidden"}`}>
+				{/* Edit */}
 				<button
 					type="button"
 					className="bg-yellow-400 rounded-full size-8 hover:bg-yellow-500
@@ -81,6 +92,22 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 				>
 					<Pencil size={18} color="white" />
 				</button>
+
+				{/* Move */}
+				<button
+					type="button"
+					className="bg-sky-600 rounded-full size-8 hover:bg-sky-500
+					flex justify-center items-center"
+					onClick={submitMove}
+				>
+					{mode === "ingredient" ? (
+						<ShoppingCart size={18} color="white" />
+					) : (
+						<Archive size={18} color="white" />
+					)}
+				</button>
+
+				{/* Delete */}
 				<button
 					type="button"
 					className="bg-red-400 rounded-full size-8 hover:bg-red-500 
