@@ -1,18 +1,24 @@
 "use client";
 
-import { IngredientCardProps } from "@/types";
 import { useContext, useState } from "react";
 import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
-import { Pencil, Trash2 } from "lucide-react";
+import { Egg, Milk, Pencil, Trash2 } from "lucide-react";
 import { FetchContext } from "./FetchContext";
 import { ActiveViewContext } from "./ActiveViewContext";
+import { Ingredient } from "@/types";
+import Router from "next/router";
 
-const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
+interface IngredientCardProps {
+	mode: "ingredient" | "shopping";
+	ingredient: Ingredient;
+}
+
+const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	const [isHover, setIsHover] = useState(false);
 
 	//! Context
-	const fetch = useContext(FetchContext);
+	// const fetch = useContext(FetchContext);
 	const view = useContext(ActiveViewContext);
 	const { setActiveView } = view!;
 
@@ -32,11 +38,12 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 	const submitDeleteIngredient = async () => {
 		await deleteIngredient(ingredient.id);
 
-		if (fetch) {
-			await fetch();
-		} else {
-			console.error("Context not found");
-		}
+		// if (fetch) {
+		// 	await fetch();
+		// } else {
+		// 	console.error("Context not found");
+		// }
+		Router.reload();
 	};
 
 	//* Expiration date
@@ -58,7 +65,11 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 			{/* Info */}
 			<div className="flex flex-col gap-1">
 				<div className="flex gap-1.5 items-center min-w-0">
-					<div className="text-neutral-600">{icon}</div>
+					{ingredient.ingredientType == "Primary" ? (
+						<Egg size={16} className="text-neutral-600" />
+					) : (
+						<Milk size={16} className="text-neutral-600" />
+					)}
 					<p className="font-medium text-nowrap truncate ">{ingredient.name}</p>
 				</div>
 				{mode === "ingredient" && (

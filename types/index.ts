@@ -153,13 +153,6 @@ export interface PageTitleProps {
 	subtitle: string;
 }
 
-export interface PaginationProps {
-	pageSize: number;
-	totalCount: number;
-	currentPageNumber: number;
-	setCurrentPageNumber: (pageNumber: number) => void;
-}
-
 export interface ActiveViewContextWrapperProps {
 	children: ReactNode;
 }
@@ -212,12 +205,6 @@ export interface AllSecondaryIngredientsProps {
 	pageSize: number;
 	currentPageNumber: number;
 	setCurrentPageNumber: (pageNumber: number) => void;
-}
-
-export interface IngredientCardProps {
-	mode: "ingredient" | "shopping";
-	ingredient: Ingredient;
-	icon: ReactNode;
 }
 
 export interface RightSideBarProps {
