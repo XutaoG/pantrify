@@ -4,7 +4,11 @@ import CollapsiblePanel from "../common/CollapsiblePanel";
 import IngredientCard from "../common/IngredientCard";
 import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
-import { IngredientSortSchema, ingredientSortSelections } from "@/constants";
+import {
+	IngredientSortSchema,
+	ingredientSortSelections,
+	shoppingListSortSelections,
+} from "@/constants";
 import SearchBar from "../common/SearchBar";
 import IngredientSortDropdown from "./IngredientSortDropdown";
 import { useIngredients } from "@/hooks";
@@ -49,6 +53,8 @@ const AllIngredients = ({
 		return <IngredientCard key={ingredient.id} ingredient={ingredient} mode="ingredient" />;
 	});
 
+	const sortSelections = isAvailable ? ingredientSortSelections : shoppingListSortSelections;
+
 	return (
 		<CollapsiblePanel
 			title={ingredientType == "Primary" ? "Primary Ingredients" : "Secondary Ingredients"}
@@ -57,7 +63,7 @@ const AllIngredients = ({
 				{/* Search and sort */}
 				<div className="flex gap-6">
 					<SearchBar placeholderText="Search for a ingredient" onSearch={search} />
-					<IngredientSortDropdown selections={ingredientSortSelections} onSort={sort} />
+					<IngredientSortDropdown selections={sortSelections} onSort={sort} />
 				</div>
 
 				{/* Show current search word */}
@@ -91,11 +97,7 @@ const AllIngredients = ({
 					) : (
 						// No ingredients
 						<div className="h-16 flex justify-center items-center">
-							<p className="font-medium italic">
-								{noIngredientMessage}
-								{/* No ingredients yet! Add your first to begin building your
-								collection. */}
-							</p>
+							<p className="font-medium italic">{noIngredientMessage}</p>
 						</div>
 					))}
 			</section>
