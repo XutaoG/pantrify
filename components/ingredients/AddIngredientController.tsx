@@ -4,7 +4,11 @@ import { CirclePlus } from "lucide-react";
 import IngredientFormModal from "./IngredientFormModal";
 import { Fragment, useState } from "react";
 
-const AddIngredientController = () => {
+interface AddIngredientControllerProps {
+	mode: "ingredient" | "shopping";
+}
+
+const AddIngredientController = ({ mode }: AddIngredientControllerProps) => {
 	// * Model control
 	const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 
@@ -25,12 +29,12 @@ const AddIngredientController = () => {
 			>
 				<div className="flex gap-2 items-center">
 					<CirclePlus size={20} color="white" />
-					<p className="text-white font-semibold">Add Ingredient</p>
+					<p className="text-white font-semibold">
+						{mode === "ingredient" ? "My Ingredients" : "Add to Shopping List"}
+					</p>
 				</div>
 			</button>
-			{isIngredientModalOpen && (
-				<IngredientFormModal mode="ingredient" onModalClose={closeModel} />
-			)}
+			{isIngredientModalOpen && <IngredientFormModal mode={mode} onModalClose={closeModel} />}
 		</Fragment>
 	);
 };

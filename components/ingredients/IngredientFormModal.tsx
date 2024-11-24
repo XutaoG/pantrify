@@ -131,6 +131,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 			isInCart,
 			dateExpired,
 		};
+
 		return newIngredient;
 	};
 
@@ -140,7 +141,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 	};
 
 	return (
-		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
+		<section className="fixed inset-0 flex justify-center items-center bg-black/15 z-20">
 			<form
 				onSubmit={handleSubmit(submit)}
 				className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"

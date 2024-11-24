@@ -2,18 +2,13 @@
 
 import { RefreshContext } from "@/components/common/FetchContext";
 import PageTitle from "@/components/common/PageTitle";
-import AllIngredients from "@/components/my-ingredients/AllIngredients";
-import AddShoppingListcontroller from "@/components/shopping-list/AddShoppingListController";
-import React, { useState } from "react";
+import AddIngredientController from "@/components/ingredients/AddIngredientController";
+import AllIngredients from "@/components/ingredients/AllIngredients";
+import { useRefresh } from "@/hooks";
 
 const ShoppingList = () => {
 	//* refreshValue: passed to useIngredients dependency array to retrieve ingredients
-	const [refreshValue, setRefreshValue] = useState(false);
-
-	//* refresh: called when ingredients are updated and need to be reloaded
-	const refresh = () => {
-		setRefreshValue((val) => !val);
-	};
+	const [refreshValue, refresh] = useRefresh();
 
 	return (
 		<RefreshContext.Provider value={{ refreshValue, refresh }}>
@@ -25,7 +20,7 @@ const ShoppingList = () => {
 				/>
 
 				{/* Add shopping items */}
-				<AddShoppingListcontroller />
+				<AddIngredientController mode="shopping" />
 
 				{/* All ingredients */}
 				<section className="flex flex-col gap-6">
@@ -35,7 +30,7 @@ const ShoppingList = () => {
 						isAvailable={false}
 						isInCart={true}
 						pageSize={12}
-						noIngredientMessage="No ingredients yet! Add your first to begin building your collection."
+						noIngredientMessage="Nothing here yet! Start adding ingredients to plan your shopping."
 						refreshValue={refreshValue}
 					/>
 
@@ -45,7 +40,7 @@ const ShoppingList = () => {
 						isAvailable={false}
 						isInCart={true}
 						pageSize={12}
-						noIngredientMessage="No ingredients yet! Add your first to begin building your collection."
+						noIngredientMessage="Nothing here yet! Start adding ingredients to plan your shopping."
 						refreshValue={refreshValue}
 					/>
 				</section>

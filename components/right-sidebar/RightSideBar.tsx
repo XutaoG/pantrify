@@ -5,6 +5,7 @@ import { ActiveViewContext } from "../common/ActiveViewContext";
 import { isIngredient, isRecipe } from "@/utils";
 import IngredientView from "./ingredient/IngredientView";
 import RecipeView from "./recipe/RecipeView";
+import Image from "next/image";
 
 const RightSideBar = () => {
 	const view = useContext(ActiveViewContext);
@@ -19,7 +20,14 @@ const RightSideBar = () => {
 			<div className="grow flex flex-col pr-4 overflow-y-auto">
 				{/* No view */}
 				{activeView == null && (
-					<div className="grow flex justify-center items-center">
+					<div className="grow flex flex-col gap-6 justify-center items-center">
+						<Image
+							src="/logo/pantrify_logo.webp"
+							alt="logo"
+							width={48}
+							height={48}
+							priority
+						/>
 						<p className="font-medium text-neutral-600 italic">
 							Select a Recipe or Ingredient to View!
 						</p>

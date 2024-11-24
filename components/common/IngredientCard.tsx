@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState } from "react";
-import IngredientFormModal from "../my-ingredients/IngredientFormModal";
+import IngredientFormModal from "../ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
 import { Egg, Milk, Pencil, Trash2 } from "lucide-react";
 import { ActiveViewContext } from "./ActiveViewContext";

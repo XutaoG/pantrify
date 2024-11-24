@@ -91,3 +91,15 @@ export const useIngredients = ({
 		setPageNumber,
 	};
 };
+
+export const useRefresh = () => {
+	//* refreshValue: passed to useIngredients dependency array to retrieve ingredients
+	const [refreshValue, setRefreshValue] = useState(false);
+
+	//* refresh: called when ingredients are updated and need to be reloaded
+	const refresh = () => {
+		setRefreshValue((val) => !val);
+	};
+
+	return [refreshValue, refresh] as const;
+};

@@ -2,18 +2,12 @@
 
 import { RefreshContext } from "@/components/common/FetchContext";
 import PageTitle from "@/components/common/PageTitle";
-import AddIngredientController from "@/components/my-ingredients/AddIngredientController";
-import AllIngredients from "@/components/my-ingredients/AllIngredients";
-import { useState } from "react";
+import AddIngredientController from "@/components/ingredients/AddIngredientController";
+import AllIngredients from "@/components/ingredients/AllIngredients";
+import { useRefresh } from "@/hooks";
 
 const MyIngredients = () => {
-	//* refreshValue: passed to useIngredients dependency array to retrieve ingredients
-	const [refreshValue, setRefreshValue] = useState(false);
-
-	//* refresh: called when ingredients are updated and need to be reloaded
-	const refresh = () => {
-		setRefreshValue((val) => !val);
-	};
+	const [refreshValue, refresh] = useRefresh();
 
 	return (
 		<RefreshContext.Provider value={{ refreshValue, refresh }}>
@@ -25,7 +19,7 @@ const MyIngredients = () => {
 				/>
 
 				{/* Add ingredient */}
-				<AddIngredientController />
+				<AddIngredientController mode="ingredient" />
 
 				{/* All ingredients */}
 				<section className="flex flex-col gap-6">

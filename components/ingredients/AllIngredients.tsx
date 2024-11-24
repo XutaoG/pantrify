@@ -50,7 +50,13 @@ const AllIngredients = ({
 
 	// Render cards
 	const ingredientCards = ingredients?.ingredients.map((ingredient) => {
-		return <IngredientCard key={ingredient.id} ingredient={ingredient} mode="ingredient" />;
+		return (
+			<IngredientCard
+				key={ingredient.id}
+				ingredient={ingredient}
+				mode={isAvailable ? "ingredient" : "shopping"}
+			/>
+		);
 	});
 
 	const sortSelections = isAvailable ? ingredientSortSelections : shoppingListSortSelections;
