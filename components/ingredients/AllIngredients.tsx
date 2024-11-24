@@ -76,7 +76,12 @@ const AllIngredients = ({
 				{searchWord !== "" && (
 					<div className="flex justify-center items-center">
 						<p className="text-sky-600">
-							Searching for <span className="font-medium">{`"${searchWord}"`}</span>
+							Searching for <span className="font-medium">{`"${searchWord}"`}</span>{" "}
+							(Found {ingredients?.totalCount ?? 0} result
+							{ingredients != null &&
+								(ingredients.totalCount > 1 || ingredients.totalCount === 0) &&
+								"s"}
+							)
 						</p>
 					</div>
 				)}
@@ -101,10 +106,12 @@ const AllIngredients = ({
 							/>
 						</div>
 					) : (
-						// No ingredients
-						<div className="h-16 flex justify-center items-center">
-							<p className="font-medium italic">{noIngredientMessage}</p>
-						</div>
+						searchWord === "" && (
+							// No ingredients
+							<div className="h-16 flex justify-center items-center">
+								<p className="font-medium italic">{noIngredientMessage}</p>
+							</div>
+						)
 					))}
 			</section>
 		</CollapsiblePanel>
