@@ -15,11 +15,11 @@ import FormDateInput from "../common/form/FormDateInput";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { addIngredient, updateIngredient } from "@/api";
 import { CalendarX2, CirclePlus, CircleX, Egg, Ham, LoaderCircle, Pencil } from "lucide-react";
-import { FetchContext } from "../common/FetchContext";
+import { RefreshContext } from "../common/FetchContext";
 
 const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormModalProps) => {
 	//! Context
-	const fetch = useContext(FetchContext);
+	const { refresh } = useContext(RefreshContext)!;
 
 	//! Form
 	const methods = useForm<TAddIngredientSchema>({
@@ -77,11 +77,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 			await submitEditIngredient();
 		}
 
-		if (fetch) {
-			await fetch();
-		} else {
-			console.error("Context not found");
-		}
+		refresh();
 	};
 
 	const submitAddIngredient = async () => {

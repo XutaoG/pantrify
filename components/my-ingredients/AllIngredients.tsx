@@ -15,6 +15,7 @@ interface AllIngredientsProps {
 	isInCart: boolean;
 	pageSize: number;
 	noIngredientMessage: string;
+	refreshValue: boolean;
 }
 
 const AllIngredients = ({
@@ -23,6 +24,7 @@ const AllIngredients = ({
 	isInCart,
 	pageSize,
 	noIngredientMessage,
+	refreshValue,
 }: AllIngredientsProps) => {
 	const {
 		ingredients,
@@ -32,7 +34,7 @@ const AllIngredients = ({
 		isLoading,
 		pageNumber,
 		setPageNumber,
-	} = useIngredients({ ingredientType, isAvailable, isInCart, pageSize });
+	} = useIngredients({ ingredientType, isAvailable, isInCart, pageSize, refreshValue });
 
 	const search = (searchWord: string) => {
 		setSearchWord(searchWord);

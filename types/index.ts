@@ -28,7 +28,7 @@ export interface RecipeList {
 interface IngredientBase {
 	id: number;
 	name: string;
-	ingredientType: string;
+	ingredientType: "Primary" | "Secondary" | "Optional";
 }
 
 export interface RecipeIngredient extends IngredientBase {

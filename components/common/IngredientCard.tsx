@@ -4,10 +4,9 @@ import { useContext, useState } from "react";
 import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
 import { Egg, Milk, Pencil, Trash2 } from "lucide-react";
-import { FetchContext } from "./FetchContext";
 import { ActiveViewContext } from "./ActiveViewContext";
 import { Ingredient } from "@/types";
-import Router from "next/router";
+import { RefreshContext } from "./FetchContext";
 
 interface IngredientCardProps {
 	mode: "ingredient" | "shopping";
@@ -18,7 +17,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	const [isHover, setIsHover] = useState(false);
 
 	//! Context
-	// const fetch = useContext(FetchContext);
+	const { refresh } = useContext(RefreshContext)!;
 	const view = useContext(ActiveViewContext);
 	const { setActiveView } = view!;
 
@@ -38,12 +37,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	const submitDeleteIngredient = async () => {
 		await deleteIngredient(ingredient.id);
 
-		// if (fetch) {
-		// 	await fetch();
-		// } else {
-		// 	console.error("Context not found");
-		// }
-		Router.reload();
+		refresh();
 	};
 
 	//* Expiration date

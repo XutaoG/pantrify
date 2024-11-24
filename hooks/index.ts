@@ -37,11 +37,13 @@ export const useIngredients = ({
 	ingredientType,
 	isAvailable,
 	isInCart,
+	refreshValue,
 }: {
 	pageSize: number;
 	ingredientType: "Primary" | "Secondary";
 	isAvailable?: boolean;
 	isInCart?: boolean;
+	refreshValue: boolean;
 }) => {
 	//* Search and sorting
 	const [searchWord, setSearchWord] = useState("");
@@ -76,7 +78,7 @@ export const useIngredients = ({
 	useEffect(() => {
 		// Fetch data
 		fetchIngredients();
-	}, [fetchIngredients]);
+	}, [fetchIngredients, refreshValue]);
 
 	return {
 		ingredients,

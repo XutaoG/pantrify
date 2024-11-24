@@ -1,4 +1,9 @@
 import { createContext } from "react";
 
+interface RefreshContextProps {
+	refreshValue: boolean;
+	refresh: () => void;
+}
+
 //* Context
-export const FetchContext = createContext<(() => Promise<void>) | null>(null);
+export const RefreshContext = createContext<RefreshContextProps | null>(null);
