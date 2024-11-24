@@ -1,6 +1,5 @@
+import ActiveViewContextWrapper from "@/components/common/ActiveViewContextWrapper";
 import LeftSideBar from "@/components/left-sidebar/LeftSideBar";
-import IngredientView from "@/components/right-sidebar/ingredient/IngredientView";
-import RecipeView from "@/components/right-sidebar/recipe/RecipeView";
 import RightSideBar from "@/components/right-sidebar/RightSideBar";
 import { ReactNode } from "react";
 
@@ -17,15 +16,14 @@ const RootLayout = async ({
 			</section>
 
 			{/* Main content */}
-			<section className="grow min-w-0 flex p-4 my-4">{children}</section>
+			<ActiveViewContextWrapper>
+				<section className="grow min-w-0 flex p-4 my-4">{children}</section>
 
-			{/* Right sidebar */}
-			<section className="flex p-4 pl-0">
-				<RightSideBar>
-					<RecipeView />
-					{/* <IngredientView /> */}
-				</RightSideBar>
-			</section>
+				{/* Right sidebar */}
+				<section className="flex p-4 pl-0">
+					<RightSideBar />
+				</section>
+			</ActiveViewContextWrapper>
 		</main>
 	);
 };

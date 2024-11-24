@@ -1,7 +1,12 @@
+import { Ingredient } from "@/types";
 import IngredientAvailableRecipe from "./IngredientAvailableRecipe";
 import IngredientInfo from "./IngredientInfo";
 
-const IngredientView = () => {
+interface IngredientViewProps {
+	ingredient: Ingredient;
+}
+
+const IngredientView = ({ ingredient }: IngredientViewProps) => {
 	return (
 		<section className="flex flex-col gap-6">
 			{/* Ingredient name */}

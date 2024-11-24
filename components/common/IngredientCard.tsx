@@ -6,15 +6,21 @@ import IngredientFormModal from "../my-ingredients/IngredientFormModal";
 import { deleteIngredient } from "@/api";
 import { Pencil, Trash2 } from "lucide-react";
 import { FetchContext } from "./FetchContext";
+import { ActiveViewContext } from "./ActiveViewContext";
 
 const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
+	const [isHover, setIsHover] = useState(false);
+
 	//! Context
 	const fetch = useContext(FetchContext);
+	const view = useContext(ActiveViewContext);
+	const { setActiveView } = view!;
 
 	//! Modal
 	const [showModalForEdit, setShowModalForEdit] = useState(false);
 
 	const openModal = () => {
+		setIsHover(false);
 		setShowModalForEdit(true);
 	};
 
@@ -45,6 +51,9 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 		<div
 			className="h-16 flex justify-between items-center gap-3 rounded-xl 
 			px-3 py-4 card-container cursor-pointer"
+			onClick={() => setActiveView(ingredient)}
+			onMouseEnter={() => setIsHover(true)}
+			onMouseLeave={() => setIsHover(false)}
 		>
 			{/* Info */}
 			<div className="flex flex-col gap-1">
@@ -58,7 +67,7 @@ const IngredientCard = ({ mode, icon, ingredient }: IngredientCardProps) => {
 			</div>
 
 			{/* Actions */}
-			<div className="flex gap-2 items-center">
+			<div className={`flex gap-2 items-center ${!isHover && "hidden"}`}>
 				<button
 					type="button"
 					className="bg-yellow-400 rounded-full size-8 hover:bg-yellow-500

@@ -29,14 +29,12 @@ const AllPrimaryIngredients = ({
 					<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
 						{primaryIngredientCards}
 					</div>
-					{/* <div className="flex justify-center py-8"> */}
 					<Pagination
 						pageSize={pageSize}
 						totalCount={ingredients.totalCount}
 						currentPageNumber={currentPageNumber}
 						setCurrentPageNumber={setCurrentPageNumber}
 					/>
-					{/* </div> */}
 				</div>
 			) : (
 				<div className="h-16 flex justify-center items-center">

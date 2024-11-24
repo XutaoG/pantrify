@@ -129,6 +129,11 @@ export interface UpdateIngredientResponse {
 	errorMessage: string | null;
 }
 
+export interface ActiveView {
+	activeView: Ingredient | Recipe | null;
+	setActiveView: (activeView: Ingredient | Recipe) => void;
+}
+
 // ! Request config
 export interface GetAllIngredientsRequestConfig {
 	name?: string;
@@ -153,6 +158,10 @@ export interface PaginationProps {
 	totalCount: number;
 	currentPageNumber: number;
 	setCurrentPageNumber: (pageNumber: number) => void;
+}
+
+export interface ActiveViewContextWrapperProps {
+	children: ReactNode;
 }
 
 export interface LargeRecipeCardProps {
@@ -218,6 +227,10 @@ export interface RightSideBarProps {
 export interface ToolTipProps {
 	children: ReactNode;
 	toolTipContent: string;
+}
+
+export interface RecipeviewProps {
+	recipe: Recipe;
 }
 
 export interface FormInputProps extends ComponentPropsWithRef<"input"> {
