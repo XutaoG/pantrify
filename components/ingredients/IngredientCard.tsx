@@ -7,6 +7,7 @@ import { Archive, Egg, Milk, Pencil, ShoppingCart, Trash2 } from "lucide-react";
 import { ActiveViewContext } from "../common/ActiveViewContext";
 import { Ingredient } from "@/types";
 import { RefreshContext } from "../common/FetchContext";
+import { getUSDate } from "@/utils";
 
 interface IngredientCardProps {
 	mode: "ingredient" | "shopping";
@@ -51,12 +52,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	};
 
 	//* Expiration date
-	const expirationDate = ingredient.dateExpired ? new Date(ingredient?.dateExpired ?? "") : null;
-	const expirationDateStr = expirationDate
-		? `Exp: ${
-				expirationDate.getMonth() + 1
-		  }/${expirationDate.getDay()}/${expirationDate.getFullYear()}`
-		: "Exp: None";
+	const expirationDateStr = getUSDate(ingredient.dateExpired ?? null);
 
 	return (
 		<div
@@ -77,7 +73,9 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 					<p className="font-medium text-nowrap truncate">{ingredient.name}</p>
 				</div>
 				{mode === "ingredient" && (
-					<p className="text-sm text-neutral-600">{expirationDateStr}</p>
+					<p className="text-sm text-neutral-600">
+						{expirationDateStr ? `Exp: ${expirationDateStr}` : "Exp: None"}
+					</p>
 				)}
 			</div>
 

@@ -1,8 +1,12 @@
 "use client";
 
-import { ActiveViewContextWrapperProps, Ingredient, Recipe } from "@/types";
+import { Ingredient, Recipe } from "@/types";
 import { ActiveViewContext } from "./ActiveViewContext";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
+
+interface ActiveViewContextWrapperProps {
+	children: ReactNode;
+}
 
 const ActiveViewContextWrapper = ({ children }: ActiveViewContextWrapperProps) => {
 	const [activeView, setActiveView] = useState<Ingredient | Recipe | null>(null);

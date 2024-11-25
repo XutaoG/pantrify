@@ -1,11 +1,19 @@
 "use client";
 
-import { InfoWidgetProps } from "@/types";
+import { ReactNode } from "react";
+
+interface InfoWidgetProps {
+	icon: ReactNode;
+	iconColor: string;
+	text: string;
+	onClick?: () => void;
+	onHover?: () => void;
+}
 
 const InfoWidget = ({ icon, iconColor, text, onClick, onHover }: InfoWidgetProps) => {
 	return (
 		<div
-			className={`flex flex-col gap-1 justify-center items-center w-14 
+			className={`flex flex-col gap-1 justify-center items-center w-20
 			rounded-sm ${(onClick || onHover) && "cursor-pointer"}`}
 			onClick={onClick}
 			onMouseOver={onHover}

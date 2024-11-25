@@ -1,8 +1,13 @@
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import LargeRecipeCard from "@/components/common/LargeRecipeCard";
 import { mockEggRecipes } from "@/constants";
+import { Ingredient } from "@/types";
 
-const IngredientAvailableRecipe = () => {
+interface IngredientAvailableRecipeProps {
+	ingredient: Ingredient;
+}
+
+const IngredientAvailableRecipe = ({}: IngredientAvailableRecipeProps) => {
 	const recipes = mockEggRecipes.map((recipe) => {
 		return <LargeRecipeCard key={recipe.name} recipe={recipe} />;
 	});

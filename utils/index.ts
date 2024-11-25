@@ -9,3 +9,15 @@ export const isIngredient = (activeView: Recipe | Ingredient): activeView is Ing
 export const isRecipe = (activeView: Recipe | Ingredient): activeView is Recipe => {
 	return (<Recipe>activeView).difficulty !== undefined;
 };
+
+export const getUSDate = (date: Date | null) => {
+	//* Expiration date
+	const expirationDate = date ? new Date(date ?? "") : null;
+	const expirationDateStr = expirationDate
+		? `${
+				expirationDate.getMonth() + 1
+		  }/${expirationDate.getDay()}/${expirationDate.getFullYear()}`
+		: null;
+
+	return expirationDateStr;
+};

@@ -1,4 +1,7 @@
-import { PageTitleProps } from "@/types";
+interface PageTitleProps {
+	title: string;
+	subtitle: string;
+}
 
 const PageTitle = ({ title, subtitle }: PageTitleProps) => {
 	return (

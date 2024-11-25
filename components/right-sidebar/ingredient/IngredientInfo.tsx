@@ -1,31 +1,45 @@
 "use client";
 
-import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import InfoWidget from "@/components/common/InfoWidget";
-import { CalendarPlus, CalendarX2, CookingPot, Pencil, ShoppingCart, Trash2 } from "lucide-react";
+import ToolTipContainer from "@/components/common/ToolTipContainer";
+import { Ingredient } from "@/types";
+import { getUSDate } from "@/utils";
+import { CalendarPlus, CalendarX2, Egg, Milk, Pencil, ShoppingCart, Trash2 } from "lucide-react";
 
-const IngredientInfo = () => {
+interface IngredientInfoProps {
+	ingredient: Ingredient;
+}
+
+const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 	return (
 		<div className="flex flex-col gap-6">
 			{/* Row 1 */}
 			<div className="flex justify-between items-center">
-				{/* Quantity */}
-				<InfoWidget
-					icon={<CookingPot size={16} />}
-					iconColor="text-emerald-500"
-					text="N/A"
-				/>
+				{/* Ingredient type */}
+				<ToolTipContainer toolTipContent="abcd" position="right">
+					<InfoWidget
+						icon={
+							ingredient.ingredientType === "Primary" ? (
+								<Egg size={16} />
+							) : (
+								<Milk size={16} />
+							)
+						}
+						iconColor="text-emerald-500"
+						text={ingredient.ingredientType}
+					/>
+				</ToolTipContainer>
 				{/* Date added */}
 				<InfoWidget
 					icon={<CalendarPlus size={16} />}
 					iconColor="text-orange-500"
-					text="12/4/24"
+					text={getUSDate(ingredient.dateAdded ?? null) ?? "N/A"}
 				/>
 				{/* Date expires */}
 				<InfoWidget
 					icon={<CalendarX2 size={16} />}
 					iconColor="text-sky-500"
-					text="1/6/25"
+					text={getUSDate(ingredient.dateExpired ?? null) ?? "N/A"}
 				/>
 			</div>
 
@@ -53,11 +67,6 @@ const IngredientInfo = () => {
 					onClick={() => {}}
 				/>
 			</div>
-
-			{/* Notes */}
-			<CollapsiblePanel title="Notes">
-				<p className="font-semibold text-neutral-600 text-sm">Some may be cracked.</p>
-			</CollapsiblePanel>
 		</div>
 	);
 };

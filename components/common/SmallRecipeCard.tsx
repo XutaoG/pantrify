@@ -1,7 +1,11 @@
-import { SmallRecipeCardProps } from "@/types";
 import Image from "next/image";
 import InfoWidget from "./InfoWidget";
 import { Clock } from "lucide-react";
+import { Recipe } from "@/types";
+
+interface SmallRecipeCardProps {
+	recipe: Recipe;
+}
 
 const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 	return (

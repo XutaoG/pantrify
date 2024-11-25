@@ -4,7 +4,11 @@ import { useState } from "react";
 import { useDropdown } from "@/hooks";
 import { ArrowDown, ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
 import { IngredientSortSchema } from "@/constants";
-import { IngredientSortByProps } from "@/types";
+
+interface IngredientSortByProps {
+	selections: IngredientSortSchema[];
+	onSort: (sortBy: IngredientSortSchema) => void;
+}
 
 const IngredientSortDropdown = ({ selections, onSort }: IngredientSortByProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();

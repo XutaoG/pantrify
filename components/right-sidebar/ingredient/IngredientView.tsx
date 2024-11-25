@@ -12,14 +12,15 @@ const IngredientView = ({ ingredient }: IngredientViewProps) => {
 			{/* Ingredient name */}
 			<div className="flex flex-col gap-1">
 				<p className="text-sm font-semibold text-neutral-600">Ingredient name</p>
-				<h3 className="font-medium tracking-wide">Eggs</h3>
+				<h3 className="font-medium tracking-wide">{ingredient.name}</h3>
+				<p className="font-medium text-sm">{ingredient.ingredientType} Ingredient</p>
 			</div>
 
 			{/* Basic info */}
-			<IngredientInfo />
+			<IngredientInfo ingredient={ingredient} />
 
 			{/* What you can make */}
-			<IngredientAvailableRecipe />
+			<IngredientAvailableRecipe ingredient={ingredient} />
 		</section>
 	);
 };

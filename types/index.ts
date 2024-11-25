@@ -1,4 +1,3 @@
-import { IngredientSortSchema } from "@/constants";
 import { ComponentPropsWithRef, ReactNode } from "react";
 import { z } from "zod";
 
@@ -148,72 +147,8 @@ export interface GetAllIngredientsRequestConfig {
 
 // ! PROPS
 
-export interface PageTitleProps {
-	title: string;
-	subtitle: string;
-}
-
-export interface ActiveViewContextWrapperProps {
-	children: ReactNode;
-}
-
-export interface LargeRecipeCardProps {
-	recipe: Recipe;
-}
-
-export interface SmallRecipeCardProps {
-	recipe: Recipe;
-}
-
-export interface InfoWidgetProps {
-	icon: ReactNode;
-	iconColor: string;
-	text: string;
-	onClick?: () => void;
-	onHover?: () => void;
-}
-
 export interface RecipeIngredientProps {
 	recipeIngredient: RecipeIngredient;
-}
-
-export interface CollapsiblePanelProps {
-	title: string;
-	children: ReactNode;
-	titleStyle?: string;
-}
-
-export interface SearchBarProps {
-	onSearch: (searchWord: string) => void;
-	placeholderText: string;
-}
-
-export interface IngredientSortByProps {
-	selections: IngredientSortSchema[];
-	onSort: (sortBy: IngredientSortSchema) => void;
-}
-
-export interface AllPrimaryIngredientsProps {
-	ingredients: IngredientList;
-	pageSize: number;
-	currentPageNumber: number;
-	setCurrentPageNumber: (pageNumber: number) => void;
-}
-
-export interface AllSecondaryIngredientsProps {
-	ingredients: IngredientList;
-	pageSize: number;
-	currentPageNumber: number;
-	setCurrentPageNumber: (pageNumber: number) => void;
-}
-
-export interface RightSideBarProps {
-	children: ReactNode;
-}
-
-export interface ToolTipProps {
-	children: ReactNode;
-	toolTipContent: string;
 }
 
 export interface RecipeviewProps {

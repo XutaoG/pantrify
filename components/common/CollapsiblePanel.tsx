@@ -1,8 +1,13 @@
 "use client";
 
-import { CollapsiblePanelProps } from "@/types";
 import { CircleChevronUp } from "lucide-react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
+
+interface CollapsiblePanelProps {
+	title: string;
+	children: ReactNode;
+	titleStyle?: string;
+}
 
 const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps) => {
 	const [isExpanded, setIsExpanded] = useState(true);

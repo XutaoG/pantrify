@@ -1,8 +1,12 @@
 "use client";
 
-import { SearchBarProps } from "@/types";
 import { FormEvent, useState } from "react";
 import { Search } from "lucide-react";
+
+interface SearchBarProps {
+	onSearch: (searchWord: string) => void;
+	placeholderText: string;
+}
 
 const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
 	const [searchWord, setSearchWord] = useState("");

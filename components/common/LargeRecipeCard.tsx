@@ -1,7 +1,11 @@
-import { LargeRecipeCardProps } from "@/types";
+import { Recipe } from "@/types";
 import Image from "next/image";
 import InfoWidget from "./InfoWidget";
 import { Clock, Gauge, Refrigerator } from "lucide-react";
+
+interface LargeRecipeCardProps {
+	recipe: Recipe;
+}
 
 const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 	return (
