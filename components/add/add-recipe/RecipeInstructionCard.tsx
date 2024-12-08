@@ -1,8 +1,16 @@
 "use client";
 
-import { FormInstructionInputProps } from "@/types";
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 import { useState } from "react";
+
+interface FormInstructionInputProps {
+	index: number;
+	value: string;
+	onInstructionEdit: (index: number, newInstruction: string) => void;
+	onInstructionRemove: (index: number) => void;
+	onInstructionMove: (index: number, direction: number) => void;
+	isSubmitting: boolean;
+}
 
 const RecipeInstructionCard = ({
 	index,

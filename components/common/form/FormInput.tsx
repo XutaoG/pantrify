@@ -1,7 +1,12 @@
 "use client";
 
-import { FormInputProps } from "@/types";
-import { forwardRef, useState } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode, useState } from "react";
+
+interface FormInputProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	errorMessage?: string;
+}
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {

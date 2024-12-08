@@ -1,9 +1,16 @@
 "use client";
 
 import { useDropdown } from "@/hooks";
-import { FormSelectionInputProps } from "@/types";
 import { ChevronUp } from "lucide-react";
-import { forwardRef } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode } from "react";
+
+interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	currentSelection: string;
+	selections: string[];
+	onSelectionChange: (val: string) => void;
+}
 
 const FormSelectionInput = forwardRef<HTMLInputElement, FormSelectionInputProps>(
 	(

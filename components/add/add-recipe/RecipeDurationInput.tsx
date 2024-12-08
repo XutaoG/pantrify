@@ -1,9 +1,13 @@
 "use client";
 
-import { RecipeDurationInputProps, TAddRecipeSchema } from "@/types";
+import { TAddRecipeSchema } from "@/types";
 import { ChevronDown, ChevronUp, Clock } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
+
+interface RecipeDurationInputProps {
+	className?: string;
+}
 
 const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 	const {

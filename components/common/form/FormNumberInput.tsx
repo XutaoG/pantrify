@@ -1,8 +1,14 @@
 "use client";
 
-import { FormNumberProps } from "@/types";
 import { Minus, Plus } from "lucide-react";
-import { forwardRef, useEffect, useRef } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode, useEffect, useRef } from "react";
+
+interface FormNumberProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	onValueIncrement: (val: number) => void;
+	incrementAmount: number;
+}
 
 const FormNumberInput = forwardRef<HTMLInputElement, FormNumberProps>(
 	(

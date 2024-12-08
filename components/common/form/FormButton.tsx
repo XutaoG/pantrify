@@ -1,9 +1,13 @@
 "use client";
 
-import { FormButtonProps } from "@/types";
 import { LoaderCircle } from "lucide-react";
-import React from "react";
+import React, { ComponentPropsWithRef, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
+
+interface FormButtonProps extends ComponentPropsWithRef<"button"> {
+	title: string;
+	icon?: ReactNode;
+}
 
 const FormButton = ({ title, icon, className, disabled, ...rest }: FormButtonProps) => {
 	return (

@@ -2,15 +2,19 @@ import FormInput from "@/components/common/form/FormInput";
 import RecipeIngredientQuantityInput from "@/components/add/add-recipe/RecipeIngredientQuantityInput";
 import FormSelectionInput from "@/components/common/form/FormSelectionInput";
 import { ingredientQuantityFractions, recipeIngredientTypes } from "@/constants";
-import {
-	RecipeIngredientFormModalProps,
-	addRecipeIngredientSchema,
-	TAddRecipeIngredientSchema,
-} from "@/types";
+import { addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { CirclePlus, CircleX, Egg, Ham, Pencil } from "lucide-react";
+
+interface RecipeIngredientFormModalProps {
+	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;
+	onModalClose: () => void;
+	index: number | null;
+	ingredient: TAddRecipeIngredientSchema | null;
+	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
+}
 
 const RecipeIngredientFormModal = ({
 	onIngredientAdd,

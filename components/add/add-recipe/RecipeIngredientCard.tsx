@@ -1,5 +1,13 @@
-import { RecipeIngredientCardProps } from "@/types";
+import { TAddRecipeIngredientSchema } from "@/types";
 import { Pencil, Trash2 } from "lucide-react";
+
+interface RecipeIngredientCardProps {
+	index: number;
+	ingredient: TAddRecipeIngredientSchema;
+	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
+	onDelete: (index: number) => void;
+	isSubmitting: boolean;
+}
 
 const RecipeIngredientCard = ({
 	index,

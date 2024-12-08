@@ -1,11 +1,15 @@
 import ToolTipContainer from "@/components/common/ToolTipContainer";
-import { RecipeIngredientProps } from "@/types";
 import { Archive, Check, CircleMinusIcon, ShoppingCart, X } from "lucide-react";
 import { Fragment } from "react";
+import { RecipeIngredient } from "@/types";
 
-const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
+interface RecipeIngredientListingProps {
+	recipeIngredient: RecipeIngredient;
+}
+
+const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingProps) => {
 	const addToInventoryAction = (
-		<ToolTipContainer toolTipContent="Have it? Add to inventory">
+		<ToolTipContainer toolTipContent="Have it? Add to inventory" position="left">
 			<button
 				type="button"
 				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
@@ -16,7 +20,7 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	);
 
 	const addToCartAction = (
-		<ToolTipContainer toolTipContent="Add to shopping list">
+		<ToolTipContainer toolTipContent="Add to shopping list" position="left">
 			<button
 				type="button"
 				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
@@ -27,7 +31,7 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	);
 
 	const removeFromInventoryAction = (
-		<ToolTipContainer toolTipContent={`Ran out? Remove from inventory`}>
+		<ToolTipContainer toolTipContent={`Ran out? Remove from inventory`} position="left">
 			<button
 				type="button"
 				className="p-1.5 rounded-full cursor-pointer hover:bg-neutral-200"
@@ -75,4 +79,4 @@ const RecipeIngredient = ({ recipeIngredient }: RecipeIngredientProps) => {
 	);
 };
 
-export default RecipeIngredient;
+export default RecipeIngredientListing;

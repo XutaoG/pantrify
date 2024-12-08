@@ -2,10 +2,14 @@
 
 import { ingredientQuantityFractions, ingredientQuantityUnits } from "@/constants";
 import { useDropdown } from "@/hooks";
-import { FormQuantityInputProps, TAddRecipeIngredientSchema } from "@/types";
+import { TAddRecipeIngredientSchema } from "@/types";
 import { ChevronLeft, CookingPot } from "lucide-react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+
+interface FormQuantityInputProps {
+	className?: string;
+}
 
 const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) => {
 	//! Dropdowns

@@ -1,7 +1,12 @@
 "use client";
 
-import { FormTextAreaProps } from "@/types";
-import { forwardRef, useState } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode, useState } from "react";
+
+interface FormTextAreaProps extends ComponentPropsWithRef<"textarea"> {
+	header: string;
+	headerIcon?: ReactNode;
+	errorMessage?: string;
+}
 
 const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
 	({ header, headerIcon, errorMessage, placeholder, disabled, ...rest }, ref) => {

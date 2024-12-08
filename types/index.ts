@@ -1,4 +1,3 @@
-import { ComponentPropsWithRef, ReactNode } from "react";
 import { z } from "zod";
 
 // ! RESPONSES
@@ -143,94 +142,6 @@ export interface GetAllIngredientsRequestConfig {
 	isAscending?: boolean;
 	pageNumber?: number;
 	pageSize?: number;
-}
-
-// ! PROPS
-
-export interface RecipeIngredientProps {
-	recipeIngredient: RecipeIngredient;
-}
-
-export interface RecipeviewProps {
-	recipe: Recipe;
-}
-
-export interface FormInputProps extends ComponentPropsWithRef<"input"> {
-	header: string;
-	headerIcon?: ReactNode;
-	errorMessage?: string;
-}
-
-export interface FormPasswordInputProps extends ComponentPropsWithRef<"input"> {
-	header: string;
-	headerIcon?: ReactNode;
-	errorMessage?: string;
-}
-
-export interface FormTextAreaProps extends ComponentPropsWithRef<"textarea"> {
-	header: string;
-	headerIcon?: ReactNode;
-	errorMessage?: string;
-}
-
-export interface RecipeDurationInputProps {
-	className?: string;
-}
-
-export interface FormNumberProps extends ComponentPropsWithRef<"input"> {
-	header: string;
-	headerIcon?: ReactNode;
-	onValueIncrement: (val: number) => void;
-	incrementAmount: number;
-}
-
-export interface FormSelectionInputProps extends ComponentPropsWithRef<"input"> {
-	header: string;
-	headerIcon?: ReactNode;
-	currentSelection: string;
-	selections: string[];
-	onSelectionChange: (val: string) => void;
-}
-
-export interface RecipeIngredientFormModalProps {
-	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;
-	onModalClose: () => void;
-	index: number | null;
-	ingredient: TAddRecipeIngredientSchema | null;
-	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
-}
-
-export interface FormQuantityInputProps {
-	className?: string;
-}
-
-export interface FormInstructionInputProps {
-	index: number;
-	value: string;
-	onInstructionEdit: (index: number, newInstruction: string) => void;
-	onInstructionRemove: (index: number) => void;
-	onInstructionMove: (index: number, direction: number) => void;
-	isSubmitting: boolean;
-}
-
-export interface RecipeIngredientCardProps {
-	index: number;
-	ingredient: TAddRecipeIngredientSchema;
-	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
-	onDelete: (index: number) => void;
-	isSubmitting: boolean;
-}
-
-export interface FormDateInputProps extends ComponentPropsWithRef<"input"> {
-	header: string;
-	headerIcon?: ReactNode;
-	password?: boolean;
-	errorMessage?: string;
-}
-
-export interface FormButtonProps extends ComponentPropsWithRef<"button"> {
-	title: string;
-	icon?: ReactNode;
 }
 
 // ! Form schemas

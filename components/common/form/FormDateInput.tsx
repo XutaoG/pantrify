@@ -1,7 +1,13 @@
 "use client";
 
-import { FormDateInputProps } from "@/types";
-import { forwardRef, useState } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode, useState } from "react";
+
+interface FormDateInputProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	password?: boolean;
+	errorMessage?: string;
+}
 
 const FormDateInput = forwardRef<HTMLInputElement, FormDateInputProps>(
 	({ header, headerIcon, errorMessage, className, disabled, ...rest }, ref) => {

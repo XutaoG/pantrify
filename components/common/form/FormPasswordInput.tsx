@@ -1,8 +1,13 @@
 "use client";
 
-import { FormPasswordInputProps } from "@/types";
-import { forwardRef, useState } from "react";
+import { ComponentPropsWithRef, forwardRef, ReactNode, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+
+interface FormPasswordInputProps extends ComponentPropsWithRef<"input"> {
+	header: string;
+	headerIcon?: ReactNode;
+	errorMessage?: string;
+}
 
 const FormPasswordInput = forwardRef<HTMLInputElement, FormPasswordInputProps>(
 	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {

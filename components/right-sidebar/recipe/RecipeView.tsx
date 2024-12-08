@@ -6,11 +6,11 @@ import RecipeSecondaryIngredients from "./RecipeSecondaryIngredients";
 import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
 import { Recipe } from "@/types";
 
-interface RecipeviewProps {
+interface RecipeViewProps {
 	recipe: Recipe;
 }
 
-const RecipeView = ({ recipe }: RecipeviewProps) => {
+const RecipeView = ({ recipe }: RecipeViewProps) => {
 	return (
 		<section className="flex flex-col gap-6">
 			{/* Recipe name */}
