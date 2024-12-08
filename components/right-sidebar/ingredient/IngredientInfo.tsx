@@ -29,18 +29,34 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 						text={ingredient.ingredientType}
 					/>
 				</ToolTipContainer>
+
 				{/* Date added */}
-				<InfoWidget
-					icon={<CalendarPlus size={16} />}
-					iconColor="text-orange-500"
-					text={getUSDate(ingredient.dateAdded ?? null) ?? "N/A"}
-				/>
+				<ToolTipContainer
+					toolTipContent={`Date added: ${
+						getUSDate(ingredient.dateAdded ?? null) ?? "N/A"
+					}`}
+					position="left"
+				>
+					<InfoWidget
+						icon={<CalendarPlus size={16} />}
+						iconColor="text-orange-500"
+						text={getUSDate(ingredient.dateAdded ?? null) ?? "N/A"}
+					/>
+				</ToolTipContainer>
+
 				{/* Date expires */}
-				<InfoWidget
-					icon={<CalendarX2 size={16} />}
-					iconColor="text-sky-500"
-					text={getUSDate(ingredient.dateExpired ?? null) ?? "N/A"}
-				/>
+				<ToolTipContainer
+					toolTipContent={`Expiration Date: ${
+						getUSDate(ingredient.dateExpired ?? null) ?? "N/A"
+					}`}
+					position="left"
+				>
+					<InfoWidget
+						icon={<CalendarX2 size={16} />}
+						iconColor="text-sky-500"
+						text={getUSDate(ingredient.dateExpired ?? null) ?? "N/A"}
+					/>
+				</ToolTipContainer>
 			</div>
 
 			{/* Row 2 */}

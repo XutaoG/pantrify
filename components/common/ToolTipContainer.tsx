@@ -23,8 +23,8 @@ const ToolTipContainer = ({ children, toolTipContent, position }: ToolTipProps) 
 			</div>
 			{showToolTip && (
 				<div
-					className={`absolute top-full ${positionStyle} bg-black/90 text-white text-nowrap 
-					py-0.5 px-2 rounded-lg select-none z-10`}
+					className={`absolute top-full ${positionStyle} bg-black/90 text-white text-sm
+					text-nowrap py-0.5 px-2 rounded-lg select-none z-10`}
 				>
 					{toolTipContent}
 				</div>

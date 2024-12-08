@@ -21,6 +21,7 @@ import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstruction
 import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
 import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
+import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
 
 const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
@@ -280,6 +281,9 @@ const AddRecipePage = () => {
 
 				<FormProvider {...methods}>
 					<section className="flex flex-col gap-5">
+						{/* Images field */}
+						<RecipeImagesInput />
+
 						{/* Name field */}
 						<FormInput
 							{...register("name")}
