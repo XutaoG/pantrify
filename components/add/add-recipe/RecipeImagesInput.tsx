@@ -1,74 +1,74 @@
-"use client";
-
-import { ChevronLeft, ChevronRight, Images, Plus } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { Images, Plus } from "lucide-react";
+import { ChangeEvent } from "react";
 import RecipeImageCard from "./RecipeImageCard";
 
-const RecipeImagesInput = () => {
-	const isSubmitting = false;
+interface RecipeImagesInputProps {
+	images: File[];
+	onImageAdd: (image: File) => void;
+	onImageRemove: (index: number) => void;
+	onImageMove: (index: number, direction: number) => void;
+	isSubmitting: boolean;
+}
 
-	const [images, setImages] = useState<File[]>([]);
-
+const RecipeImagesInput = ({
+	images,
+	onImageAdd,
+	onImageRemove,
+	onImageMove,
+	isSubmitting,
+}: RecipeImagesInputProps) => {
 	const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files.length > 0) {
-			setImages([...images, event.target.files[0]]);
+			onImageAdd(event.target.files[0]);
 		}
 	};
 
 	// Render all recent recipe cards
 	const recipeCards = images.map((image, id) => {
-		return <RecipeImageCard image={image} key={id} />;
+		return (
+			<RecipeImageCard
+				key={id}
+				index={id}
+				image={image}
+				onImageRemove={onImageRemove}
+				onImageMove={onImageMove}
+				isSubmitting={isSubmitting}
+			/>
+		);
 	});
 
 	return (
-		<div className="h-72 card-container rounded-xl flex flex-col px-4 py-2 justify-end gap-2 relative">
+		<div className="card-container rounded-xl flex flex-col px-4 py-2 justify-end gap-2 relative">
 			{/* Title */}
 			<div className="flex items-center gap-1.5">
 				<Images size={16} />
-				<p className="text-sm font-semibold text-neutral-600 select-none">Images</p>
+				<p className="text-sm font-semibold text-neutral-600 select-none">
+					Recipe Pictures
+				</p>
 			</div>
 
 			<div className="grow flex flex-col gap-4">
 				{/* Images */}
-				<div className="grow flex gap-5 overflow-x-hidden relative">
-					{recipeCards}
-
-					{/* Previous recipe button */}
-					<div className="absolute left-2 inset-y-0 size-8 my-auto flex items-center z-20">
-						<button
-							type="button"
-							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center`}
-						>
-							<ChevronLeft color="white" />
-						</button>
-					</div>
-
-					{/* Next recipe button */}
-					<div className="absolute right-2 inset-y-0 size-8 my-auto flex items-center z-20">
-						<button
-							type="button"
-							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center`}
-						>
-							<ChevronRight color="white" />
-						</button>
-					</div>
-				</div>
+				<div className="grow grid grid-cols-2 gap-4">{recipeCards}</div>
 
 				{/* Add image button */}
 				<label
 					htmlFor="file-upload"
-					className={`self-center flex items-center bg-neutral-200 p-1 rounded-full cursor-pointer ${
-						isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-300"
+					className={`self-center flex items-center bg-neutral-200 p-1 rounded-full ${
+						isSubmitting || images.length === 4
+							? "cursor-not-allowed"
+							: "hover:bg-neutral-300 cursor-pointer"
 					}`}
 				>
 					<Plus size={28} color="white" strokeWidth={2} />
 				</label>
 				<input
-					className="hidden"
+					className={`hidden cursor-not-allowed`}
 					id="file-upload"
 					type="file"
 					accept="image/*"
 					onChange={handleFileChange}
+					disabled={isSubmitting || images.length === 4}
 				/>
 			</div>
 		</div>

@@ -42,6 +42,41 @@ const AddRecipePage = () => {
 		setValue,
 	} = methods;
 
+	//! Images
+	const [images, setImages] = useState<File[]>([]);
+
+	//* Add image
+	const addImage = (image: File) => {
+		if (images.length < 4) {
+			setImages([...images, image]);
+		}
+	};
+
+	//* Delete image
+	const removeImage = (index: number) => {
+		const updatedImages = images.filter((_, i) => {
+			return i !== index;
+		});
+
+		setImages(updatedImages);
+	};
+
+	//* Move image
+	const moveImage = (index: number, direction: number) => {
+		if ((index === 0 && direction === -1) || (index === images.length - 1 && direction === 1)) {
+			return;
+		}
+
+		const originalImage = images[index];
+		const newImage = images[index + direction];
+
+		const updatedImages = [...images];
+		updatedImages[index] = newImage;
+		updatedImages[index + direction] = originalImage;
+
+		setImages(updatedImages);
+	};
+
 	//! Serving
 
 	const onServingChange = (val: number) => {
@@ -267,6 +302,10 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
+		const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+		await wait(5000);
+
 		console.log(recipe);
 	};
 
@@ -282,7 +321,13 @@ const AddRecipePage = () => {
 				<FormProvider {...methods}>
 					<section className="flex flex-col gap-5">
 						{/* Images field */}
-						<RecipeImagesInput />
+						<RecipeImagesInput
+							images={images}
+							onImageAdd={addImage}
+							onImageRemove={removeImage}
+							onImageMove={moveImage}
+							isSubmitting={isSubmitting}
+						/>
 
 						{/* Name field */}
 						<FormInput
