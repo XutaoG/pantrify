@@ -21,7 +21,7 @@ const RecipeIngredientCard = ({
 		(ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
 
 	return (
-		<div className="bg-neutral-100 border border-neutral-200 rounded p-2 flex justify-between gap-2">
+		<div className="card-container rounded-xl p-2 flex justify-between gap-2">
 			<div className="flex flex-col gap-2">
 				{/* Name */}
 				<p className="font-semibold">{ingredient.name}</p>

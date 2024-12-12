@@ -14,6 +14,9 @@ export const ingredientsPath = "/ingredient";
 export const moveIngredientToCartPath = "/ingredient/move-to-cart";
 export const moveIngredientToInventoryPath = "/ingredient/move-to-inventory";
 
+//! Recipe
+export const recipesPath = "/recipe";
+
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
 

@@ -22,6 +22,7 @@ import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput
 import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
 import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
+import { addRecipeApi } from "@/api";
 
 const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
@@ -294,6 +295,7 @@ const AddRecipePage = () => {
 			numServings,
 			ingredients: addRecipeIngredientDtos,
 			instructions: instructions,
+			images: images,
 		};
 
 		return addRecipeDto;
@@ -302,11 +304,11 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+		const response = await addRecipeApi(recipe);
 
-		await wait(5000);
-
-		console.log(recipe);
+		if (response.errorMessage != null) {
+			console.log(response.errorMessage);
+		}
 	};
 
 	return (

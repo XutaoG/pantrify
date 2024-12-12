@@ -10,6 +10,8 @@ export const isRecipe = (activeView: Recipe | Ingredient): activeView is Recipe 
 	return (<Recipe>activeView).difficulty !== undefined;
 };
 
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const getUSDate = (date: Date | null) => {
 	//* Expiration date
 	const expirationDate = date ? new Date(date ?? "") : null;

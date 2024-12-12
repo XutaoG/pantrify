@@ -93,6 +93,7 @@ export interface AddRecipeDto {
 	numServings: number;
 	ingredients: AddRecipeIngredientDto[];
 	instructions: string[];
+	images: File[];
 }
 
 export interface AddRecipeIngredientDto {
@@ -124,6 +125,10 @@ export interface AddIngredientResponse {
 }
 
 export interface UpdateIngredientResponse {
+	errorMessage: string | null;
+}
+
+export interface ErrorMessageResponse {
 	errorMessage: string | null;
 }
 

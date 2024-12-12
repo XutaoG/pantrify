@@ -168,8 +168,8 @@ const RecipeIngredientFormModal = ({
 						{/* Cancel */}
 						<button
 							type="button"
-							className={`flex justify-center items-center gap-2 bg-yellow-500 
-							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-600"}`}
+							className={`flex justify-center items-center gap-2 bg-yellow-400 
+							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-500"}`}
 							onClick={onModalClose}
 							disabled={isSubmitting}
 						>

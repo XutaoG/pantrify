@@ -8,12 +8,15 @@ import {
 	logoutApiPath,
 	moveIngredientToCartPath,
 	moveIngredientToInventoryPath,
+	recipesPath,
 	refreshApiPath,
 	signUpApiPath,
 } from "@/constants";
 import {
 	AddIngredientDto,
 	AddIngredientResponse,
+	AddRecipeDto,
+	ErrorMessageResponse,
 	GetAllIngredientsRequestConfig,
 	Ingredient,
 	IngredientList,
@@ -392,4 +395,89 @@ export const moveToInventory = async (id: number) => {
 	}
 
 	return response;
+};
+
+export const addRecipeApi = async (recipe: AddRecipeDto) => {
+	const formData = new FormData();
+
+	//* Name
+	formData.append("name", recipe.name);
+
+	//* Description
+	if (recipe.description) {
+		formData.append("description", recipe.description);
+	}
+
+	//* Duration
+	formData.append("duration", recipe.duration.toString());
+
+	//* Difficulty
+	formData.append("difficulty", recipe.difficulty.toString());
+
+	//* NumServings
+	formData.append("numServings", recipe.numServings.toString());
+
+	//* Ingredients
+	recipe.ingredients.forEach((ingredient, index) => {
+		formData.append(`ingredients[${index}].name`, ingredient.name);
+		formData.append(`ingredients[${index}].ingredientType`, ingredient.ingredientType);
+
+		if (ingredient.quantityWhole) {
+			formData.append(
+				`ingredients[${index}].quantityWhole`,
+				ingredient.quantityWhole.toString()
+			);
+		}
+
+		if (ingredient.quantityFraction) {
+			formData.append(`ingredients[${index}].quantityFraction`, ingredient.quantityFraction);
+		}
+
+		if (ingredient.quantityUnit) {
+			formData.append(`ingredients[${index}].quantityUnit`, ingredient.quantityUnit);
+		}
+	});
+
+	//* Instructions
+	recipe.instructions.forEach((instruction) => {
+		formData.append("instructions", instruction);
+	});
+
+	//* Images
+	recipe.images.forEach((image) => {
+		formData.append("images", image);
+	});
+
+	const errorMessageResponse: ErrorMessageResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.post(recipesPath, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Cookie: cookieStore.toString(),
+			},
+		});
+	} catch (e) {
+		const error = e as AxiosError;
+
+		console.log(error);
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 400) {
+				errorMessageResponse.errorMessage = "An unexpected error occurred";
+			}
+		} else {
+			// No response received
+
+			errorMessageResponse.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return errorMessageResponse;
 };
