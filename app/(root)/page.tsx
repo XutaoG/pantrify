@@ -1,6 +1,5 @@
 import { getUser } from "@/api";
 import PageTitle from "@/components/common/PageTitle";
-import Pagination from "@/components/common/Pagination";
 import AllRecipes from "@/components/my-recipes/AllRecipes";
 import Overview from "@/components/my-recipes/Overview";
 import RecentRecipes from "@/components/my-recipes/RecentRecipes";
@@ -37,9 +36,6 @@ const Home = async () => {
 
 			{/* All recipe */}
 			<AllRecipes />
-
-			{/* Pagination */}
-			<Pagination />
 		</div>
 	);
 };

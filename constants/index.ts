@@ -45,11 +45,42 @@ export const ingredientQuantityUnits = [
 	"serving",
 ];
 
+export const defaultRecipeImageRoute = "/temp-recipe-images/chow-mein.jpeg";
+
 export interface IngredientSortSchema {
 	name: string;
 	routeParam: string;
 	isAscending: boolean;
 }
+
+export interface RecipeSortSchema {
+	name: string;
+	routeParam: string;
+	isAscending: boolean;
+}
+
+export const recipeSortSelections: RecipeSortSchema[] = [
+	{
+		name: "Creation Date",
+		routeParam: "dateAdded",
+		isAscending: true,
+	},
+	{
+		name: "Name",
+		routeParam: "name",
+		isAscending: true,
+	},
+	{
+		name: "Duration",
+		routeParam: "duration",
+		isAscending: true,
+	},
+	{
+		name: "Difficulty",
+		routeParam: "difficulty",
+		isAscending: true,
+	},
+];
 
 export const ingredientSortSelections: IngredientSortSchema[] = [
 	{

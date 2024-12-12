@@ -2,6 +2,7 @@ import Image from "next/image";
 import InfoWidget from "./InfoWidget";
 import { Clock } from "lucide-react";
 import { Recipe } from "@/types";
+import { defaultRecipeImageRoute } from "@/constants";
 
 interface SmallRecipeCardProps {
 	recipe: Recipe;
@@ -13,7 +14,9 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 			{/* Recipe image */}
 			<div className="w-full grow relative overflow-hidden rounded-t-xl">
 				<Image
-					src={recipe.images[0].path}
+					src={
+						recipe.images.length !== 0 ? recipe.images[0].path : defaultRecipeImageRoute
+					}
 					alt="food"
 					className="object-cover"
 					fill

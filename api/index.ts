@@ -18,9 +18,11 @@ import {
 	AddRecipeDto,
 	ErrorMessageResponse,
 	GetAllIngredientsRequestConfig,
+	GetAllRecipesRequestConfig,
 	Ingredient,
 	IngredientList,
 	LoginResponse,
+	RecipeList,
 	RefreshResponse,
 	SignUpResponse,
 	TLoginSchema,
@@ -448,6 +450,8 @@ export const addRecipeApi = async (recipe: AddRecipeDto) => {
 		formData.append("images", image);
 	});
 
+	// console.log(formData);
+
 	const errorMessageResponse: ErrorMessageResponse = {
 		errorMessage: null,
 	};
@@ -464,7 +468,7 @@ export const addRecipeApi = async (recipe: AddRecipeDto) => {
 	} catch (e) {
 		const error = e as AxiosError;
 
-		console.log(error);
+		console.log(error.response?.data);
 
 		if (error.response) {
 			// Response received, but error status code
@@ -480,4 +484,32 @@ export const addRecipeApi = async (recipe: AddRecipeDto) => {
 	}
 
 	return errorMessageResponse;
+};
+
+export const getAllRecipes = async (config?: GetAllRecipesRequestConfig) => {
+	try {
+		const cookieStore = await cookies();
+
+		const response = await axios.get<RecipeList>(recipesPath, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
+			},
+			params: config && {
+				// Attach parameters
+				name: config.name,
+				difficulty: config.difficulty,
+				minDuration: config.minDuration,
+				maxDuration: config.maxDuration,
+				sortBy: config.sortBy,
+				isAscending: config.isAscending,
+				pageNumber: config.pageNumber,
+				pageSize: config.pageSize,
+			},
+		});
+
+		return response.data;
+	} catch {
+		return null;
+	}
 };

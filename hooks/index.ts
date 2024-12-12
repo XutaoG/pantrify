@@ -1,6 +1,6 @@
-import { getAllIngredients } from "@/api";
-import { IngredientSortSchema } from "@/constants";
-import { IngredientList } from "@/types";
+import { getAllIngredients, getAllRecipes } from "@/api";
+import { IngredientSortSchema, RecipeSortSchema } from "@/constants";
+import { IngredientList, RecipeList } from "@/types";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useDropdown = <T extends HTMLElement>() => {
@@ -82,6 +82,60 @@ export const useIngredients = ({
 
 	return {
 		ingredients,
+		searchWord,
+		setSearchWord,
+		sortOption,
+		setSortOption,
+		isLoading,
+		pageNumber,
+		setPageNumber,
+	};
+};
+
+export const useRecipes = ({
+	pageSize,
+}: // refreshValue,
+{
+	pageSize: number;
+	// refreshValue: boolean;
+}) => {
+	//* Search and sorting
+	const [searchWord, setSearchWord] = useState("");
+	const [sortOption, setSortOption] = useState<RecipeSortSchema | null>(null);
+
+	//* Data retrieving
+	const [recipes, setRecipes] = useState<RecipeList | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const [pageNumber, setPageNumber] = useState(1);
+
+	//* Fetch data
+	const fetchRecipes = useCallback(async () => {
+		setIsLoading(true);
+
+		setRecipes(
+			await getAllRecipes({
+				name: searchWord,
+				sortBy: sortOption?.routeParam,
+				isAscending: sortOption?.isAscending,
+				pageNumber: pageNumber,
+				pageSize: pageSize,
+			})
+		);
+
+		setIsLoading(false);
+	}, [pageNumber, searchWord, sortOption, pageSize]);
+
+	useEffect(() => {
+		// Fetch data
+		fetchRecipes();
+	}, [
+		fetchRecipes,
+		// refreshValue
+	]);
+
+	return {
+		recipes,
 		searchWord,
 		setSearchWord,
 		sortOption,

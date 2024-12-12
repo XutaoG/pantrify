@@ -2,75 +2,81 @@
 
 import { useState } from "react";
 import { useDropdown } from "@/hooks";
-import { ArrowDownNarrowWide, ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
+import { ArrowDown, ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
+import { RecipeSortSchema } from "@/constants";
 
-const RecipeSortDropdown = () => {
+interface RecipeSortByProps {
+	selections: RecipeSortSchema[];
+	onSort: (sortBy: RecipeSortSchema) => void;
+}
+
+const RecipeSortDropdown = ({ selections, onSort }: RecipeSortByProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
-	const mockSortSelections = [
-		{
-			name: "Date added",
-			isAscending: false,
-		},
-		{
-			name: "Name",
-			isAscending: true,
-		},
-		{
-			name: "Duration",
-			isAscending: true,
-		},
-		{
-			name: "Difficulty",
-			isAscending: true,
-		},
-	];
+	//* Store current sort option
+	const [currentSortSelection, setCurrentSortSeletion] = useState(selections[0]);
+	//* Store sort orders
+	const [currentSortSchema, setCurrentSortSchema] = useState(selections);
 
-	const [currentSortSelection, setCurrentSortSeletion] = useState(mockSortSelections[0].name);
-	const [currentSortOrder, setCurrentSortOrder] = useState(mockSortSelections);
+	// Get sort order
+	let currentSortOrder: boolean = false;
+	currentSortSchema.forEach((selection) => {
+		if (selection.name == currentSortSelection.name) {
+			currentSortOrder = selection.isAscending;
+		}
+	});
 
-	const handleSortSelectionClick = (selection: { name: string; isAscending: boolean }) => {
-		if (selection.name === currentSortSelection) {
+	const handleSortSelectionClick = (selection: RecipeSortSchema) => {
+		if (selection.name === currentSortSelection.name) {
 			// Same selection, update sort order
 
-			const updatedSortOrder = currentSortOrder.map((selection) => {
-				if (selection.name == currentSortSelection) {
+			const updatedSortSchema = currentSortSchema.map((selection) => {
+				if (selection.name == currentSortSelection.name) {
 					return {
-						name: selection.name,
+						...selection,
 						isAscending: !selection.isAscending,
 					};
 				}
 				return selection;
 			});
 
-			setCurrentSortOrder(updatedSortOrder);
+			setCurrentSortSchema(updatedSortSchema);
+
+			// Sort
+			onSort({
+				...selection,
+				isAscending: !selection.isAscending,
+			});
 		} else {
 			// Different selection, update selection
 
-			setCurrentSortSeletion(selection.name);
+			setCurrentSortSeletion(selection);
+
+			// Sort
+			onSort(selection);
 		}
 	};
 
-	const dropdownOptions = currentSortOrder.map((selection) => {
+	const dropdownOptions = currentSortSchema.map((selection) => {
 		return (
-			<div
+			<button
+				type="button"
 				key={selection.name}
-				className={`p-2 hover:bg-neutral-200 rounded-lg cursor-pointer 
+				className={`p-2 hover:bg-neutral-200 rounded-lg 
 				flex justify-between items-center  ${
-					selection.name === currentSortSelection
+					selection.name === currentSortSelection.name
 						? "text-black font-medium"
 						: "text-neutral-600 font-normal"
 				}`}
 				onClick={() => handleSortSelectionClick(selection)}
 			>
 				{selection.name}
-				{selection.name === currentSortSelection &&
-					(selection.isAscending ? (
-						<ArrowUpNarrowWide className="text-neutral-600" size={20} />
-					) : (
-						<ArrowDownNarrowWide className="text-neutral-600" size={20} />
-					))}
-			</div>
+				{selection.name === currentSortSelection.name && (
+					<div className={`${selection.isAscending && "rotate-180"}`}>
+						<ArrowDown size={20} className="text-neutral-600" />
+					</div>
+				)}
+			</button>
 		);
 	});
 
@@ -84,8 +90,12 @@ const RecipeSortDropdown = () => {
 				}`}
 				onClick={onToggle}
 			>
-				<p className="tracking-wide">Sort</p>
-				<ArrowDownWideNarrow size={20} />
+				<p className="tracking-wide text-nowrap">{currentSortSelection.name}</p>
+				{currentSortOrder ? (
+					<ArrowUpNarrowWide size={20} />
+				) : (
+					<ArrowDownNarrowWide size={20} />
+				)}
 			</button>
 			{isExpanded && (
 				<div

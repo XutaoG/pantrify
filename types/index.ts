@@ -149,6 +149,17 @@ export interface GetAllIngredientsRequestConfig {
 	pageSize?: number;
 }
 
+export interface GetAllRecipesRequestConfig {
+	name?: string;
+	difficulty?: number;
+	minDuration?: number;
+	maxDuration?: number;
+	sortBy?: string;
+	isAscending?: boolean;
+	pageNumber?: number;
+	pageSize?: number;
+}
+
 // ! Form schemas
 
 // Sign up
