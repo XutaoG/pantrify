@@ -3,8 +3,8 @@ import MissingIngredientsRecipe from "@/components/available-recipes/MissingIngr
 import SomeIngredientsRecipes from "@/components/available-recipes/SomeIngredientsRecipes";
 import PageTitle from "@/components/common/PageTitle";
 import SearchBar from "@/components/common/SearchBar";
+import SortDropdown from "@/components/common/SortDropdown";
 import RecipeFilterDropdown from "@/components/my-recipes/RecipeFilterDropdown";
-import RecipeSortDropdown from "@/components/my-recipes/RecipeSortDropdown";
 
 const AvailableRecipes = () => {
 	return (
@@ -20,7 +20,7 @@ const AvailableRecipes = () => {
 				<div className="flex gap-4">
 					<SearchBar placeholderText="Search for a recipe" />
 					<RecipeFilterDropdown />
-					<RecipeSortDropdown />
+					<SortDropdown />
 				</div>
 			</div>
 

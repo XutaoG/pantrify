@@ -1,13 +1,13 @@
 "use client";
 
-import { RecipeSortSchema, recipeSortSelections } from "@/constants";
+import { recipeSortSelections, SortSchema } from "@/constants";
 import SmallRecipeCard from "../common/SmallRecipeCard";
 import SearchBar from "../common/SearchBar";
 import RecipeFilterDropdown from "./RecipeFilterDropdown";
-import RecipeSortDropdown from "./RecipeSortDropdown";
 import { useRecipes } from "@/hooks";
 import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
+import SortDropdown from "../common/SortDropdown";
 
 const AllRecipes = () => {
 	const pageSize = 12;
@@ -26,7 +26,7 @@ const AllRecipes = () => {
 		setSearchWord(searchWord);
 	};
 
-	const sort = (sortBy: RecipeSortSchema) => {
+	const sort = (sortBy: SortSchema) => {
 		setSortOption(sortBy);
 	};
 
@@ -44,7 +44,7 @@ const AllRecipes = () => {
 				<div className="flex gap-4">
 					<SearchBar placeholderText="Search for a recipe" onSearch={search} />
 					<RecipeFilterDropdown />
-					<RecipeSortDropdown selections={recipeSortSelections} onSort={sort} />
+					<SortDropdown selections={recipeSortSelections} onSort={sort} />
 				</div>
 
 				{/* Show current search word */}

@@ -4,14 +4,10 @@ import CollapsiblePanel from "../common/CollapsiblePanel";
 import IngredientCard from "./IngredientCard";
 import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
-import {
-	IngredientSortSchema,
-	ingredientSortSelections,
-	shoppingListSortSelections,
-} from "@/constants";
+import { ingredientSortSelections, shoppingListSortSelections, SortSchema } from "@/constants";
 import SearchBar from "../common/SearchBar";
-import IngredientSortDropdown from "./IngredientSortDropdown";
 import { useIngredients } from "@/hooks";
+import SortDropdown from "../common/SortDropdown";
 
 interface AllIngredientsProps {
 	ingredientType: "Primary" | "Secondary";
@@ -44,7 +40,7 @@ const AllIngredients = ({
 		setSearchWord(searchWord);
 	};
 
-	const sort = (sortBy: IngredientSortSchema) => {
+	const sort = (sortBy: SortSchema) => {
 		setSortOption(sortBy);
 	};
 
@@ -69,7 +65,7 @@ const AllIngredients = ({
 				{/* Search and sort */}
 				<div className="flex gap-6">
 					<SearchBar placeholderText="Search for a ingredient" onSearch={search} />
-					<IngredientSortDropdown selections={sortSelections} onSort={sort} />
+					<SortDropdown selections={sortSelections} onSort={sort} />
 				</div>
 
 				{/* Show current search word */}

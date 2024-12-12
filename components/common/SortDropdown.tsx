@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { SortSchema } from "@/constants";
 import { useDropdown } from "@/hooks";
 import { ArrowDown, ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
-import { RecipeSortSchema } from "@/constants";
+import { useState } from "react";
 
-interface RecipeSortByProps {
-	selections: RecipeSortSchema[];
-	onSort: (sortBy: RecipeSortSchema) => void;
+interface SortDropdownProps {
+	selections: SortSchema[];
+	onSort: (sortBy: SortSchema) => void;
 }
 
-const RecipeSortDropdown = ({ selections, onSort }: RecipeSortByProps) => {
+const SortDropdown = ({ selections, onSort }: SortDropdownProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 	//* Store current sort option
@@ -26,7 +26,7 @@ const RecipeSortDropdown = ({ selections, onSort }: RecipeSortByProps) => {
 		}
 	});
 
-	const handleSortSelectionClick = (selection: RecipeSortSchema) => {
+	const handleSortSelectionClick = (selection: SortSchema) => {
 		if (selection.name === currentSortSelection.name) {
 			// Same selection, update sort order
 
@@ -109,4 +109,4 @@ const RecipeSortDropdown = ({ selections, onSort }: RecipeSortByProps) => {
 	);
 };
 
-export default RecipeSortDropdown;
+export default SortDropdown;

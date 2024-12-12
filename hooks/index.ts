@@ -1,5 +1,5 @@
 import { getAllIngredients, getAllRecipes } from "@/api";
-import { IngredientSortSchema, RecipeSortSchema } from "@/constants";
+import { SortSchema } from "@/constants";
 import { IngredientList, RecipeList } from "@/types";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -47,7 +47,7 @@ export const useIngredients = ({
 }) => {
 	//* Search and sorting
 	const [searchWord, setSearchWord] = useState("");
-	const [sortOption, setSortOption] = useState<IngredientSortSchema | null>(null);
+	const [sortOption, setSortOption] = useState<SortSchema | null>(null);
 
 	//* Data retrieving
 	const [ingredients, setIngredients] = useState<IngredientList | null>(null);
@@ -101,7 +101,7 @@ export const useRecipes = ({
 }) => {
 	//* Search and sorting
 	const [searchWord, setSearchWord] = useState("");
-	const [sortOption, setSortOption] = useState<RecipeSortSchema | null>(null);
+	const [sortOption, setSortOption] = useState<SortSchema | null>(null);
 
 	//* Data retrieving
 	const [recipes, setRecipes] = useState<RecipeList | null>(null);
