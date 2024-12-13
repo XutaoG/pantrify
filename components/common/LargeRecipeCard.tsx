@@ -2,6 +2,7 @@ import { Recipe } from "@/types";
 import Image from "next/image";
 import InfoWidget from "./InfoWidget";
 import { Clock, Gauge, Refrigerator } from "lucide-react";
+import { defaultRecipeImageRoute } from "@/constants";
 
 interface LargeRecipeCardProps {
 	recipe: Recipe;
@@ -13,7 +14,9 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			{/* Recipe image */}
 			<div className="w-full h-48 relative overflow-hidden rounded-t-xl">
 				<Image
-					src={recipe.images[0].path}
+					src={
+						recipe.images.length !== 0 ? recipe.images[0].path : defaultRecipeImageRoute
+					}
 					alt="food"
 					className="object-cover"
 					fill

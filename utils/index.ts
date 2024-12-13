@@ -28,5 +28,11 @@ export const getTimeStr = (time: number) => {
 	const hours = Math.floor(time / 60);
 	const mins = time % 60;
 
+	if (hours === 0) {
+		return `${mins}m`;
+	} else if (mins === 0) {
+		return `${hours}h`;
+	}
+
 	return `${hours}h ${mins}m`;
 };

@@ -89,7 +89,7 @@ const AllRecipes = () => {
 					</div>
 				)}
 
-				{recipes == null && isLoading && (
+				{(recipes == null || isLoading) && (
 					<div className="flex justify-center items-center">
 						<LoaderCircle className="animate-spin" />
 					</div>

@@ -3,6 +3,7 @@ import InfoWidget from "./InfoWidget";
 import { Clock } from "lucide-react";
 import { Recipe } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
+import { getTimeStr } from "@/utils";
 
 interface SmallRecipeCardProps {
 	recipe: Recipe;
@@ -32,7 +33,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 				<InfoWidget
 					icon={<Clock size={16} />}
 					iconColor="text-emerald-500"
-					text={recipe.duration.toString()}
+					text={getTimeStr(recipe.duration)}
 				/>
 			</div>
 		</div>

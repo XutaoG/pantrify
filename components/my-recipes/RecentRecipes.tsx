@@ -3,9 +3,10 @@
 import LargeRecipeCard from "../common/LargeRecipeCard";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { mockRecipes1 } from "@/constants";
 import CollapsiblePanel from "../common/CollapsiblePanel";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, LoaderCircle } from "lucide-react";
+import { RecipeList } from "@/types";
+import { getAllRecipes } from "@/api";
 
 const RecentRecipes = () => {
 	// Scroll recipes
@@ -20,6 +21,10 @@ const RecentRecipes = () => {
 	// End of scroll
 	const isEndOfScrollRef = useRef(false);
 	const [isEndOfScroll, setIsEndOfScroll] = useState(false);
+
+	// Recipes
+	const [recentRecipes, setRecentRecipes] = useState<RecipeList | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const checkOverflow = () => {
@@ -50,10 +55,28 @@ const RecentRecipes = () => {
 		return () => {
 			window.removeEventListener("resize", checkOverflow);
 		};
+	}, [recentRecipes]);
+
+	useEffect(() => {
+		const fetchRecipes = async () => {
+			setIsLoading(true);
+
+			setRecentRecipes(
+				await getAllRecipes({
+					sortBy: "dateAdded",
+					isAscending: true,
+					pageSize: 3,
+				})
+			);
+
+			setIsLoading(false);
+		};
+
+		fetchRecipes();
 	}, []);
 
 	// Render all recent recipe cards
-	const recipeCards = mockRecipes1.map((recipe, index) => {
+	const recipeCards = recentRecipes?.recipes.map((recipe, index) => {
 		return (
 			<div
 				className=""
@@ -114,57 +137,65 @@ const RecentRecipes = () => {
 
 	return (
 		<CollapsiblePanel title="Recently Added">
-			<div className="relative">
-				<div
-					ref={recipeCardsContainerRef}
-					className="flex gap-9 overflow-x-hidden"
-					onScroll={handleScroll}
-				>
-					{recipeCards}
+			{recentRecipes == null || isLoading ? (
+				<div className="flex justify-center items-center">
+					<LoaderCircle className="animate-spin" />
+				</div>
+			) : (
+				<div className="relative">
+					<div
+						ref={recipeCardsContainerRef}
+						className="flex gap-9 overflow-x-hidden"
+						onScroll={handleScroll}
+					>
+						{recipeCards}
 
-					<div className="min-w-[350px] flex justify-center items-center card-container rounded-xl grow">
-						<div className="flex flex-col gap-2 items-center">
-							<Image
-								src="/logo/pantrify_logo.webp"
-								alt="logo"
-								width={48}
-								height={48}
-								priority
-							/>
-							<p className="text-neutral-600 font-medium">View all recipes below!</p>
+						<div className="min-w-[350px] flex justify-center items-center card-container rounded-xl grow">
+							<div className="flex flex-col gap-2 items-center">
+								<Image
+									src="/logo/pantrify_logo.webp"
+									alt="logo"
+									width={48}
+									height={48}
+									priority
+								/>
+								<p className="text-neutral-600 font-medium">
+									View all recipes below!
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				{/* Previous recipe button */}
-				<div className="absolute left-2 inset-y-0 flex items-center">
-					<button
-						type="button"
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
-							(scrollIndex === 0 || !showNavigationArrows) && "hidden"
-						}`}
-						onClick={() => handleChangeRecipeClick(-1)}
-					>
-						<ChevronLeft color="white" />
-					</button>
-				</div>
+					{/* Previous recipe button */}
+					<div className="absolute left-2 inset-y-0 flex items-center">
+						<button
+							type="button"
+							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
+								(scrollIndex === 0 || !showNavigationArrows) && "hidden"
+							}`}
+							onClick={() => handleChangeRecipeClick(-1)}
+						>
+							<ChevronLeft color="white" />
+						</button>
+					</div>
 
-				{/* Next recipe button */}
-				<div className="absolute right-2 inset-y-0 flex items-center">
-					<button
-						type="button"
-						className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
-							(scrollIndex === recipeCardsRef.current.length - 1 ||
-								!showNavigationArrows ||
-								isEndOfScroll) &&
-							"hidden"
-						}`}
-						onClick={() => handleChangeRecipeClick(1)}
-					>
-						<ChevronRight color="white" />
-					</button>
+					{/* Next recipe button */}
+					<div className="absolute right-2 inset-y-0 flex items-center">
+						<button
+							type="button"
+							className={`size-8 bg-black/60 hover:bg-black/80 rounded-full flex justify-center items-center ${
+								(scrollIndex === recipeCardsRef.current.length - 1 ||
+									!showNavigationArrows ||
+									isEndOfScroll) &&
+								"hidden"
+							}`}
+							onClick={() => handleChangeRecipeClick(1)}
+						>
+							<ChevronRight color="white" />
+						</button>
+					</div>
 				</div>
-			</div>
+			)}
 		</CollapsiblePanel>
 	);
 };
