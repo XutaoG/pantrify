@@ -47,6 +47,64 @@ export const ingredientQuantityUnits = [
 
 export const defaultRecipeImageRoute = "/temp-recipe-images/chow-mein.jpeg";
 
+export interface DifficultyFilterSchema {
+	name: string;
+	difficulty?: number;
+}
+
+export const recipeDifficultyFilters: DifficultyFilterSchema[] = [
+	{
+		name: "All Difficulties",
+	},
+	{
+		name: "Easy",
+		difficulty: 1,
+	},
+	{
+		name: "Medium",
+		difficulty: 2,
+	},
+	{
+		name: "Hard",
+		difficulty: 3,
+	},
+];
+
+export interface DurationFilterSchema {
+	name: string;
+	minDuration?: number;
+	maxDuration?: number;
+}
+
+export const recipeDurationFilters: DurationFilterSchema[] = [
+	{
+		name: "All",
+	},
+	{
+		name: "0 to 15 mins",
+		maxDuration: 900,
+	},
+	{
+		name: "15 to 30 mins",
+		minDuration: 900,
+		maxDuration: 1800,
+	},
+	{
+		name: "30 to 1 hr",
+		minDuration: 1800,
+		maxDuration: 3600,
+	},
+	{
+		name: "1 to 2 hrs",
+		minDuration: 3600,
+		maxDuration: 7200,
+	},
+	{
+		name: "2 hrs+",
+		minDuration: 7200,
+	},
+];
+
 export interface SortSchema {
 	name: string;
 	routeParam: string;

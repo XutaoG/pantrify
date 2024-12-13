@@ -4,66 +4,78 @@ import { useState } from "react";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import { useDropdown } from "@/hooks";
 import { ListFilter } from "lucide-react";
+import {
+	DifficultyFilterSchema,
+	DurationFilterSchema,
+	recipeDifficultyFilters,
+	recipeDurationFilters,
+} from "@/constants";
 
-const RecipeFilterDropdown = () => {
+interface RecipeFilterDropdownProps {
+	// difficultyFilter: DifficultyFilterSchema;
+	onDifficultyFilterChange: (difficulty: DifficultyFilterSchema) => void;
+	// durationFilter: DurationFilterSchema;
+	onDurationFilterChange: (duration: DurationFilterSchema) => void;
+}
+
+const RecipeFilterDropdown = ({
+	onDifficultyFilterChange,
+	onDurationFilterChange,
+}: RecipeFilterDropdownProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
-	const mockDifficultySelections = ["All Difficulty", "Easy", "Medium", "Difficult"];
-
-	const mockTimeSelections = [
-		"0 to 15 mins",
-		"15 to 30 mins",
-		"30 to 60 mins",
-		"1 to 2 hrs",
-		"2 hrs+",
-	];
-
-	const [currentDifficultySelection, setCurrentDifficultySelection] = useState(
-		mockDifficultySelections[0]
+	const [currentDifficultyFilter, setCurrentDifficultyFilter] = useState(
+		recipeDifficultyFilters[0]
 	);
 
-	const [currentTimeSelection, setCurrentTimeSelection] = useState(mockTimeSelections[0]);
+	const [currentDurationFilter, setCurrentDurationFilter] = useState(recipeDurationFilters[0]);
 
-	const handleDifficultySelectionClick = (selection: string) => {
-		if (selection !== currentDifficultySelection) {
-			setCurrentDifficultySelection(selection);
+	const handleDifficultySelectionClick = (selection: DifficultyFilterSchema) => {
+		if (selection !== currentDifficultyFilter) {
+			setCurrentDifficultyFilter(selection);
 		}
 	};
 
-	const difficultyDropdownOptions = mockDifficultySelections.map((selection) => {
+	const difficultyFilterOptions = recipeDifficultyFilters.map((filter) => {
 		return (
 			<div
-				key={selection}
+				key={filter.name}
 				className={`p-1.5 hover:bg-neutral-200 rounded-lg cursor-pointer ${
-					selection === currentDifficultySelection
+					filter === currentDifficultyFilter
 						? "text-black font-medium"
 						: "text-neutral-600 font-normal"
 				}`}
-				onClick={() => handleDifficultySelectionClick(selection)}
+				onClick={() => {
+					handleDifficultySelectionClick(filter);
+					onDifficultyFilterChange(filter);
+				}}
 			>
-				{selection}
+				{filter.name}
 			</div>
 		);
 	});
 
-	const handleTimeSelectionClick = (selection: string) => {
-		if (selection !== currentDifficultySelection) {
-			setCurrentTimeSelection(selection);
+	const handleTimeSelectionClick = (selection: DurationFilterSchema) => {
+		if (selection !== currentDifficultyFilter) {
+			setCurrentDurationFilter(selection);
 		}
 	};
 
-	const timeDropdownOptions = mockTimeSelections.map((selection) => {
+	const durationFilterOptions = recipeDurationFilters.map((filter) => {
 		return (
 			<div
-				key={selection}
+				key={filter.name}
 				className={`p-2 hover:bg-neutral-200 rounded-lg cursor-pointer ${
-					selection === currentTimeSelection
+					filter === currentDurationFilter
 						? "text-black font-medium"
 						: "text-neutral-600 font-normal"
 				}`}
-				onClick={() => handleTimeSelectionClick(selection)}
+				onClick={() => {
+					handleTimeSelectionClick(filter);
+					onDurationFilterChange(filter);
+				}}
 			>
-				{selection}
+				{filter.name}
 			</div>
 		);
 	});
@@ -88,12 +100,12 @@ const RecipeFilterDropdown = () => {
 				>
 					{/* Difficulty selections */}
 					<CollapsiblePanel title="Difficulty">
-						<div className="flex flex-col gap-0">{difficultyDropdownOptions}</div>
+						<div className="flex flex-col gap-0">{difficultyFilterOptions}</div>
 					</CollapsiblePanel>
 
 					{/* Time selections */}
-					<CollapsiblePanel title="Time">
-						<div className="flex flex-col gap-0">{timeDropdownOptions}</div>
+					<CollapsiblePanel title="Duration">
+						<div className="flex flex-col gap-0">{durationFilterOptions}</div>
 					</CollapsiblePanel>
 				</div>
 			)}

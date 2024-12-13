@@ -16,6 +16,10 @@ const AllRecipes = () => {
 		recipes,
 		searchWord,
 		setSearchWord,
+		difficultyFilterOption,
+		setDifficultyFilterOption,
+		durationFilterOption,
+		setDurationFilterOption,
 		setSortOption,
 		isLoading,
 		pageNumber,
@@ -43,7 +47,10 @@ const AllRecipes = () => {
 				{/* Search bar + filter + sort */}
 				<div className="flex gap-4">
 					<SearchBar placeholderText="Search for a recipe" onSearch={search} />
-					<RecipeFilterDropdown />
+					<RecipeFilterDropdown
+						onDifficultyFilterChange={setDifficultyFilterOption}
+						onDurationFilterChange={setDurationFilterOption}
+					/>
 					<SortDropdown selections={recipeSortSelections} onSort={sort} />
 				</div>
 
@@ -58,6 +65,27 @@ const AllRecipes = () => {
 								"s"}
 							)
 						</p>
+					</div>
+				)}
+
+				{/* Show filter */}
+				{(difficultyFilterOption.difficulty != null ||
+					durationFilterOption.maxDuration != null ||
+					durationFilterOption.minDuration != null) && (
+					<div className="flex justify-center items-center gap-6">
+						{difficultyFilterOption.difficulty != null && (
+							<p className="text-sky-600">
+								Filter by difficulty:{" "}
+								<span className="font-medium">{difficultyFilterOption.name}</span>
+							</p>
+						)}
+						{(durationFilterOption.maxDuration != null ||
+							durationFilterOption.minDuration != null) && (
+							<p className="text-sky-600">
+								Filter by Duration:{" "}
+								<span className="font-medium">{durationFilterOption.name}</span>
+							</p>
+						)}
 					</div>
 				)}
 

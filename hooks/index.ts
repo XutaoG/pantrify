@@ -1,5 +1,13 @@
 import { getAllIngredients, getAllRecipes } from "@/api";
-import { SortSchema } from "@/constants";
+import {
+	DifficultyFilterSchema,
+	DurationFilterSchema,
+	ingredientSortSelections,
+	recipeDifficultyFilters,
+	recipeDurationFilters,
+	recipeSortSelections,
+	SortSchema,
+} from "@/constants";
 import { IngredientList, RecipeList } from "@/types";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -47,7 +55,7 @@ export const useIngredients = ({
 }) => {
 	//* Search and sorting
 	const [searchWord, setSearchWord] = useState("");
-	const [sortOption, setSortOption] = useState<SortSchema | null>(null);
+	const [sortOption, setSortOption] = useState<SortSchema>(ingredientSortSelections[0]);
 
 	//* Data retrieving
 	const [ingredients, setIngredients] = useState<IngredientList | null>(null);
@@ -99,9 +107,16 @@ export const useRecipes = ({
 	pageSize: number;
 	// refreshValue: boolean;
 }) => {
-	//* Search and sorting
+	//* Search, filtering, and sorting
 	const [searchWord, setSearchWord] = useState("");
-	const [sortOption, setSortOption] = useState<SortSchema | null>(null);
+	const [sortOption, setSortOption] = useState<SortSchema>(recipeSortSelections[0]);
+
+	const [difficultyFilterOption, setDifficultyFilterOption] = useState<DifficultyFilterSchema>(
+		recipeDifficultyFilters[0]
+	);
+	const [durationFilterOption, setDurationFilterOption] = useState<DurationFilterSchema>(
+		recipeDurationFilters[0]
+	);
 
 	//* Data retrieving
 	const [recipes, setRecipes] = useState<RecipeList | null>(null);
@@ -116,6 +131,9 @@ export const useRecipes = ({
 		setRecipes(
 			await getAllRecipes({
 				name: searchWord,
+				difficulty: difficultyFilterOption.difficulty,
+				minDuration: durationFilterOption.minDuration,
+				maxDuration: durationFilterOption.maxDuration,
 				sortBy: sortOption?.routeParam,
 				isAscending: sortOption?.isAscending,
 				pageNumber: pageNumber,
@@ -124,7 +142,14 @@ export const useRecipes = ({
 		);
 
 		setIsLoading(false);
-	}, [pageNumber, searchWord, sortOption, pageSize]);
+	}, [
+		searchWord,
+		difficultyFilterOption,
+		durationFilterOption,
+		sortOption,
+		pageNumber,
+		pageSize,
+	]);
 
 	useEffect(() => {
 		// Fetch data
@@ -138,6 +163,10 @@ export const useRecipes = ({
 		recipes,
 		searchWord,
 		setSearchWord,
+		difficultyFilterOption,
+		setDifficultyFilterOption,
+		durationFilterOption,
+		setDurationFilterOption,
 		sortOption,
 		setSortOption,
 		isLoading,
