@@ -8,7 +8,7 @@ const Home = async () => {
 	const user = await getUser();
 
 	return (
-		<div className="flex flex-col gap-6 px-4 pt-8 overflow-y-auto">
+		<div className="grow flex flex-col gap-6 px-4 pt-8 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="flex flex-col gap-2">
 				<h1 className="font-semibold tracking-wide">

@@ -8,6 +8,7 @@ import { useRecipes } from "@/hooks";
 import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
 import SortDropdown from "../common/SortDropdown";
+import { getPluralEnding } from "@/utils";
 
 const AllRecipes = () => {
 	const pageSize = 12;
@@ -60,10 +61,7 @@ const AllRecipes = () => {
 						<p className="text-sky-600">
 							Searching for <span className="font-medium">{`"${searchWord}"`}</span>{" "}
 							(Found {recipes?.totalCount ?? 0} result
-							{recipes != null &&
-								(recipes.totalCount > 1 || recipes.totalCount === 0) &&
-								"s"}
-							)
+							{getPluralEnding(recipes?.totalCount ?? 0)})
 						</p>
 					</div>
 				)}

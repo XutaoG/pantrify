@@ -8,6 +8,7 @@ import { ingredientSortSelections, shoppingListSortSelections, SortSchema } from
 import SearchBar from "../common/SearchBar";
 import { useIngredients } from "@/hooks";
 import SortDropdown from "../common/SortDropdown";
+import { getPluralEnding } from "@/utils";
 
 interface AllIngredientsProps {
 	ingredientType: "Primary" | "Secondary";
@@ -74,10 +75,7 @@ const AllIngredients = ({
 						<p className="text-sky-600">
 							Searching for <span className="font-medium">{`"${searchWord}"`}</span>{" "}
 							(Found {ingredients?.totalCount ?? 0} result
-							{ingredients != null &&
-								(ingredients.totalCount > 1 || ingredients.totalCount === 0) &&
-								"s"}
-							)
+							{getPluralEnding(ingredients?.totalCount ?? 0)})
 						</p>
 					</div>
 				)}

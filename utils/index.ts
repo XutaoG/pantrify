@@ -36,3 +36,17 @@ export const getTimeStr = (time: number) => {
 
 	return `${hours}h ${mins}m`;
 };
+
+export const getPluralEnding = (count: number, ending?: string) => {
+	if (count === 1) {
+		return;
+	}
+
+	if (ending != null && count !== 1) {
+		return ending;
+	}
+
+	if (count !== 1) {
+		return "s";
+	}
+};
