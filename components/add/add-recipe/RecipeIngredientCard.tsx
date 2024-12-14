@@ -33,7 +33,7 @@ const RecipeIngredientCard = ({
 		>
 			<div className="flex flex-col gap-2 truncate">
 				{/* Name */}
-				<p className="font-medium text-nowrap truncate">{ingredient.name}</p>
+				<p className="text-nowrap truncate">{ingredient.name}</p>
 
 				{/* Quantity */}
 				{hideQuantity ? (

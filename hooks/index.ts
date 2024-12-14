@@ -159,6 +159,11 @@ export const useRecipes = ({
 		// refreshValue
 	]);
 
+	// Set page to 1 when filter is changed
+	useEffect(() => {
+		setPageNumber(1);
+	}, [difficultyFilterOption, durationFilterOption]);
+
 	return {
 		recipes,
 		searchWord,

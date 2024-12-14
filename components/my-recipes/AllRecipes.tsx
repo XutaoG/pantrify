@@ -60,8 +60,6 @@ const AllRecipes = () => {
 					<div className="flex justify-center items-center">
 						<p className="text-sky-600">
 							Searching for <span className="font-medium">{`"${searchWord}"`}</span>{" "}
-							(Found {recipes?.totalCount ?? 0} result
-							{getPluralEnding(recipes?.totalCount ?? 0)})
 						</p>
 					</div>
 				)}
@@ -73,18 +71,29 @@ const AllRecipes = () => {
 					<div className="flex justify-center items-center gap-6">
 						{difficultyFilterOption.difficulty != null && (
 							<p className="text-sky-600">
-								Filter by difficulty:{" "}
+								Filtered by difficulty:{" "}
 								<span className="font-medium">{difficultyFilterOption.name}</span>
 							</p>
 						)}
 						{(durationFilterOption.maxDuration != null ||
 							durationFilterOption.minDuration != null) && (
 							<p className="text-sky-600">
-								Filter by Duration:{" "}
+								Filtered by Duration:{" "}
 								<span className="font-medium">{durationFilterOption.name}</span>
 							</p>
 						)}
 					</div>
+				)}
+
+				{/* Number of recipes found */}
+				{(searchWord !== "" ||
+					difficultyFilterOption.difficulty != null ||
+					durationFilterOption.maxDuration != null ||
+					durationFilterOption.minDuration != null) && (
+					<p className="font-medium self-center">
+						Found {recipes?.totalCount ?? 0} result
+						{getPluralEnding(recipes?.totalCount ?? 0)}
+					</p>
 				)}
 
 				{(recipes == null || isLoading) && (
@@ -108,7 +117,10 @@ const AllRecipes = () => {
 							/>
 						</div>
 					) : (
-						searchWord === "" && (
+						searchWord === "" &&
+						difficultyFilterOption.difficulty != null &&
+						durationFilterOption.minDuration != null &&
+						durationFilterOption.maxDuration != null && (
 							// No recipes
 							<div className="h-16 flex justify-center items-center">
 								<p className="font-medium italic">No Recipe Added</p>
