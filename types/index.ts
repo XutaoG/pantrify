@@ -196,8 +196,8 @@ export type TLoginSchema = z.infer<typeof loginSchema>;
 // Add recipe
 export const addRecipeSchema = z
 	.object({
-		name: z.string().min(1, "Recipe name cannot be empty"),
-		description: z.string().max(1000, "Description cannot be longer than 500 characters"),
+		name: z.string().trim().min(1, "Recipe name cannot be empty"),
+		description: z.string().trim().max(500, "Description cannot be longer than 500 characters"),
 		difficulty: z.string().min(1, "Difficulty cannot be empty"),
 		durationHour: z.string(),
 		durationMinute: z.string(),
@@ -223,7 +223,7 @@ export type TAddRecipeIngredientSchema = z.infer<typeof addRecipeIngredientSchem
 
 // Add recipe instruction
 export const addRecipeInstructionSchema = z.object({
-	instruction: z.string().min(1, "Instruction cannot be empty"),
+	instruction: z.string().trim().min(1, "Instruction cannot be empty"),
 });
 
 export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSchema>;
