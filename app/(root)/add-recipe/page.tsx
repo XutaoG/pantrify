@@ -23,6 +23,7 @@ import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
 import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
 import { addRecipeApi } from "@/api";
+import Divider from "@/components/common/Divider";
 
 const AddRecipePage = () => {
 	const methods = useForm<TAddRecipeSchema>({
@@ -104,6 +105,9 @@ const AddRecipePage = () => {
 		null
 	);
 
+	//* Ingredients error
+	const [ingredientsError, setIngredientsError] = useState<string | null>(null);
+
 	const openModalForAdd = () => {
 		setIsIngredientModalOpen(true);
 	};
@@ -135,6 +139,7 @@ const AddRecipePage = () => {
 		}
 
 		setIngredients([...ingredients, newIngredient]);
+		setIngredientsError(null);
 		return null;
 	};
 
@@ -304,8 +309,24 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		// const response = await addRecipeApi(recipe);
+		console.log(recipe);
 
+		// Zero primary or secondary ingredients
+		let hasIngredients = false;
+		recipe.ingredients.forEach((ingredient) => {
+			if (
+				ingredient.ingredientType === "Primary" ||
+				ingredient.ingredientType === "Secondary"
+			) {
+				hasIngredients = true;
+			}
+		});
+
+		if (!hasIngredients) {
+			setIngredientsError("At least 1 ingredient must be added");
+		}
+
+		// const response = await addRecipeApi(recipe);
 		// if (response.errorMessage != null) {
 		// 	console.log(response.errorMessage);
 		// }
@@ -380,6 +401,11 @@ const AddRecipePage = () => {
 							disabled={isSubmitting}
 						/>
 
+						<Divider />
+
+						{/* Title */}
+						<p className="font-medium self-center select-none">Ingredients</p>
+
 						{/* Open ingredient form */}
 						<button
 							type="button"
@@ -392,6 +418,13 @@ const AddRecipePage = () => {
 							<CirclePlus size={20} color="white" />
 							<p className="text-white font-medium">Add Ingredient</p>
 						</button>
+
+						{/* Ingredients error */}
+						{ingredientsError && (
+							<p className="self-center font-medium px-1 text-red-600">
+								{ingredientsError}
+							</p>
+						)}
 
 						{/* Add ingredient form modal */}
 						{isIngredientModalOpen && (
@@ -407,30 +440,38 @@ const AddRecipePage = () => {
 						{/* Primary ingredients */}
 						{primaryIngredients.length != 0 && (
 							<section className="flex flex-col gap-2">
-								<p className="font-semibold select-none">Primary Ingredients</p>
+								<p className="font-semibold text-sm select-none">
+									Primary Ingredients
+								</p>
 								<div className="grid grid-cols-3 gap-4">{primaryIngredients}</div>
 							</section>
 						)}
 						{/* Secondary ingredients */}
 						{secondaryIngredients.length != 0 && (
 							<section className="flex flex-col gap-2">
-								<p className="font-semibold select-none">Secondary Ingredients</p>
+								<p className="font-semibold text-sm select-none">
+									Secondary Ingredients
+								</p>
 								<div className="grid grid-cols-3 gap-4">{secondaryIngredients}</div>
 							</section>
 						)}
 						{/* Optional ingredients */}
 						{optionalIngredients.length != 0 && (
 							<section className="flex flex-col gap-2">
-								<p className="font-semibold select-none">Optional Ingredients</p>
+								<p className="font-semibold text-sm select-none">
+									Optional Ingredients
+								</p>
 								<div className="grid grid-cols-3 gap-4">{optionalIngredients}</div>
 							</section>
 						)}
+
+						<Divider />
 
 						{/* Instructions */}
 						<section className="flex flex-col gap-6">
 							<div className="flex flex-col gap-4">
 								{/* Title */}
-								<p className="font-medium select-none">Instructions</p>
+								<p className="font-medium self-center select-none">Instructions</p>
 
 								{/* Cards */}
 								<div className="flex flex-col gap-4">{instructionCards}</div>

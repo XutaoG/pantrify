@@ -168,6 +168,7 @@ export const signUpSchema = z
 	.object({
 		email: z
 			.string()
+			.trim()
 			.min(1, "Email cannot be empty")
 			.email({ message: "Invalid email address" }),
 		firstName: z.string().min(1, "First name cannot be empty"),
@@ -204,7 +205,7 @@ export const addRecipeSchema = z
 		numServings: z.string(),
 	})
 	.refine((data) => Number(data.durationHour) !== 0 || Number(data.durationMinute) !== 0, {
-		message: "Duration cannot be 0 minutes",
+		message: "Duration cannot be 0",
 		path: ["durationMinute"],
 	});
 
@@ -212,7 +213,7 @@ export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;
 
 // Add recipe ingredient
 export const addRecipeIngredientSchema = z.object({
-	name: z.string().min(1, "Name cannot be empty"),
+	name: z.string().trim().min(1, "Name cannot be empty"),
 	ingredientType: z.string(),
 	quantityWhole: z.string(),
 	quantityFraction: z.string(),
@@ -230,7 +231,7 @@ export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSch
 
 // Add ingredient
 export const addIngredientSchema = z.object({
-	name: z.string().min(1, "Name cannot be empty"),
+	name: z.string().trim().min(1, "Name cannot be empty"),
 	ingredientType: z.string(),
 	dateExpired: z.string().optional(),
 });
