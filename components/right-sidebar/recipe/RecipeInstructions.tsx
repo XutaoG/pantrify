@@ -1,8 +1,12 @@
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
-import { mockInstructions } from "@/constants";
+import { Recipe } from "@/types";
 
-const RecipeInstructions = () => {
-	const instructions = mockInstructions.map((instruction) => {
+interface RecipeInstructionsProps {
+	recipe: Recipe;
+}
+
+const RecipeInstructions = ({ recipe }: RecipeInstructionsProps) => {
+	const instructions = recipe.instructions.map((instruction) => {
 		return <li key={instruction.step}>{instruction.instruction}</li>;
 	});
 

@@ -1,15 +1,29 @@
-import { mockRecipeOptionalIngredients } from "@/constants";
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import RecipeIngredientListing from "./RecipeIngredientListing";
+import { Recipe } from "@/types";
 
-const RecipeOptionalIngredients = () => {
-	const SecondaryIngredients = mockRecipeOptionalIngredients.map((ingredient) => {
-		return <RecipeIngredientListing key={ingredient.name} recipeIngredient={ingredient} />;
+interface RecipeOptionalIngredientsProps {
+	recipe: Recipe;
+}
+
+const RecipeOptionalIngredients = ({ recipe }: RecipeOptionalIngredientsProps) => {
+	const optionalIngredients = recipe.ingredients.filter((ingredient) => {
+		return ingredient.ingredientType === "Optional";
 	});
 
+	const renderedOptionalIngredients = optionalIngredients.map((ingredient) => {
+		if (ingredient.ingredientType === "Optional") {
+			return <RecipeIngredientListing key={ingredient.name} recipeIngredient={ingredient} />;
+		}
+	});
+
+	if (renderedOptionalIngredients.length === 0) {
+		return null;
+	}
+
 	return (
-		<CollapsiblePanel title="Secondary Ingredients">
-			<div className="flex flex-col gap-2">{SecondaryIngredients}</div>
+		<CollapsiblePanel title="Optional Ingredients">
+			<div className="flex flex-col gap-2">{renderedOptionalIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

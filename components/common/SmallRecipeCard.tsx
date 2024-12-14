@@ -1,17 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import InfoWidget from "./InfoWidget";
 import { Clock } from "lucide-react";
 import { Recipe } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
 import { getTimeStr } from "@/utils";
+import { ActiveViewContext } from "./ActiveViewContext";
+import { useContext } from "react";
 
 interface SmallRecipeCardProps {
 	recipe: Recipe;
 }
 
 const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
+	//! Context
+	const view = useContext(ActiveViewContext);
+	const { setActiveView } = view!;
+
 	return (
-		<div className="flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer">
+		<div
+			className="flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer"
+			onClick={() => setActiveView(recipe)}
+		>
 			{/* Recipe image */}
 			<div className="w-full grow relative overflow-hidden rounded-t-xl">
 				<Image

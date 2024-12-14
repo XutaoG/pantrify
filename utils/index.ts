@@ -50,3 +50,13 @@ export const getPluralEnding = (count: number, ending?: string) => {
 		return "s";
 	}
 };
+
+export const getDifficulty = (difficulty: number) => {
+	if (difficulty === 1) {
+		return "Easy";
+	} else if (difficulty === 2) {
+		return "Medium";
+	} else {
+		return "Hard";
+	}
+};

@@ -1,30 +1,48 @@
 "use client";
 
 import InfoWidget from "@/components/common/InfoWidget";
+import { Recipe } from "@/types";
+import { getDifficulty, getTimeStr } from "@/utils";
 import { Clock, Gauge, Pencil, Refrigerator, Trash2, Users } from "lucide-react";
 import React from "react";
 
-const RecipeInfo = () => {
+interface RecipeInfoProps {
+	recipe: Recipe;
+}
+
+const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 	return (
 		<div className="flex flex-col gap-6">
 			{/* Row 1 */}
 			<div className="flex justify-between items-center">
 				{/* Time */}
-				<InfoWidget icon={<Clock size={16} />} iconColor="text-emerald-500" text="30m" />
+				<InfoWidget
+					icon={<Clock size={16} />}
+					iconColor="text-emerald-500"
+					text={getTimeStr(recipe.duration)}
+				/>
 				{/* Difficulty */}
-				<InfoWidget icon={<Gauge size={16} />} iconColor="text-orange-500" text="Med" />
+				<InfoWidget
+					icon={<Gauge size={16} />}
+					iconColor="text-orange-500"
+					text={getDifficulty(recipe.difficulty)}
+				/>
 				{/* Ingredients */}
 				<InfoWidget
 					icon={<Refrigerator size={16} />}
 					iconColor="text-sky-500"
-					text="4 Ing."
+					text={`${recipe.ingredients.length} Ing.`}
 				/>
 			</div>
 
 			{/* Row 2 */}
 			<div className="flex justify-between items-center">
 				{/* Portion */}
-				<InfoWidget icon={<Users size={16} />} iconColor="text-violet-500" text="2 P." />
+				<InfoWidget
+					icon={<Users size={16} />}
+					iconColor="text-violet-500"
+					text={`${recipe.numServings} P.`}
+				/>
 				{/* Edit */}
 				<InfoWidget
 					icon={<Pencil size={16} />}

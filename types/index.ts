@@ -5,6 +5,7 @@ import { z } from "zod";
 export interface Recipe {
 	id: number;
 	name: string;
+	description?: string;
 	duration: number;
 	difficulty: number;
 	numServings: number;
