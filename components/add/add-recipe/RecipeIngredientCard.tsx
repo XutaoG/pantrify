@@ -1,5 +1,8 @@
+"use client";
+
 import { TAddRecipeIngredientSchema } from "@/types";
 import { Pencil, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 interface RecipeIngredientCardProps {
 	index: number;
@@ -16,21 +19,29 @@ const RecipeIngredientCard = ({
 	onDelete,
 	isSubmitting,
 }: RecipeIngredientCardProps) => {
+	const [isHover, setIsHover] = useState(false);
+
 	const hideQuantity =
 		ingredient.quantityWhole == "" &&
 		(ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
 
 	return (
-		<div className="card-container rounded-xl p-2 flex justify-between gap-2">
-			<div className="flex flex-col gap-2">
+		<div
+			className="card-container rounded-xl p-2 flex justify-between gap-2"
+			onMouseEnter={() => setIsHover(true)}
+			onMouseLeave={() => setIsHover(false)}
+		>
+			<div className="flex flex-col gap-2 truncate">
 				{/* Name */}
-				<p className="font-semibold">{ingredient.name}</p>
+				<p className="font-medium text-nowrap truncate">{ingredient.name}</p>
 
 				{/* Quantity */}
 				{hideQuantity ? (
-					<p className="text-sm text-neutral-600 font-medium">Quantity unspecified</p>
+					<p className="text-sm text-neutral-600 font-medium text-nowrap truncate">
+						Quantity unspecified
+					</p>
 				) : (
-					<p className="text-sm font-medium">
+					<p className="text-sm text-neutral-600 font-medium">
 						{ingredient.quantityWhole}{" "}
 						{ingredient.quantityFraction !== "None" ? ingredient.quantityFraction : ""}{" "}
 						{ingredient.quantityUnit !== "None" ? ingredient.quantityUnit : ""}
@@ -38,7 +49,8 @@ const RecipeIngredientCard = ({
 				)}
 			</div>
 
-			<div className="flex gap-2 items-center">
+			{/* Actions */}
+			<div className={`flex gap-2 items-center ${!isHover && "hidden"}`}>
 				{/* Edit */}
 				<button
 					type="button"

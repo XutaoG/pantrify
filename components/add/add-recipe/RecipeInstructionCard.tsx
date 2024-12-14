@@ -21,9 +21,14 @@ const RecipeInstructionCard = ({
 	isSubmitting,
 }: FormInstructionInputProps) => {
 	const [isFocused, setIsFocused] = useState(false);
+	const [isHover, setIsHover] = useState(false);
 
 	return (
-		<div className="flex card-container rounded-xl">
+		<div
+			className="flex card-container rounded-xl"
+			onMouseEnter={() => setIsHover(true)}
+			onMouseLeave={() => setIsHover(false)}
+		>
 			{/* Move */}
 			<div className="flex flex-col justify-between overflow-hidden">
 				{/* Move up */}
@@ -82,7 +87,7 @@ const RecipeInstructionCard = ({
 					type="button"
 					className={`self-center bg-red-400 rounded-full size-10 ${
 						isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"
-					}
+					} ${!isHover && !isFocused && "hidden"}
 					flex justify-center items-center`}
 					onClick={() => onInstructionRemove(index)}
 					disabled={isSubmitting}
