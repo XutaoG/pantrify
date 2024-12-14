@@ -15,7 +15,7 @@ const RightSideBar = () => {
 	return (
 		<section
 			className="flex flex-col w-[450px] min-w-[450px] p-4 card-container 
-			shadow-sm rounded-xl min-h-0"
+			rounded-xl min-h-0"
 		>
 			<div className="grow flex flex-col pr-4 overflow-y-auto">
 				{/* No view */}

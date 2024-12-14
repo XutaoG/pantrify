@@ -95,6 +95,7 @@ const RecipeIngredientFormModal = ({
 				<form
 					onSubmit={handleSubmit(submitForm)}
 					className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"
+					noValidate
 				>
 					{/* Title */}
 					<p className="font-semibold">

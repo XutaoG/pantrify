@@ -212,13 +212,27 @@ export const addRecipeSchema = z
 export type TAddRecipeSchema = z.infer<typeof addRecipeSchema>;
 
 // Add recipe ingredient
-export const addRecipeIngredientSchema = z.object({
-	name: z.string().trim().min(1, "Name cannot be empty"),
-	ingredientType: z.string(),
-	quantityWhole: z.string(),
-	quantityFraction: z.string(),
-	quantityUnit: z.string(),
-});
+export const addRecipeIngredientSchema = z
+	.object({
+		name: z.string().trim().min(1, "Name cannot be empty"),
+		ingredientType: z.string(),
+		quantityWhole: z.string(),
+		quantityFraction: z.string(),
+		quantityUnit: z.string(),
+	})
+	.refine(
+		(data) => {
+			if (isNaN(Number(data.quantityWhole))) {
+				return true;
+			}
+			// If quantity whole is negative or a decimal
+			if (Number(data.quantityWhole) < 0 || !Number.isInteger(Number(data.quantityWhole))) {
+				return false;
+			}
+			return true;
+		},
+		{ message: "Invalid quantity", path: ["quantityWhole"] }
+	);
 
 export type TAddRecipeIngredientSchema = z.infer<typeof addRecipeIngredientSchema>;
 

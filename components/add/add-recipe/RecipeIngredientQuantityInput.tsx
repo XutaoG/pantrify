@@ -19,7 +19,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 
 	const {
 		register,
-		formState: { isSubmitting },
+		formState: { errors, isSubmitting },
 		getValues,
 		setValue,
 	} = useFormContext<TAddRecipeIngredientSchema>();
@@ -33,7 +33,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 				key={selection}
 				className={`p-1 hover:bg-neutral-200 rounded-lg cursor-pointer ${
 					selection === getValues("quantityFraction")
-						? "text-black font-bold"
+						? "text-black font-semibold"
 						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
@@ -51,7 +51,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 				key={selection}
 				className={`p-1 hover:bg-neutral-200 rounded-lg cursor-pointer ${
 					selection === getValues("quantityUnit")
-						? "text-black font-bold"
+						? "text-black font-semibold"
 						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
@@ -84,6 +84,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 					>
 						<input
 							{...register("quantityWhole")}
+							type="number"
 							disabled={isSubmitting}
 							className={`w-12 py-1.5 bg-transparent outline-none min-w-0 ${
 								isSubmitting && "cursor-not-allowed"
@@ -156,6 +157,11 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 					</button>
 				</div>
 			</div>
+
+			{/* Error */}
+			{errors.quantityWhole && (
+				<p className="px-1 text-red-600">{errors.quantityWhole.message}</p>
+			)}
 		</div>
 	);
 };

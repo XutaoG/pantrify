@@ -9,7 +9,20 @@ interface FormInputProps extends ComponentPropsWithRef<"input"> {
 }
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
-	({ header, headerIcon, errorMessage, placeholder, className, disabled, ...rest }, ref) => {
+	(
+		{
+			header,
+			headerIcon,
+			errorMessage,
+			placeholder,
+			className,
+			disabled,
+			onFocus,
+			onBlur,
+			...rest
+		},
+		ref
+	) => {
 		const [isFocused, setIsFocused] = useState(false);
 
 		return (
@@ -38,8 +51,18 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 							}`}
 							disabled={disabled}
 							placeholder={placeholder}
-							onFocus={() => setIsFocused(true)}
-							onBlur={() => setIsFocused(false)}
+							onFocus={(e) => {
+								setIsFocused(true);
+								if (onFocus != null) {
+									onFocus(e);
+								}
+							}}
+							onBlur={(e) => {
+								setIsFocused(false);
+								if (onBlur != null) {
+									onBlur(e);
+								}
+							}}
 						/>
 					</div>
 				</div>
