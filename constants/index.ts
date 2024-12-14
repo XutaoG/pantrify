@@ -1,4 +1,4 @@
-import { Recipe, RecipeIngredient, RecipeInstruction } from "@/types";
+import { Recipe } from "@/types";
 
 export const baseApiPath = "http://localhost:5188/api";
 
@@ -162,106 +162,6 @@ export const shoppingListSortSelections: SortSchema[] = [
 		name: "Name",
 		routeParam: "name",
 		isAscending: true,
-	},
-];
-
-export const mockRecipePrimaryIngredients: RecipeIngredient[] = [
-	{
-		id: 1,
-		name: "Spaghetti",
-		ingredientType: "Primary",
-		quantity: 2,
-		quantityUnit: "servings",
-		isAvailable: true,
-	},
-	{
-		id: 2,
-		name: "Ground beef",
-		ingredientType: "Primary",
-		quantity: 0.5,
-		quantityUnit: "lbs",
-		isAvailable: false,
-	},
-	{
-		id: 3,
-		name: "Tomato paste",
-		ingredientType: "Primary",
-		quantity: 2,
-		quantityUnit: "tbsp",
-		isAvailable: true,
-	},
-	{
-		id: 4,
-		name: "Heavy whipping cream",
-		ingredientType: "Primary",
-		quantity: 1,
-		quantityUnit: "cups",
-		isAvailable: true,
-	},
-];
-
-export const mockRecipeSecondaryIngredients: RecipeIngredient[] = [
-	{
-		id: 1,
-		name: "Salt",
-		ingredientType: "Secondary",
-		quantity: 1,
-		quantityUnit: "tsp",
-		isAvailable: true,
-	},
-	{
-		id: 2,
-		name: "Black pepper",
-		ingredientType: "Secondary",
-		quantity: 0.5,
-		quantityUnit: "tsp",
-		isAvailable: true,
-	},
-	{
-		id: 3,
-		name: "Garlic powder",
-		ingredientType: "Secondary",
-		quantity: 1,
-		quantityUnit: "tsp",
-		isAvailable: true,
-	},
-];
-
-export const mockRecipeOptionalIngredients: RecipeIngredient[] = [
-	{
-		id: 1,
-		name: "Parmesan cheese",
-		isAvailable: false,
-		ingredientType: "Optional",
-	},
-];
-
-export const mockInstructions: RecipeInstruction[] = [
-	{
-		id: 1,
-		instruction: "Boil water and add salt and pasta. Strain after.",
-		step: 1,
-	},
-	{
-		id: 2,
-		instruction: "On medium heat, fry ground beef until brown. Then remove.",
-		step: 2,
-	},
-	{
-		id: 3,
-		instruction:
-			"On medium heat, add tomato paste, heavy whipping cream, salt, black pepper, and garlic powder.",
-		step: 3,
-	},
-	{
-		id: 4,
-		instruction: "Once simmering, add pasta and ground beef back in, and mix. ",
-		step: 4,
-	},
-	{
-		id: 5,
-		instruction: "(Optional) Add shredded cheese on top.",
-		step: 5,
 	},
 ];
 

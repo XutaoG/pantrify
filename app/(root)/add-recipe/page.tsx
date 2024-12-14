@@ -304,11 +304,11 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		const response = await addRecipeApi(recipe);
+		// const response = await addRecipeApi(recipe);
 
-		if (response.errorMessage != null) {
-			console.log(response.errorMessage);
-		}
+		// if (response.errorMessage != null) {
+		// 	console.log(response.errorMessage);
+		// }
 	};
 
 	return (

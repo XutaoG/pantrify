@@ -43,7 +43,7 @@ const RecipeImagesInput = ({
 			<div className="flex items-center gap-1.5">
 				<Images size={16} />
 				<p className="text-sm font-semibold text-neutral-600 select-none">
-					Recipe Pictures
+					Recipe Pictures (optional)
 				</p>
 			</div>
 

@@ -12,9 +12,10 @@ interface RecipeDurationInputProps {
 const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 	const {
 		register,
-		formState: { isSubmitting },
+		formState: { errors, isSubmitting },
 		getValues,
 		setValue,
+		trigger,
 	} = useFormContext<TAddRecipeSchema>();
 
 	//* Interval
@@ -50,7 +51,6 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 	};
 
 	//* Change hours
-
 	const incrementHour = (val: number) => {
 		const hour = Number(getValues("durationHour"));
 
@@ -62,10 +62,11 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 			"durationHour",
 			(hour + val).toLocaleString(undefined, { minimumIntegerDigits: 2 })
 		);
+
+		trigger("durationMinute");
 	};
 
 	//* Change minutes
-
 	const incrementMinute = (val: number) => {
 		const minute = Number(getValues("durationMinute"));
 
@@ -75,105 +76,113 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 
 		setValue(
 			"durationMinute",
-			(minute + val).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+			(minute + val).toLocaleString(undefined, { minimumIntegerDigits: 2 }),
+			{ shouldValidate: true }
 		);
 	};
 
 	return (
-		<div
-			className={`h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2 ${className}`}
-		>
-			{/* Title */}
-			<div className="flex items-center gap-1.5">
-				<Clock size={14} />
-				<p className="text-sm font-semibold text-neutral-600 select-none">Duration</p>
-			</div>
+		<div className={`flex flex-col gap-1 min-w-12 ${className}`}>
+			<div
+				className={`h-20 flex flex-col gap-1 card-container rounded-xl px-4 py-2 ${className}`}
+			>
+				{/* Title */}
+				<div className="flex items-center gap-1.5">
+					<Clock size={14} />
+					<p className="text-sm font-semibold text-neutral-600 select-none">Duration</p>
+				</div>
 
-			<div className="grow flex items-center gap-4">
-				<div className="flex gap-2 items-center">
-					<p className="font-medium select-none">Hour:</p>
+				<div className="grow flex items-center gap-4">
+					<div className="flex gap-2 items-center">
+						<p className="font-medium select-none">Hour:</p>
 
-					{/* Hour field */}
-					<div className="flex">
-						<input
-							{...register("durationHour")}
-							disabled={isSubmitting}
-							className="w-8 rounded-l border border-neutral-200 p-1 outline-none cursor-default"
-							readOnly
-						/>
-
-						{/* Control */}
-						<div className="w-4 flex flex-col justify-evenly">
-							<button
-								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200 
-								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
-								type="button"
-								onClick={() => incrementHour(1)}
-								onMouseDown={() => keepValueIncrement("hour", 1)}
-								onMouseUp={stopValueIncrement}
-								onMouseLeave={stopValueIncrement}
+						{/* Hour field */}
+						<div className="flex">
+							<input
+								{...register("durationHour")}
 								disabled={isSubmitting}
-							>
-								<ChevronUp size={16} strokeWidth={1} />
-							</button>
-							<button
-								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
+								className="w-8 rounded-l border border-neutral-200 p-1 outline-none cursor-default"
+								readOnly
+							/>
+
+							{/* Control */}
+							<div className="w-4 flex flex-col justify-evenly">
+								<button
+									className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200 
 								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
-								type="button"
-								onClick={() => incrementHour(-1)}
-								onMouseDown={() => keepValueIncrement("hour", -1)}
-								onMouseUp={stopValueIncrement}
-								onMouseLeave={stopValueIncrement}
+									type="button"
+									onClick={() => incrementHour(1)}
+									onMouseDown={() => keepValueIncrement("hour", 1)}
+									onMouseUp={stopValueIncrement}
+									onMouseLeave={stopValueIncrement}
+									disabled={isSubmitting}
+								>
+									<ChevronUp size={16} strokeWidth={1} />
+								</button>
+								<button
+									className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
+									type="button"
+									onClick={() => incrementHour(-1)}
+									onMouseDown={() => keepValueIncrement("hour", -1)}
+									onMouseUp={stopValueIncrement}
+									onMouseLeave={stopValueIncrement}
+									disabled={isSubmitting}
+								>
+									<ChevronDown size={16} strokeWidth={1} />
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div className="flex gap-2 items-center">
+						<p className="font-medium select-none">Minute:</p>
+
+						{/* Minute field */}
+						<div className="flex">
+							<input
+								{...register("durationMinute")}
 								disabled={isSubmitting}
-							>
-								<ChevronDown size={16} strokeWidth={1} />
-							</button>
+								className="w-8 rounded-l border border-neutral-200 p-1 outline-none"
+								readOnly
+							/>
+
+							{/* Control */}
+							<div className="w-4 flex flex-col justify-evenly">
+								<button
+									className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
+									type="button"
+									onClick={() => incrementMinute(5)}
+									onMouseDown={() => keepValueIncrement("minute", 5)}
+									onMouseUp={stopValueIncrement}
+									onMouseLeave={stopValueIncrement}
+									disabled={isSubmitting}
+								>
+									<ChevronUp size={16} strokeWidth={1} />
+								</button>
+								<button
+									className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
+								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
+									type="button"
+									onClick={() => incrementMinute(-5)}
+									onMouseDown={() => keepValueIncrement("minute", -5)}
+									onMouseUp={stopValueIncrement}
+									onMouseLeave={stopValueIncrement}
+									disabled={isSubmitting}
+								>
+									<ChevronDown size={16} strokeWidth={1} />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-
-				<div className="flex gap-2 items-center">
-					<p className="font-medium select-none">Minute:</p>
-
-					{/* Minute field */}
-					<div className="flex">
-						<input
-							{...register("durationMinute")}
-							disabled={isSubmitting}
-							className="w-8 rounded-l border border-neutral-200 p-1 outline-none"
-							readOnly
-						/>
-
-						{/* Control */}
-						<div className="w-4 flex flex-col justify-evenly">
-							<button
-								className={`grow border border-l-0 border-neutral-200 rounded-tr hover:bg-neutral-200
-								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
-								type="button"
-								onClick={() => incrementMinute(5)}
-								onMouseDown={() => keepValueIncrement("minute", 5)}
-								onMouseUp={stopValueIncrement}
-								onMouseLeave={stopValueIncrement}
-								disabled={isSubmitting}
-							>
-								<ChevronUp size={16} strokeWidth={1} />
-							</button>
-							<button
-								className={`grow border border-l-0 border-t-0 border-neutral-200 rounded-br hover:bg-neutral-200
-								flex justify-center items-center ${isSubmitting && "cursor-not-allowed"}`}
-								type="button"
-								onClick={() => incrementMinute(-5)}
-								onMouseDown={() => keepValueIncrement("minute", -5)}
-								onMouseUp={stopValueIncrement}
-								onMouseLeave={stopValueIncrement}
-								disabled={isSubmitting}
-							>
-								<ChevronDown size={16} strokeWidth={1} />
-							</button>
-						</div>
-					</div>
-				</div>
 			</div>
+
+			{/* Error */}
+			{errors.durationMinute && (
+				<p className="px-1 text-red-600">{errors.durationMinute.message}</p>
+			)}
 		</div>
 	);
 };
