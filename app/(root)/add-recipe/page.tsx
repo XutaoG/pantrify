@@ -13,6 +13,7 @@ import {
 	AddRecipeIngredientDto,
 	TAddRecipeIngredientSchema,
 	TAddRecipeSchema,
+	RecipeInstructionCardObj,
 } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -178,6 +179,23 @@ const AddRecipePage = () => {
 		closeModal();
 	};
 
+	//* Check if zero primary or secondary ingredients
+	const checkIngredientsCount = () => {
+		let hasIngredients = false;
+		ingredients.forEach((ingredient) => {
+			if (
+				ingredient.ingredientType === "Primary" ||
+				ingredient.ingredientType === "Secondary"
+			) {
+				hasIngredients = true;
+			}
+		});
+
+		if (!hasIngredients) {
+			setIngredientsError("At least 1 ingredient must be added");
+		}
+	};
+
 	//* Render ingredient cards
 	const primaryIngredients: JSX.Element[] = [];
 	const secondaryIngredients: JSX.Element[] = [];
@@ -205,17 +223,32 @@ const AddRecipePage = () => {
 	});
 
 	//! Instructions
-	const [instructions, setInstructions] = useState<string[]>(["", "", ""]);
+	const [instructions, setInstructions] = useState<RecipeInstructionCardObj[]>([
+		{ value: "" },
+		{ value: "" },
+		{ value: "" },
+	]);
+
+	//* Ingredients error
+	const [instructionsError, setInstructionsError] = useState<string | null>(null);
 
 	const addInstruction = () => {
-		setInstructions([...instructions, ""]);
+		setInstructions([...instructions, { value: "" }]);
+		setInstructionsError(null);
 	};
 
 	//* Edit instruction
 	const editInstruction = (index: number, newInstruction: string) => {
 		const updatedInstructions = instructions.map((instruction, i) => {
 			if (index === i) {
-				return newInstruction;
+				if (newInstruction.trim().length === 0) {
+					return {
+						value: newInstruction,
+						error: "Instruction cannot be empty",
+					};
+				} else {
+					return { value: newInstruction };
+				}
 			}
 			return instruction;
 		});
@@ -251,17 +284,41 @@ const AddRecipePage = () => {
 		setInstructions(updatedInstructions);
 	};
 
+	//* Check if zero instructions
+	const checkInstructionsCount = () => {
+		if (instructions.length === 0) {
+			setInstructionsError("At least 1 instruction must be added");
+		}
+	};
+
+	//* Check if instructions are empty
+	const checkInstructionsContent = () => {
+		const updatedInstructions = instructions.map((instruction) => {
+			if (instruction.value.trim().length === 0) {
+				return {
+					value: instruction.value,
+					error: "Instruction cannot be empty",
+				};
+			}
+
+			return instruction;
+		});
+
+		setInstructions(updatedInstructions);
+	};
+
 	//* Render instruction cards
 	const instructionCards = instructions.map((instruction, index) => {
 		return (
 			<RecipeInstructionCard
 				key={index}
 				index={index}
-				value={instruction}
+				value={instruction.value}
 				onInstructionRemove={removeInstruction}
 				onInstructionEdit={editInstruction}
 				onInstructionMove={moveInstruction}
 				isSubmitting={isSubmitting}
+				error={instruction.error}
 			/>
 		);
 	});
@@ -277,7 +334,7 @@ const AddRecipePage = () => {
 		const numServings = Number(getValues("numServings"));
 
 		for (let i = 0; i < instructions.length; i++) {
-			instructions[i] = instructions[i].trim();
+			instructions[i].value = instructions[i].value.trim();
 		}
 
 		const addRecipeIngredientDtos = ingredients.map((ingredient) => {
@@ -299,7 +356,7 @@ const AddRecipePage = () => {
 			difficulty,
 			numServings,
 			ingredients: addRecipeIngredientDtos,
-			instructions: instructions,
+			instructions: instructions.map((instruction) => instruction.value),
 			images: images,
 		};
 
@@ -309,22 +366,9 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		console.log(recipe);
-
-		// Zero primary or secondary ingredients
-		let hasIngredients = false;
-		recipe.ingredients.forEach((ingredient) => {
-			if (
-				ingredient.ingredientType === "Primary" ||
-				ingredient.ingredientType === "Secondary"
-			) {
-				hasIngredients = true;
-			}
-		});
-
-		if (!hasIngredients) {
-			setIngredientsError("At least 1 ingredient must be added");
-		}
+		checkIngredientsCount();
+		checkInstructionsCount();
+		checkInstructionsContent();
 
 		// const response = await addRecipeApi(recipe);
 		// if (response.errorMessage != null) {
@@ -403,9 +447,6 @@ const AddRecipePage = () => {
 
 						<Divider />
 
-						{/* Title */}
-						<p className="font-medium self-center select-none">Ingredients</p>
-
 						{/* Open ingredient form */}
 						<button
 							type="button"
@@ -468,14 +509,18 @@ const AddRecipePage = () => {
 						<Divider />
 
 						{/* Instructions */}
-						<section className="flex flex-col gap-6">
-							<div className="flex flex-col gap-4">
-								{/* Title */}
-								<p className="font-medium self-center select-none">Instructions</p>
+						<section className="flex flex-col gap-5">
+							{instructionCards.length !== 0 && (
+								<div className="flex flex-col gap-4">
+									{/* Title */}
+									<p className="font-medium self-center select-none">
+										Instructions
+									</p>
 
-								{/* Cards */}
-								<div className="flex flex-col gap-4">{instructionCards}</div>
-							</div>
+									{/* Cards */}
+									<div className="flex flex-col gap-4">{instructionCards}</div>
+								</div>
+							)}
 
 							{/* Add instruction button */}
 							<button
@@ -489,6 +534,13 @@ const AddRecipePage = () => {
 								<CirclePlus size={20} color="white" />
 								<p className="text-white font-medium">Add Instruction</p>
 							</button>
+
+							{/* Instructions error */}
+							{instructionsError && (
+								<p className="self-center font-medium px-1 text-red-600">
+									{instructionsError}
+								</p>
+							)}
 						</section>
 
 						{/* Add */}

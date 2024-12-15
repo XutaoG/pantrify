@@ -42,6 +42,11 @@ export interface RecipeInstruction {
 	instruction: string;
 }
 
+export interface RecipeInstructionCardObj {
+	value: string;
+	error?: string;
+}
+
 export interface RecipeImage {
 	id: number;
 	path: string;
@@ -235,13 +240,6 @@ export const addRecipeIngredientSchema = z
 	);
 
 export type TAddRecipeIngredientSchema = z.infer<typeof addRecipeIngredientSchema>;
-
-// Add recipe instruction
-export const addRecipeInstructionSchema = z.object({
-	instruction: z.string().trim().min(1, "Instruction cannot be empty"),
-});
-
-export type TAddRecipeInstructionSchema = z.infer<typeof addRecipeInstructionSchema>;
 
 // Add ingredient
 export const addIngredientSchema = z.object({

@@ -68,7 +68,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 				</div>
 
 				{/* Error */}
-				{errorMessage && <p className="px-1 text-red-600">{errorMessage}</p>}
+				{errorMessage && <p className="font-medium px-1 text-red-600">{errorMessage}</p>}
 			</div>
 		);
 	}

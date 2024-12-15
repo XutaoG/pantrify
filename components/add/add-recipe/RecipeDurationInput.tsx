@@ -181,7 +181,7 @@ const RecipeDurationInput = ({ className }: RecipeDurationInputProps) => {
 
 			{/* Error */}
 			{errors.durationMinute && (
-				<p className="px-1 text-red-600">{errors.durationMinute.message}</p>
+				<p className="px-1 font-medium text-red-600">{errors.durationMinute.message}</p>
 			)}
 		</div>
 	);
