@@ -180,6 +180,7 @@ const AddRecipePage = () => {
 	};
 
 	//* Check if zero primary or secondary ingredients
+	//* true is valid
 	const checkIngredientsCount = () => {
 		let hasIngredients = false;
 		ingredients.forEach((ingredient) => {
@@ -194,6 +195,8 @@ const AddRecipePage = () => {
 		if (!hasIngredients) {
 			setIngredientsError("At least 1 ingredient must be added");
 		}
+
+		return hasIngredients;
 	};
 
 	//* Render ingredient cards
@@ -288,13 +291,17 @@ const AddRecipePage = () => {
 	const checkInstructionsCount = () => {
 		if (instructions.length === 0) {
 			setInstructionsError("At least 1 instruction must be added");
+			return false;
 		}
+		return true;
 	};
 
 	//* Check if instructions are empty
 	const checkInstructionsContent = () => {
+		let hasEmptyInstructions = false;
 		const updatedInstructions = instructions.map((instruction) => {
 			if (instruction.value.trim().length === 0) {
+				hasEmptyInstructions = true;
 				return {
 					value: instruction.value,
 					error: "Instruction cannot be empty",
@@ -305,6 +312,7 @@ const AddRecipePage = () => {
 		});
 
 		setInstructions(updatedInstructions);
+		return !hasEmptyInstructions;
 	};
 
 	//* Render instruction cards
@@ -366,14 +374,18 @@ const AddRecipePage = () => {
 	const addRecipe = async () => {
 		const recipe = parseRecipe();
 
-		checkIngredientsCount();
-		checkInstructionsCount();
-		checkInstructionsContent();
+		const ingredientsCountCheck = checkIngredientsCount();
+		const instructionsCountCheck = checkInstructionsCount();
+		const instructionsContentCheck = checkInstructionsContent();
 
-		// const response = await addRecipeApi(recipe);
-		// if (response.errorMessage != null) {
-		// 	console.log(response.errorMessage);
-		// }
+		if (!ingredientsCountCheck || !instructionsCountCheck || !instructionsContentCheck) {
+			return;
+		}
+
+		const response = await addRecipeApi(recipe);
+		if (response.errorMessage != null) {
+			console.log(response.errorMessage);
+		}
 	};
 
 	return (
