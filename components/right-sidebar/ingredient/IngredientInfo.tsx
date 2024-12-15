@@ -23,24 +23,16 @@ interface IngredientInfoProps {
 }
 
 const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
-	// const { refresh } = useContext(RefreshContext)!;
-
-	//* Move ingredient to cart or inventory
-	// const submitMove = async () => {
-	// 	if (ingredient.isAvailable) {
-	// 		await moveToCart(ingredient.id);
-	// 	} else {
-	// 		await moveToInventory(ingredient.id);
-	// 	}
-	// 	refresh();
-	// };
+	const { refresh } = useContext(RefreshContext)!;
 
 	const submitMoveToCart = async () => {
 		await moveToCart(ingredient.id);
+		refresh();
 	};
 
 	const submitMoveToInventory = async () => {
 		await moveToInventory(ingredient.id);
+		refresh();
 	};
 
 	return (

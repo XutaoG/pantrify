@@ -22,6 +22,7 @@ import {
 	Ingredient,
 	IngredientList,
 	LoginResponse,
+	Recipe,
 	RecipeList,
 	RefreshResponse,
 	SignUpResponse,
@@ -265,7 +266,7 @@ export const addIngredient = async (newIngredient: AddIngredientDto) => {
 	return response;
 };
 
-export const getIngredient = async (id: number) => {
+export const getIngredientApi = async (id: number) => {
 	try {
 		const cookieStore = await cookies();
 
@@ -505,6 +506,23 @@ export const getAllRecipes = async (config?: GetAllRecipesRequestConfig) => {
 				isAscending: config.isAscending,
 				pageNumber: config.pageNumber,
 				pageSize: config.pageSize,
+			},
+		});
+
+		return response.data;
+	} catch {
+		return null;
+	}
+};
+
+export const getRecipeApi = async (id: number) => {
+	try {
+		const cookieStore = await cookies();
+
+		const response = await axios.get<Recipe>(`${recipesPath}/${id}`, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
 			},
 		});
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Ingredient } from "@/types";
 import IngredientAvailableRecipe from "./IngredientAvailableRecipe";
 import IngredientInfo from "./IngredientInfo";

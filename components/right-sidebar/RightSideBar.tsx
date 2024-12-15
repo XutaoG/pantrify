@@ -1,16 +1,44 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ActiveViewContext } from "../common/ActiveViewContext";
 import { isIngredient, isRecipe } from "@/utils";
 import IngredientView from "./ingredient/IngredientView";
 import RecipeView from "./recipe/RecipeView";
 import Image from "next/image";
+import { RefreshContext } from "../common/FetchContext";
+import { Ingredient, Recipe } from "@/types";
+import { getIngredientApi, getRecipeApi } from "@/api";
 
 const RightSideBar = () => {
-	const view = useContext(ActiveViewContext);
+	const { activeView } = useContext(ActiveViewContext)!;
+	const { refreshValue } = useContext(RefreshContext)!;
 
-	const { activeView } = view!;
+	const [view, setView] = useState<Ingredient | Recipe | null>(null);
+
+	useEffect(() => {
+		if (activeView == null) {
+			return;
+		}
+
+		const setIngredient = async () => {
+			setView(await getIngredientApi(activeView.id));
+		};
+
+		const setRecipe = async () => {
+			setView(await getRecipeApi(activeView.id));
+		};
+
+		// Ingredient type
+		if (isIngredient(activeView)) {
+			setIngredient();
+		}
+
+		// Recipe type
+		if (isRecipe(activeView)) {
+			setRecipe();
+		}
+	}, [activeView, refreshValue]);
 
 	return (
 		<section
@@ -34,11 +62,10 @@ const RightSideBar = () => {
 					</div>
 				)}
 				{/* Ingredient view */}
-				{activeView != null && isIngredient(activeView) && (
-					<IngredientView ingredient={activeView} />
-				)}
+				{view != null && isIngredient(view) && <IngredientView ingredient={view} />}
+
 				{/* Recipe view */}
-				{activeView != null && isRecipe(activeView) && <RecipeView recipe={activeView} />}
+				{view != null && isRecipe(view) && <RecipeView recipe={view} />}
 			</div>
 		</section>
 	);
