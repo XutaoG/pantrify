@@ -7,6 +7,7 @@ import { Clock, Gauge, Refrigerator } from "lucide-react";
 import { defaultRecipeImageRoute } from "@/constants";
 import { ActiveViewContext } from "./ActiveViewContext";
 import { useContext } from "react";
+import { getDifficulty, getTimeStr } from "@/utils";
 
 interface LargeRecipeCardProps {
 	recipe: Recipe;
@@ -38,25 +39,30 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 
 			{/* Info */}
 			<div className="flex flex-col gap-4 p-3">
+				{/* Name */}
 				<p className="font-medium tracking-wide truncate text-nowrap">{recipe.name}</p>
+
 				<div className="flex justify-between">
 					{/* Time */}
 					<InfoWidget
 						icon={<Clock size={16} />}
 						iconColor="text-emerald-500"
-						text={recipe.duration.toString()}
+						text={getTimeStr(recipe.duration)}
+						small
 					/>
 					{/* Difficulty */}
 					<InfoWidget
 						icon={<Gauge size={16} />}
 						iconColor="text-orange-500"
-						text={recipe.difficulty.toString()}
+						text={getDifficulty(recipe.difficulty)}
+						small
 					/>
 					{/* Ingredients */}
 					<InfoWidget
 						icon={<Refrigerator size={16} />}
 						iconColor="text-sky-500"
 						text={`${recipe.ingredients.length} Ing.`}
+						small
 					/>
 				</div>
 			</div>

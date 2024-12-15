@@ -7,7 +7,7 @@ import { Archive, Egg, Milk, Pencil, ShoppingCart, Trash2 } from "lucide-react";
 import { ActiveViewContext } from "../common/ActiveViewContext";
 import { Ingredient } from "@/types";
 import { RefreshContext } from "../common/FetchContext";
-import { getUSDate } from "@/utils";
+import { getUSDate, isIngredient } from "@/utils";
 
 interface IngredientCardProps {
 	mode: "ingredient" | "shopping";
@@ -20,7 +20,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	//! Context
 	const { refresh } = useContext(RefreshContext)!;
 	const view = useContext(ActiveViewContext);
-	const { setActiveView } = view!;
+	const { activeView, setActiveView } = view!;
 
 	//! Modal
 	const [showModalForEdit, setShowModalForEdit] = useState(false);
@@ -54,10 +54,15 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	//* Expiration date
 	const expirationDateStr = getUSDate(ingredient.dateExpired ?? null);
 
+	const isCurrentlyViewed =
+		activeView != null && isIngredient(activeView) && activeView.id === ingredient.id;
+
 	return (
 		<div
-			className="h-16 flex justify-between items-center gap-3 rounded-xl 
-			px-3 py-4 card-container cursor-pointer"
+			className={`h-16 flex justify-between items-center gap-3 rounded-xl 
+			px-3 py-4 card-container cursor-pointer ${
+				isCurrentlyViewed && "border-neutral-200 bg-neutral-200"
+			}`}
 			onClick={() => setActiveView(ingredient)}
 			onMouseEnter={() => setIsHover(true)}
 			onMouseLeave={() => setIsHover(false)}

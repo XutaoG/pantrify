@@ -64,7 +64,7 @@ const RecentRecipes = () => {
 			setRecentRecipes(
 				await getAllRecipes({
 					sortBy: "dateAdded",
-					isAscending: true,
+					isAscending: false,
 					pageSize: 3,
 				})
 			);
@@ -79,8 +79,7 @@ const RecentRecipes = () => {
 	const recipeCards = recentRecipes?.recipes.map((recipe, index) => {
 		return (
 			<div
-				className=""
-				key={recipe.name}
+				key={recipe.id}
 				ref={(e: HTMLDivElement) => {
 					recipeCardsRef.current[index] = e;
 				}}

@@ -1,34 +1,64 @@
 "use client";
 
+import { moveToCart, moveToInventory } from "@/api";
+import { RefreshContext } from "@/components/common/FetchContext";
 import InfoWidget from "@/components/common/InfoWidget";
 import ToolTipContainer from "@/components/common/ToolTipContainer";
 import { Ingredient } from "@/types";
 import { getUSDate } from "@/utils";
-import { CalendarPlus, CalendarX2, Egg, Milk, Pencil, ShoppingCart, Trash2 } from "lucide-react";
+import {
+	Archive,
+	CalendarPlus,
+	CalendarX2,
+	Egg,
+	Milk,
+	Pencil,
+	ShoppingCart,
+	Trash2,
+} from "lucide-react";
+import { useContext } from "react";
 
 interface IngredientInfoProps {
 	ingredient: Ingredient;
 }
 
 const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
+	// const { refresh } = useContext(RefreshContext)!;
+
+	//* Move ingredient to cart or inventory
+	// const submitMove = async () => {
+	// 	if (ingredient.isAvailable) {
+	// 		await moveToCart(ingredient.id);
+	// 	} else {
+	// 		await moveToInventory(ingredient.id);
+	// 	}
+	// 	refresh();
+	// };
+
+	const submitMoveToCart = async () => {
+		await moveToCart(ingredient.id);
+	};
+
+	const submitMoveToInventory = async () => {
+		await moveToInventory(ingredient.id);
+	};
+
 	return (
 		<div className="flex flex-col gap-6">
 			{/* Row 1 */}
 			<div className="flex justify-between items-center">
 				{/* Ingredient type */}
-				<ToolTipContainer toolTipContent="abcd" position="right">
-					<InfoWidget
-						icon={
-							ingredient.ingredientType === "Primary" ? (
-								<Egg size={16} />
-							) : (
-								<Milk size={16} />
-							)
-						}
-						iconColor="text-emerald-500"
-						text={ingredient.ingredientType}
-					/>
-				</ToolTipContainer>
+				<InfoWidget
+					icon={
+						ingredient.ingredientType === "Primary" ? (
+							<Egg size={16} />
+						) : (
+							<Milk size={16} />
+						)
+					}
+					iconColor="text-emerald-500"
+					text={ingredient.ingredientType}
+				/>
 
 				{/* Date added */}
 				<ToolTipContainer
@@ -61,13 +91,24 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 
 			{/* Row 2 */}
 			<div className="flex justify-between items-center">
-				{/* Add to cart */}
-				<InfoWidget
-					icon={<ShoppingCart size={16} />}
-					iconColor="text-violet-500"
-					text="Add to Cart"
-					onClick={() => {}}
-				/>
+				{ingredient.isAvailable ? (
+					// Add to cart
+					<InfoWidget
+						icon={<ShoppingCart size={16} />}
+						iconColor="text-violet-500"
+						text="Add to Cart"
+						onClick={submitMoveToCart}
+					/>
+				) : (
+					// Add to cart
+					<InfoWidget
+						icon={<Archive size={16} />}
+						iconColor="text-violet-500"
+						text="Add to Inventory"
+						onClick={submitMoveToInventory}
+					/>
+				)}
+
 				{/* Edit */}
 				<InfoWidget
 					icon={<Pencil size={16} />}

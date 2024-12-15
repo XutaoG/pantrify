@@ -37,7 +37,7 @@ const AllRecipes = () => {
 
 	// Render cards
 	const recipeCards = recipes?.recipes.map((recipe) => {
-		return <SmallRecipeCard recipe={recipe} key={recipe.name} />;
+		return <SmallRecipeCard recipe={recipe} key={recipe.id} />;
 	});
 
 	return (

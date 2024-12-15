@@ -8,13 +8,14 @@ interface InfoWidgetProps {
 	text: string;
 	onClick?: () => void;
 	onHover?: () => void;
+	small?: boolean;
 }
 
-const InfoWidget = ({ icon, iconColor, text, onClick, onHover }: InfoWidgetProps) => {
+const InfoWidget = ({ icon, iconColor, text, onClick, onHover, small }: InfoWidgetProps) => {
 	return (
 		<div
-			className={`flex flex-col gap-1 justify-center items-center w-20
-			rounded-sm ${(onClick || onHover) && "cursor-pointer"}`}
+			className={`flex flex-col gap-1 justify-center items-center 
+			rounded-sm ${(onClick || onHover) && "cursor-pointer"} ${small ? "w-12" : "w-24"}`}
 			onClick={onClick}
 			onMouseOver={onHover}
 		>

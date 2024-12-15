@@ -5,7 +5,7 @@ import InfoWidget from "./InfoWidget";
 import { Clock } from "lucide-react";
 import { Recipe } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
-import { getTimeStr } from "@/utils";
+import { getTimeStr, isRecipe } from "@/utils";
 import { ActiveViewContext } from "./ActiveViewContext";
 import { useContext } from "react";
 
@@ -16,15 +16,20 @@ interface SmallRecipeCardProps {
 const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 	//! Context
 	const view = useContext(ActiveViewContext);
-	const { setActiveView } = view!;
+	const { activeView, setActiveView } = view!;
+
+	const isCurrentlyViewed =
+		activeView != null && isRecipe(activeView) && activeView.id === recipe.id;
 
 	return (
 		<div
-			className="flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer"
+			className={`flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer overflow-hidden ${
+				isCurrentlyViewed && "border-neutral-200 bg-neutral-200"
+			}`}
 			onClick={() => setActiveView(recipe)}
 		>
 			{/* Recipe image */}
-			<div className="w-full grow relative overflow-hidden rounded-t-xl">
+			<div className="w-full grow relative">
 				<Image
 					src={
 						recipe.images.length !== 0 ? recipe.images[0].path : defaultRecipeImageRoute
