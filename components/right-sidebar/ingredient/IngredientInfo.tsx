@@ -1,6 +1,6 @@
 "use client";
 
-import { moveToCart, moveToInventory } from "@/api";
+import { deleteIngredient, moveToCart, moveToInventory } from "@/api";
 import { RefreshContext } from "@/components/common/FetchContext";
 import InfoWidget from "@/components/common/InfoWidget";
 import ToolTipContainer from "@/components/common/ToolTipContainer";
@@ -26,6 +26,7 @@ interface IngredientInfoProps {
 const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 	const { refresh } = useContext(RefreshContext)!;
 
+	//! Move between inventory and cart
 	const submitMoveToCart = async () => {
 		await moveToCart(ingredient.id);
 		refresh();
@@ -45,6 +46,12 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 
 	const closeModal = () => {
 		setShowModalForEdit(false);
+	};
+
+	//! Delete ingredient
+	const submitDeleteIngredient = async () => {
+		await deleteIngredient(ingredient.id);
+		refresh();
 	};
 
 	return (
@@ -125,7 +132,7 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 					icon={<Trash2 size={16} />}
 					iconColor="text-red-500"
 					text="Delete"
-					onClick={() => {}}
+					onClick={submitDeleteIngredient}
 				/>
 			</div>
 

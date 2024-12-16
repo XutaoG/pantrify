@@ -67,18 +67,22 @@ export const useIngredients = ({
 	const fetchIngredients = useCallback(async () => {
 		setIsLoading(true);
 
-		setIngredients(
-			await getAllIngredients({
-				name: searchWord,
-				ingredientType,
-				isAvailable,
-				isInCart,
-				sortBy: sortOption?.routeParam,
-				isAscending: sortOption?.isAscending,
-				pageNumber: pageNumber,
-				pageSize: pageSize,
-			})
-		);
+		const ingredientList = await getAllIngredients({
+			name: searchWord,
+			ingredientType,
+			isAvailable,
+			isInCart,
+			sortBy: sortOption?.routeParam,
+			isAscending: sortOption?.isAscending,
+			pageNumber: pageNumber,
+			pageSize: pageSize,
+		});
+
+		setIngredients(ingredientList);
+
+		if (ingredientList?.ingredients.length === 0) {
+			setPageNumber(1);
+		}
 
 		setIsLoading(false);
 	}, [ingredientType, isAvailable, isInCart, pageNumber, searchWord, sortOption, pageSize]);
@@ -128,18 +132,22 @@ export const useRecipes = ({
 	const fetchRecipes = useCallback(async () => {
 		setIsLoading(true);
 
-		setRecipes(
-			await getAllRecipes({
-				name: searchWord,
-				difficulty: difficultyFilterOption.difficulty,
-				minDuration: durationFilterOption.minDuration,
-				maxDuration: durationFilterOption.maxDuration,
-				sortBy: sortOption?.routeParam,
-				isAscending: sortOption?.isAscending,
-				pageNumber: pageNumber,
-				pageSize: pageSize,
-			})
-		);
+		const recipeList = await getAllRecipes({
+			name: searchWord,
+			difficulty: difficultyFilterOption.difficulty,
+			minDuration: durationFilterOption.minDuration,
+			maxDuration: durationFilterOption.maxDuration,
+			sortBy: sortOption?.routeParam,
+			isAscending: sortOption?.isAscending,
+			pageNumber: pageNumber,
+			pageSize: pageSize,
+		});
+
+		setRecipes(recipeList);
+
+		if (recipeList?.recipes.length === 0) {
+			setPageNumber(1);
+		}
 
 		setIsLoading(false);
 	}, [
