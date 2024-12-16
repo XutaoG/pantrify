@@ -4,6 +4,7 @@ import { moveToCart, moveToInventory } from "@/api";
 import { RefreshContext } from "@/components/common/FetchContext";
 import InfoWidget from "@/components/common/InfoWidget";
 import ToolTipContainer from "@/components/common/ToolTipContainer";
+import IngredientFormModal from "@/components/ingredients/IngredientFormModal";
 import { Ingredient } from "@/types";
 import { getUSDate } from "@/utils";
 import {
@@ -16,7 +17,7 @@ import {
 	ShoppingCart,
 	Trash2,
 } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 interface IngredientInfoProps {
 	ingredient: Ingredient;
@@ -33,6 +34,17 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 	const submitMoveToInventory = async () => {
 		await moveToInventory(ingredient.id);
 		refresh();
+	};
+
+	//! Modal
+	const [showModalForEdit, setShowModalForEdit] = useState(false);
+
+	const openModal = () => {
+		setShowModalForEdit(true);
+	};
+
+	const closeModal = () => {
+		setShowModalForEdit(false);
 	};
 
 	return (
@@ -106,7 +118,7 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 					icon={<Pencil size={16} />}
 					iconColor="text-yellow-500"
 					text="Edit"
-					onClick={() => {}}
+					onClick={openModal}
 				/>
 				{/* Delete */}
 				<InfoWidget
@@ -116,6 +128,15 @@ const IngredientInfo = ({ ingredient }: IngredientInfoProps) => {
 					onClick={() => {}}
 				/>
 			</div>
+
+			{/* Modal */}
+			{showModalForEdit && (
+				<IngredientFormModal
+					mode={ingredient.isAvailable ? "ingredient" : "shopping"}
+					ingredient={ingredient}
+					onModalClose={closeModal}
+				/>
+			)}
 		</div>
 	);
 };

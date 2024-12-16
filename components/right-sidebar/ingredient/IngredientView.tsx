@@ -15,7 +15,6 @@ const IngredientView = ({ ingredient }: IngredientViewProps) => {
 			<div className="flex flex-col gap-1">
 				<p className="text-sm font-semibold text-neutral-600">Ingredient name</p>
 				<h3 className="font-medium tracking-wide">{ingredient.name}</h3>
-				<p className="font-medium text-sm">{ingredient.ingredientType} Ingredient</p>
 			</div>
 
 			{/* Basic info */}

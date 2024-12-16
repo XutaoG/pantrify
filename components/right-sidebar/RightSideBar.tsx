@@ -14,6 +14,7 @@ const RightSideBar = () => {
 	const { activeView } = useContext(ActiveViewContext)!;
 	const { refreshValue } = useContext(RefreshContext)!;
 
+	// Actual view for display
 	const [view, setView] = useState<Ingredient | Recipe | null>(null);
 
 	useEffect(() => {
@@ -47,7 +48,7 @@ const RightSideBar = () => {
 		>
 			<div className="grow flex flex-col pr-4 overflow-y-auto">
 				{/* No view */}
-				{activeView == null && (
+				{view == null && (
 					<div className="grow flex flex-col gap-6 justify-center items-center">
 						<Image
 							src="/logo/pantrify_logo.webp"

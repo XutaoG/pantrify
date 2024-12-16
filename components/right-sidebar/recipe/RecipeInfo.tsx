@@ -1,10 +1,10 @@
 "use client";
 
 import InfoWidget from "@/components/common/InfoWidget";
+import IngredientFormModal from "@/components/ingredients/IngredientFormModal";
 import { Recipe } from "@/types";
 import { getDifficulty, getTimeStr } from "@/utils";
 import { Clock, Gauge, Pencil, Refrigerator, Trash2, Users } from "lucide-react";
-import React from "react";
 
 interface RecipeInfoProps {
 	recipe: Recipe;

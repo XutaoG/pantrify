@@ -24,7 +24,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 	return (
 		<div
 			className={`flex flex-col rounded-xl aspect-[5/4] card-container cursor-pointer overflow-hidden ${
-				isCurrentlyViewed && "border-neutral-200 bg-neutral-200"
+				isCurrentlyViewed && "border-neutral-300"
 			}`}
 			onClick={() => setActiveView(recipe)}
 		>

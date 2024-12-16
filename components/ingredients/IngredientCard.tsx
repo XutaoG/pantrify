@@ -60,9 +60,7 @@ const IngredientCard = ({ mode, ingredient }: IngredientCardProps) => {
 	return (
 		<div
 			className={`h-16 flex justify-between items-center gap-3 rounded-xl 
-			px-3 py-4 card-container cursor-pointer ${
-				isCurrentlyViewed && "border-neutral-200 bg-neutral-200"
-			}`}
+			px-3 py-4 card-container cursor-pointer ${isCurrentlyViewed && "border-neutral-300"}`}
 			onClick={() => setActiveView(ingredient)}
 			onMouseEnter={() => setIsHover(true)}
 			onMouseLeave={() => setIsHover(false)}
