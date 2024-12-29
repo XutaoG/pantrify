@@ -531,3 +531,18 @@ export const getRecipeApi = async (id: number) => {
 		return null;
 	}
 };
+
+export const deleteRecipeApi = async (id: number) => {
+	try {
+		const cookieStore = await cookies();
+
+		await axios.delete<Recipe>(`${recipesPath}/${id}`, {
+			headers: {
+				// Attach client cookies
+				Cookie: cookieStore.toString(),
+			},
+		});
+	} catch {
+		return;
+	}
+};

@@ -9,8 +9,13 @@ import { LoaderCircle } from "lucide-react";
 import Pagination from "../common/Pagination";
 import SortDropdown from "../common/SortDropdown";
 import { getPluralEnding } from "@/utils";
+import { RefreshContext } from "../common/FetchContext";
+import { useContext } from "react";
 
 const AllRecipes = () => {
+	//* refreshValue: passed to useRecipe dependency array to retrieve ingredients
+	const { refreshValue } = useContext(RefreshContext)!;
+
 	const pageSize = 12;
 
 	const {
@@ -25,7 +30,7 @@ const AllRecipes = () => {
 		isLoading,
 		pageNumber,
 		setPageNumber,
-	} = useRecipes({ pageSize });
+	} = useRecipes({ pageSize, refreshValue });
 
 	const search = (searchWord: string) => {
 		setSearchWord(searchWord);

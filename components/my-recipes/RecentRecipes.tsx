@@ -1,14 +1,18 @@
 "use client";
 
 import LargeRecipeCard from "../common/LargeRecipeCard";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import CollapsiblePanel from "../common/CollapsiblePanel";
 import { ChevronLeft, ChevronRight, LoaderCircle } from "lucide-react";
 import { RecipeList } from "@/types";
 import { getAllRecipes } from "@/api";
+import { RefreshContext } from "../common/FetchContext";
 
 const RecentRecipes = () => {
+	//* refreshValue: passed to dependency array to retrieve ingredients
+	const { refreshValue } = useContext(RefreshContext)!;
+
 	// Scroll recipes
 	const recipeCardsRef = useRef<HTMLElement[]>([]);
 	const [scrollIndex, setScrollIndex] = useState(0);
@@ -73,7 +77,7 @@ const RecentRecipes = () => {
 		};
 
 		fetchRecipes();
-	}, []);
+	}, [refreshValue]);
 
 	// Render all recent recipe cards
 	const recipeCards = recentRecipes?.recipes.map((recipe, index) => {

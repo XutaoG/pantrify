@@ -106,10 +106,11 @@ export const useIngredients = ({
 
 export const useRecipes = ({
 	pageSize,
+	refreshValue,
 }: // refreshValue,
 {
 	pageSize: number;
-	// refreshValue: boolean;
+	refreshValue: boolean;
 }) => {
 	//* Search, filtering, and sorting
 	const [searchWord, setSearchWord] = useState("");
@@ -162,10 +163,7 @@ export const useRecipes = ({
 	useEffect(() => {
 		// Fetch data
 		fetchRecipes();
-	}, [
-		fetchRecipes,
-		// refreshValue
-	]);
+	}, [fetchRecipes, refreshValue]);
 
 	// Set page to 1 when filter is changed
 	useEffect(() => {

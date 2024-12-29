@@ -50,6 +50,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 					icon={<Clock size={16} />}
 					iconColor="text-emerald-500"
 					text={getTimeStr(recipe.duration)}
+					small
 				/>
 			</div>
 		</div>
