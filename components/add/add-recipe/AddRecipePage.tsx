@@ -16,17 +16,24 @@ import {
 	RecipeInstructionCardObj,
 } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstructionCard";
 import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
-import { Text, ChefHat, Gauge, Users, CirclePlus } from "lucide-react";
+import { Text, ChefHat, Gauge, Users, CirclePlus, CircleX } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
 import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
 import { addRecipeApi } from "@/api";
 import Divider from "@/components/common/Divider";
+import { RefreshContext } from "@/components/common/FetchContext";
 
-const AddRecipePage = () => {
+interface AddRecipePageProps {
+	onModalClose: () => void;
+}
+
+const AddRecipePage = ({ onModalClose }: AddRecipePageProps) => {
+	const { refresh } = useContext(RefreshContext)!;
+
 	const methods = useForm<TAddRecipeSchema>({
 		resolver: zodResolver(addRecipeSchema),
 		defaultValues: {
@@ -386,186 +393,231 @@ const AddRecipePage = () => {
 		if (response.errorMessage != null) {
 			console.log(response.errorMessage);
 		}
+
+		onModalClose();
+		refresh();
 	};
 
 	return (
-		<div
-			id="add-recipe-page"
-			className="grow flex flex-col items-center gap-6 px-5 pt-10 pb-5 overflow-y-auto"
-		>
-			<div className="container mx-auto flex flex-col gap-6">
-				{/* Page title */}
-				<PageTitle title="Add a New Recipe" subtitle="Enrich Your Own Personal Cookbook." />
+		<section className="fixed inset-0 flex flex-col items-center gap-6 py-10 bg-black/15 z-50">
+			{/* Discard */}
+			<button
+				type="button"
+				className={`bg-neutral-500 rounded-full 
+				flex justify-center items-center gap-2 p-2 px-2.5 pr-4 ${
+					isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-600"
+				}`}
+				onClick={onModalClose}
+			>
+				<CircleX color="white" />
+				<p className="text-white font-semibold">Discard</p>
+			</button>
 
-				<FormProvider {...methods}>
-					<section className="flex flex-col gap-5">
-						{/* Images field */}
-						<RecipeImagesInput
-							images={images}
-							onImageAdd={addImage}
-							onImageRemove={removeImage}
-							onImageMove={moveImage}
-							isSubmitting={isSubmitting}
-						/>
+			{/* Content */}
+			<div
+				className="grow w-[1000px] flex flex-col items-center gap-6 
+				bg-gray-100 p-6 pr-3 rounded-2xl shadow-sm min-h-0"
+			>
+				<div className="container mx-auto flex flex-col gap-6 pr-3 overflow-y-auto">
+					{/* Page title */}
+					<PageTitle
+						title="Add a New Recipe"
+						subtitle="Enrich Your Own Personal Cookbook."
+					/>
 
-						{/* Name field */}
-						<FormInput
-							{...register("name")}
-							header="Recipe Name"
-							headerIcon={<ChefHat size={16} />}
-							placeholder="Enter the name of the recipe"
-							errorMessage={errors.name?.message}
-							className="grow"
-							disabled={isSubmitting}
-						/>
-
-						<div className="flex gap-6">
-							{/* Serving field */}
-							<FormNumberInput
-								{...register("numServings")}
-								header="Servings"
-								headerIcon={<Users size={16} />}
-								onValueIncrement={onServingChange}
-								incrementAmount={1}
-								className="w-40"
-								disabled={isSubmitting}
+					<FormProvider {...methods}>
+						<section className="flex flex-col gap-5">
+							{/* Images field */}
+							<RecipeImagesInput
+								images={images}
+								onImageAdd={addImage}
+								onImageRemove={removeImage}
+								onImageMove={moveImage}
+								isSubmitting={isSubmitting}
 							/>
 
-							{/* Duration field */}
-							<RecipeDurationInput />
-
-							{/* Difficulty field */}
-							<FormSelectionInput
-								{...register("difficulty")}
-								header="Difficulty"
-								headerIcon={<Gauge size={16} />}
-								selections={["Easy", "Medium", "Hard"]}
-								currentSelection={getValues("difficulty")}
-								onSelectionChange={onDifficultyChange}
+							{/* Name field */}
+							<FormInput
+								{...register("name")}
+								header="Recipe Name"
+								headerIcon={<ChefHat size={16} />}
+								placeholder="Enter the name of the recipe"
+								errorMessage={errors.name?.message}
 								className="grow"
 								disabled={isSubmitting}
 							/>
-						</div>
 
-						{/* Description field */}
-						<FormTextArea
-							{...register("description")}
-							header="Description (optional)"
-							headerIcon={<Text size={16} />}
-							placeholder="Enter the description of the recipe"
-							errorMessage={errors.description?.message}
-							disabled={isSubmitting}
-						/>
+							<div className="flex gap-6">
+								{/* Serving field */}
+								<FormNumberInput
+									{...register("numServings")}
+									header="Servings"
+									headerIcon={<Users size={16} />}
+									onValueIncrement={onServingChange}
+									incrementAmount={1}
+									className="w-40"
+									disabled={isSubmitting}
+								/>
 
-						<Divider />
+								{/* Duration field */}
+								<RecipeDurationInput />
 
-						{/* Open ingredient form */}
-						<button
-							type="button"
-							className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
-								isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
-							}`}
-							onClick={openModalForAdd}
-							disabled={isSubmitting}
-						>
-							<CirclePlus size={20} color="white" />
-							<p className="text-white font-medium">Add Ingredient</p>
-						</button>
+								{/* Difficulty field */}
+								<FormSelectionInput
+									{...register("difficulty")}
+									header="Difficulty"
+									headerIcon={<Gauge size={16} />}
+									selections={["Easy", "Medium", "Hard"]}
+									currentSelection={getValues("difficulty")}
+									onSelectionChange={onDifficultyChange}
+									className="grow"
+									disabled={isSubmitting}
+								/>
+							</div>
 
-						{/* Ingredients error */}
-						{ingredientsError && (
-							<p className="self-center font-medium px-1 text-red-600">
-								{ingredientsError}
-							</p>
-						)}
-
-						{/* Add ingredient form modal */}
-						{isIngredientModalOpen && (
-							<RecipeIngredientFormModal
-								onIngredientAdd={addIngredient}
-								onModalClose={closeModal}
-								index={ingredientEditIndex}
-								ingredient={ingredientEditObj}
-								onIngredientEdit={editIngredient}
+							{/* Description field */}
+							<FormTextArea
+								{...register("description")}
+								header="Description (optional)"
+								headerIcon={<Text size={16} />}
+								placeholder="Enter the description of the recipe"
+								errorMessage={errors.description?.message}
+								disabled={isSubmitting}
 							/>
-						)}
 
-						{/* Primary ingredients */}
-						{primaryIngredients.length != 0 && (
-							<section className="flex flex-col gap-2">
-								<p className="font-semibold text-sm select-none">
-									Primary Ingredients
-								</p>
-								<div className="grid grid-cols-3 gap-4">{primaryIngredients}</div>
-							</section>
-						)}
-						{/* Secondary ingredients */}
-						{secondaryIngredients.length != 0 && (
-							<section className="flex flex-col gap-2">
-								<p className="font-semibold text-sm select-none">
-									Secondary Ingredients
-								</p>
-								<div className="grid grid-cols-3 gap-4">{secondaryIngredients}</div>
-							</section>
-						)}
-						{/* Optional ingredients */}
-						{optionalIngredients.length != 0 && (
-							<section className="flex flex-col gap-2">
-								<p className="font-semibold text-sm select-none">
-									Optional Ingredients
-								</p>
-								<div className="grid grid-cols-3 gap-4">{optionalIngredients}</div>
-							</section>
-						)}
+							<Divider />
 
-						<Divider />
-
-						{/* Instructions */}
-						<section className="flex flex-col gap-5">
-							{instructionCards.length !== 0 && (
-								<div className="flex flex-col gap-4">
-									{/* Title */}
-									<p className="font-medium self-center select-none">
-										Instructions
-									</p>
-
-									{/* Cards */}
-									<div className="flex flex-col gap-4">{instructionCards}</div>
-								</div>
-							)}
-
-							{/* Add instruction button */}
+							{/* Open ingredient form */}
 							<button
 								type="button"
 								className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
 									isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
 								}`}
-								onClick={addInstruction}
+								onClick={openModalForAdd}
 								disabled={isSubmitting}
 							>
 								<CirclePlus size={20} color="white" />
-								<p className="text-white font-medium">Add Instruction</p>
+								<p className="text-white font-medium">Add Ingredient</p>
 							</button>
 
-							{/* Instructions error */}
-							{instructionsError && (
+							{/* Ingredients error */}
+							{ingredientsError && (
 								<p className="self-center font-medium px-1 text-red-600">
-									{instructionsError}
+									{ingredientsError}
 								</p>
 							)}
-						</section>
 
-						{/* Add */}
-						<FormButton
-							title="Add Recipe"
-							icon={<ChefHat color="white" />}
-							onClick={handleSubmit(addRecipe)}
-							disabled={isSubmitting}
-						/>
-					</section>
-				</FormProvider>
+							{/* Add ingredient form modal */}
+							{isIngredientModalOpen && (
+								<RecipeIngredientFormModal
+									onIngredientAdd={addIngredient}
+									onModalClose={closeModal}
+									index={ingredientEditIndex}
+									ingredient={ingredientEditObj}
+									onIngredientEdit={editIngredient}
+								/>
+							)}
+
+							{/* Primary ingredients */}
+							{primaryIngredients.length != 0 && (
+								<section className="flex flex-col gap-2">
+									<p className="font-semibold text-sm select-none">
+										Primary Ingredients
+									</p>
+									<div className="grid grid-cols-3 gap-4">
+										{primaryIngredients}
+									</div>
+								</section>
+							)}
+							{/* Secondary ingredients */}
+							{secondaryIngredients.length != 0 && (
+								<section className="flex flex-col gap-2">
+									<p className="font-semibold text-sm select-none">
+										Secondary Ingredients
+									</p>
+									<div className="grid grid-cols-3 gap-4">
+										{secondaryIngredients}
+									</div>
+								</section>
+							)}
+							{/* Optional ingredients */}
+							{optionalIngredients.length != 0 && (
+								<section className="flex flex-col gap-2">
+									<p className="font-semibold text-sm select-none">
+										Optional Ingredients
+									</p>
+									<div className="grid grid-cols-3 gap-4">
+										{optionalIngredients}
+									</div>
+								</section>
+							)}
+
+							<Divider />
+
+							{/* Instructions */}
+							<section className="flex flex-col gap-5">
+								{instructionCards.length !== 0 && (
+									<div className="flex flex-col gap-4">
+										{/* Title */}
+										<p className="font-medium self-center select-none">
+											Instructions
+										</p>
+
+										{/* Cards */}
+										<div className="flex flex-col gap-4">
+											{instructionCards}
+										</div>
+									</div>
+								)}
+
+								{/* Add instruction button */}
+								<button
+									type="button"
+									className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
+										isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+									}`}
+									onClick={addInstruction}
+									disabled={isSubmitting}
+								>
+									<CirclePlus size={20} color="white" />
+									<p className="text-white font-medium">Add Instruction</p>
+								</button>
+
+								{/* Instructions error */}
+								{instructionsError && (
+									<p className="self-center font-medium px-1 text-red-600">
+										{instructionsError}
+									</p>
+								)}
+							</section>
+
+							{/* Add and discard buttons */}
+							<div className="flex flex-col gap-4">
+								{/* Add */}
+								<FormButton
+									title="Add Recipe"
+									icon={<ChefHat color="white" />}
+									onClick={handleSubmit(addRecipe)}
+									disabled={isSubmitting}
+								/>
+
+								{/* Discard */}
+								<button
+									type="button"
+									className={`bg-red-400 py-2 rounded-xl flex justify-center items-center gap-2 ${
+										isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"
+									}`}
+									onClick={onModalClose}
+								>
+									<CircleX color="white" />
+									<p className="text-white font-semibold">Discard</p>
+								</button>
+							</div>
+						</section>
+					</FormProvider>
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

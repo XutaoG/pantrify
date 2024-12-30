@@ -25,6 +25,5 @@ export const navRoutes = [
 
 export const addRecipeRoute = {
 	icon: <ChefHat color="white" />,
-	route: "/add-recipe",
 	label: "Add Recipe",
 };

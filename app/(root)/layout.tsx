@@ -10,13 +10,13 @@ const RootLayout = async ({
 }>) => {
 	return (
 		<main className="min-h-screen max-h-screen flex bg-gray-100">
-			{/* Left sidebar */}
-			<section className="flex p-4 pr-0">
-				<LeftSideBar />
-			</section>
-
-			{/* Main content */}
 			<ActiveViewContextWrapper>
+				{/* Left sidebar */}
+				<section className="flex p-4 pr-0">
+					<LeftSideBar />
+				</section>
+
+				{/* Main content */}
 				<section className="grow min-w-0 flex p-4 my-4">{children}</section>
 
 				{/* Right sidebar */}

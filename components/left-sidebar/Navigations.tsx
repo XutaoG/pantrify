@@ -3,8 +3,20 @@
 import { addRecipeRoute, navRoutes } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AddRecipePage from "../add/add-recipe/AddRecipePage";
+import { useState } from "react";
 
 const Navigations = () => {
+	const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState(false);
+
+	const openModal = () => {
+		setIsAddRecipeModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsAddRecipeModalOpen(false);
+	};
+
 	const pathname = usePathname();
 
 	const renderedNavigationButtons = navRoutes.map((route) => {
@@ -31,14 +43,18 @@ const Navigations = () => {
 
 			{/* Add recipe route */}
 			<div className="mt-4 relative">
-				<Link
-					href={addRecipeRoute.route}
+				<button
+					type="button"
+					onClick={openModal}
 					className="flex justify-center items-center gap-4 size-12 rounded-full font-semibold 
 					bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
 				>
 					{addRecipeRoute.icon}
-				</Link>
+				</button>
 			</div>
+
+			{/* Add recipe modal */}
+			{isAddRecipeModalOpen && <AddRecipePage onModalClose={closeModal} />}
 		</nav>
 	);
 };
