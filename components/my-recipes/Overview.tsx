@@ -3,7 +3,7 @@
 import { getAllIngredients, getAllRecipes } from "@/api";
 import { getPluralEnding } from "@/utils";
 import { LoaderCircle } from "lucide-react";
-import Link from "next/link";
+// import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 
 const Overview = () => {
@@ -64,7 +64,7 @@ const Overview = () => {
 					</div>
 
 					{/* Actions */}
-					<div className="flex flex-col gap-4 px-6 py-7">
+					{/* <div className="flex flex-col gap-4 px-6 py-7">
 						<Link
 							href="/available-recipes"
 							className="p-4 text-nowrap bg-sky-600 rounded-xl tracking-wide
@@ -79,7 +79,7 @@ const Overview = () => {
 						>
 							View All Ingredients
 						</Link>
-					</div>
+					</div> */}
 				</Fragment>
 			)}
 		</section>
