@@ -1,4 +1,10 @@
-import { ChefHat, CookingPot, Ham, ShoppingCart, UtensilsCrossed } from "lucide-react";
+import {
+	ChefHat,
+	// CookingPot,
+	Ham,
+	ShoppingCart,
+	UtensilsCrossed,
+} from "lucide-react";
 
 export const navRoutes = [
 	{
@@ -11,11 +17,11 @@ export const navRoutes = [
 		route: "/my-ingredients",
 		label: "My Ingredients",
 	},
-	{
-		icon: <CookingPot />,
-		route: "/available-recipes",
-		label: "Available Recipes",
-	},
+	// {
+	// 	icon: <CookingPot />,
+	// 	route: "/available-recipes",
+	// 	label: "Available Recipes",
+	// },
 	{
 		icon: <ShoppingCart />,
 		route: "/shopping-list",
