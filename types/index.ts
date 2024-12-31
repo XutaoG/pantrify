@@ -31,9 +31,9 @@ interface IngredientBase {
 }
 
 export interface RecipeIngredient extends IngredientBase {
-	quantity?: number;
+	quantityWhole?: number;
+	quantityFraction?: string;
 	quantityUnit?: string;
-	isAvailable: boolean; // To be removed
 }
 
 export interface RecipeInstruction {
@@ -92,6 +92,17 @@ export interface RefreshResponse {
 }
 
 export interface AddRecipeDto {
+	name: string;
+	description?: string;
+	duration: number;
+	difficulty: number;
+	numServings: number;
+	ingredients: AddRecipeIngredientDto[];
+	instructions: string[];
+	images: File[];
+}
+
+export interface UpdateRecipeDto {
 	name: string;
 	description?: string;
 	duration: number;

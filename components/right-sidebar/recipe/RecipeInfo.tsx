@@ -8,6 +8,7 @@ import RecipeDeletionConfirmModal from "./RecipeDeletionConfirmModal";
 import { useContext, useState } from "react";
 import { RefreshContext } from "@/components/common/FetchContext";
 import { deleteRecipeApi } from "@/api";
+import RecipeFormModal from "@/components/add/add-recipe/RecipeFormModal";
 
 interface RecipeInfoProps {
 	recipe: Recipe;
@@ -17,6 +18,8 @@ const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 	const { refresh } = useContext(RefreshContext)!;
 
 	const [isDeletionModalOpen, setIsDeletionModalOpen] = useState(false);
+
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
 	const showDeletionModal = () => {
 		setIsDeletionModalOpen(true);
@@ -30,6 +33,14 @@ const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 		await deleteRecipeApi(recipe.id);
 		closeDeletionModal();
 		refresh();
+	};
+
+	const showEditModal = () => {
+		setIsEditModalOpen(true);
+	};
+
+	const closeEditModal = () => {
+		setIsEditModalOpen(false);
 	};
 
 	return (
@@ -73,7 +84,7 @@ const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 					icon={<Pencil size={16} />}
 					iconColor="text-yellow-500"
 					text="Edit"
-					onClick={() => {}}
+					onClick={showEditModal}
 					small
 				/>
 				{/* Delete */}
@@ -91,6 +102,8 @@ const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 					onRecipeDelete={deleteRecipe}
 				/>
 			)}
+
+			{isEditModalOpen && <RecipeFormModal onModalClose={closeEditModal} recipe={recipe} />}
 		</div>
 	);
 };

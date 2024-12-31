@@ -1,4 +1,4 @@
-import { Ingredient, Recipe } from "@/types";
+import { AddRecipeDto, Ingredient, Recipe, UpdateRecipeDto } from "@/types";
 
 // Asserts activeView is typed Ingredient
 export const isIngredient = (activeView: Recipe | Ingredient): activeView is Ingredient => {
@@ -37,6 +37,14 @@ export const getTimeStr = (time: number) => {
 	return `${hours}h ${mins}m`;
 };
 
+export const getHourFromTime = (time: number) => {
+	return Math.floor(time / 60);
+};
+
+export const getMinuteFromTime = (time: number) => {
+	return time % 60;
+};
+
 export const getPluralEnding = (count: number, ending?: string) => {
 	if (count === 1) {
 		return;
@@ -59,4 +67,64 @@ export const getDifficulty = (difficulty: number) => {
 	} else {
 		return "Hard";
 	}
+};
+
+export const packageRecipeToFormData = (recipe: AddRecipeDto | UpdateRecipeDto): FormData => {
+	const formData = new FormData();
+
+	//* Name
+	formData.append("name", recipe.name);
+
+	//* Description
+	if (recipe.description) {
+		formData.append("description", recipe.description);
+	}
+
+	//* Duration
+	formData.append("duration", recipe.duration.toString());
+
+	//* Difficulty
+	formData.append("difficulty", recipe.difficulty.toString());
+
+	//* NumServings
+	formData.append("numServings", recipe.numServings.toString());
+
+	//* Ingredients
+	recipe.ingredients.forEach((ingredient, index) => {
+		formData.append(`ingredients[${index}].name`, ingredient.name);
+		formData.append(`ingredients[${index}].ingredientType`, ingredient.ingredientType);
+
+		if (ingredient.quantityWhole) {
+			formData.append(
+				`ingredients[${index}].quantityWhole`,
+				ingredient.quantityWhole.toString()
+			);
+		}
+
+		if (ingredient.quantityFraction) {
+			formData.append(`ingredients[${index}].quantityFraction`, ingredient.quantityFraction);
+		}
+
+		if (ingredient.quantityUnit) {
+			formData.append(`ingredients[${index}].quantityUnit`, ingredient.quantityUnit);
+		}
+	});
+
+	//* Instructions
+	recipe.instructions.forEach((instruction) => {
+		formData.append("instructions", instruction);
+	});
+
+	//* Images
+	recipe.images.forEach((image) => {
+		formData.append("images", image);
+	});
+
+	return formData;
+};
+
+export const convertImageURLtoFile = async (url: string) => {
+	const response = await (await fetch(url)).blob();
+
+	return new File([response], "image.png", { type: response.type });
 };

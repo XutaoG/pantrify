@@ -14,9 +14,10 @@ import {
 	TAddRecipeIngredientSchema,
 	TAddRecipeSchema,
 	RecipeInstructionCardObj,
+	Recipe,
 } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstructionCard";
 import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
@@ -26,12 +27,16 @@ import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
 import { addRecipeApi } from "@/api";
 import Divider from "@/components/common/Divider";
 import { RefreshContext } from "@/components/common/FetchContext";
+import { convertImageURLtoFile, getHourFromTime, getMinuteFromTime } from "@/utils";
 
 interface AddRecipePageProps {
+	recipe?: Recipe;
 	onModalClose: () => void;
 }
 
-const AddRecipePage = ({ onModalClose }: AddRecipePageProps) => {
+const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
+	console.log(recipe);
+
 	const { refresh } = useContext(RefreshContext)!;
 
 	const methods = useForm<TAddRecipeSchema>({
@@ -56,11 +61,14 @@ const AddRecipePage = ({ onModalClose }: AddRecipePageProps) => {
 	const [images, setImages] = useState<File[]>([]);
 
 	//* Add image
-	const addImage = (image: File) => {
-		if (images.length < 4) {
-			setImages([...images, image]);
-		}
-	};
+	const addImage = useCallback(
+		(image: File) => {
+			if (images.length < 4) {
+				setImages([...images, image]);
+			}
+		},
+		[images]
+	);
 
 	//* Delete image
 	const removeImage = (index: number) => {
@@ -398,6 +406,67 @@ const AddRecipePage = ({ onModalClose }: AddRecipePageProps) => {
 		refresh();
 	};
 
+	useEffect(() => {
+		//* Initialize form if recipe is valid
+		if (recipe != null) {
+			setValue("name", recipe.name, { shouldValidate: true });
+			setValue("description", recipe.description ?? "");
+			setValue("difficulty", recipe.difficulty.toString(), { shouldValidate: true });
+			setValue("durationHour", getHourFromTime(recipe.duration).toString(), {
+				shouldValidate: true,
+			});
+			setValue("durationMinute", getMinuteFromTime(recipe.duration).toString(), {
+				shouldValidate: true,
+			});
+			setValue("numServings", recipe.numServings.toString(), { shouldValidate: true });
+
+			// Initialize images
+			const populateImages = async () => {
+				const imageFiles: File[] = [];
+
+				for (const image of recipe.images) {
+					imageFiles.push(await convertImageURLtoFile(image.path));
+				}
+
+				setImages(imageFiles);
+			};
+
+			populateImages();
+
+			// Initialize ingredients
+			const populateIngredients = () => {
+				const existingIngredients: TAddRecipeIngredientSchema[] = recipe.ingredients.map(
+					(ingredient) => {
+						return {
+							name: ingredient.name,
+							ingredientType: ingredient.ingredientType,
+							quantityWhole: ingredient.quantityWhole?.toString() ?? "",
+							quantityFraction: ingredient.quantityFraction ?? "None",
+							quantityUnit: ingredient.quantityUnit ?? "",
+						};
+					}
+				);
+
+				setIngredients(existingIngredients);
+			};
+
+			populateIngredients();
+
+			// Initialize instructions
+			const populateInstructions = () => {
+				const existingInstructions: RecipeInstructionCardObj[] = recipe.instructions.map(
+					(instruction) => {
+						return { value: instruction.instruction };
+					}
+				);
+
+				setInstructions(existingInstructions);
+			};
+
+			populateInstructions();
+		}
+	}, [recipe, setValue]);
+
 	return (
 		<section className="fixed inset-0 flex flex-col items-center gap-6 py-10 bg-black/15 z-50">
 			{/* Discard */}
@@ -621,4 +690,4 @@ const AddRecipePage = ({ onModalClose }: AddRecipePageProps) => {
 	);
 };
 
-export default AddRecipePage;
+export default RecipeFormModal;

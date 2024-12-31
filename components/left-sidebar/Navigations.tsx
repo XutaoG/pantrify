@@ -3,7 +3,7 @@
 import { addRecipeRoute, navRoutes } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import AddRecipePage from "../add/add-recipe/AddRecipePage";
+import RecipeFormModal from "../add/add-recipe/RecipeFormModal";
 import { useState } from "react";
 
 const Navigations = () => {
@@ -54,7 +54,7 @@ const Navigations = () => {
 			</div>
 
 			{/* Add recipe modal */}
-			{isAddRecipeModalOpen && <AddRecipePage onModalClose={closeModal} />}
+			{isAddRecipeModalOpen && <RecipeFormModal onModalClose={closeModal} />}
 		</nav>
 	);
 };

@@ -30,8 +30,10 @@ import {
 	TSignUpSchema,
 	UpdateIngredientDto,
 	UpdateIngredientResponse,
+	UpdateRecipeDto,
 	User,
 } from "@/types";
+import { packageRecipeToFormData } from "@/utils";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -401,57 +403,7 @@ export const moveToInventory = async (id: number) => {
 };
 
 export const addRecipeApi = async (recipe: AddRecipeDto) => {
-	const formData = new FormData();
-
-	//* Name
-	formData.append("name", recipe.name);
-
-	//* Description
-	if (recipe.description) {
-		formData.append("description", recipe.description);
-	}
-
-	//* Duration
-	formData.append("duration", recipe.duration.toString());
-
-	//* Difficulty
-	formData.append("difficulty", recipe.difficulty.toString());
-
-	//* NumServings
-	formData.append("numServings", recipe.numServings.toString());
-
-	//* Ingredients
-	recipe.ingredients.forEach((ingredient, index) => {
-		formData.append(`ingredients[${index}].name`, ingredient.name);
-		formData.append(`ingredients[${index}].ingredientType`, ingredient.ingredientType);
-
-		if (ingredient.quantityWhole) {
-			formData.append(
-				`ingredients[${index}].quantityWhole`,
-				ingredient.quantityWhole.toString()
-			);
-		}
-
-		if (ingredient.quantityFraction) {
-			formData.append(`ingredients[${index}].quantityFraction`, ingredient.quantityFraction);
-		}
-
-		if (ingredient.quantityUnit) {
-			formData.append(`ingredients[${index}].quantityUnit`, ingredient.quantityUnit);
-		}
-	});
-
-	//* Instructions
-	recipe.instructions.forEach((instruction) => {
-		formData.append("instructions", instruction);
-	});
-
-	//* Images
-	recipe.images.forEach((image) => {
-		formData.append("images", image);
-	});
-
-	// console.log(formData);
+	const formData = packageRecipeToFormData(recipe);
 
 	const errorMessageResponse: ErrorMessageResponse = {
 		errorMessage: null,
@@ -545,4 +497,43 @@ export const deleteRecipeApi = async (id: number) => {
 	} catch {
 		return;
 	}
+};
+
+export const updateRecipeApi = async (id: number, updatedRecipe: UpdateRecipeDto) => {
+	const formData = packageRecipeToFormData(updatedRecipe);
+
+	const errorMessageResponse: ErrorMessageResponse = {
+		errorMessage: null,
+	};
+
+	try {
+		const cookieStore = await cookies();
+
+		await axios.put(`${recipesPath}/${id}`, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Cookie: cookieStore.toString(),
+			},
+		});
+	} catch (e) {
+		const error = e as AxiosError;
+
+		console.log(error.response?.data);
+
+		if (error.response) {
+			// Response received, but error status code
+
+			if (error.response.status == 400) {
+				errorMessageResponse.errorMessage = "Invalid recipe";
+			} else if (error.response.status == 409) {
+				errorMessageResponse.errorMessage = "Recipe already exists";
+			}
+		} else {
+			// No response received
+
+			errorMessageResponse.errorMessage = "An unexpected error occurred";
+		}
+	}
+
+	return errorMessageResponse;
 };
