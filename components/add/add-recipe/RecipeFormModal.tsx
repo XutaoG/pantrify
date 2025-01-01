@@ -58,6 +58,8 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 	//! Images
 	const [images, setImages] = useState<File[]>([]);
 
+	const [isFetchingImages, setIsFetchingImages] = useState(false);
+
 	//* Add image
 	const addImage = useCallback(
 		(image: File) => {
@@ -430,7 +432,10 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 			setValue("numServings", recipe.numServings.toString(), { shouldValidate: true });
 
 			// Initialize images
+
 			const populateImages = async () => {
+				setIsFetchingImages(true);
+
 				const imageFiles: File[] = [];
 
 				for (const image of recipe.images) {
@@ -438,6 +443,8 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 				}
 
 				setImages(imageFiles);
+
+				setIsFetchingImages(false);
 			};
 
 			populateImages();
@@ -512,6 +519,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 								onImageRemove={removeImage}
 								onImageMove={moveImage}
 								isSubmitting={isSubmitting}
+								isFetchingImages={isFetchingImages}
 							/>
 
 							{/* Name field */}
@@ -676,7 +684,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									title={recipe == null ? "Add Recipe" : "Save"}
 									icon={<ChefHat color="white" />}
 									onClick={handleSubmit(submitRecipe)}
-									disabled={isSubmitting}
+									disabled={isSubmitting || isFetchingImages}
 								/>
 
 								{/* Discard */}

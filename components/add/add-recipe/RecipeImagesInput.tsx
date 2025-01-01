@@ -1,4 +1,4 @@
-import { Images, Plus } from "lucide-react";
+import { Images, LoaderCircle, Plus } from "lucide-react";
 import { ChangeEvent } from "react";
 import RecipeImageCard from "./RecipeImageCard";
 
@@ -8,6 +8,7 @@ interface RecipeImagesInputProps {
 	onImageRemove: (index: number) => void;
 	onImageMove: (index: number, direction: number) => void;
 	isSubmitting: boolean;
+	isFetchingImages: boolean;
 }
 
 const RecipeImagesInput = ({
@@ -16,6 +17,7 @@ const RecipeImagesInput = ({
 	onImageRemove,
 	onImageMove,
 	isSubmitting,
+	isFetchingImages,
 }: RecipeImagesInputProps) => {
 	const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files.length > 0) {
@@ -55,12 +57,16 @@ const RecipeImagesInput = ({
 				<label
 					htmlFor="file-upload"
 					className={`self-center flex items-center bg-neutral-200 p-1 rounded-full ${
-						isSubmitting || images.length === 4
+						isSubmitting || images.length === 4 || isFetchingImages
 							? "cursor-not-allowed"
 							: "hover:bg-neutral-300 cursor-pointer"
 					}`}
 				>
-					<Plus size={28} color="white" strokeWidth={2} />
+					{isFetchingImages ? (
+						<LoaderCircle size={28} color="white" className="animate-spin" />
+					) : (
+						<Plus size={28} color="white" />
+					)}
 				</label>
 				<input
 					className={`hidden cursor-not-allowed`}
@@ -68,7 +74,7 @@ const RecipeImagesInput = ({
 					type="file"
 					accept="image/*"
 					onChange={handleFileChange}
-					disabled={isSubmitting || images.length === 4}
+					disabled={isSubmitting || images.length === 4 || isFetchingImages}
 				/>
 			</div>
 		</div>
