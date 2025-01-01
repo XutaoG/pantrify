@@ -24,7 +24,7 @@ import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput
 import { Text, ChefHat, Gauge, Users, CirclePlus, CircleX } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
 import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
-import { addRecipeApi } from "@/api";
+import { addRecipeApi, updateRecipeApi } from "@/api";
 import Divider from "@/components/common/Divider";
 import { RefreshContext } from "@/components/common/FetchContext";
 import { convertImageURLtoFile, getHourFromTime, getMinuteFromTime } from "@/utils";
@@ -35,8 +35,6 @@ interface AddRecipePageProps {
 }
 
 const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
-	console.log(recipe);
-
 	const { refresh } = useContext(RefreshContext)!;
 
 	const methods = useForm<TAddRecipeSchema>({
@@ -386,8 +384,8 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 		return addRecipeDto;
 	};
 
-	const addRecipe = async () => {
-		const recipe = parseRecipe();
+	const submitRecipe = async () => {
+		const parsedRecipe = parseRecipe();
 
 		const ingredientsCountCheck = checkIngredientsCount();
 		const instructionsCountCheck = checkInstructionsCount();
@@ -397,9 +395,20 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 			return;
 		}
 
-		const response = await addRecipeApi(recipe);
-		if (response.errorMessage != null) {
-			console.log(response.errorMessage);
+		if (recipe == null) {
+			// Add recipe
+
+			const response = await addRecipeApi(parsedRecipe);
+			if (response.errorMessage != null) {
+				console.log(response.errorMessage);
+			}
+		} else {
+			// Update recipe
+
+			const response = await updateRecipeApi(recipe.id, parsedRecipe);
+			if (response.errorMessage != null) {
+				console.log(response.errorMessage);
+			}
 		}
 
 		onModalClose();
@@ -490,7 +499,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 				<div className="container mx-auto flex flex-col gap-6 pr-3 overflow-y-auto">
 					{/* Page title */}
 					<PageTitle
-						title="Add a New Recipe"
+						title={recipe == null ? "Add a New Recipe" : "Editing Existing Recipe"}
 						subtitle="Enrich Your Own Personal Cookbook."
 					/>
 
@@ -664,9 +673,9 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 							<div className="flex flex-col gap-4">
 								{/* Add */}
 								<FormButton
-									title="Add Recipe"
+									title={recipe == null ? "Add Recipe" : "Save"}
 									icon={<ChefHat color="white" />}
-									onClick={handleSubmit(addRecipe)}
+									onClick={handleSubmit(submitRecipe)}
 									disabled={isSubmitting}
 								/>
 
@@ -679,7 +688,9 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									onClick={onModalClose}
 								>
 									<CircleX color="white" />
-									<p className="text-white font-semibold">Discard</p>
+									<p className="text-white font-semibold">
+										{recipe == null ? "Discard" : "Discard changes"}
+									</p>
 								</button>
 							</div>
 						</section>
