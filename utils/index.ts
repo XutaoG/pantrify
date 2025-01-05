@@ -1,4 +1,12 @@
-import { AddRecipeDto, Ingredient, Recipe, UpdateRecipeDto } from "@/types";
+import {
+	AddRecipeDto,
+	Ingredient,
+	Recipe,
+	RecipeIngredient,
+	RecipeIngredientAvailability,
+	TAddRecipeIngredientSchema,
+	UpdateRecipeDto,
+} from "@/types";
 
 // Asserts activeView is typed Ingredient
 export const isIngredient = (activeView: Recipe | Ingredient): activeView is Ingredient => {
@@ -127,4 +135,30 @@ export const convertImageURLtoFile = async (url: string) => {
 	const response = await (await fetch(url)).blob();
 
 	return new File([response], "image.png", { type: response.type });
+};
+
+export const getQuantityStr = (
+	ingredient: TAddRecipeIngredientSchema | RecipeIngredient | RecipeIngredientAvailability
+) => {
+	const invalidQuantity =
+		ingredient.quantityWhole == "" &&
+		(ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
+
+	if (invalidQuantity) {
+		return null;
+	} else {
+		return `${
+			ingredient.quantityWhole !== 0 && ingredient.quantityWhole != null
+				? ingredient.quantityWhole
+				: ""
+		} ${
+			ingredient.quantityFraction !== "None" && ingredient.quantityFraction != null
+				? ingredient.quantityFraction
+				: ""
+		} ${
+			ingredient.quantityUnit !== "None" && ingredient.quantityUnit != null
+				? ingredient.quantityUnit
+				: ""
+		}`;
+	}
 };

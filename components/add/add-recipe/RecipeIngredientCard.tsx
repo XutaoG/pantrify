@@ -1,6 +1,7 @@
 "use client";
 
 import { TAddRecipeIngredientSchema } from "@/types";
+import { getQuantityStr } from "@/utils";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -21,9 +22,7 @@ const RecipeIngredientCard = ({
 }: RecipeIngredientCardProps) => {
 	const [isHover, setIsHover] = useState(false);
 
-	const hideQuantity =
-		ingredient.quantityWhole == "" &&
-		(ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
+	const quantityStr = getQuantityStr(ingredient);
 
 	return (
 		<div
@@ -36,16 +35,12 @@ const RecipeIngredientCard = ({
 				<p className="text-nowrap truncate">{ingredient.name}</p>
 
 				{/* Quantity */}
-				{hideQuantity ? (
+				{quantityStr == null ? (
 					<p className="text-sm text-neutral-600 font-medium text-nowrap truncate">
 						Quantity unspecified
 					</p>
 				) : (
-					<p className="text-sm text-neutral-600 font-medium">
-						{ingredient.quantityWhole}{" "}
-						{ingredient.quantityFraction !== "None" ? ingredient.quantityFraction : ""}{" "}
-						{ingredient.quantityUnit !== "None" ? ingredient.quantityUnit : ""}
-					</p>
+					<p className="text-sm text-neutral-600 font-medium">{quantityStr}</p>
 				)}
 			</div>
 

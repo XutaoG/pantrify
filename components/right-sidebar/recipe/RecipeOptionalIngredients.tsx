@@ -1,13 +1,13 @@
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
 import RecipeIngredientListing from "./RecipeIngredientListing";
-import { Recipe } from "@/types";
+import { RecipeIngredientAvailability } from "@/types";
 
 interface RecipeOptionalIngredientsProps {
-	recipe: Recipe;
+	ingredientAvailability: RecipeIngredientAvailability[];
 }
 
-const RecipeOptionalIngredients = ({ recipe }: RecipeOptionalIngredientsProps) => {
-	const optionalIngredients = recipe.ingredients.filter((ingredient) => {
+const RecipeOptionalIngredients = ({ ingredientAvailability }: RecipeOptionalIngredientsProps) => {
+	const optionalIngredients = ingredientAvailability.filter((ingredient) => {
 		return ingredient.ingredientType === "Optional";
 	});
 

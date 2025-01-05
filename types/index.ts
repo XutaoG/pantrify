@@ -53,6 +53,10 @@ export interface RecipeImage {
 	order: number;
 }
 
+export interface RecipeIngredientAvailability extends RecipeIngredient {
+	isAvailable: boolean;
+}
+
 export interface Ingredient extends IngredientBase {
 	isAvailable: boolean;
 	isInCart: boolean;

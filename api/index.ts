@@ -23,6 +23,7 @@ import {
 	IngredientList,
 	LoginResponse,
 	Recipe,
+	RecipeIngredientAvailability,
 	RecipeList,
 	RefreshResponse,
 	SignUpResponse,
@@ -536,4 +537,24 @@ export const updateRecipeApi = async (id: number, updatedRecipe: UpdateRecipeDto
 	}
 
 	return errorMessageResponse;
+};
+
+export const getRecipeIngredientsAvailability = async (id: number) => {
+	try {
+		const cookieStore = await cookies();
+
+		const response = await axios.get<RecipeIngredientAvailability[]>(
+			`${recipesPath}/get-ingredients-availability/${id}`,
+			{
+				headers: {
+					// Attach client cookies
+					Cookie: cookieStore.toString(),
+				},
+			}
+		);
+
+		return response.data;
+	} catch {
+		return [];
+	}
 };

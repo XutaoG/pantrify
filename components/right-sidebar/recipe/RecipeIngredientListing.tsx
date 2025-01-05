@@ -1,10 +1,11 @@
 import ToolTipContainer from "@/components/common/ToolTipContainer";
 import { Archive, Check, CircleMinusIcon, ShoppingCart, X } from "lucide-react";
 import { Fragment } from "react";
-import { RecipeIngredient } from "@/types";
+import { RecipeIngredientAvailability } from "@/types";
+import { getQuantityStr } from "@/utils";
 
 interface RecipeIngredientListingProps {
-	recipeIngredient: RecipeIngredient;
+	recipeIngredient: RecipeIngredientAvailability;
 }
 
 const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingProps) => {
@@ -41,6 +42,8 @@ const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingPr
 		</ToolTipContainer>
 	);
 
+	const quantityStr = getQuantityStr(recipeIngredient);
+
 	return (
 		<div className="flex justify-between items-center">
 			<div className="flex gap-2 items-center">
@@ -55,10 +58,9 @@ const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingPr
 				)}
 				<p>
 					{recipeIngredient.name}
-					{recipeIngredient.quantity && (
-						<span>
-							{":"} {recipeIngredient.quantityUnit}
-						</span>
+					{": "}
+					{quantityStr != null && (
+						<span className="text-neutral-600 font-medium">{quantityStr}</span>
 					)}
 				</p>
 			</div>

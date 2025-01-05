@@ -1,18 +1,40 @@
+"use client";
+
 import Image from "next/image";
 import RecipeInfo from "./RecipeInfo";
 import RecipeInstructions from "./RecipeInstructions";
 import RecipePrimaryIngredients from "./RecipePrimaryIngredients";
 import RecipeSecondaryIngredients from "./RecipeSecondaryIngredients";
 import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
-import { Recipe } from "@/types";
+import { Recipe, RecipeIngredientAvailability } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
 import RecipeDescription from "./RecipeDescription";
+import { Fragment, useEffect, useState } from "react";
+import { getRecipeIngredientsAvailability } from "@/api";
+import { LoaderCircle } from "lucide-react";
 
 interface RecipeViewProps {
 	recipe: Recipe;
 }
 
 const RecipeView = ({ recipe }: RecipeViewProps) => {
+	const [isFetching, setIsFetching] = useState(false);
+	const [ingredientAvailabilities, setIngredientAvailabilities] = useState<
+		RecipeIngredientAvailability[]
+	>([]);
+
+	useEffect(() => {
+		const fetchIngredientAvailabilities = async () => {
+			setIsFetching(true);
+
+			setIngredientAvailabilities(await getRecipeIngredientsAvailability(recipe.id));
+
+			setIsFetching(false);
+		};
+
+		fetchIngredientAvailabilities();
+	}, [recipe]);
+
 	return (
 		<section className="flex flex-col gap-6">
 			{/* Recipe name */}
@@ -37,14 +59,26 @@ const RecipeView = ({ recipe }: RecipeViewProps) => {
 
 			{/* Basic infos */}
 			<RecipeInfo recipe={recipe} />
+
 			{/* Description */}
 			<RecipeDescription recipe={recipe} />
-			{/* Primary ingredients */}
-			<RecipePrimaryIngredients recipe={recipe} />
-			{/* Secondary ingredient */}
-			<RecipeSecondaryIngredients recipe={recipe} />
-			{/* Optional ingredients */}
-			<RecipeOptionalIngredients recipe={recipe} />
+
+			{/* Ingredients */}
+			{isFetching ? (
+				<div className="flex justify-center items-center">
+					<LoaderCircle className="animate-spin" />
+				</div>
+			) : (
+				<Fragment>
+					{/* Primary ingredients */}
+					<RecipePrimaryIngredients ingredientAvailability={ingredientAvailabilities} />
+					{/* Secondary ingredient */}
+					<RecipeSecondaryIngredients ingredientAvailability={ingredientAvailabilities} />
+					{/* Optional ingredients */}
+					<RecipeOptionalIngredients ingredientAvailability={ingredientAvailabilities} />
+				</Fragment>
+			)}
+
 			{/* Instructions */}
 			<RecipeInstructions recipe={recipe} />
 		</section>
