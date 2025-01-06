@@ -1,6 +1,4 @@
 import CollapsiblePanel from "@/components/common/CollapsiblePanel";
-import LargeRecipeCard from "@/components/common/LargeRecipeCard";
-import { mockEggRecipes } from "@/constants";
 import { Ingredient } from "@/types";
 
 interface IngredientAvailableRecipeProps {
@@ -8,14 +6,10 @@ interface IngredientAvailableRecipeProps {
 }
 
 const IngredientAvailableRecipe = ({}: IngredientAvailableRecipeProps) => {
-	const recipes = mockEggRecipes.map((recipe) => {
-		return <LargeRecipeCard key={recipe.name} recipe={recipe} />;
-	});
-
 	return (
 		<CollapsiblePanel title={'What You Can Make with "Eggs" '}>
 			<div className="bg-gray-100 p-4 rounded-2xl flex flex-col items-stretch gap-9">
-				{recipes}
+				<p className="text-center font-medium">To be implemented</p>
 			</div>
 		</CollapsiblePanel>
 	);

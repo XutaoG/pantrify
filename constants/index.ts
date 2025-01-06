@@ -165,45 +165,6 @@ export const shoppingListSortSelections: SortSchema[] = [
 	},
 ];
 
-export const mockEggRecipes: Recipe[] = [
-	{
-		id: 1,
-		name: "Fried Rice",
-		duration: 1800,
-		difficulty: 2,
-		numServings: 1,
-		ingredients: [],
-		instructions: [],
-		dateAdded: new Date(),
-		dateModified: new Date(),
-		images: [
-			{
-				id: 1,
-				path: "/temp-recipe-images/fried-rice.webp",
-				order: 1,
-			},
-		],
-	},
-	{
-		id: 2,
-		name: "Egg Drop Soup",
-		duration: 900,
-		difficulty: 1,
-		numServings: 1,
-		ingredients: [],
-		instructions: [],
-		dateAdded: new Date(),
-		dateModified: new Date(),
-		images: [
-			{
-				id: 1,
-				path: "/temp-recipe-images/egg-drop-soup.jpg",
-				order: 1,
-			},
-		],
-	},
-];
-
 export const mockAllIngredientsRecipes: Recipe[] = [
 	{
 		id: 4,

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import InfoWidget from "./InfoWidget";
-import { Clock } from "lucide-react";
+import { Clock, Images } from "lucide-react";
 import { Recipe } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
 import { getTimeStr, isRecipe } from "@/utils";
@@ -29,18 +29,27 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 			onClick={() => setActiveView(recipe)}
 		>
 			{/* Recipe image */}
-			<div className="w-full grow relative">
-				<Image
-					src={
-						recipe.images.length !== 0 ? recipe.images[0].path : defaultRecipeImageRoute
-					}
-					alt="food"
-					className="object-cover"
-					fill
-					sizes="33vw"
-					priority
-				/>
-			</div>
+			{recipe.images.length !== 0 ? (
+				<div className="w-full grow relative">
+					<Image
+						src={
+							recipe.images.length !== 0
+								? recipe.images[0].path
+								: defaultRecipeImageRoute
+						}
+						alt="food"
+						className="object-cover"
+						fill
+						sizes="33vw"
+						priority
+					/>
+				</div>
+			) : (
+				<div className="w-full grow flex justify-center items-center bg-neutral-200">
+					{/* Recipe with no image placeholder */}
+					<Images size={36} className="text-neutral-500" />
+				</div>
+			)}
 
 			{/* Info */}
 			<div className="flex justify-between items-center gap-4 p-2">
