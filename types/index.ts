@@ -55,6 +55,8 @@ export interface RecipeImage {
 
 export interface RecipeIngredientAvailability extends RecipeIngredient {
 	isAvailable: boolean;
+	isInCart: boolean;
+	ingredientId?: number;
 }
 
 export interface Ingredient extends IngredientBase {

@@ -26,7 +26,6 @@ const ShoppingList = () => {
 				{/* Primary ingredients */}
 				<AllIngredients
 					ingredientType="Primary"
-					isAvailable={false}
 					isInCart={true}
 					pageSize={12}
 					noIngredientMessage="Nothing here yet! Start adding ingredients to plan your shopping."
@@ -36,7 +35,6 @@ const ShoppingList = () => {
 				{/* Secondary ingredients */}
 				<AllIngredients
 					ingredientType="Secondary"
-					isAvailable={false}
 					isInCart={true}
 					pageSize={12}
 					noIngredientMessage="Nothing here yet! Start adding ingredients to plan your shopping."

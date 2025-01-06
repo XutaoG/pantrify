@@ -3,10 +3,12 @@
 import { getAllIngredients, getAllRecipes } from "@/api";
 import { getPluralEnding } from "@/utils";
 import { LoaderCircle } from "lucide-react";
-// import Link from "next/link";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { RefreshContext } from "../common/FetchContext";
 
 const Overview = () => {
+	const { refreshValue } = useContext(RefreshContext)!;
+
 	// Count
 	const [recentRecipeCount, setRecentRecipeCount] = useState<number | null>(null);
 	const [recentIngredientCount, setRecentIngredientCount] = useState<number | null>(null);
@@ -26,7 +28,7 @@ const Overview = () => {
 		};
 
 		fetchRecipes();
-	}, []);
+	}, [refreshValue]);
 
 	return (
 		<section className="flex card-container rounded-2xl">

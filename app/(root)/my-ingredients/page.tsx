@@ -27,7 +27,6 @@ const MyIngredients = () => {
 				<AllIngredients
 					ingredientType="Primary"
 					isAvailable={true}
-					isInCart={false}
 					pageSize={12}
 					noIngredientMessage="No ingredients yet! Add your first to begin building your collection."
 					refreshValue={refreshValue}
@@ -37,7 +36,6 @@ const MyIngredients = () => {
 				<AllIngredients
 					ingredientType="Secondary"
 					isAvailable={true}
-					isInCart={false}
 					pageSize={12}
 					noIngredientMessage="No ingredients yet! Add your first to begin building your collection."
 					refreshValue={refreshValue}

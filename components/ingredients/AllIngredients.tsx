@@ -12,8 +12,8 @@ import { getPluralEnding } from "@/utils";
 
 interface AllIngredientsProps {
 	ingredientType: "Primary" | "Secondary";
-	isAvailable: boolean;
-	isInCart: boolean;
+	isAvailable?: boolean;
+	isInCart?: boolean;
 	pageSize: number;
 	noIngredientMessage: string;
 	refreshValue: boolean;
