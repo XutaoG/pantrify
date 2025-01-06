@@ -1,17 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import RecipeInfo from "./RecipeInfo";
 import RecipeInstructions from "./RecipeInstructions";
 import RecipePrimaryIngredients from "./RecipePrimaryIngredients";
 import RecipeSecondaryIngredients from "./RecipeSecondaryIngredients";
 import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
 import { Recipe, RecipeIngredientAvailability } from "@/types";
-import { defaultRecipeImageRoute } from "@/constants";
 import RecipeDescription from "./RecipeDescription";
 import { Fragment, useEffect, useState } from "react";
 import { getRecipeIngredientsAvailability } from "@/api";
 import { LoaderCircle } from "lucide-react";
+import ImageCarousel from "@/components/common/ImageCarousel";
 
 interface RecipeViewProps {
 	recipe: Recipe;
@@ -44,18 +43,11 @@ const RecipeView = ({ recipe }: RecipeViewProps) => {
 			</div>
 
 			{/* Image */}
-			<div className="h-60 w-full relative rounded-lg overflow-hidden">
-				<Image
-					src={
-						recipe.images.length !== 0 ? recipe.images[0].path : defaultRecipeImageRoute
-					}
-					alt="recipe image"
-					fill
-					className="object-cover"
-					sizes="33vw"
-					priority
-				/>
-			</div>
+			{recipe.images.length !== 0 && (
+				<div className="h-60 w-full relative rounded-lg overflow-hidden">
+					<ImageCarousel images={recipe.images} />
+				</div>
+			)}
 
 			{/* Basic infos */}
 			<RecipeInfo recipe={recipe} />
