@@ -27,6 +27,8 @@ const Login = () => {
 	const router = useRouter();
 
 	const onSubmit = async () => {
+		console.log(getValues());
+
 		const loginResponse = await login(getValues());
 
 		// Check if error message exists

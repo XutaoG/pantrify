@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import { Edu_VIC_WA_NT_Beginner } from "next/font/google";
+import SessionManageWrapper from "@/components/common/SessionManageWrapper";
 
 const edu_vic = Edu_VIC_WA_NT_Beginner({
 	subsets: ["latin"],
@@ -27,7 +28,7 @@ const AuthLayout = async ({
 					<h1 className={`font-medium select-none ${edu_vic.className}`}>Pantrify</h1>
 				</div>
 
-				{children}
+				<SessionManageWrapper>{children}</SessionManageWrapper>
 			</div>
 
 			{/* Images */}
