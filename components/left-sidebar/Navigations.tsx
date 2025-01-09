@@ -3,8 +3,8 @@
 import { addRecipeRoute, navRoutes } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import RecipeFormModal from "../add/add-recipe/RecipeFormModal";
 import { useState } from "react";
+import RecipeFormModal from "../add/RecipeFormModal";
 
 const Navigations = () => {
 	const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState(false);

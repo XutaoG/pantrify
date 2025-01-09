@@ -1,5 +1,4 @@
 import FormInput from "@/components/common/form/FormInput";
-import RecipeIngredientQuantityInput from "@/components/add/add-recipe/RecipeIngredientQuantityInput";
 import FormSelectionInput from "@/components/common/form/FormSelectionInput";
 import { ingredientQuantityFractions, recipeIngredientTypes } from "@/constants";
 import { addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
@@ -7,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { CirclePlus, CircleX, Egg, Ham, Pencil } from "lucide-react";
+import RecipeIngredientQuantityInput from "./RecipeIngredientQuantityInput";
 
 interface RecipeIngredientFormModalProps {
 	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;

@@ -8,7 +8,7 @@ import RecipeDeletionConfirmModal from "./RecipeDeletionConfirmModal";
 import { useContext, useState } from "react";
 import { RefreshContext } from "@/components/common/FetchContext";
 import { deleteRecipeApi } from "@/api";
-import RecipeFormModal from "@/components/add/add-recipe/RecipeFormModal";
+import RecipeFormModal from "@/components/add/RecipeFormModal";
 
 interface RecipeInfoProps {
 	recipe: Recipe;

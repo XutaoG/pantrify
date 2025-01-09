@@ -1,7 +1,5 @@
 "use client";
 
-import RecipeIngredientFormModal from "@/components/add/add-recipe/RecipeIngredientFormModal";
-import RecipeIngredientCard from "@/components/add/add-recipe/RecipeIngredientCard";
 import FormButton from "@/components/common/form/FormButton";
 import FormInput from "@/components/common/form/FormInput";
 import FormNumberInput from "@/components/common/form/FormNumberInput";
@@ -19,15 +17,17 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import RecipeInstructionCard from "@/components/add/add-recipe/RecipeInstructionCard";
-import RecipeDurationInput from "@/components/add/add-recipe/RecipeDurationInput";
 import { Text, ChefHat, Gauge, Users, CirclePlus, CircleX } from "lucide-react";
 import PageTitle from "@/components/common/PageTitle";
-import RecipeImagesInput from "@/components/add/add-recipe/RecipeImagesInput";
 import { addRecipeApi, updateRecipeApi } from "@/api";
 import Divider from "@/components/common/Divider";
 import { RefreshContext } from "@/components/common/FetchContext";
 import { convertImageURLtoFile, getHourFromTime, getMinuteFromTime } from "@/utils";
+import RecipeInstructionCard from "./RecipeInstructionCard";
+import RecipeImagesInput from "./RecipeImagesInput";
+import RecipeDurationInput from "./RecipeDurationInput";
+import RecipeIngredientFormModal from "./RecipeIngredientFormModal";
+import RecipeIngredientCard from "./RecipeIngredientCard";
 
 interface AddRecipePageProps {
 	recipe?: Recipe;
