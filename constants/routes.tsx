@@ -5,16 +5,17 @@ import {
 	ShoppingCart,
 	UtensilsCrossed,
 } from "lucide-react";
+import { homeRoute, myIngredientRoute, shoppingListRoute } from ".";
 
 export const navRoutes = [
 	{
 		icon: <UtensilsCrossed />,
-		route: "/",
+		route: homeRoute,
 		label: "My Recipes",
 	},
 	{
 		icon: <Ham />,
-		route: "/my-ingredients",
+		route: myIngredientRoute,
 		label: "My Ingredients",
 	},
 	// {
@@ -24,7 +25,7 @@ export const navRoutes = [
 	// },
 	{
 		icon: <ShoppingCart />,
-		route: "/shopping-list",
+		route: shoppingListRoute,
 		label: "Shopping List",
 	},
 ];

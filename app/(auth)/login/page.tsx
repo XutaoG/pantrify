@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { KeyRound, Mail } from "lucide-react";
 import FormPasswordInput from "@/components/common/form/FormPasswordInput";
+import { homeRoute } from "@/constants";
 
 const Login = () => {
 	const {
@@ -27,13 +28,11 @@ const Login = () => {
 	const router = useRouter();
 
 	const onSubmit = async () => {
-		console.log(getValues());
-
 		const loginResponse = await login(getValues());
 
 		// Check if error message exists
 		if (loginResponse.errorMessage == null) {
-			router.push("/");
+			router.push(homeRoute);
 		} else {
 			setLoginError(loginResponse.errorMessage);
 		}

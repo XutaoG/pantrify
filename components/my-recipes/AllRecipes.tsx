@@ -19,7 +19,7 @@ const AllRecipes = () => {
 	const pageSize = 12;
 
 	const {
-		recipes,
+		recipes: recipeList,
 		searchWord,
 		setSearchWord,
 		difficultyFilterOption,
@@ -41,7 +41,7 @@ const AllRecipes = () => {
 	};
 
 	// Render cards
-	const recipeCards = recipes?.recipes.map((recipe) => {
+	const recipeCards = recipeList?.recipes.map((recipe) => {
 		return <SmallRecipeCard recipe={recipe} key={recipe.id} />;
 	});
 
@@ -96,19 +96,19 @@ const AllRecipes = () => {
 					durationFilterOption.maxDuration != null ||
 					durationFilterOption.minDuration != null) && (
 					<p className="font-medium self-center">
-						Found {recipes?.totalCount ?? 0} result
-						{getPluralEnding(recipes?.totalCount ?? 0)}
+						Found {recipeList?.totalCount ?? 0} result
+						{getPluralEnding(recipeList?.totalCount ?? 0)}
 					</p>
 				)}
 
-				{(recipes == null || isLoading) && (
+				{(recipeList == null || isLoading) && (
 					<div className="flex justify-center items-center">
 						<LoaderCircle className="animate-spin" />
 					</div>
 				)}
 
-				{recipes != null &&
-					(recipes.totalCount != 0 ? (
+				{recipeList != null &&
+					(recipeList.totalCount !== 0 ? (
 						// Recipe cards
 						<div className="flex flex-col gap-6">
 							<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
@@ -116,19 +116,22 @@ const AllRecipes = () => {
 							</div>
 							<Pagination
 								pageSize={pageSize}
-								totalCount={recipes.totalCount}
+								totalCount={recipeList.totalCount}
 								currentPageNumber={pageNumber}
 								setCurrentPageNumber={setPageNumber}
 							/>
 						</div>
 					) : (
 						searchWord === "" &&
-						difficultyFilterOption.difficulty != null &&
-						durationFilterOption.minDuration != null &&
-						durationFilterOption.maxDuration != null && (
+						difficultyFilterOption.difficulty == null &&
+						durationFilterOption.minDuration == null &&
+						durationFilterOption.maxDuration == null && (
 							// No recipes
 							<div className="h-16 flex justify-center items-center">
-								<p className="font-medium italic">No Recipe Added</p>
+								<p className="font-medium italic">
+									No recipes yet! Add your first to begin building your
+									collection.
+								</p>
 							</div>
 						)
 					))}

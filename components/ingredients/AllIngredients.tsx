@@ -86,7 +86,7 @@ const AllIngredients = ({
 					</div>
 				)}
 				{ingredients != null &&
-					(ingredients.totalCount != 0 ? (
+					(ingredients.totalCount !== 0 ? (
 						// ingredient cards
 						<div className="flex flex-col gap-6">
 							<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">

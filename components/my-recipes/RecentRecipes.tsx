@@ -138,6 +138,10 @@ const RecentRecipes = () => {
 		setScrollIndex((val) => val + direction);
 	};
 
+	if (recentRecipes?.recipes.length === 0) {
+		return;
+	}
+
 	return (
 		<CollapsiblePanel title="Recently Added">
 			{recentRecipes == null || isLoading ? (
