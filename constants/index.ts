@@ -19,6 +19,9 @@ export const recipesPath = "/recipe";
 
 export const loginRoute = "/login";
 export const signUpRoute = "/sign-up";
+export const homeRoute = "/home";
+export const myIngredientRoute = "/my-ingredients";
+export const shoppingListRoute = "/shopping-list";
 
 export const recipeIngredientTypes = ["Primary", "Secondary", "Optional"];
 export const ingredientTypes = ["Primary", "Secondary"];

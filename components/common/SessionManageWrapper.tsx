@@ -1,7 +1,7 @@
 "use client";
 
 import { getUser, refresh } from "@/api";
-import { loginRoute, signUpRoute } from "@/constants";
+import { homeRoute, loginRoute, signUpRoute } from "@/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useContext, useEffect } from "react";
 import { RefreshContext } from "./FetchContext";
@@ -21,13 +21,13 @@ const SessionManageWrapper = ({ children }: SessionManagerWrapperProps) => {
 				if ((await getUser()) == null) {
 					// Attempt to refresh token
 					if ((await refresh()).errorMessage == null) {
-						router.push("/");
+						router.push(homeRoute);
 						return;
 					}
 				} else {
 					// User is already signed in, redirect to "/"
 
-					router.push("/");
+					router.push(homeRoute);
 					return;
 				}
 			} else if (pathname.startsWith("/")) {
