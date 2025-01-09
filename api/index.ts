@@ -36,7 +36,6 @@ import {
 } from "@/types";
 import { packageRecipeToFormData } from "@/utils";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import setCookieParser from "set-cookie-parser";
 
@@ -137,8 +136,6 @@ export const logout = async () => {
 
 		await setCookies(response);
 	} catch {}
-
-	revalidatePath("/");
 };
 
 export const refresh = async () => {

@@ -5,9 +5,9 @@ interface IngredientAvailableRecipeProps {
 	ingredient: Ingredient;
 }
 
-const IngredientAvailableRecipe = ({}: IngredientAvailableRecipeProps) => {
+const IngredientAvailableRecipe = ({ ingredient }: IngredientAvailableRecipeProps) => {
 	return (
-		<CollapsiblePanel title={'What You Can Make with "Eggs" '}>
+		<CollapsiblePanel title={`What You Can Make with "${ingredient.name}"`}>
 			<div className="bg-gray-100 p-4 rounded-2xl flex flex-col items-stretch gap-9">
 				<p className="text-center font-medium">To be implemented</p>
 			</div>

@@ -1,12 +1,17 @@
 "use client";
 
 import { logout } from "@/api";
+import { loginRoute } from "@/constants";
 import { LogOut, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const UserProfileActions = () => {
+	const router = useRouter();
+
 	const onLogoutClick = async () => {
 		await logout();
+		router.push(loginRoute);
 	};
 
 	return (

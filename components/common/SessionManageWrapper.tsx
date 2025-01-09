@@ -11,13 +11,11 @@ interface SessionManagerWrapperProps {
 }
 
 const SessionManageWrapper = ({ children }: SessionManagerWrapperProps) => {
-	const { refreshValue } = useContext(RefreshContext)!;
+	const refreshContext = useContext(RefreshContext);
 	const pathname = usePathname();
 	const router = useRouter();
 
 	useEffect(() => {
-		console.log("CHECKING");
-
 		const sessionRedirect = async () => {
 			if (pathname.startsWith(loginRoute) || pathname.startsWith(signUpRoute)) {
 				if ((await getUser()) == null) {
@@ -45,7 +43,7 @@ const SessionManageWrapper = ({ children }: SessionManagerWrapperProps) => {
 		};
 
 		sessionRedirect();
-	}, [pathname, router, refreshValue]);
+	}, [pathname, router, refreshContext?.refreshValue]);
 
 	return children;
 };
