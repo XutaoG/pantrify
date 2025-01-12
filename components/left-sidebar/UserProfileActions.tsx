@@ -1,16 +1,27 @@
 "use client";
 
-import { logout } from "@/api";
+import { logoutApi } from "@/api";
 import { loginRoute } from "@/constants";
 import { LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import ConfirmationModal from "../common/ConfirmationModal";
 
 const UserProfileActions = () => {
 	const router = useRouter();
 
-	const onLogoutClick = async () => {
-		await logout();
+	const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+	const showLogoutModal = () => {
+		setIsLogoutModalOpen(true);
+	};
+
+	const closeLogoutModal = () => {
+		setIsLogoutModalOpen(false);
+	};
+
+	const logout = async () => {
+		await logoutApi();
 		router.push(loginRoute);
 	};
 
@@ -23,10 +34,20 @@ const UserProfileActions = () => {
 			<button
 				type="button"
 				className="hover:bg-neutral-100 p-4 rounded-2xl"
-				onClick={onLogoutClick}
+				onClick={showLogoutModal}
 			>
 				<LogOut />
 			</button>
+
+			{isLogoutModalOpen && (
+				<ConfirmationModal
+					message="Are you sure you want to log out?"
+					confirmText="Log Out"
+					cancelText="Cancel"
+					onConfirm={logout}
+					onModalClose={closeLogoutModal}
+				/>
+			)}
 		</div>
 	);
 };

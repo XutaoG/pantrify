@@ -4,11 +4,11 @@ import InfoWidget from "@/components/common/InfoWidget";
 import { Recipe } from "@/types";
 import { getDifficulty, getTimeStr } from "@/utils";
 import { Clock, Gauge, Pencil, Refrigerator, Trash2, Users } from "lucide-react";
-import RecipeDeletionConfirmModal from "./RecipeDeletionConfirmModal";
 import { useContext, useState } from "react";
 import { RefreshContext } from "@/components/common/FetchContext";
 import { deleteRecipeApi } from "@/api";
 import RecipeFormModal from "@/components/add/RecipeFormModal";
+import ConfirmationModal from "../../common/ConfirmationModal";
 
 interface RecipeInfoProps {
 	recipe: Recipe;
@@ -97,9 +97,12 @@ const RecipeInfo = ({ recipe }: RecipeInfoProps) => {
 				/>
 			</div>
 			{isDeletionModalOpen && (
-				<RecipeDeletionConfirmModal
+				<ConfirmationModal
+					message="Are you sure you want to delete this recipe?"
+					confirmText="Confirm"
+					cancelText="Cancel"
+					onConfirm={deleteRecipe}
 					onModalClose={closeDeletionModal}
-					onRecipeDelete={deleteRecipe}
 				/>
 			)}
 

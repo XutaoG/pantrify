@@ -1,19 +1,25 @@
 import { CircleX, Trash2 } from "lucide-react";
 
-interface RecipeDeletionConfirmModalProps {
+interface ConfirmationModalProps {
+	message: string;
+	confirmText: string;
+	cancelText: string;
 	onModalClose: () => void;
-	onRecipeDelete: () => void;
+	onConfirm: () => void;
 }
 
-const RecipeDeletionConfirmModal = ({
+const ConfirmationModal = ({
+	message,
+	confirmText,
+	cancelText,
 	onModalClose,
-	onRecipeDelete,
-}: RecipeDeletionConfirmModalProps) => {
+	onConfirm,
+}: ConfirmationModalProps) => {
 	return (
-		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
+		<section className="fixed inset-0 flex justify-center items-center bg-black/15 z-50 text-base">
 			<div className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm">
 				{/* Message */}
-				<p className="font-medium">Are you sure you want to delete this recipe?</p>
+				<p className="font-medium">{message}</p>
 
 				{/* Buttons */}
 				<div className="grid grid-cols-2 gap-3">
@@ -22,10 +28,10 @@ const RecipeDeletionConfirmModal = ({
 						type="button"
 						className="bg-red-400 flex justify-center items-center gap-2 p-1.5 
 						rounded-full hover:bg-red-500"
-						onClick={onRecipeDelete}
+						onClick={onConfirm}
 					>
 						<Trash2 size={20} color="white" />
-						<p className="text-white font-medium">Confirm</p>
+						<p className="text-white font-medium">{confirmText}</p>
 					</button>
 
 					{/* Cancel deletion */}
@@ -36,7 +42,7 @@ const RecipeDeletionConfirmModal = ({
 						onClick={onModalClose}
 					>
 						<CircleX size={20} color="white" />
-						<p className="text-white font-medium">Cancel</p>
+						<p className="text-white font-medium">{cancelText}</p>
 					</button>
 				</div>
 			</div>
@@ -44,4 +50,4 @@ const RecipeDeletionConfirmModal = ({
 	);
 };
 
-export default RecipeDeletionConfirmModal;
+export default ConfirmationModal;

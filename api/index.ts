@@ -123,7 +123,7 @@ export const getUser = async () => {
 	}
 };
 
-export const logout = async () => {
+export const logoutApi = async () => {
 	try {
 		const cookieStore = await cookies();
 
