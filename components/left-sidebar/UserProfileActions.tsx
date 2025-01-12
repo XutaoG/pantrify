@@ -2,7 +2,7 @@
 
 import { logoutApi } from "@/api";
 import { loginRoute } from "@/constants";
-import { LogOut, Settings } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ConfirmationModal from "../common/ConfirmationModal";
@@ -28,9 +28,9 @@ const UserProfileActions = () => {
 	return (
 		<div className="flex flex-col gap-4 2xl:flex-row 2xl:gap-2 items-center text-2xl text-neutral-600">
 			<span className="hidden 2xl:block w-[2px] bg-neutral-600 self-stretch" />
-			<button type="button" className="hover:bg-neutral-100 p-4 rounded-2xl">
+			{/* <button type="button" className="hover:bg-neutral-100 p-4 rounded-2xl">
 				<Settings />
-			</button>
+			</button> */}
 			<button
 				type="button"
 				className="hover:bg-neutral-100 p-4 rounded-2xl"
