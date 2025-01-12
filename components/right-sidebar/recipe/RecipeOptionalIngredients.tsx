@@ -23,7 +23,7 @@ const RecipeOptionalIngredients = ({ ingredientAvailability }: RecipeOptionalIng
 
 	return (
 		<CollapsiblePanel title="Optional Ingredients">
-			<div className="flex flex-col gap-2">{renderedOptionalIngredients}</div>
+			<div className="flex flex-col gap-1 sm:gap-2">{renderedOptionalIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

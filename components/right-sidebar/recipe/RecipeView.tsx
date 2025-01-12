@@ -35,7 +35,7 @@ const RecipeView = ({ recipe }: RecipeViewProps) => {
 	}, [recipe]);
 
 	return (
-		<section className="flex flex-col gap-6">
+		<section className="flex flex-col gap-4 sm:gap-6">
 			{/* Recipe name */}
 			<div className="flex flex-col">
 				<p className="text-sm font-semibold text-neutral-600">Recipe name</p>

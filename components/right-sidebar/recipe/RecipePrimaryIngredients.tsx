@@ -23,7 +23,7 @@ const RecipePrimaryIngredients = ({ ingredientAvailability }: RecipePrimaryIngre
 
 	return (
 		<CollapsiblePanel title="Primary Ingredients">
-			<div className="flex flex-col gap-2">{renderedPrimaryIngredients}</div>
+			<div className="flex flex-col gap-1 sm:gap-2">{renderedPrimaryIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

@@ -10,7 +10,7 @@ interface IngredientViewProps {
 
 const IngredientView = ({ ingredient }: IngredientViewProps) => {
 	return (
-		<section className="flex flex-col gap-6">
+		<section className="flex flex-col gap-4 sm:gap-6">
 			{/* Ingredient name */}
 			<div className="flex flex-col gap-1">
 				<p className="text-sm font-semibold text-neutral-600">Ingredient name</p>

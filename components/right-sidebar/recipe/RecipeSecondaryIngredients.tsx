@@ -25,7 +25,7 @@ const RecipeSecondaryIngredients = ({
 
 	return (
 		<CollapsiblePanel title="Secondary Ingredients">
-			<div className="flex flex-col gap-2">{renderedSecondaryIngredients}</div>
+			<div className="flex flex-col gap-1 sm:gap-2">{renderedSecondaryIngredients}</div>
 		</CollapsiblePanel>
 	);
 };

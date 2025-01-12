@@ -63,10 +63,10 @@ const RightSideBar = () => {
 		>
 			<div className="w-full flex justify-end">
 				<div
-					className={`flex flex-col w-[400px] min-w-[300px] p-4 card-container 
+					className={`flex flex-col w-[400px] min-w-[300px] p-2 sm:p-4 card-container 
 				 	min-h-0 ${isLargeView ? "rounded-xl" : "rounded-none"}`}
 				>
-					<div className="grow flex flex-col pr-4 overflow-y-auto gap-2">
+					<div className="grow flex flex-col pr-2 sm:pr-4 overflow-y-auto gap-2">
 						{/* No view */}
 						{view == null && (
 							<div className="grow flex flex-col gap-6 justify-center items-center">
@@ -82,12 +82,13 @@ const RightSideBar = () => {
 								</p>
 							</div>
 						)}
+
 						{/* Close button */}
 						{isLargeView || (
 							<button
 								type="button"
 								className="self-center bg-neutral-400 rounded-full 
-								flex justify-center items-center gap-2 p-2 px-2.5 pr-4 hover:bg-neutral-500"
+								flex justify-center items-center gap-2 p-1 px-1.5 pr-2.5 hover:bg-neutral-500"
 								onClick={closeView}
 							>
 								<CircleX color="white" />

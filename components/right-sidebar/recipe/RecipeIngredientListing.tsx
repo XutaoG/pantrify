@@ -103,7 +103,7 @@ const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingPr
 
 	return (
 		<div className="flex justify-between items-center">
-			<div className="flex gap-2 items-center">
+			<div className="flex gap-4 items-center">
 				{recipeIngredient.isAvailable ? (
 					<div className="text-emerald-500">
 						<Check size={18} />
