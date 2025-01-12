@@ -152,12 +152,12 @@ const RecentRecipes = () => {
 				<div className="relative">
 					<div
 						ref={recipeCardsContainerRef}
-						className="flex gap-9 overflow-x-hidden"
+						className="flex gap-4 sm:gap-9 overflow-x-hidden"
 						onScroll={handleScroll}
 					>
 						{recipeCards}
 
-						<div className="min-w-[350px] flex justify-center items-center card-container rounded-xl grow">
+						<div className="min-w-[275px] sm:min-w-[350px] flex justify-center items-center card-container rounded-xl grow">
 							<div className="flex flex-col gap-2 items-center">
 								<Image
 									src="/logo/pantrify_logo.webp"

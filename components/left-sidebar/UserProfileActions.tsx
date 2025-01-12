@@ -31,9 +31,11 @@ const UserProfileActions = () => {
 			{/* <button type="button" className="hover:bg-neutral-100 p-4 rounded-2xl">
 				<Settings />
 			</button> */}
+
+			{/* Logout button */}
 			<button
 				type="button"
-				className="hover:bg-neutral-100 p-4 rounded-2xl"
+				className="hover:bg-neutral-100 p-2 sm:p-4 rounded-2xl"
 				onClick={showLogoutModal}
 			>
 				<LogOut />

@@ -26,8 +26,8 @@ const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
 
 	return (
 		<form
-			className={`h-10 card-container rounded-full 
-			flex items-center grow gap-4 px-4 ${isFocused && "border-neutral-200"}`}
+			className={`h-8 sm:h-10 card-container rounded-full 
+			flex items-center grow gap-2 sm:gap-4 px-3 sm:px-4 ${isFocused && "border-neutral-200"}`}
 			onSubmit={search}
 		>
 			{/* Input */}

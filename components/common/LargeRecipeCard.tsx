@@ -19,11 +19,12 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 
 	return (
 		<div
-			className="min-w-[350px] flex flex-col rounded-xl card-container cursor-pointer"
+			className="min-w-[275px] sm:min-w-[350px]
+			flex flex-col rounded-xl card-container cursor-pointer"
 			onClick={() => setActiveView(recipe)}
 		>
 			{recipe.images.length !== 0 ? (
-				<div className="w-full h-48 relative overflow-hidden rounded-t-xl">
+				<div className="w-full h-36 sm:h-48 relative overflow-hidden rounded-t-xl">
 					{/* Recipe image */}
 					<Image
 						src={recipe.images[0].path}
@@ -36,7 +37,7 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 				</div>
 			) : (
 				<div
-					className="w-full h-48 relative overflow-hidden rounded-t-xl 
+					className="w-full h-36 sm:h-48 relative overflow-hidden rounded-t-xl 
 					flex justify-center items-center bg-neutral-200"
 				>
 					{/* Recipe with no image placeholder */}
@@ -45,9 +46,11 @@ const LargeRecipeCard = ({ recipe }: LargeRecipeCardProps) => {
 			)}
 
 			{/* Info */}
-			<div className="flex flex-col gap-4 p-3">
+			<div className="flex flex-col gap-3 sm:gap-4 p-2 sm:p-3">
 				{/* Name */}
-				<p className="font-medium tracking-wide truncate text-nowrap">{recipe.name}</p>
+				<p className="font-medium tracking-wide truncate text-nowrap text-neutral-700">
+					{recipe.name}
+				</p>
 
 				<div className="flex justify-between">
 					{/* Time */}

@@ -489,7 +489,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 			<button
 				type="button"
 				className={`bg-neutral-500 rounded-full 
-				flex justify-center items-center gap-2 p-2 px-2.5 pr-4 ${
+				flex justify-center items-center gap-2 p-1 px-1.5 pr-2.5 ${
 					isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-600"
 				}`}
 				onClick={onModalClose}

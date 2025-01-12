@@ -27,7 +27,7 @@ const Navigations = () => {
 			<Link
 				key={route.label}
 				href={route.route}
-				className={`flex justify-left gap-4 p-4 rounded-2xl
+				className={`flex justify-left gap-4 p-2 sm:p-4 rounded-2xl
 					${isActive ? "bg-sky-600 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
 			>
 				{route.icon}
@@ -42,16 +42,14 @@ const Navigations = () => {
 			{renderedNavigationButtons}
 
 			{/* Add recipe route */}
-			<div className="mt-4 relative">
-				<button
-					type="button"
-					onClick={openModal}
-					className="flex justify-center items-center gap-4 size-12 rounded-full font-semibold 
+			<button
+				type="button"
+				onClick={openModal}
+				className="flex justify-center items-center gap-4 size-10 sm:size-12 rounded-full font-semibold 
 					bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
-				>
-					{addRecipeRoute.icon}
-				</button>
-			</div>
+			>
+				{addRecipeRoute.icon}
+			</button>
 
 			{/* Add recipe modal */}
 			{isAddRecipeModalOpen && <RecipeFormModal onModalClose={closeModal} />}

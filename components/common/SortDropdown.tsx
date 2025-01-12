@@ -84,7 +84,7 @@ const SortDropdown = ({ selections, onSort }: SortDropdownProps) => {
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
 			<button
 				type="button"
-				className={`h-10 card-container aspect-square px-4
+				className={`h-8 sm:h-10 card-container aspect-square px-2 sm:px-4
 				flex gap-2 justify-center items-center rounded-full  ${
 					isExpanded ? "text-neutral-800 border-neutral-200" : "text-neutral-400"
 				}`}
