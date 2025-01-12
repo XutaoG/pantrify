@@ -50,7 +50,9 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 			<button
 				key={image.id}
 				type="button"
-				className={`size-3 rounded-full bg-black/60 ${imageIndex === index && "bg-black"}`}
+				className={`size-3 rounded-full  ${
+					imageIndex === index ? "bg-black" : "bg-black/60"
+				}`}
 				onClick={() => setImageIndex(index)}
 			/>
 		);

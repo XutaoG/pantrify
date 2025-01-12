@@ -53,7 +53,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 
 			{/* Info */}
 			<div className="flex justify-between items-center gap-4 p-2">
-				<p className="font-medium tracking-wide truncate text-nowrap">{recipe.name}</p>
+				<p className="tracking-wide truncate text-nowrap">{recipe.name}</p>
 				{/* Time */}
 				<InfoWidget
 					icon={<Clock size={16} />}

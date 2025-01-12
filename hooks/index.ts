@@ -197,3 +197,22 @@ export const useRefresh = () => {
 
 	return [refreshValue, refresh] as const;
 };
+
+export const useBreakpointWidthCheck = (breakpoint: number) => {
+	const [reached, setReached] = useState(false);
+
+	useEffect(() => {
+		const handleWindowResize = () => {
+			if (window.innerWidth >= breakpoint && !reached) {
+				setReached(true);
+			} else if (window.innerWidth < breakpoint && reached) {
+				setReached(false);
+			}
+		};
+		handleWindowResize();
+		window.addEventListener("resize", handleWindowResize);
+		return () => window.removeEventListener("resize", handleWindowResize);
+	}, [breakpoint, reached]);
+
+	return reached;
+};

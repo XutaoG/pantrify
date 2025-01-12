@@ -157,7 +157,7 @@ export interface ErrorMessageResponse {
 
 export interface ActiveView {
 	activeView: Ingredient | Recipe | null;
-	setActiveView: (activeView: Ingredient | Recipe) => void;
+	setActiveView: (activeView: Ingredient | Recipe | null) => void;
 }
 
 // ! Request config
