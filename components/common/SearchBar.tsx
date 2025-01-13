@@ -6,9 +6,10 @@ import { Search } from "lucide-react";
 interface SearchBarProps {
 	onSearch: (searchWord: string) => void;
 	placeholderText: string;
+	className?: string;
 }
 
-const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
+const SearchBar = ({ placeholderText, onSearch, className }: SearchBarProps) => {
 	const [searchWord, setSearchWord] = useState("");
 
 	const [isFocused, setIsFocused] = useState(false);
@@ -26,8 +27,10 @@ const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
 
 	return (
 		<form
-			className={`h-8 sm:h-10 card-container rounded-full 
-			flex items-center grow gap-2 sm:gap-4 px-3 sm:px-4 ${isFocused && "border-neutral-200"}`}
+			className={`card-container rounded-full min-w-0
+			flex items-center grow gap-2 sm:gap-4 py-1.5 md:py-2 px-3 md:px-4 ${
+				isFocused && "border-neutral-200"
+			} ${className}`}
 			onSubmit={search}
 		>
 			{/* Input */}
@@ -36,7 +39,7 @@ const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
 				onChange={(e) => {
 					setSearchWord(e.target.value);
 				}}
-				className="bg-transparent grow outline-none"
+				className="bg-transparent grow outline-none min-w-0"
 				placeholder={placeholderText}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
@@ -45,7 +48,9 @@ const SearchBar = ({ placeholderText, onSearch }: SearchBarProps) => {
 			{/* Clear search */}
 			{searchWord.trim() !== "" && (
 				<button type="button" className="px-2 rounded-full border" onClick={clearSearch}>
-					<p className="text-neutral-600">Clear Search</p>
+					<p className="text-neutral-600 text-sm sm:text-base text-nowrap">
+						Clear Search
+					</p>
 				</button>
 			)}
 

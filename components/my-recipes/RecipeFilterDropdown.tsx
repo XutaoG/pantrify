@@ -12,15 +12,15 @@ import {
 } from "@/constants";
 
 interface RecipeFilterDropdownProps {
-	// difficultyFilter: DifficultyFilterSchema;
 	onDifficultyFilterChange: (difficulty: DifficultyFilterSchema) => void;
-	// durationFilter: DurationFilterSchema;
 	onDurationFilterChange: (duration: DurationFilterSchema) => void;
+	className?: string;
 }
 
 const RecipeFilterDropdown = ({
 	onDifficultyFilterChange,
 	onDurationFilterChange,
+	className,
 }: RecipeFilterDropdownProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
@@ -84,13 +84,13 @@ const RecipeFilterDropdown = ({
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
 			<button
 				type="button"
-				className={`h-8 sm:h-10 card-container aspect-square px-3 sm:px-4
+				className={`card-container p-1.5 md:px-4 md:py-2
 				flex gap-2 justify-center items-center rounded-full ${
 					isExpanded ? "text-neutral-800 border-neutral-200" : "text-neutral-400"
-				}`}
+				} ${className}`}
 				onClick={onToggle}
 			>
-				<p className="tracking-wide">Filter</p>
+				<p className="hidden md:block tracking-wide">Filter</p>
 				<ListFilter size={20} />
 			</button>
 			{isExpanded && (

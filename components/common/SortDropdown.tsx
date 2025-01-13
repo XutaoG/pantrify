@@ -8,9 +8,10 @@ import { useState } from "react";
 interface SortDropdownProps {
 	selections: SortSchema[];
 	onSort: (sortBy: SortSchema) => void;
+	className?: string;
 }
 
-const SortDropdown = ({ selections, onSort }: SortDropdownProps) => {
+const SortDropdown = ({ selections, onSort, className }: SortDropdownProps) => {
 	const [containerRef, isExpanded, onToggle] = useDropdown<HTMLDivElement>();
 
 	//* Store current sort option
@@ -84,13 +85,15 @@ const SortDropdown = ({ selections, onSort }: SortDropdownProps) => {
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
 			<button
 				type="button"
-				className={`h-8 sm:h-10 card-container aspect-square px-2 sm:px-4
+				className={`card-container p-1.5 md:px-4 md:py-2
 				flex gap-2 justify-center items-center rounded-full  ${
 					isExpanded ? "text-neutral-800 border-neutral-200" : "text-neutral-400"
-				}`}
+				} ${className}`}
 				onClick={onToggle}
 			>
-				<p className="tracking-wide text-nowrap">{currentSortSelection.name}</p>
+				<p className="hidden md:block tracking-wide text-nowrap">
+					{currentSortSelection.name}
+				</p>
 				{currentSortOrder ? (
 					<ArrowUpNarrowWide size={20} />
 				) : (
