@@ -62,9 +62,9 @@ const AllIngredients = ({
 		<CollapsiblePanel
 			title={ingredientType == "Primary" ? "Primary Ingredients" : "Secondary Ingredients"}
 		>
-			<section className="flex flex-col gap-6">
+			<section className="flex flex-col gap-3 sm:gap-4">
 				{/* Search and sort */}
-				<div className="flex gap-6">
+				<div className="flex gap-2 sm:gap-4">
 					<SearchBar placeholderText="Search for a ingredient" onSearch={search} />
 					<SortDropdown selections={sortSelections} onSort={sort} />
 				</div>
@@ -85,11 +85,15 @@ const AllIngredients = ({
 						<LoaderCircle className="animate-spin" />
 					</div>
 				)}
+
 				{ingredients != null &&
 					(ingredients.totalCount !== 0 ? (
 						// ingredient cards
-						<div className="flex flex-col gap-6">
-							<div className="grid grid-cols-3 2xl:grid-cols-4 gap-6">
+						<div className="flex flex-col gap-4 sm:gap-6">
+							<div
+								className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3
+								lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-6"
+							>
 								{ingredientCards}
 							</div>
 							<Pagination

@@ -70,7 +70,7 @@ const Pagination = ({
 	});
 
 	return (
-		<section className="flex justify-center py-8">
+		<section className="flex justify-center pt-4 sm:pt-8 pb-8">
 			<div className="h-7 sm:h-8 flex gap-3 sm:gap-6">
 				{/* Left arrow */}
 				<button

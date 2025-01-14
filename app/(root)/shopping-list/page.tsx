@@ -11,7 +11,7 @@ const ShoppingList = () => {
 	const { refreshValue } = useContext(RefreshContext)!;
 
 	return (
-		<div className="grow flex flex-col gap-6 px-5 pt-10 pb-5 overflow-y-auto">
+		<div className="grow flex flex-col gap-4 sm:gap-6 px-3 sm:px-4 pt-4 sm:pt-8 overflow-y-auto">
 			{/* Page title */}
 			<PageTitle
 				title="Shopping List"
@@ -22,7 +22,7 @@ const ShoppingList = () => {
 			<AddIngredientController mode="shopping" />
 
 			{/* All ingredients */}
-			<section className="flex flex-col gap-6">
+			<section className="flex flex-col gap-4 sm:gap-6">
 				{/* Primary ingredients */}
 				<AllIngredients
 					ingredientType="Primary"
