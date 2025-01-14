@@ -44,6 +44,7 @@ const UserProfileActions = () => {
 			{isLogoutModalOpen && (
 				<ConfirmationModal
 					message="Are you sure you want to log out?"
+					confirmationIcon={<LogOut size={20} color="white" />}
 					confirmText="Log Out"
 					cancelText="Cancel"
 					onConfirm={logout}

@@ -1,8 +1,11 @@
 import { CircleX, Trash2 } from "lucide-react";
+import { ReactNode } from "react";
 
 interface ConfirmationModalProps {
 	message: string;
+	confirmationIcon?: ReactNode;
 	confirmText: string;
+	cancelIcon?: ReactNode;
 	cancelText: string;
 	onModalClose: () => void;
 	onConfirm: () => void;
@@ -11,7 +14,9 @@ interface ConfirmationModalProps {
 const ConfirmationModal = ({
 	message,
 	confirmText,
+	confirmationIcon,
 	cancelText,
+	cancelIcon,
 	onModalClose,
 	onConfirm,
 }: ConfirmationModalProps) => {
@@ -30,7 +35,7 @@ const ConfirmationModal = ({
 						rounded-full hover:bg-red-500"
 						onClick={onConfirm}
 					>
-						<Trash2 size={20} color="white" />
+						{confirmationIcon || <Trash2 size={20} color="white" />}
 						<p className="text-white font-medium">{confirmText}</p>
 					</button>
 
@@ -41,7 +46,7 @@ const ConfirmationModal = ({
 						rounded-full hover:bg-yellow-500"
 						onClick={onModalClose}
 					>
-						<CircleX size={20} color="white" />
+						{cancelIcon || <CircleX size={20} color="white" />}
 						<p className="text-white font-medium">{cancelText}</p>
 					</button>
 				</div>
