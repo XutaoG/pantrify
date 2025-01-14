@@ -19,7 +19,7 @@ const Navigations = () => {
 					${isActive ? "bg-sky-600 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
 			>
 				{route.icon}
-				<p className="hidden 2xl:block">{route.label}</p>
+				<p className="hidden 2xl:block font-medium">{route.label}</p>
 			</Link>
 		);
 	});
