@@ -1,22 +1,10 @@
 "use client";
 
-import { addRecipeRoute, navRoutes } from "@/constants/routes";
+import { navRoutes } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import RecipeFormModal from "../add/RecipeFormModal";
 
 const Navigations = () => {
-	const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState(false);
-
-	const openModal = () => {
-		setIsAddRecipeModalOpen(true);
-	};
-
-	const closeModal = () => {
-		setIsAddRecipeModalOpen(false);
-	};
-
 	const pathname = usePathname();
 
 	const renderedNavigationButtons = navRoutes.map((route) => {
@@ -27,7 +15,7 @@ const Navigations = () => {
 			<Link
 				key={route.label}
 				href={route.route}
-				className={`flex justify-left gap-4 p-2 sm:p-4 rounded-2xl
+				className={`flex justify-left gap-4 p-2 sm:p-4 rounded-xl md:rounded-2xl
 					${isActive ? "bg-sky-600 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
 			>
 				{route.icon}
@@ -37,22 +25,9 @@ const Navigations = () => {
 	});
 
 	return (
-		<nav className="flex flex-col gap-4 items-center 2xl:items-stretch">
+		<nav className="flex flex-col gap-3 md:gap-4 items-center 2xl:items-stretch">
 			{/* Nav routes */}
 			{renderedNavigationButtons}
-
-			{/* Add recipe route */}
-			<button
-				type="button"
-				onClick={openModal}
-				className="flex justify-center items-center gap-4 size-10 sm:size-12 rounded-full font-semibold 
-					bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
-			>
-				{addRecipeRoute.icon}
-			</button>
-
-			{/* Add recipe modal */}
-			{isAddRecipeModalOpen && <RecipeFormModal onModalClose={closeModal} />}
 		</nav>
 	);
 };

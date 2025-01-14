@@ -58,12 +58,14 @@ const RightSideBar = () => {
 	return (
 		<section
 			className={`flex ${
-				isLargeView ? "p-4" : "absolute inset-0 bg-black/40 border-l border-l-neutral-200"
+				isLargeView
+					? "p-4 pl-0"
+					: "absolute inset-0 bg-black/40 border-l border-l-neutral-200"
 			}`}
 		>
 			<div className="w-full flex justify-end">
 				<div
-					className={`flex flex-col w-[400px] min-w-[300px] pl-4 pr-2 sm:p-4 card-container 
+					className={`flex flex-col w-[400px] min-w-[300px] py-4 pl-4 pr-2 sm:p-4 card-container 
 				 	min-h-0 ${isLargeView ? "rounded-xl" : "rounded-none"}`}
 				>
 					<div className="grow flex flex-col pr-2 sm:pr-4 overflow-y-auto gap-2">

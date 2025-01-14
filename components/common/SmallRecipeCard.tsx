@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import InfoWidget from "./InfoWidget";
 import { Clock, Images } from "lucide-react";
 import { Recipe } from "@/types";
 import { defaultRecipeImageRoute } from "@/constants";
@@ -52,17 +51,18 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 			)}
 
 			{/* Info */}
-			<div className="flex justify-between items-center gap-4 p-2">
-				<p className="tracking-wide truncate text-nowrap text-neutral-700 font-medium">
+			<div className="flex flex-col gap-0.5 p-2">
+				<p className="tracking-wide truncate text-nowrap text-neutral-800 text-sm font-medium">
 					{recipe.name}
 				</p>
+
 				{/* Time */}
-				<InfoWidget
-					icon={<Clock size={16} />}
-					iconColor="text-emerald-500"
-					text={getTimeStr(recipe.duration)}
-					small
-				/>
+				<div className="flex items-center gap-1">
+					<Clock size={11} strokeWidth={3} className="text-neutral-500" />
+					<p className="text-xs font-semibold text-neutral-500">
+						{getTimeStr(recipe.duration)}
+					</p>
+				</div>
 			</div>
 		</div>
 	);
