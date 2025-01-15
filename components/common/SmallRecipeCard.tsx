@@ -59,7 +59,7 @@ const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
 				{/* Time */}
 				<div className="flex items-center gap-1">
 					<Clock size={11} strokeWidth={3} className="text-neutral-500" />
-					<p className="text-xs font-semibold text-neutral-500">
+					<p className="text-xs font-semibold text-neutral-600">
 						{getTimeStr(recipe.duration)}
 					</p>
 				</div>

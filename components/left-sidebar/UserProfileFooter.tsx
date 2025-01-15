@@ -11,7 +11,7 @@ const UserProfileFooter = async () => {
 
 			<div
 				className="flex justify-between gap-2 
-				2xl:p-4 2xl:py-2 2xl:bg-gray-100 2xl:rounded-lg"
+				2xl:p-2 2xl:pl-4 2xl:bg-gray-100 2xl:rounded-lg"
 			>
 				{/* Name + email */}
 				<div className="hidden 2xl:flex flex-col gap-1 grow min-w-0">

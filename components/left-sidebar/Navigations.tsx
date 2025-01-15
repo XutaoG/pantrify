@@ -13,10 +13,11 @@ const Navigations = () => {
 
 		return (
 			<Link
-				key={route.label}
+				key={route.route}
 				href={route.route}
-				className={`flex justify-left gap-4 p-2 sm:p-4 rounded-xl md:rounded-2xl
+				className={`relative inline-flex justify-left gap-4 p-2 sm:p-4 rounded-xl md:rounded-2xl
 					${isActive ? "bg-sky-600 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
+				title={route.label}
 			>
 				{route.icon}
 				<p className="hidden 2xl:block font-medium">{route.label}</p>

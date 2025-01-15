@@ -15,7 +15,7 @@ const LeftSideBar = () => {
 				md:pl-2 md:p-4 md:pr-0 md:border-r-0 2xl:p-4 2xl:pr-0 2xl:pt-8
 				border-r border-r-neutral-200"
 			>
-				<div className="grow flex flex-col justify-between gap-3 md:gap-4 overflow-auto pr-2 2xl:pr-4">
+				<div className="grow flex flex-col justify-between gap-3 md:gap-4 overflow-y-auto pr-2 2xl:pr-4">
 					{/* Top */}
 					<div className="flex flex-col gap-8 md:gap-12">
 						{/* Logo + Text */}
