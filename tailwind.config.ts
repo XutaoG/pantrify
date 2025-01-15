@@ -23,7 +23,10 @@ const config: Config = {
 		screens: {
 			"custom-sm": "480px",
 			"custom-md": "820px",
-			"custom-lg": "1140",
+			"custom-lg": "1140px",
+			"custom-3xl": "1860px",
+			"custom-4xl": "2320px",
+			"custom-5xl": "2570px",
 		},
 	},
 	plugins: [],

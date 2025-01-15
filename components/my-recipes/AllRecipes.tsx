@@ -115,7 +115,8 @@ const AllRecipes = () => {
 						<div className="flex flex-col gap-4 sm:gap-6">
 							<div
 								className="grid grid-cols-1 custom-sm:grid-cols-2 custom-md:grid-cols-3
-								lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 sm:gap-4 xl:gap-6"
+								lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 sm:gap-4 xl:gap-6
+								custom-3xl:grid-cols-5 custom-4xl:grid-cols-6 custom-5xl:grid-cols-7"
 							>
 								{recipeCards}
 							</div>
