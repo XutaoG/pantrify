@@ -142,10 +142,11 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 	};
 
 	return (
-		<section className="fixed inset-0 flex justify-center items-center bg-black/15 z-20">
+		<section className="fixed inset-0 flex justify-center items-end custom-sm:items-center bg-black/25 z-20">
 			<form
 				onSubmit={handleSubmit(submit)}
-				className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"
+				className="grow custom-sm:grow-0 custom-sm:w-[400px] flex flex-col gap-3 custom-sm:gap-4 
+				bg-gray-100 p-5 rounded-none custom-sm:rounded-xl shadow-sm"
 				noValidate
 			>
 				{/* Page title */}
@@ -157,97 +158,93 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 						: "Add to Shopping List"}
 				</p>
 
-				<div className="flex flex-col gap-5">
-					{/* Name field */}
-					<FormInput
-						{...register("name")}
-						header="Ingredient Name"
-						headerIcon={<Ham size={16} />}
-						placeholder="Enter the name of the ingredient"
-						errorMessage={errors.name?.message}
+				{/* Name field */}
+				<FormInput
+					{...register("name")}
+					header="Ingredient Name"
+					headerIcon={<Ham size={16} />}
+					placeholder="Enter the name of the ingredient"
+					errorMessage={errors.name?.message}
+					className="grow"
+					onFocus={removeMessages}
+					disabled={isSubmitting}
+				/>
+
+				{/* Ingredient type field */}
+				<FormSelectionInput
+					{...register("ingredientType")}
+					header="Ingredient Type"
+					headerIcon={<Egg size={16} />}
+					currentSelection={getValues("ingredientType")}
+					selections={ingredientTypes}
+					onSelectionChange={onIngredientTypeChange}
+					disabled={isSubmitting}
+				/>
+
+				{/* Expiration date field */}
+				{mode == "ingredient" && (
+					<FormDateInput
+						{...register("dateExpired")}
+						header="Expiration Date (Optional)"
+						headerIcon={<CalendarX2 size={16} />}
 						className="grow"
-						onFocus={removeMessages}
+						errorMessage={errors.dateExpired?.message}
 						disabled={isSubmitting}
 					/>
+				)}
 
-					{/* Ingredient type field */}
-					<FormSelectionInput
-						{...register("ingredientType")}
-						header="Ingredient Type"
-						headerIcon={<Egg size={16} />}
-						currentSelection={getValues("ingredientType")}
-						selections={ingredientTypes}
-						onSelectionChange={onIngredientTypeChange}
-						disabled={isSubmitting}
-					/>
+				{/* Success message */}
+				{formSuccessMessage && (
+					<p className="self-center px-1 text-emerald-500 font-medium">
+						{formSuccessMessage}
+					</p>
+				)}
 
-					{/* Expiration date field */}
-					{mode == "ingredient" && (
-						<FormDateInput
-							{...register("dateExpired")}
-							header="Expiration Date (Optional)"
-							headerIcon={<CalendarX2 size={16} />}
-							className="grow"
-							errorMessage={errors.dateExpired?.message}
-							disabled={isSubmitting}
-						/>
-					)}
+				{/* Error message */}
+				{formErrorMessage && (
+					<p className="self-center px-1 text-red-600 font-medium">{formErrorMessage}</p>
+				)}
 
-					{/* Success message */}
-					{formSuccessMessage && (
-						<p className="self-center px-1 text-emerald-500 font-medium">
-							{formSuccessMessage}
-						</p>
-					)}
-
-					{/* Error message */}
-					{formErrorMessage && (
-						<p className="self-center px-1 text-red-600 font-medium">
-							{formErrorMessage}
-						</p>
-					)}
-
-					<div className="grid grid-cols-2 gap-3">
-						{/* Add or edit ingredient */}
-						<button
-							type="submit"
-							className="flex justify-center items-center gap-2 
+				<div className="grid grid-cols-2 gap-3">
+					{/* Add or edit ingredient */}
+					<button
+						type="submit"
+						className="flex justify-center items-center gap-2 
 							bg-sky-600 p-1.5 rounded-full hover:bg-sky-500"
-						>
-							{ingredient == null ? (
-								<Fragment>
-									{/* Add icon and text */}
-									{isSubmitting ? (
-										<LoaderCircle
-											className="animate-spin"
-											size={20}
-											color="white"
-										/>
-									) : (
-										<CirclePlus size={20} color="white" />
-									)}
-									<p className="text-white font-medium">Add</p>
-								</Fragment>
-							) : (
-								<Fragment>
-									{/* Edit icon and text */}
-									<Pencil size={18} color="white" />
-									<p className="text-white font-medium">Save</p>
-								</Fragment>
-							)}
-						</button>
+					>
+						{ingredient == null ? (
+							<Fragment>
+								{/* Add icon and text */}
+								{isSubmitting ? (
+									<LoaderCircle
+										className="animate-spin"
+										size={20}
+										color="white"
+									/>
+								) : (
+									<CirclePlus size={20} color="white" />
+								)}
+								<p className="text-white font-medium">Add</p>
+							</Fragment>
+						) : (
+							<Fragment>
+								{/* Edit icon and text */}
+								<Pencil size={18} color="white" />
+								<p className="text-white font-medium">Save</p>
+							</Fragment>
+						)}
+					</button>
 
-						{/* Cancel */}
-						<button
-							type="button"
-							className="flex justify-center items-center gap-2 bg-yellow-500 
+					{/* Cancel */}
+					<button
+						type="button"
+						className="flex justify-center items-center gap-2 bg-yellow-500 
 							p-1.5 rounded-full hover:bg-yellow-600"
-							onClick={cancel}
-						>
-							<CircleX size={20} color="white" />
-							<p className="text-white font-medium">Cancel</p>
-						</button>
-					</div>
+						onClick={cancel}
+					>
+						<CircleX size={20} color="white" />
+						<p className="text-white font-medium">Cancel</p>
+					</button>
 				</div>
 			</form>
 		</section>
