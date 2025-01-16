@@ -212,7 +212,7 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 						<button
 							type="submit"
 							className="flex justify-center items-center gap-2 
-							bg-emerald-500 p-1.5 rounded-full hover:bg-emerald-600"
+							bg-sky-600 p-1.5 rounded-full hover:bg-sky-500"
 						>
 							{ingredient == null ? (
 								<Fragment>

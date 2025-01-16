@@ -22,7 +22,7 @@ const AddRecipeController = () => {
 				type="button"
 				onClick={openModal}
 				className="flex justify-left gap-4 p-2 sm:p-4 rounded-xl md:rounded-2xl font-semibold 
-			bg-emerald-300 hover:bg-emerald-400 cursor-pointer "
+				bg-sky-600 hover:bg-sky-500 cursor-pointer "
 			>
 				{addRecipeRoute.icon}
 				<p className="hidden 2xl:block text-white text-nowrap">Add New Recipe</p>
