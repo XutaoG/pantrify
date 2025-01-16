@@ -27,7 +27,7 @@ import RecipeInstructionCard from "./RecipeInstructionCard";
 import RecipeImagesInput from "./RecipeImagesInput";
 import RecipeDurationInput from "./RecipeDurationInput";
 import RecipeIngredientFormModal from "./RecipeIngredientFormModal";
-import RecipeIngredientCard from "./RecipeIngredientCard";
+import RecipeIngredientCardsDisplay from "./RecipeIngredientCardsDisplay";
 
 interface AddRecipePageProps {
 	recipe?: Recipe;
@@ -214,29 +214,18 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 		return hasIngredients;
 	};
 
-	//* Render ingredient cards
-	const primaryIngredients: JSX.Element[] = [];
-	const secondaryIngredients: JSX.Element[] = [];
-	const optionalIngredients: JSX.Element[] = [];
+	//* Ingredient type counts
+	let primaryIngredientsCount = 0;
+	let secondaryIngredientsCount = 0;
+	let optionalIngredientsCount = 0;
 
-	ingredients.forEach((ingredient, index) => {
-		const recipeIngredientCard = (
-			<RecipeIngredientCard
-				key={ingredient.name}
-				ingredient={ingredient}
-				index={index}
-				onEdit={openModalForEdit}
-				onDelete={deleteIngredient}
-				isSubmitting={isSubmitting}
-			/>
-		);
-
+	ingredients.forEach((ingredient) => {
 		if (ingredient.ingredientType == "Primary") {
-			primaryIngredients.push(recipeIngredientCard);
+			primaryIngredientsCount++;
 		} else if (ingredient.ingredientType == "Secondary") {
-			secondaryIngredients.push(recipeIngredientCard);
+			secondaryIngredientsCount++;
 		} else {
-			optionalIngredients.push(recipeIngredientCard);
+			optionalIngredientsCount++;
 		}
 	});
 
@@ -484,26 +473,30 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 	}, [recipe, setValue]);
 
 	return (
-		<section className="fixed inset-0 flex flex-col items-center gap-6 py-10 bg-black/15 z-50">
-			{/* Discard */}
-			<button
-				type="button"
-				className={`bg-neutral-500 rounded-full 
-				flex justify-center items-center gap-2 p-1 px-1.5 pr-2.5 ${
-					isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-600"
-				}`}
-				onClick={onModalClose}
-			>
-				<CircleX color="white" />
-				<p className="text-white font-semibold">Discard</p>
-			</button>
-
-			{/* Content */}
+		<section
+			className="fixed inset-0 flex flex-col custom-sm:items-center gap-6 
+			py-0 custom-sm:py-2 sm:py-4 md:py-6 lg:py-10 bg-black/15 z-50"
+		>
 			<div
-				className="grow w-[1000px] flex flex-col items-center gap-6 
-				bg-gray-100 p-6 pr-3 rounded-2xl shadow-sm min-h-0"
+				className="grow custom-sm:w-[440px] sm:w-[600px] md:w-[728px] lg:w-[984px] 
+				flex flex-col items-center gap-6 bg-gray-100 p-3 custom-sm:p-6 pr-1.5 custom-sm:pr-3 
+				pt-4 custom-sm:pt-6 rounded-none custom-sm:rounded-2xl shadow-sm min-h-0"
 			>
-				<div className="container mx-auto flex flex-col gap-6 pr-3 overflow-y-auto">
+				{/* Discard */}
+				<button
+					type="button"
+					className={`bg-neutral-500 rounded-full 
+						flex justify-center items-center gap-2 p-1 px-1.5 pr-2.5 ${
+							isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-600"
+						}`}
+					onClick={onModalClose}
+				>
+					<CircleX color="white" />
+					<p className="text-white font-semibold">Discard</p>
+				</button>
+
+				{/* Content */}
+				<div className="container mx-auto flex flex-col gap-6 pr-1.5 custom-sm:pr-3 overflow-y-auto">
 					{/* Page title */}
 					<PageTitle
 						title={recipe == null ? "Add a New Recipe" : "Editing Existing Recipe"}
@@ -511,7 +504,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 					/>
 
 					<FormProvider {...methods}>
-						<section className="flex flex-col gap-5">
+						<section className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6">
 							{/* Images field */}
 							<RecipeImagesInput
 								images={images}
@@ -533,7 +526,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 								disabled={isSubmitting}
 							/>
 
-							<div className="flex gap-6">
+							<div className="flex flex-wrap gap-3 custom-sm:gap-4 lg:gap-6">
 								{/* Serving field */}
 								<FormNumberInput
 									{...register("numServings")}
@@ -541,12 +534,12 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									headerIcon={<Users size={16} />}
 									onValueIncrement={onServingChange}
 									incrementAmount={1}
-									className="w-40"
+									className="w-40 grow md:w-auto lg:w-40"
 									disabled={isSubmitting}
 								/>
 
 								{/* Duration field */}
-								<RecipeDurationInput />
+								<RecipeDurationInput className="grow sm:grow-0" />
 
 								{/* Difficulty field */}
 								<FormSelectionInput
@@ -573,89 +566,82 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 
 							<Divider />
 
-							{/* Open ingredient form */}
-							<button
-								type="button"
-								className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
-									isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
-								}`}
-								onClick={openModalForAdd}
-								disabled={isSubmitting}
-							>
-								<CirclePlus size={20} color="white" />
-								<p className="text-white font-medium">Add Ingredient</p>
-							</button>
+							{/* Ingredients */}
+							<div className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6 py-6 md:py-8">
+								{/* Open ingredient form */}
+								<button
+									type="button"
+									className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
+										isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+									}`}
+									onClick={openModalForAdd}
+									disabled={isSubmitting}
+								>
+									<CirclePlus size={20} color="white" />
+									<p className="text-white font-medium">Add Ingredient</p>
+								</button>
 
-							{/* Ingredients error */}
-							{ingredientsError && (
-								<p className="self-center font-medium px-1 text-red-600">
-									{ingredientsError}
-								</p>
-							)}
+								{/* Ingredients error */}
+								{ingredientsError && (
+									<p className="self-center font-medium px-1 text-red-600">
+										{ingredientsError}
+									</p>
+								)}
 
-							{/* Add ingredient form modal */}
-							{isIngredientModalOpen && (
-								<RecipeIngredientFormModal
-									onIngredientAdd={addIngredient}
-									onModalClose={closeModal}
-									index={ingredientEditIndex}
-									ingredient={ingredientEditObj}
-									onIngredientEdit={editIngredient}
-								/>
-							)}
+								{ingredients.length !== 0 && (
+									<div
+										className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6 
+										p-4 py-4 sm:py-6 rounded-lg bg-gray-200"
+									>
+										{/* Add ingredient form modal */}
+										{isIngredientModalOpen && (
+											<RecipeIngredientFormModal
+												onIngredientAdd={addIngredient}
+												onModalClose={closeModal}
+												index={ingredientEditIndex}
+												ingredient={ingredientEditObj}
+												onIngredientEdit={editIngredient}
+											/>
+										)}
 
-							{/* Primary ingredients */}
-							{primaryIngredients.length != 0 && (
-								<section className="flex flex-col gap-2">
-									<p className="font-semibold text-sm select-none">
-										Primary Ingredients
-									</p>
-									<div className="grid grid-cols-3 gap-4">
-										{primaryIngredients}
+										{/* Primary ingredients */}
+										{primaryIngredientsCount > 0 && (
+											<RecipeIngredientCardsDisplay
+												ingredientType="Primary"
+												ingredients={ingredients}
+												onEdit={openModalForEdit}
+												onDelete={deleteIngredient}
+												isSubmitting={isSubmitting}
+											/>
+										)}
+										{/* Secondary ingredients */}
+										{secondaryIngredientsCount > 0 && (
+											<RecipeIngredientCardsDisplay
+												ingredientType="Secondary"
+												ingredients={ingredients}
+												onEdit={openModalForEdit}
+												onDelete={deleteIngredient}
+												isSubmitting={isSubmitting}
+											/>
+										)}
+										{/* Optional ingredients */}
+										{optionalIngredientsCount > 0 && (
+											<RecipeIngredientCardsDisplay
+												ingredientType="Optional"
+												ingredients={ingredients}
+												onEdit={openModalForEdit}
+												onDelete={deleteIngredient}
+												isSubmitting={isSubmitting}
+											/>
+										)}
 									</div>
-								</section>
-							)}
-							{/* Secondary ingredients */}
-							{secondaryIngredients.length != 0 && (
-								<section className="flex flex-col gap-2">
-									<p className="font-semibold text-sm select-none">
-										Secondary Ingredients
-									</p>
-									<div className="grid grid-cols-3 gap-4">
-										{secondaryIngredients}
-									</div>
-								</section>
-							)}
-							{/* Optional ingredients */}
-							{optionalIngredients.length != 0 && (
-								<section className="flex flex-col gap-2">
-									<p className="font-semibold text-sm select-none">
-										Optional Ingredients
-									</p>
-									<div className="grid grid-cols-3 gap-4">
-										{optionalIngredients}
-									</div>
-								</section>
-							)}
+								)}
+							</div>
 
 							<Divider />
 
 							{/* Instructions */}
-							<section className="flex flex-col gap-5">
-								{instructionCards.length !== 0 && (
-									<div className="flex flex-col gap-4">
-										{/* Title */}
-										<p className="font-medium self-center select-none">
-											Instructions
-										</p>
-
-										{/* Cards */}
-										<div className="flex flex-col gap-4">
-											{instructionCards}
-										</div>
-									</div>
-								)}
-
+							<section className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6 py-6 md:py-8">
 								{/* Add instruction button */}
 								<button
 									type="button"
@@ -675,10 +661,26 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 										{instructionsError}
 									</p>
 								)}
+
+								{instructionCards.length !== 0 && (
+									<div className="flex flex-col gap-2 p-4 py-4 sm:py-6 rounded-lg bg-gray-200">
+										{/* Title */}
+										<p className="font-medium self-center select-none">
+											Instructions
+										</p>
+
+										{/* Cards */}
+										<div className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6">
+											{instructionCards}
+										</div>
+									</div>
+								)}
 							</section>
 
+							<Divider />
+
 							{/* Add and discard buttons */}
-							<div className="flex flex-col gap-4">
+							<div className="flex flex-col md:grid md:grid-cols-2 pt-4 md:pt-6 gap-2 custom-sm:gap-3 md:gap-4">
 								{/* Add */}
 								<FormButton
 									title={recipe == null ? "Add Recipe" : "Save"}

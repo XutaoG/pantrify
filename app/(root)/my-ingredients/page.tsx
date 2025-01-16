@@ -11,7 +11,7 @@ const MyIngredients = () => {
 	const { refreshValue } = useContext(RefreshContext)!;
 
 	return (
-		<div className="grow flex flex-col gap-4 sm:gap-6 px-3 sm:px-4 pt-4 sm:pt-8 overflow-y-auto">
+		<div className="grow flex flex-col gap-4 sm:gap-6 p-3 sm:p-4 overflow-y-auto">
 			{/* Page title */}
 			<PageTitle
 				title="My Ingredients"

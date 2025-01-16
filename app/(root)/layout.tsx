@@ -17,7 +17,7 @@ const RootLayout = async ({
 
 				{/* Main content */}
 				<SessionManageWrapper>
-					<section className="grow min-w-0 flex p-0 sm:p-4 pr-0 my-0 sm:my-4">
+					<section className="grow min-w-0 flex p-1 py-0 pr-0 my-0 sm:p-4 sm:my-4">
 						{children}
 					</section>
 				</SessionManageWrapper>
