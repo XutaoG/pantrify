@@ -1,10 +1,10 @@
 "use client";
 
 import { ingredientQuantityFractions, ingredientQuantityUnits } from "@/constants";
-import { useDropdown } from "@/hooks";
+import { useDropdown, useDropdownOffScreenCheck } from "@/hooks";
 import { TAddRecipeIngredientSchema } from "@/types";
 import { ChevronLeft, CookingPot } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface FormQuantityInputProps {
@@ -63,10 +63,21 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 		);
 	});
 
+	const quantityFractionRef = useRef<HTMLDivElement>(null);
+
+	const isQuantityFractionOffScreen = useDropdownOffScreenCheck(
+		quantityFractionRef,
+		isExpandedFraction
+	);
+
+	const quantityUnitRef = useRef<HTMLDivElement>(null);
+
+	const isQuantityUnitOffScreen = useDropdownOffScreenCheck(quantityUnitRef, isExpandedUnit);
+
 	return (
 		<div className={`flex flex-col gap-1 min-w-0 relative ${className}`}>
 			{/* Input */}
-			<div className="h-24 flex flex-col gap-1 card-container rounded-xl px-4 pt-2 pb-2">
+			<div className="min-w-0 h-24 flex flex-col gap-1 card-container rounded-xl px-4 pt-2 pb-2">
 				{/* Title */}
 				<div className="flex items-center gap-1.5">
 					<CookingPot size={16} />
@@ -75,10 +86,10 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 					</p>
 				</div>
 
-				<div className="grow flex gap-4 items-center">
+				<div className="min-w-0 grow flex gap-4 items-center">
 					{/* Whole field */}
 					<div
-						className={`flex gap-2 px-2 items-center border rounded-lg ${
+						className={`min-w-0 flex gap-2 px-2 items-center border rounded-lg ${
 							isQuantityWholeFocused ? "border-neutral-200" : "border-transparent"
 						}`}
 					>
@@ -98,7 +109,7 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 					{/* fraction field */}
 					<button
 						type="button"
-						className={`grow flex gap-2 px-2 items-center border rounded-lg relative ${
+						className={`grow min-w-0 flex gap-2 px-2 items-center border rounded-lg relative ${
 							isSubmitting && "cursor-not-allowed"
 						} ${isExpandedFraction ? "border-neutral-200" : "border-transparent"}`}
 						ref={fractionContainerRef}
@@ -114,20 +125,25 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 							placeholder="1/2"
 						/>
 						<ChevronLeft size={16} />
-						{isExpandedFraction && (
-							<div
-								className="absolute inset-x-0 top-full z-10 border-neutral-200
-								card-container rounded-lg flex flex-col p-2 gap-1"
-							>
-								{fractionQuantityOptions}
-							</div>
-						)}
+						{/* {isExpandedFraction && ( */}
+						<div
+							className={`absolute inset-x-0 min-w-0 ${
+								isExpandedFraction ? "flex" : "hidden"
+							} ${
+								isQuantityFractionOffScreen ? "bottom-full" : "top-full"
+							} z-10 border-neutral-200
+								card-container rounded-lg flex-col p-2 gap-1`}
+							ref={quantityFractionRef}
+						>
+							{fractionQuantityOptions}
+						</div>
+						{/* )} */}
 					</button>
 
 					{/* Unit field */}
 					<button
 						type="button"
-						className={`grow flex gap-2 px-2 items-center border rounded-lg relative ${
+						className={`grow min-w-0 flex gap-2 px-2 items-center border rounded-lg relative ${
 							isSubmitting && "cursor-not-allowed"
 						} ${isExpandedUnit ? "border-neutral-200" : "border-transparent"}`}
 						ref={unitContainerRef}
@@ -144,16 +160,19 @@ const RecipeIngredientQuantityInput = ({ className }: FormQuantityInputProps) =>
 						/>
 
 						<ChevronLeft size={16} />
-						{isExpandedUnit && (
-							<div
-								className="absolute inset-x-0 top-full z-10 card-container 
-								h-64 p-2 border-neutral-200 rounded-lg flex flex-col"
-							>
-								<div className="grow flex flex-col pr-2 gap-1 overflow-y-scroll">
-									{quantityUnitOptions}
-								</div>
+						<div
+							className={`absolute min-w-0 inset-x-0 ${
+								isExpandedUnit ? "flex" : "hidden"
+							} ${
+								isQuantityUnitOffScreen ? "bottom-full" : "top-full"
+							} z-10 card-container 
+								h-64 p-2 border-neutral-200 rounded-lg flex-col`}
+							ref={quantityUnitRef}
+						>
+							<div className="grow flex flex-col pr-2 gap-1 overflow-y-scroll">
+								{quantityUnitOptions}
 							</div>
-						)}
+						</div>
 					</button>
 				</div>
 			</div>

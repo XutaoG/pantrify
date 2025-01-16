@@ -9,7 +9,7 @@ import {
 	SortSchema,
 } from "@/constants";
 import { IngredientList, RecipeList } from "@/types";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 export const useDropdown = <T extends HTMLElement>() => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -215,4 +215,43 @@ export const useBreakpointWidthCheck = (breakpoint: number) => {
 	}, [breakpoint, reached]);
 
 	return reached;
+};
+
+export const useDropdownOffScreenCheck = (ref: RefObject<HTMLElement>, isOpen: boolean) => {
+	const [offScreen, setOffScreen] = useState(false);
+
+	const handleWindowResize = useCallback(() => {
+		if (ref.current == null) {
+			return;
+		}
+
+		const rect = ref.current.getBoundingClientRect();
+
+		const currentlyOffScreen = rect.y < 0 || rect.y + rect.height > window.innerHeight;
+
+		if (currentlyOffScreen !== offScreen) {
+			if (currentlyOffScreen === true) {
+				setOffScreen(true);
+			}
+		}
+	}, [offScreen, ref]);
+
+	useEffect(() => {
+		if (isOpen === false) {
+			setOffScreen(false);
+		}
+		handleWindowResize();
+	}, [handleWindowResize, isOpen]);
+
+	useEffect(() => {
+		if (ref.current == null) {
+			return;
+		}
+
+		handleWindowResize();
+		window.addEventListener("resize", handleWindowResize);
+		return () => window.removeEventListener("resize", handleWindowResize);
+	}, [handleWindowResize, offScreen, ref]);
+
+	return offScreen;
 };

@@ -90,11 +90,12 @@ const RecipeIngredientFormModal = ({
 	};
 
 	return (
-		<section className="fixed inset-0 flex justify-center items-center bg-black/15">
+		<section className="fixed inset-0 flex justify-center items-end custom-sm:items-center bg-black/25">
 			<FormProvider {...methods}>
 				<form
 					onSubmit={handleSubmit(submitForm)}
-					className="w-96 flex flex-col gap-4 bg-gray-100 p-6 rounded-xl shadow-sm"
+					className="grow custom-sm:grow-0 custom-sm:w-[400px] flex flex-col gap-3 custom-sm:gap-4 
+					bg-gray-100 p-5 rounded-none custom-sm:rounded-xl shadow-sm"
 					noValidate
 				>
 					{/* Title */}
@@ -147,8 +148,8 @@ const RecipeIngredientFormModal = ({
 						{/* Add or edit ingredient */}
 						<button
 							type="submit"
-							className={`flex justify-center items-center gap-2 
-							bg-emerald-500 p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-600"}`}
+							className={`flex justify-center items-center gap-2 bg-sky-600
+							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-sky-500"}`}
 							disabled={isSubmitting}
 						>
 							{index == null || ingredient == null ? (
@@ -169,8 +170,8 @@ const RecipeIngredientFormModal = ({
 						{/* Cancel */}
 						<button
 							type="button"
-							className={`flex justify-center items-center gap-2 bg-yellow-400 
-							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-yellow-500"}`}
+							className={`flex justify-center items-center gap-2 bg-red-400 
+							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"}`}
 							onClick={onModalClose}
 							disabled={isSubmitting}
 						>

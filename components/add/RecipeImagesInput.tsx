@@ -51,7 +51,7 @@ const RecipeImagesInput = ({
 
 			<div className="grow flex flex-col gap-4">
 				{/* Images */}
-				<div className="grow grid grid-cols-2 gap-4">{recipeCards}</div>
+				<div className="grow grid grid-cols-1 sm:grid-cols-2 gap-4">{recipeCards}</div>
 
 				{/* Add image button */}
 				<label

@@ -35,7 +35,7 @@ const RecipeImageCard = ({
 
 	return (
 		<div
-			className="h-44 relative overflow-hidden rounded-xl border border-neutral-200
+			className="h-36 sm:h-44 lg:h-48 relative overflow-hidden rounded-xl border border-neutral-200
 			flex justify-center items-center"
 			onMouseEnter={onHover}
 			onMouseLeave={onHoverLeave}

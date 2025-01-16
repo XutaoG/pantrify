@@ -571,8 +571,8 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 								{/* Open ingredient form */}
 								<button
 									type="button"
-									className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
-										isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+									className={`self-center flex items-center gap-2 bg-sky-600 p-2 px-3 rounded-full ${
+										isSubmitting ? "cursor-not-allowed" : "hover:bg-sky-500"
 									}`}
 									onClick={openModalForAdd}
 									disabled={isSubmitting}
@@ -588,22 +588,23 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									</p>
 								)}
 
+								{/* Add ingredient form modal */}
+								{isIngredientModalOpen && (
+									<RecipeIngredientFormModal
+										onIngredientAdd={addIngredient}
+										onModalClose={closeModal}
+										index={ingredientEditIndex}
+										ingredient={ingredientEditObj}
+										onIngredientEdit={editIngredient}
+									/>
+								)}
+
+								{/* Ingredients */}
 								{ingredients.length !== 0 && (
 									<div
 										className="flex flex-col gap-3 custom-sm:gap-4 lg:gap-6 
 										p-4 py-4 sm:py-6 rounded-lg bg-gray-200"
 									>
-										{/* Add ingredient form modal */}
-										{isIngredientModalOpen && (
-											<RecipeIngredientFormModal
-												onIngredientAdd={addIngredient}
-												onModalClose={closeModal}
-												index={ingredientEditIndex}
-												ingredient={ingredientEditObj}
-												onIngredientEdit={editIngredient}
-											/>
-										)}
-
 										{/* Primary ingredients */}
 										{primaryIngredientsCount > 0 && (
 											<RecipeIngredientCardsDisplay
@@ -645,8 +646,8 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 								{/* Add instruction button */}
 								<button
 									type="button"
-									className={`self-center flex items-center gap-2 bg-emerald-400 p-2 px-3 rounded-full ${
-										isSubmitting ? "cursor-not-allowed" : "hover:bg-emerald-500"
+									className={`self-center flex items-center gap-2 bg-sky-600 p-2 px-3 rounded-full ${
+										isSubmitting ? "cursor-not-allowed" : "hover:bg-sky-500"
 									}`}
 									onClick={addInstruction}
 									disabled={isSubmitting}

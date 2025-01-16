@@ -63,10 +63,10 @@ const RecipeInstructionCard = ({
 					</button>
 				</div>
 
-				<div className="grow flex gap-3 p-2 px-3">
+				<div className="grow flex gap-2 sm:gap-3 p-2 px-3">
 					{/* Text area */}
 					<div
-						className={`grow border p-2 rounded-lg flex ${
+						className={`grow border p-1 sm:p-2 rounded-lg flex ${
 							isFocused ? "border-neutral-200" : "border-transparent"
 						}`}
 					>
@@ -91,7 +91,7 @@ const RecipeInstructionCard = ({
 						className={`self-center bg-red-400 rounded-full size-10 ${
 							isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"
 						} ${!isHover && !isFocused && "hidden"}
-					flex justify-center items-center`}
+						flex justify-center items-center`}
 						onClick={() => onInstructionRemove(index)}
 						disabled={isSubmitting}
 					>
