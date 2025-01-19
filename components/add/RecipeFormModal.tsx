@@ -319,6 +319,25 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 		return !hasEmptyInstructions;
 	};
 
+	//* Check if instructions are too long
+	const checkInstructionsContentLength = () => {
+		let hasLongInstructions = false;
+		const updatedInstructions = instructions.map((instruction) => {
+			if (instruction.value.trim().length > 1000) {
+				hasLongInstructions = true;
+				return {
+					value: instruction.value,
+					error: "Instruction cannot be longer than 1000 characters",
+				};
+			}
+
+			return instruction;
+		});
+
+		setInstructions(updatedInstructions);
+		return !hasLongInstructions;
+	};
+
 	//* Render instruction cards
 	const instructionCards = instructions.map((instruction, index) => {
 		return (
@@ -381,8 +400,14 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 		const ingredientsCountCheck = checkIngredientsCount();
 		const instructionsCountCheck = checkInstructionsCount();
 		const instructionsContentCheck = checkInstructionsContent();
+		const instructionsContentLengthCheck = checkInstructionsContentLength();
 
-		if (!ingredientsCountCheck || !instructionsCountCheck || !instructionsContentCheck) {
+		if (
+			!ingredientsCountCheck ||
+			!instructionsCountCheck ||
+			!instructionsContentCheck ||
+			!instructionsContentLengthCheck
+		) {
 			return;
 		}
 
