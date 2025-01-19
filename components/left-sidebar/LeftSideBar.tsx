@@ -11,11 +11,11 @@ const LeftSideBar = () => {
 	return (
 		<section className="flex p-0 md:p-4 md:pr-0">
 			<div
-				className="2xl:min-w-60 2xl:max-w-60 flex card-container rounded-none md:rounded-xl py-2 pl-2 pr-0 
-				md:pl-2 md:py-2 md:pr-0 md:border-r-0 2xl:p-4 2xl:pr-0 2xl:pt-8
+				className="2xl:min-w-60 2xl:max-w-60 flex card-container rounded-none md:rounded-xl py-2 pl-1 pr-0 
+				md:pl-2 md:py-2 md:pr-1 md:border-r-0 2xl:p-4 2xl:pr-0 2xl:pt-8
 				border-r border-r-neutral-200"
 			>
-				<div className="grow flex flex-col justify-between gap-3 md:gap-4 overflow-y-auto pr-2 2xl:pr-4">
+				<div className="grow flex flex-col justify-between gap-3 md:gap-4 overflow-y-auto pr-1 2xl:pr-4">
 					{/* Top */}
 					<div className="flex flex-col gap-8 md:gap-12">
 						{/* Logo + Text */}

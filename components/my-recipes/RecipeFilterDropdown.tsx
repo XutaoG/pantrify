@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CollapsiblePanel from "../common/CollapsiblePanel";
-import { useDropdown } from "@/hooks";
+import { useDropdown, useDropdownOffScreenCheck } from "@/hooks";
 import { ListFilter } from "lucide-react";
 import {
 	DifficultyFilterSchema,
@@ -40,10 +40,10 @@ const RecipeFilterDropdown = ({
 		return (
 			<div
 				key={filter.name}
-				className={`p-1.5 hover:bg-neutral-200 rounded-lg cursor-pointer ${
+				className={`p-1.5 hover:bg-neutral-200 rounded-lg cursor-pointer text-sm ${
 					filter === currentDifficultyFilter
-						? "text-black font-medium"
-						: "text-neutral-600 font-normal"
+						? "text-black font-semibold"
+						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
 					handleDifficultySelectionClick(filter);
@@ -65,10 +65,10 @@ const RecipeFilterDropdown = ({
 		return (
 			<div
 				key={filter.name}
-				className={`p-2 hover:bg-neutral-200 rounded-lg cursor-pointer ${
+				className={`p-1.5 hover:bg-neutral-200 rounded-lg cursor-pointer text-sm ${
 					filter === currentDurationFilter
-						? "text-black font-medium"
-						: "text-neutral-600 font-normal"
+						? "text-black font-semibold"
+						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => {
 					handleTimeSelectionClick(filter);
@@ -79,6 +79,10 @@ const RecipeFilterDropdown = ({
 			</div>
 		);
 	});
+
+	const dropdownRef = useRef<HTMLDivElement>(null);
+
+	const isDropdownOffScreen = useDropdownOffScreenCheck(dropdownRef, isExpanded);
 
 	return (
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
@@ -93,22 +97,25 @@ const RecipeFilterDropdown = ({
 				<p className="hidden md:block tracking-wide">Filter</p>
 				<ListFilter size={20} />
 			</button>
-			{isExpanded && (
-				<div
-					className="absolute z-10 top-12 right-0 w-48 card-container p-3 
-					border border-neutral-200 rounded-xl flex flex-col gap-5"
-				>
-					{/* Difficulty selections */}
-					<CollapsiblePanel title="Difficulty">
-						<div className="flex flex-col gap-0">{difficultyFilterOptions}</div>
-					</CollapsiblePanel>
+			{/* {isExpanded && ( */}
+			<div
+				className={`absolute z-10 ${isExpanded ? "flex" : "hidden"} ${
+					isDropdownOffScreen ? "bottom-full" : "top-full"
+				} right-0 w-48 card-container p-3 
+					border border-neutral-200 rounded-xl flex-col gap-3`}
+				ref={dropdownRef}
+			>
+				{/* Difficulty selections */}
+				<CollapsiblePanel title="Difficulty">
+					<div className="flex flex-col gap-0">{difficultyFilterOptions}</div>
+				</CollapsiblePanel>
 
-					{/* Time selections */}
-					<CollapsiblePanel title="Duration">
-						<div className="flex flex-col gap-0">{durationFilterOptions}</div>
-					</CollapsiblePanel>
-				</div>
-			)}
+				{/* Time selections */}
+				<CollapsiblePanel title="Duration">
+					<div className="flex flex-col gap-0">{durationFilterOptions}</div>
+				</CollapsiblePanel>
+			</div>
+			{/* )} */}
 		</div>
 	);
 };

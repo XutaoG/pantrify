@@ -1,9 +1,9 @@
 "use client";
 
 import { SortSchema } from "@/constants";
-import { useDropdown } from "@/hooks";
+import { useDropdown, useDropdownOffScreenCheck } from "@/hooks";
 import { ArrowDown, ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface SortDropdownProps {
 	selections: SortSchema[];
@@ -63,11 +63,11 @@ const SortDropdown = ({ selections, onSort, className }: SortDropdownProps) => {
 			<button
 				type="button"
 				key={selection.name}
-				className={`p-2 hover:bg-neutral-200 rounded-lg 
+				className={`p-1.5 hover:bg-neutral-200 rounded-lg text-sm
 				flex justify-between items-center  ${
 					selection.name === currentSortSelection.name
-						? "text-black font-medium"
-						: "text-neutral-600 font-normal"
+						? "text-black font-semibold"
+						: "text-neutral-600 font-medium"
 				}`}
 				onClick={() => handleSortSelectionClick(selection)}
 			>
@@ -80,6 +80,10 @@ const SortDropdown = ({ selections, onSort, className }: SortDropdownProps) => {
 			</button>
 		);
 	});
+
+	const dropdownRef = useRef<HTMLDivElement>(null);
+
+	const isDropdownOffScreen = useDropdownOffScreenCheck(dropdownRef, isExpanded);
 
 	return (
 		<div className="flex justify-center items-center relative select-none" ref={containerRef}>
@@ -100,14 +104,17 @@ const SortDropdown = ({ selections, onSort, className }: SortDropdownProps) => {
 					<ArrowDownNarrowWide size={20} />
 				)}
 			</button>
-			{isExpanded && (
-				<div
-					className="absolute z-10 top-12 right-0 w-48 card-container p-3 
-					border border-neutral-200 rounded-xl"
-				>
-					<div className="flex flex-col gap-0">{dropdownOptions}</div>
-				</div>
-			)}
+			{/* {isExpanded && ( */}
+			<div
+				className={`absolute z-10 ${isExpanded ? "flex" : "hidden"} ${
+					isDropdownOffScreen ? "bottom-full" : "top-full"
+				} w-44 right-0 card-container p-3 flex-col
+					border border-neutral-200 rounded-xl`}
+				ref={dropdownRef}
+			>
+				<div className="flex flex-col gap-0">{dropdownOptions}</div>
+			</div>
+			{/* )} */}
 		</div>
 	);
 };

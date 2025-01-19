@@ -485,14 +485,14 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 				{/* Discard */}
 				<button
 					type="button"
-					className={`bg-neutral-500 rounded-full 
+					className={`bg-red-400 rounded-full 
 						flex justify-center items-center gap-2 p-1 px-1.5 pr-2.5 ${
-							isSubmitting ? "cursor-not-allowed" : "hover:bg-neutral-600"
+							isSubmitting ? "cursor-not-allowed" : "hover:bg-red-500"
 						}`}
 					onClick={onModalClose}
 				>
 					<CircleX color="white" />
-					<p className="text-white font-semibold">Discard</p>
+					<p className="text-white font-semibold tracking-wide">Discard</p>
 				</button>
 
 				{/* Content */}
@@ -578,7 +578,9 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									disabled={isSubmitting}
 								>
 									<CirclePlus size={20} color="white" />
-									<p className="text-white font-medium">Add Ingredient</p>
+									<p className="text-white font-medium tracking-wide">
+										Add Ingredient
+									</p>
 								</button>
 
 								{/* Ingredients error */}
@@ -653,7 +655,9 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									disabled={isSubmitting}
 								>
 									<CirclePlus size={20} color="white" />
-									<p className="text-white font-medium">Add Instruction</p>
+									<p className="text-white font-medium tracking-wide">
+										Add Instruction
+									</p>
 								</button>
 
 								{/* Instructions error */}
@@ -664,7 +668,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 								)}
 
 								{instructionCards.length !== 0 && (
-									<div className="flex flex-col gap-2 p-4 py-4 sm:py-6 rounded-lg bg-gray-200">
+									<div className="flex flex-col gap-3 p-4 py-4 sm:py-6 rounded-lg bg-gray-200">
 										{/* Title */}
 										<p className="font-medium self-center select-none">
 											Instructions
@@ -699,7 +703,7 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									onClick={onModalClose}
 								>
 									<CircleX color="white" />
-									<p className="text-white font-semibold">
+									<p className="text-white font-semibold tracking-wide">
 										{recipe == null ? "Discard" : "Discard changes"}
 									</p>
 								</button>

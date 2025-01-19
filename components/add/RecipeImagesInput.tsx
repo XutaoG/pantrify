@@ -56,10 +56,10 @@ const RecipeImagesInput = ({
 				{/* Add image button */}
 				<label
 					htmlFor="file-upload"
-					className={`self-center flex items-center bg-neutral-200 p-1 rounded-full ${
+					className={`self-center flex items-center bg-sky-600 p-1 rounded-full ${
 						isSubmitting || images.length === 4 || isFetchingImages
 							? "cursor-not-allowed"
-							: "hover:bg-neutral-300 cursor-pointer"
+							: "hover:bg-sky-500 cursor-pointer"
 					}`}
 				>
 					{isFetchingImages ? (

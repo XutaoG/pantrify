@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface SearchBarProps {
 	onSearch: (searchWord: string) => void;
@@ -47,10 +47,12 @@ const SearchBar = ({ placeholderText, onSearch, className }: SearchBarProps) => 
 
 			{/* Clear search */}
 			{searchWord.trim() !== "" && (
-				<button type="button" className="px-2 rounded-full border" onClick={clearSearch}>
-					<p className="text-neutral-600 text-sm sm:text-base text-nowrap">
-						Clear Search
-					</p>
+				<button
+					type="button"
+					className="rounded-full border border-neutarl-500"
+					onClick={clearSearch}
+				>
+					<X size={20} className="text-neutral-500" />
 				</button>
 			)}
 

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	* {
+		@apply outline-none;
+	}
+
 	h1 {
 		@apply text-2xl sm:text-3xl;
 	}

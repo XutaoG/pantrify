@@ -29,7 +29,7 @@ const AddIngredientController = ({ mode }: AddIngredientControllerProps) => {
 			>
 				<div className="flex gap-2 items-center">
 					<CirclePlus size={20} color="white" />
-					<p className="text-white font-semibold">
+					<p className="text-white font-semibold tracking-wide">
 						{mode === "ingredient" ? "My Ingredients" : "Add to Shopping List"}
 					</p>
 				</div>

@@ -156,13 +156,13 @@ const RecipeIngredientFormModal = ({
 								<Fragment>
 									{/* Add icon and text */}
 									<CirclePlus size={20} color="white" />
-									<p className="text-white font-medium">Add</p>
+									<p className="text-white font-medium tracking-wide">Add</p>
 								</Fragment>
 							) : (
 								<Fragment>
 									{/* Edit icon and text */}
 									<Pencil size={18} color="white" />
-									<p className="text-white font-medium">Save</p>
+									<p className="text-white font-medium tracking-wide">Save</p>
 								</Fragment>
 							)}
 						</button>
@@ -176,7 +176,7 @@ const RecipeIngredientFormModal = ({
 							disabled={isSubmitting}
 						>
 							<CircleX size={20} color="white" />
-							<p className="text-white font-medium">Cancel</p>
+							<p className="text-white font-medium tracking-wide">Cancel</p>
 						</button>
 					</div>
 				</form>

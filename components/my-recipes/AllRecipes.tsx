@@ -49,7 +49,7 @@ const AllRecipes = () => {
 
 	return (
 		<section className="flex flex-col gap-2 sm:gap-4">
-			<p className="font-medium">All Recipes</p>
+			<p className="font-medium text-sm sm:text-base tracking-wide">All Recipes</p>
 
 			<div className="flex flex-col gap-3 sm:gap-4">
 				{/* Search bar + filter + sort */}

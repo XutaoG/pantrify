@@ -25,12 +25,12 @@ const FormButton = ({ title, icon, className, disabled, ...rest }: FormButtonPro
 			{disabled ? (
 				<Fragment>
 					<LoaderCircle className="animate-spin" color="white" />
-					<p className="text-white font-semibold">Loading</p>
+					<p className="text-white font-semibold tracking-wide">Loading</p>
 				</Fragment>
 			) : (
 				<Fragment>
 					{icon}
-					<p className="text-white font-semibold">{title}</p>
+					<p className="text-white font-semibold tracking-wide">{title}</p>
 				</Fragment>
 			)}
 		</button>

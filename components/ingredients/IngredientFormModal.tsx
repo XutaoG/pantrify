@@ -238,8 +238,8 @@ const IngredientFormModal = ({ mode, ingredient, onModalClose }: IngredientFormM
 					{/* Cancel */}
 					<button
 						type="button"
-						className="flex justify-center items-center gap-2 bg-yellow-500 
-							p-1.5 rounded-full hover:bg-yellow-600"
+						className="flex justify-center items-center gap-2 bg-red-400 
+							p-1.5 rounded-full hover:bg-red-500"
 						onClick={cancel}
 					>
 						<CircleX size={20} color="white" />

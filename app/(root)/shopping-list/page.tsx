@@ -11,7 +11,7 @@ const ShoppingList = () => {
 	const { refreshValue } = useContext(RefreshContext)!;
 
 	return (
-		<div className="grow flex flex-col gap-4 sm:gap-6 p-3 sm:p-4 overflow-y-auto">
+		<div className="grow flex flex-col gap-4 sm:gap-6 p-1 sm:p-4 sm:py-2 overflow-y-auto">
 			{/* Page title */}
 			<PageTitle
 				title="Shopping List"

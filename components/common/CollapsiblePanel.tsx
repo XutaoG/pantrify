@@ -16,7 +16,7 @@ const CollapsiblePanel = ({ children, title, titleStyle }: CollapsiblePanelProps
 		<section className="flex flex-col gap-2 sm:gap-4">
 			{/* Title */}
 			<div className="flex items-center gap-4">
-				<p className={`font-medium select-none ${titleStyle}`}>{title}</p>
+				<p className={`font-medium select-none ${titleStyle} tracking-wide`}>{title}</p>
 				<div className="bg-neutral-300 h-0.5 grow" />
 				<button
 					type="button"
