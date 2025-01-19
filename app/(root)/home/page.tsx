@@ -16,7 +16,7 @@ const Home = async () => {
 		<div className="grow flex flex-col gap-4 sm:gap-6 p-3 sm:p-4 overflow-y-auto">
 			{/* Welcome Message */}
 			<div className="p-1 bg-sky-600 rounded-2xl">
-				<div className="flex flex-col gap-2 sm:gap-3 bg-sky-600 p-2 rounded-2xl border-4 border-white">
+				<div className="flex flex-col gap-2 sm:gap-3 bg-sky-600 p-2 rounded-2xl border-2 border-white">
 					<h1 className={`font-normal tracking-wide text-white ${edu_vic.className}`}>
 						Welcome, {user?.firstName} {user?.lastName}!
 					</h1>
