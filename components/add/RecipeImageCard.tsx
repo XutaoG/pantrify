@@ -89,7 +89,7 @@ const RecipeImageCard = ({
 					<p className="absolute top-3 left-3 text-sm z-10 text-white">{index + 1}</p>
 
 					{/* File name */}
-					<p className="w-48 absolute bottom-3 text-xs z-10 text-white truncate text-ellipsis">
+					<p className="w-48 absolute bottom-3 text-xs z-10 text-white truncate text-ellipsis text-center">
 						{image.name}
 					</p>
 				</Fragment>
