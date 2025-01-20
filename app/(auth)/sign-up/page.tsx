@@ -7,7 +7,7 @@ import { signUpSchema, TSignUpSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { KeyboardEvent, ClipboardEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormPasswordInput from "@/components/common/form/FormPasswordInput";
 import { CircleUserRound, KeyRound, Mail } from "lucide-react";
@@ -23,6 +23,26 @@ const SignUp = () => {
 	});
 
 	const [signUpError, setSignUpError] = useState<string | null>(null);
+
+	const disablePaste = (event: ClipboardEvent<HTMLInputElement>) => {
+		event.preventDefault();
+	};
+
+	const disableSpace = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key.charCodeAt(0) === 32) {
+			event.preventDefault();
+		}
+	};
+
+	const onNameKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key.charCodeAt(0) === 66) {
+			return;
+		}
+
+		if (event.key.charCodeAt(0) === 32 || !/^[a-zA-Z]$/.test(event.key)) {
+			event.preventDefault();
+		}
+	};
 
 	const router = useRouter();
 
@@ -68,6 +88,7 @@ const SignUp = () => {
 						placeholder="Enter your email"
 						errorMessage={errors.email?.message}
 						onFocus={removeSignUpError}
+						onKeyDown={disableSpace}
 					/>
 
 					<div className="grid grid-cols-1 custom-sm:grid-cols-2 gap-3 sm:gap-6">
@@ -79,6 +100,8 @@ const SignUp = () => {
 							placeholder="Enter your first name"
 							errorMessage={errors.firstName?.message}
 							onFocus={removeSignUpError}
+							onKeyDown={onNameKeyDown}
+							onPaste={disablePaste}
 						/>
 
 						{/* Last name field */}
@@ -89,6 +112,8 @@ const SignUp = () => {
 							placeholder="Enter your last name"
 							errorMessage={errors.lastName?.message}
 							onFocus={removeSignUpError}
+							onKeyDown={onNameKeyDown}
+							onPaste={disablePaste}
 						/>
 					</div>
 
@@ -101,6 +126,8 @@ const SignUp = () => {
 							placeholder="Enter your password"
 							errorMessage={errors.password?.message}
 							onFocus={removeSignUpError}
+							onKeyDown={disableSpace}
+							onPaste={disablePaste}
 						/>
 					</div>
 
@@ -114,6 +141,8 @@ const SignUp = () => {
 							disabled={isSubmitting}
 							errorMessage={errors.confirmPassword?.message}
 							onFocus={removeSignUpError}
+							onKeyDown={disableSpace}
+							onPaste={disablePaste}
 						/>
 					</div>
 				</div>

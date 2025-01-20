@@ -192,13 +192,32 @@ export const signUpSchema = z
 			.string()
 			.trim()
 			.min(1, "Email cannot be empty")
-			.email({ message: "Invalid email address" }),
-		firstName: z.string().min(1, "First name cannot be empty"),
-		lastName: z.string().min(1, "Last name cannot be empty"),
-		password: z.string().min(8, "Password must be at least 8 characters"),
-		confirmPassword: z.string({
-			message: "Password confirmation cannot be empty",
-		}),
+			.email({ message: "Invalid email address" })
+			.max(64, "Email cannot be longer than 64 characters"),
+		firstName: z
+			.string()
+			.trim()
+			.min(1, "First name cannot be empty")
+			.max(30, "First name cannot be longer than 30 characters"),
+		lastName: z
+			.string()
+			.trim()
+			.min(1, "Last name cannot be empty")
+			.max(30, "Last name cannot be longer than 30 characters"),
+		password: z
+			.string()
+			.trim()
+			.min(8, "Password must be at least 8 characters")
+			.max(30, "Password cannot be longer than 30 characters")
+			.regex(/[a-zA-Z]/, "Password must have alphabetical characters")
+			.regex(/[0-9]/, "Password must have numbers")
+			.regex(/[A-Z]/, "Password must have at least 1 uppercase letter")
+			.regex(/[^a-zA-Z0-9]/, "Password must have at least 1 special character"),
+		confirmPassword: z
+			.string({
+				message: "Password confirmation cannot be empty",
+			})
+			.trim(),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Passwords must match",
@@ -209,8 +228,8 @@ export type TSignUpSchema = z.infer<typeof signUpSchema>;
 
 // Login
 export const loginSchema = z.object({
-	email: z.string().min(1, "Email cannot be empty").email(),
-	password: z.string().min(1, "Password cannot be empty"),
+	email: z.string().trim().min(1, "Email cannot be empty").email(),
+	password: z.string().trim().min(1, "Password cannot be empty"),
 	rememberMe: z.boolean(),
 });
 
