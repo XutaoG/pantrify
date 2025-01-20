@@ -32,7 +32,31 @@ const AuthLayout = async ({
 			</div>
 
 			{/* Images */}
-			<div className="grow bg-white"></div>
+			<div className="grow bg-white flex items-center justify-end relative  overflow-hidden">
+				<div className="absolute h-4/5 aspect-[16/9] left-48 ">
+					<div className="relative w-full h-full">
+						{/* Image 1 */}
+						<Image
+							src="/images/fried_rice.jpg"
+							alt="chicken"
+							fill
+							className="absolute inset-0 object-cover rounded-3xl border-neutral-400 object-left"
+						/>
+
+						{/* Image 2 */}
+						<div className="relative size-full">
+							<div className="absolute left-32 right-0 top-16 bottom-0">
+								<Image
+									src="/images/pecan_pie.jpg"
+									alt="pecan"
+									fill
+									className="object-cover rounded-3xl border border-neutral-400 shadow-md object-left"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 	);
 };
