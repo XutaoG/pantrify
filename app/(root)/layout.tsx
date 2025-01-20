@@ -17,7 +17,7 @@ const RootLayout = async ({
 
 				{/* Main content */}
 				<SessionManageWrapper>
-					<section className="grow min-w-0 flex p-0 my-0 sm:p-4">{children}</section>
+					<section className="grow min-w-0 flex p-2 my-0 sm:p-4">{children}</section>
 				</SessionManageWrapper>
 
 				{/* Right sidebar */}
