@@ -42,7 +42,7 @@ const SignUp = () => {
 	};
 
 	return (
-		<section className="flex flex-col gap-16">
+		<section className="flex flex-col gap-10 custom-sm:gap-16">
 			{/* Header */}
 			<div className="flex flex-col gap-4">
 				<h1 className="font-semibold tracking-wide text-neutral-600">Sign Up</h1>
@@ -55,8 +55,11 @@ const SignUp = () => {
 			</div>
 
 			{/* Form */}
-			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
-				<div className="flex flex-col gap-6">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="flex flex-col gap-6 custom-sm:gap-10"
+			>
+				<div className="flex flex-col gap-3 sm:gap-6">
 					{/* Email field */}
 					<FormInput
 						{...register("email")}
@@ -67,7 +70,7 @@ const SignUp = () => {
 						onFocus={removeSignUpError}
 					/>
 
-					<div className="flex gap-6">
+					<div className="grid grid-cols-1 custom-sm:grid-cols-2 gap-3 sm:gap-6">
 						{/* First name fields */}
 						<FormInput
 							{...register("firstName")}

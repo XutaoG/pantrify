@@ -21,6 +21,7 @@ const config: Config = {
 			},
 		},
 		screens: {
+			"custom-xs": "400px",
 			"custom-sm": "480px",
 			"custom-md": "820px",
 			"custom-lg": "1140px",
