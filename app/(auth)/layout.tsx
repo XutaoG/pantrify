@@ -38,24 +38,24 @@ const AuthLayout = async ({
 
 			{/* Images */}
 			<div className="grow hidden md:flex bg-white items-center justify-end relative overflow-hidden ">
-				<div className="absolute h-4/5 aspect-[16/9] left-16 lg:left-24 xl:left-48">
+				<div className="absolute h-4/5 aspect-[16/9] left-16 lg:left-20 xl:left-24">
 					<div className="relative w-full h-full">
 						{/* Image 1 */}
 						<Image
-							src="/images/fried_rice.jpg"
+							src="/images/screenshot_imac.png"
 							alt="chicken"
 							fill
-							className="absolute inset-0 object-cover rounded-3xl border-neutral-400 object-left"
+							className="absolute inset-0 object-contain rounded-3xl object-left"
 						/>
 
 						{/* Image 2 */}
 						<div className="relative size-full">
-							<div className="absolute left-32 right-0 top-16 bottom-0">
+							<div className="absolute left-80 right-0 top-48 bottom-0">
 								<Image
-									src="/images/pecan_pie.jpg"
+									src="/images/screenshot_macbook.png"
 									alt="pecan"
 									fill
-									className="object-cover rounded-3xl border border-neutral-400 shadow-md object-left"
+									className="object-contain rounded-3xl object-left"
 								/>
 							</div>
 						</div>
