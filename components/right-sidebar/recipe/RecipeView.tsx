@@ -2,15 +2,13 @@
 
 import RecipeInfo from "./RecipeInfo";
 import RecipeInstructions from "./RecipeInstructions";
-import RecipePrimaryIngredients from "./RecipePrimaryIngredients";
-import RecipeSecondaryIngredients from "./RecipeSecondaryIngredients";
-import RecipeOptionalIngredients from "./RecipeOptionalIngredients";
 import { Recipe, RecipeIngredientAvailability } from "@/types";
 import RecipeDescription from "./RecipeDescription";
 import { Fragment, useEffect, useState } from "react";
 import { getRecipeIngredientsAvailability } from "@/api";
 import { LoaderCircle } from "lucide-react";
 import ImageCarousel from "@/components/common/ImageCarousel";
+import RecipeIngredientsDisplay from "./RecipeIngredientsDisplay";
 
 interface RecipeViewProps {
 	recipe: Recipe;
@@ -63,11 +61,20 @@ const RecipeView = ({ recipe }: RecipeViewProps) => {
 			) : (
 				<Fragment>
 					{/* Primary ingredients */}
-					<RecipePrimaryIngredients ingredientAvailability={ingredientAvailabilities} />
+					<RecipeIngredientsDisplay
+						ingredientType="Primary"
+						ingredientAvailability={ingredientAvailabilities}
+					/>
 					{/* Secondary ingredient */}
-					<RecipeSecondaryIngredients ingredientAvailability={ingredientAvailabilities} />
+					<RecipeIngredientsDisplay
+						ingredientType="Secondary"
+						ingredientAvailability={ingredientAvailabilities}
+					/>
 					{/* Optional ingredients */}
-					<RecipeOptionalIngredients ingredientAvailability={ingredientAvailabilities} />
+					<RecipeIngredientsDisplay
+						ingredientType="Optional"
+						ingredientAvailability={ingredientAvailabilities}
+					/>
 				</Fragment>
 			)}
 
