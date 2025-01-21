@@ -1,11 +1,11 @@
-import { TAddRecipeIngredientSchema } from "@/types";
+import { RecipeIngredientObj } from "@/types";
 import RecipeIngredientCard from "./RecipeIngredientCard";
 
 interface RecipeIngredientCardsDisplayProps {
 	ingredientType: "Primary" | "Secondary" | "Optional";
-	ingredients: TAddRecipeIngredientSchema[];
-	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
-	onDelete: (index: number) => void;
+	ingredients: RecipeIngredientObj[];
+	onEdit: (ingredient: RecipeIngredientObj) => void;
+	onDelete: (index: string) => void;
 	isSubmitting: boolean;
 }
 
@@ -20,12 +20,11 @@ const RecipeIngredientCardsDisplay = ({
 		return ingredient.ingredientType === ingredientType;
 	});
 
-	const renderedRecipeIngredients = recipeIngredients.map((ingredient, index) => {
+	const renderedRecipeIngredients = recipeIngredients.map((ingredient) => {
 		return (
 			<RecipeIngredientCard
 				key={ingredient.name}
 				ingredient={ingredient}
-				index={index}
 				onEdit={onEdit}
 				onDelete={onDelete}
 				isSubmitting={isSubmitting}

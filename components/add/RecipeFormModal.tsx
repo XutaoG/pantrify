@@ -9,10 +9,10 @@ import {
 	addRecipeSchema,
 	AddRecipeDto,
 	AddRecipeIngredientDto,
-	TAddRecipeIngredientSchema,
 	TAddRecipeSchema,
 	RecipeInstructionCardObj,
 	Recipe,
+	RecipeIngredientObj,
 } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -28,6 +28,7 @@ import RecipeImagesInput from "./RecipeImagesInput";
 import RecipeDurationInput from "./RecipeDurationInput";
 import RecipeIngredientFormModal from "./RecipeIngredientFormModal";
 import RecipeIngredientCardsDisplay from "./RecipeIngredientCardsDisplay";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddRecipePageProps {
 	recipe?: Recipe;
@@ -116,38 +117,34 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 	//! Ingredients
 	// * Modal control
 	const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
-	const [ingredientEditIndex, setIngredientEditIndex] = useState<number | null>(null);
-	const [ingredientEditObj, setIngredientEditObj] = useState<TAddRecipeIngredientSchema | null>(
-		null
-	);
+	const [ingredientEditObj, setIngredientEditObj] = useState<RecipeIngredientObj | null>(null);
 
 	//* Ingredients error
 	const [ingredientsError, setIngredientsError] = useState<string | null>(null);
+
+	//* Ingredients
+	const [ingredients, setIngredients] = useState<RecipeIngredientObj[]>([]);
 
 	const openModalForAdd = () => {
 		setIsIngredientModalOpen(true);
 	};
 
-	const openModalForEdit = (index: number, ingredient: TAddRecipeIngredientSchema) => {
-		setIngredientEditIndex(index);
+	const openModalForEdit = (ingredient: RecipeIngredientObj) => {
 		setIngredientEditObj(ingredient);
 		setIsIngredientModalOpen(true);
 	};
 
 	const closeModal = () => {
-		setIngredientEditIndex(null);
-		setIngredientEditIndex(null);
+		setIngredientEditObj(null);
 		setIsIngredientModalOpen(false);
 	};
-
-	const [ingredients, setIngredients] = useState<TAddRecipeIngredientSchema[]>([]);
 
 	//* Add ingredient
 	// Success: returns null
 	// Fail: error message
-	const addIngredient = (newIngredient: TAddRecipeIngredientSchema) => {
+	const addIngredient = (newIngredient: RecipeIngredientObj) => {
 		for (const ingredient of ingredients) {
-			if (ingredient.name == newIngredient.name) {
+			if (ingredient.name === newIngredient.name) {
 				// Ingredient duplicated
 
 				return "Ingredient already added";
@@ -162,17 +159,20 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 	//* Edit ingredient
 	// Success: returns null
 	// Fail: error message
-	const editIngredient = (index: number, newIngredient: TAddRecipeIngredientSchema) => {
+	const editIngredient = (newIngredient: RecipeIngredientObj) => {
 		for (let i = 0; i < ingredients.length; i++) {
-			if (i != index && ingredients[i].name == newIngredient.name) {
+			if (
+				ingredients[i].id !== newIngredient.id &&
+				ingredients[i].name == newIngredient.name
+			) {
 				// Ingredient duplicated
 
 				return "Ingredient already added";
 			}
 		}
 
-		const updatedIngredients = ingredients.map((ingredient, i) => {
-			if (index == i) {
+		const updatedIngredients = ingredients.map((ingredient) => {
+			if (ingredient.id === newIngredient.id) {
 				return newIngredient;
 			}
 
@@ -185,9 +185,9 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 	};
 
 	//* Delete ingredient
-	const deleteIngredient = (index: number) => {
-		const updatedIngredients = ingredients.filter((_, i) => {
-			return i !== index;
+	const deleteIngredient = (id: string) => {
+		const updatedIngredients = ingredients.filter((ingredient) => {
+			return ingredient.id !== id;
 		});
 
 		setIngredients(updatedIngredients);
@@ -374,11 +374,13 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 				ingredientType: ingredient.ingredientType,
 				quantityWhole: Number(ingredient.quantityWhole),
 				quantityFraction:
-					ingredient.quantityFraction === "None"
+					ingredient.quantityFraction === "None" || ingredient.quantityFraction === ""
 						? undefined
 						: ingredient.quantityFraction,
 				quantityUnit:
-					ingredient.quantityUnit === "None" ? undefined : ingredient.quantityUnit,
+					ingredient.quantityUnit === "None" || ingredient.quantityUnit === "None"
+						? undefined
+						: ingredient.quantityUnit,
 			};
 
 			return ingredientDto;
@@ -469,13 +471,14 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 
 			// Initialize ingredients
 			const populateIngredients = () => {
-				const existingIngredients: TAddRecipeIngredientSchema[] = recipe.ingredients.map(
+				const existingIngredients: RecipeIngredientObj[] = recipe.ingredients.map(
 					(ingredient) => {
 						return {
+							id: uuidv4(),
 							name: ingredient.name,
 							ingredientType: ingredient.ingredientType,
 							quantityWhole: ingredient.quantityWhole?.toString() ?? "",
-							quantityFraction: ingredient.quantityFraction ?? "None",
+							quantityFraction: ingredient.quantityFraction ?? "",
 							quantityUnit: ingredient.quantityUnit ?? "",
 						};
 					}
@@ -624,7 +627,6 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 									<RecipeIngredientFormModal
 										onIngredientAdd={addIngredient}
 										onModalClose={closeModal}
-										index={ingredientEditIndex}
 										ingredient={ingredientEditObj}
 										onIngredientEdit={editIngredient}
 									/>

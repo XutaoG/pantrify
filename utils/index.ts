@@ -4,7 +4,7 @@ import {
 	Recipe,
 	RecipeIngredient,
 	RecipeIngredientAvailability,
-	TAddRecipeIngredientSchema,
+	RecipeIngredientObj,
 	UpdateRecipeDto,
 } from "@/types";
 
@@ -138,7 +138,7 @@ export const convertImageURLtoFile = async (url: string) => {
 };
 
 export const getQuantityStr = (
-	ingredient: TAddRecipeIngredientSchema | RecipeIngredient | RecipeIngredientAvailability
+	ingredient: RecipeIngredientObj | RecipeIngredient | RecipeIngredientAvailability
 ) => {
 	const invalidQuantity =
 		(ingredient.quantityWhole == "" || ingredient.quantityWhole == null) &&

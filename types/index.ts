@@ -36,6 +36,15 @@ export interface RecipeIngredient extends IngredientBase {
 	quantityUnit?: string;
 }
 
+export interface RecipeIngredientObj {
+	id: string;
+	name: string;
+	ingredientType: string;
+	quantityWhole: string;
+	quantityFraction: string;
+	quantityUnit: string;
+}
+
 export interface RecipeInstruction {
 	id: number;
 	step: number;

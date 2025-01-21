@@ -1,25 +1,28 @@
 import FormInput from "@/components/common/form/FormInput";
 import FormSelectionInput from "@/components/common/form/FormSelectionInput";
 import { ingredientQuantityFractions, recipeIngredientTypes } from "@/constants";
-import { addRecipeIngredientSchema, TAddRecipeIngredientSchema } from "@/types";
+import {
+	addRecipeIngredientSchema,
+	RecipeIngredientObj,
+	TAddRecipeIngredientSchema,
+} from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fragment, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { CirclePlus, CircleX, Egg, Ham, Pencil } from "lucide-react";
 import RecipeIngredientQuantityInput from "./RecipeIngredientQuantityInput";
+import { v4 as uuidv4 } from "uuid";
 
 interface RecipeIngredientFormModalProps {
-	onIngredientAdd: (ingredient: TAddRecipeIngredientSchema) => string | null;
+	onIngredientAdd: (ingredient: RecipeIngredientObj) => string | null;
 	onModalClose: () => void;
-	index: number | null;
-	ingredient: TAddRecipeIngredientSchema | null;
-	onIngredientEdit: (index: number, newIngredient: TAddRecipeIngredientSchema) => string | null;
+	ingredient: RecipeIngredientObj | null;
+	onIngredientEdit: (newIngredient: RecipeIngredientObj) => string | null;
 }
 
 const RecipeIngredientFormModal = ({
 	onIngredientAdd,
 	onModalClose,
-	index,
 	ingredient,
 	onIngredientEdit,
 }: RecipeIngredientFormModalProps) => {
@@ -43,14 +46,14 @@ const RecipeIngredientFormModal = ({
 
 	useEffect(() => {
 		//* Initialize form if ingredient is valid
-		if (index != null && ingredient != null) {
+		if (ingredient != null) {
 			setValue("name", ingredient.name, { shouldValidate: true });
 			setValue("ingredientType", ingredient.ingredientType);
 			setValue("quantityWhole", ingredient.quantityWhole, { shouldValidate: true });
 			setValue("quantityFraction", ingredient.quantityFraction);
 			setValue("quantityUnit", ingredient.quantityUnit);
 		}
-	}, [index, ingredient, setValue]);
+	}, [ingredient, setValue]);
 
 	//* Selection management
 	const onIngredientTypeChange = (val: string) => {
@@ -68,10 +71,13 @@ const RecipeIngredientFormModal = ({
 
 	//* Form submission
 	const submitForm = () => {
-		if (index == null || ingredient == null) {
+		if (ingredient == null) {
 			// Add ingredient
 
-			const response = onIngredientAdd(getValues());
+			const response = onIngredientAdd({
+				id: uuidv4(),
+				...getValues(),
+			});
 
 			if (response == null) {
 				setFormSuccessMessage("Ingredient added");
@@ -81,7 +87,8 @@ const RecipeIngredientFormModal = ({
 			}
 		} else {
 			// Edit ingredient
-			const response = onIngredientEdit(index, getValues());
+
+			const response = onIngredientEdit({ id: ingredient.id, ...getValues() });
 
 			if (response != null) {
 				setFormErrorMessage(response);
@@ -100,9 +107,7 @@ const RecipeIngredientFormModal = ({
 				>
 					{/* Title */}
 					<p className="font-semibold">
-						{index == null || ingredient == null
-							? "Add Ingredients"
-							: "Edit ingredient"}
+						{ingredient == null ? "Add Ingredients" : "Edit ingredient"}
 					</p>
 
 					{/* Ingredient name field */}
@@ -152,7 +157,7 @@ const RecipeIngredientFormModal = ({
 							p-1.5 rounded-full ${isSubmitting ? "cursor-not-allowed" : "hover:bg-sky-500"}`}
 							disabled={isSubmitting}
 						>
-							{index == null || ingredient == null ? (
+							{ingredient == null ? (
 								<Fragment>
 									{/* Add icon and text */}
 									<CirclePlus size={20} color="white" />

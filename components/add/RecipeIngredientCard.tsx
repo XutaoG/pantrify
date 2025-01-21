@@ -1,20 +1,18 @@
 "use client";
 
-import { TAddRecipeIngredientSchema } from "@/types";
+import { RecipeIngredientObj } from "@/types";
 import { getQuantityStr } from "@/utils";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 interface RecipeIngredientCardProps {
-	index: number;
-	ingredient: TAddRecipeIngredientSchema;
-	onEdit: (index: number, ingredient: TAddRecipeIngredientSchema) => void;
-	onDelete: (index: number) => void;
+	ingredient: RecipeIngredientObj;
+	onEdit: (ingredient: RecipeIngredientObj) => void;
+	onDelete: (index: string) => void;
 	isSubmitting: boolean;
 }
 
 const RecipeIngredientCard = ({
-	index,
 	ingredient,
 	onEdit,
 	onDelete,
@@ -51,7 +49,7 @@ const RecipeIngredientCard = ({
 					type="button"
 					className="bg-yellow-400 rounded-full size-8 hover:bg-yellow-500
 					flex justify-center items-center"
-					onClick={() => onEdit(index, ingredient)}
+					onClick={() => onEdit(ingredient)}
 					disabled={isSubmitting}
 				>
 					<Pencil size={18} color="white" />
@@ -61,7 +59,7 @@ const RecipeIngredientCard = ({
 					type="button"
 					className="bg-red-400 rounded-full size-8 hover:bg-red-500 
 					flex justify-center items-center"
-					onClick={() => onDelete(index)}
+					onClick={() => onDelete(ingredient.id)}
 					disabled={isSubmitting}
 				>
 					<Trash2 size={18} color="white" />
