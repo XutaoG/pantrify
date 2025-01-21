@@ -142,8 +142,12 @@ export const getQuantityStr = (
 ) => {
 	const invalidQuantity =
 		(ingredient.quantityWhole == "" || ingredient.quantityWhole == null) &&
-		(ingredient.quantityFraction == "None" || ingredient.quantityFraction == null) &&
-		(ingredient.quantityFraction == "None" || ingredient.quantityFraction == null);
+		(ingredient.quantityFraction == "None" ||
+			ingredient.quantityFraction == "" ||
+			ingredient.quantityFraction == null) &&
+		(ingredient.quantityFraction == "None" ||
+			ingredient.quantityFraction == "" ||
+			ingredient.quantityFraction == null);
 
 	if (invalidQuantity) {
 		return null;
