@@ -373,8 +373,12 @@ const RecipeFormModal = ({ recipe, onModalClose }: AddRecipePageProps) => {
 				name: ingredient.name,
 				ingredientType: ingredient.ingredientType,
 				quantityWhole: Number(ingredient.quantityWhole),
-				quantityFraction: ingredient.quantityFraction,
-				quantityUnit: ingredient.quantityUnit,
+				quantityFraction:
+					ingredient.quantityFraction === "None"
+						? undefined
+						: ingredient.quantityFraction,
+				quantityUnit:
+					ingredient.quantityUnit === "None" ? undefined : ingredient.quantityUnit,
 			};
 
 			return ingredientDto;

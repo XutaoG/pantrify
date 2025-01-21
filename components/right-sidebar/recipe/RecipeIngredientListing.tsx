@@ -115,7 +115,7 @@ const RecipeIngredientListing = ({ recipeIngredient }: RecipeIngredientListingPr
 				)}
 				<p>
 					{recipeIngredient.name}
-					{": "}
+					{quantityStr != null && ": "}
 					{quantityStr != null && (
 						<span className="text-neutral-600 font-medium">{quantityStr}</span>
 					)}

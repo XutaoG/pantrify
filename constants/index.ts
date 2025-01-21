@@ -26,7 +26,7 @@ export const ingredientTypes = ["Primary", "Secondary"];
 export const ingredientQuantityFractions = ["None", "1/4", "1/3", "1/2", "2/3", "3/4"];
 
 export const ingredientQuantityUnits = [
-	"none",
+	"None",
 	"tsp",
 	"tbsp",
 	"cup",

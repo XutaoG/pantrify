@@ -141,8 +141,9 @@ export const getQuantityStr = (
 	ingredient: TAddRecipeIngredientSchema | RecipeIngredient | RecipeIngredientAvailability
 ) => {
 	const invalidQuantity =
-		ingredient.quantityWhole == "" &&
-		(ingredient.quantityFraction == "" || ingredient.quantityFraction == "None");
+		(ingredient.quantityWhole == "" || ingredient.quantityWhole == null) &&
+		(ingredient.quantityFraction == "None" || ingredient.quantityFraction == null) &&
+		(ingredient.quantityFraction == "None" || ingredient.quantityFraction == null);
 
 	if (invalidQuantity) {
 		return null;
